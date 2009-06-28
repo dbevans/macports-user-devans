@@ -1,0 +1,67 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem 1.0
+
+name            gedit
+version         2.26.2
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     GNOME editor.
+long_description \
+                ${description}
+maintainers     devans openmaintainer
+categories      gnome editors
+platforms       darwin
+homepage        http://www.gnome.org/projects/gedit/
+master_sites    gnome:sources/${name}/${branch}/
+
+checksums       md5     ef8c98051c03d0caf0c75456e48c25b0 \
+                sha1    b5b0c0b6fda604fff630987d9cbd69733943407d \
+                rmd160  37d151d4ca038ca433ad92ec639ae40a86f7fece
+
+depends_build    \
+        port:p5-xml-parser \
+        port:gtk-doc \
+        port:intltool \
+        port:gnome-doc-utils \
+        port:autoconf \
+        port:automake
+
+depends_lib    \
+        port:gtksourceview2 \
+        port:gconf \
+        port:py25-gobject \
+        port:py25-gtk \
+        port:py25-pygtksourceview \
+        port:iso-codes \
+        port:enchant \
+        port:policykit \
+        port:xorg-libsm
+
+use_bzip2       yes
+
+patchfiles      patch-configure.ac.diff \
+                patch-gedit-smclient-Makefile.am.diff
+
+use_autoreconf  yes
+autoreconf.args -vfi
+
+configure.args  --mandir=${prefix}/share/man \
+                --disable-scrollkeeper \
+                --disable-schemas-install
+
+configure.python ${prefix}/bin/python2.5
+
+variant no_x11 {
+        depends_lib-delete  port:xorg-libsm
+}
+
+post-activate    {
+        system "${prefix}/bin/scrollkeeper-update"
+        system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+             gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

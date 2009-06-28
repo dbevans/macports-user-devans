@@ -1,0 +1,85 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            gnome-desktop
+version         2.27.3
+set branch      [join [lrange [split ${version} .] 0 1] .]
+maintainers     devans openmaintainer
+categories      gnome
+platforms       darwin
+description     Additional UI API for GNOME 2
+
+long_description \
+    This is a collection of APIs not included in \
+    libgnomeui as they have not undergone sufficient \
+    testing.
+
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+use_bzip2       yes
+
+checksums       md5     a4fd698181f3b22ca09564e149eb56a9 \
+                sha1    5bf192db0f6333a61255144d8a36d26cf377a82e \
+                rmd160  568a4bbb445f1f0641014d0f664cfd036b244b6a
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:p5-xml-parser \
+                port:gnome-doc-utils \
+                port:gtk-doc
+
+depends_lib     port:libxml2 \
+                port:gconf \
+                port:libgnomecanvas \
+                port:libgnomeui \
+                port:startup-notification \
+                port:py25-gnome
+
+depends_run     port:gnome-themes
+
+patchfiles      patch-libgnome-destop-gnome-bg.c.diff \
+                patch-libgnome-destop-gnome-rr.c.diff \
+                patch-libgnome-destop-gnome-rr-config.c.diff
+
+configure.args  --with-gnome-distributor=MacPorts \
+                --disable-scrollkeeper
+
+configure.python  ${prefix}/bin/python2.5
+
+use_parallel_build  yes
+
+post-activate {
+    system "${prefix}/bin/scrollkeeper-update"
+}
+
+if {[variant_isset no_x11]} {
+    default_variants    +quartz
+}
+
+pre-configure {
+    if {[file exists ${prefix}/lib/gtk-2.0/include/gdkconfig.h]} {
+        set gtk_not_quartz [catch {exec grep -q GDK_WINDOWING_QUARTZ ${prefix}/lib/gtk-2.0/include/gdkconfig.h}]
+        set gtk_not_x11 [catch {exec grep -q GDK_WINDOWING_X11 ${prefix}/lib/gtk-2.0/include/gdkconfig.h}]
+        if {[variant_isset quartz] && ${gtk_not_quartz}} {
+            error "+quartz variant selected, but gtk2+x11 is installed"
+        } elseif {! [variant_isset quartz] && ${gtk_not_x11}} {
+            error "-quartz variant selected, but gtk2+quartz is installed"
+        }
+    } else {
+        error "Cannot find gdkconfig.h"
+    }
+}
+
+variant quartz requires no_x11 description {Enable Quartz rendering} {
+    depends_lib-delete      port:startup-notification
+    patchfiles-append       patch-configure.diff
+}
+
+variant no_x11 {
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

@@ -1,0 +1,44 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            libsoup
+version         2.27.2
+set branch      [join [lrange [split ${version} .] 0 1] .]
+categories      gnome net
+platforms       darwin
+maintainers     devans openmaintainer
+description     Soup is an HTTP library implementation in C.
+
+long_description \
+    Soup provides a queued asynchronous callback-based \
+    mechanism for sending and servicing SOAP requests \
+    and a WSDL (Web Service Definition Language) for C \
+    compilers which generates client stubs and server \
+    skeletons for easily calling and implementing SOAP \
+    methods.
+
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+use_bzip2       yes
+
+checksums       md5     6ea5e7780488efe4565790cf4937cce3 \
+                sha1    3e67d6e7f9a886ccec7d3da2953176aa4ca553b4 \
+                rmd160  fe05424785308dda87084fd26086d87f473489de
+
+depends_lib \
+    port:libxml2 \
+    port:gnutls \
+    port:sqlite3 \
+    port:gconf \
+    port:libproxy
+
+use_parallel_build  yes
+
+test.run        yes
+test.target     check
+
+livecheck.check regex
+livecheck.url   ftp://ftp.gnome.org/pub/gnome/sources/$name/$branch/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

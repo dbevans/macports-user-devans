@@ -1,0 +1,39 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem 1.0
+
+name		bug-buddy
+version		2.26.0
+set branch  [join [lrange [split ${version} .] 0 1] .]
+description	A graphical bug reporting tool.
+long_description        This is a graphical bug reporting tool. It can \
+			extract debugging information from a core file \
+			or crashed application (via gnome_segv).
+maintainers	devans openmaintainer
+categories	gnome
+platforms	darwin
+homepage	http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+
+checksums       md5     f92663a1a819f83e3eb3004f9e8a687a \
+                sha1    6b96ea35d58b969fe0129af2bfb4aa144c207e6d \
+                rmd160  51dac975a5752c910928ddf07bab3bc9c0225649
+
+depends_lib     port:libelf \
+		port:gnome-desktop \
+		port:gnome-menus \
+		port:evolution-data-server \
+		port:libgtop
+
+use_bzip2 	yes
+
+configure.args	--mandir=${prefix}/share/man --disable-scrollkeeper
+
+post-activate {
+	system "${prefix}/bin/scrollkeeper-update"
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

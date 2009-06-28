@@ -1,0 +1,87 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            totem
+version         2.26.2
+set branch      [join [lrange [split ${version} .] 0 1] .]
+categories      gnome
+maintainers     devans openmaintainer
+description     Official movie player of the GNOME desktop environment
+long_description \
+        Totem is based on xine-lib or GStreamer. It features a \
+        playlist, a full-screen mode, seek and volume controls, \
+        as well as keyboard navigation. It comes with added \
+        functionality such as: \
+            * Video thumbnailer for the file manager \
+            * Nautilus properties tab \
+            * Mozilla (Firefox) plugin to view movies inside your \
+              browser (in development) \
+            * Webcam utility (in development)
+
+homepage        http://live.gnome.org/Totem
+platforms       darwin
+master_sites    gnome:sources/${name}/${branch}/
+
+checksums       md5     aa9905e84c7a15354baa2de529afde86 \
+                sha1    17103cf33a06190b83287a10ad38562ce9c737c5 \
+                rmd160  ec6778868dfb0cb7cdc69743e87248e1ec0634e5
+
+use_bzip2       yes
+
+patchfiles      patch-bindings-python-totem.override.diff \
+                patch-src-plugins-totem-python-module.c.diff \
+                patch-src-backend-Makefile.in.diff
+
+depends_build   port:pkgconfig \
+                port:rarian \
+                port:gtk-doc
+
+depends_lib     port:gconf \
+                port:totem-pl-parser \
+                port:xorg-libXtst \
+                port:xorg-libXxf86vm \
+                port:py25-gtk \
+                port:gst-plugins-good \
+                port:nautilus
+
+configure.python  ${prefix}/bin/python2.5
+
+configure.args  --with-plugins="thumbnail screensaver ontop gromit media-player-keys properties sidebar-test skipto youtube pythonconsole" \
+                --disable-static \
+                --enable-browser-plugins \
+                --enable-complex-plugin \
+                --enable-easy-codec-installation \
+                --enable-nautilus \
+                --disable-schemas-install \
+                --disable-scrollkeeper \
+                --x-includes=${prefix}/include \
+                --x-libraries=${prefix}/lib \
+                BROWSER_PLUGIN_DIR=${prefix}/lib/nsplugins
+
+variant xine description {Use xine-lib instead of gstreamer} {
+    depends_lib-delete port:gst-plugins-good
+    depends_lib-append port:xine-lib
+    configure.args-append --enable-xine
+    configure.args-delete --enable-easy-codec-installation
+    configure.args-append --disable-easy-codec-installation
+}
+
+post-patch {
+    reinplace "s:libdbus-glib-1.so.2:${prefix}/lib/libdbus-glib-1.2.dylib:" ${worksrcpath}/browser-plugin/totemPluginGlue.cpp
+}
+
+post-destroot {
+    eval delete [glob "${destroot}${prefix}/lib/nsplugins/*.la"]
+}
+
+post-activate {
+    system "scrollkeeper-update"
+    system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+        gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

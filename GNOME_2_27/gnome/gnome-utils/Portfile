@@ -1,0 +1,52 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem 1.0
+
+name		gnome-utils
+version		2.26.0
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description	GNOME utilities
+long_description Utilities for the GNOME 2.0 desktop.
+maintainers	devans openmaintainer
+categories	gnome
+platforms	darwin
+homepage	http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+
+checksums       md5     667400cfb9bee954028024ac3cf91a09 \
+                sha1    ac1078ad2d75a561f7aa562d06316a221d6dcbc4 \
+                rmd160  7ef1bc0d7a497135426fa79505726b50acb75547
+
+depends_lib     port:libgnomeui \
+                port:libgtop \
+                port:gnome-desktop \
+                port:gnome-panel
+
+use_bzip2 	yes
+
+configure.args  --mandir=${prefix}/share/man \
+		--x-includes=${prefix}/include \
+                --x-libraries=${prefix}/lib \
+                --disable-hal \
+                --enable-gfloppy=no \
+                --disable-scrollkeeper
+
+post-extract {
+	reinplace "s|-export-dynamic||g" ${worksrcpath}/gnome-screenshot/Makefile.in
+}
+
+post-activate	{
+	system "scrollkeeper-update"
+}
+
+platform darwin 7 {
+	depends_lib-append lib:libgnuregex:gnuregex
+	post-patch {
+		reinplace "s|gnuregex.h|regex.h|g" ${worksrcpath}/gsearchtool/gsearchtool-support.c
+	}
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

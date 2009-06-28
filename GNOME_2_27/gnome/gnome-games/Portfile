@@ -1,0 +1,57 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem 1.0
+
+name		gnome-games
+version		2.26.2
+set branch  [join [lrange [split ${version} .] 0 1] .]
+description	Collection of small but addictive games for GNOME
+long_description    ${description}
+maintainers	devans openmaintainer
+categories	gnome
+platforms	darwin
+homepage	http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+
+checksums       md5     d43a84c1b5c6c5566c575cbf83d5fac4 \
+                sha1    c7de7b61431a10fbe287431b08d23c9e67c069fb \
+                rmd160  9d2bea14db0dcf63dee42677584e20a37be778c5
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:p5-xml-parser \
+                port:gnome-doc-utils \
+                port:gtk-doc
+
+depends_lib     port:gconf \
+                port:librsvg \
+                port:py25-gtk \
+                port:gnome-python-desktop \
+                port:libsdl_mixer \
+                port:ggz-client-libs \
+                port:guile
+              
+use_bzip2 	yes
+
+configure.python ${prefix}/bin/python2.5
+
+configure.args  --disable-scrollkeeper \
+                --disable-schemas-install
+
+post-extract {
+    reinplace "s|/usr/bin/env python|${prefix}/bin/python2.5|" ${worksrcpath}/glchess/src/glchess.in.in
+    reinplace "s|/usr/bin/env python|${prefix}/bin/python2.5|" ${worksrcpath}/gnome-sudoku/src/gnome-sudoku.in.in
+}
+
+post-activate {
+        system "${prefix}/bin/gtk-update-icon-cache -f -t ${prefix}/share/icons/hicolor"
+        system "${prefix}/bin/scrollkeeper-update; true"
+        system "${prefix}/bin/update-desktop-database -q ${prefix}/share/applications; true"
+        system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+            gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

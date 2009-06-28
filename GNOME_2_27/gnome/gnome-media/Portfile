@@ -1,0 +1,46 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            gnome-media
+version         2.26.0
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     A collection of utilities for simple multimedia handling.
+long_description	\
+	The GNOME media utilities provide simple applications for basic \
+	multimedia tasks, such as CD playback, volume control or audio \
+	recording.
+maintainers     devans openmaintainer
+categories      gnome
+platforms       darwin
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+
+checksums       md5     3d519bc7d812aed8f6e4288b6d3cdf26 \
+                sha1    23ec588fdf5df3eef542278952fe78ed032d354a \
+                rmd160  0720cf0394148d8dc3cf6423a8b817a70f1486ed
+
+use_bzip2       yes
+
+depends_build	port:pkgconfig \
+                port:gnome-doc-utils
+
+depends_lib     port:libcanberra \
+                port:libunique \
+                port:libgnomeui \
+                port:gst-plugins-base
+
+variant deprecated description {Enable deprecated functionality} {
+        configure.args-append --enable-vumeter \
+                              --enable-cddbslave
+#
+#  this is untested and may not work
+#
+#                              --enable-gnomecd
+#        depends_lib-append port:nautilus-cd-burner
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}
