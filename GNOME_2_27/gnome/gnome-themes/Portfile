@@ -32,8 +32,6 @@ depends_build   port:icon-naming-utils \
 
 configure.args  --enable-all-themes
 
-configure.cppflags-append   -L${prefix}/lib
-
 universal_variant   no
 
 livecheck.check regex
