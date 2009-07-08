@@ -9,6 +9,7 @@ my $ftp_passwd = "devans\@macports.org";
 my $ftp_base   = "/pub/gnome/sources";
 my $branch     = "";
 my $debug      = 0;
+my $names_only = 0;
 
 my $result = GetOptions(
 	"host=s"     => \$ftp_host,
@@ -16,7 +17,8 @@ my $result = GetOptions(
 	"password=s" => \$ftp_passwd,
 	"base=s"     => \$ftp_base,
 	"branch=s"   => \$branch,
-	"debug"      => \$debug
+	"debug"      => \$debug,
+	"names_only" => \$names_only
 );
 
 my $nargs  = scalar(@ARGV);
@@ -40,9 +42,7 @@ if ($debug) {
 }
 
 foreach my $gname (@gnames) {
-	$ftp->cwd("$ftp_base/$gname")
-	  or die "cannot change to working directory $gname: ",
-	  $ftp->message;
+	$ftp->cwd("$ftp_base/$gname") or next;
 	my @lines = $ftp->ls;
 
 	my $major = -1;
@@ -50,12 +50,14 @@ foreach my $gname (@gnames) {
 
 	foreach my $line (@lines) {
 		if ( $line =~ m/^(\d+)\.(\d+)$/ ) {
-			if ( $1 > $major ) {
-				$major = $1;
-				$minor = $2;
-			}
-			elsif ( ( $1 == $major ) && ( $2 > $minor ) ) {
-				$minor = $2;
+			if ( $branch ne "$major.$minor" ) {
+				if ( $1 > $major ) {
+					$major = $1;
+					$minor = $2;
+				}
+				elsif ( ( $1 == $major ) && ( $2 > $minor ) ) {
+					$minor = $2;
+				}
 			}
 		}
 	}
@@ -74,7 +76,7 @@ foreach my $gname (@gnames) {
 			  $ftp->message;
 
 			my @lines = $ftp->ls;
-			
+
 			$version = "$major.$minor";
 
 			foreach my $line (@lines) {
@@ -85,6 +87,9 @@ foreach my $gname (@gnames) {
 
 			if ($debug) {
 				print "Latest version for $gname is $version\n";
+			}
+			elsif ($names_only) {
+				print "$gname\n";
 			}
 			else {
 				print "$gname $version\n";
