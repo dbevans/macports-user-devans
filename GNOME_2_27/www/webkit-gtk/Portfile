@@ -1,0 +1,88 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem	1.0
+
+name		webkit-gtk
+version		1.1.10
+revision    1
+epoch           1
+description	Apple's WebKit HTML rendering library for GTK+
+long_description ${description}
+maintainers	gmail.com:myschizobuddy devans
+categories	www gnome
+platforms	darwin freebsd
+homepage	http://webkitgtk.org/
+master_sites    ${homepage}
+
+distname        webkit-${version}
+
+checksums       md5     b852753b3e21f010f565312132f88311 \
+                sha1    8f0637c936b4f62fb21c8d0c35298e5c0317fd0a \
+                rmd160  c3d5a7b9793318d0fc9f4d170b7aeac7a6f30735
+
+patchfiles      patch-WebKitTools-DumpRenderTree-gtk-TestNetscapePlugin-TestNetscapePlugin.cpp.diff
+
+depends_lib	\
+	port:gtk2 \
+	port:libsoup \
+        port:icu \
+	port:libxslt \
+	port:sqlite3 \
+        port:enchant \
+        port:gst-plugins-base
+        
+
+depends_build	\
+	port:pkgconfig \
+        port:gtk-doc
+
+post-patch {
+    reinplace "s|-licucore|-licui18n -licuuc|" ${worksrcpath}/configure
+}
+
+#
+# video is now enabled by default so make the variant no_video
+#
+
+variant no_video description {Disable HTML5 video support using gstreamer} {
+	depends_lib-delete      port:gst-plugins-base
+	configure.args-append	--disable-video
+}
+
+#
+# add new variant to support gnome_keyring
+#
+
+variant gnome_keyring description {Enable support for gnomekeyring} {
+        depends_lib-append      port:gnome-keyring
+        configure.args-append   --enable-gnomekeyring
+}
+
+#
+# variant to enable filter support which is disabled by default
+# was svg_filters previously but renamed to follow configure arg usage
+#
+
+variant filters description {Enable support for SVG filters (experimental)} {
+	configure.args-append	--enable-filters
+}
+
+#
+# include dummy variant to ease transition from svg_filters to filters
+#
+
+variant svg_filters requires filters description {Build with +filters if +svg_filters was previously installed} {
+}
+
+#
+# all svg support (except filters) is enabled by default
+#
+
+variant no_svg description {Disable all SVG support} {
+	configure.args-append	--disable-svg
+}
+
+livecheck.check regex
+livecheck.url   http://webkitgtk.org/?page=download
+livecheck.regex "webkit-(\\d+(?:\\.\\d+)*)${extract.suffix}"
