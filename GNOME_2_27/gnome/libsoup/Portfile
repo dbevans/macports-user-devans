@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            libsoup
-version         2.27.2
+version         2.27.4
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome net
 platforms       darwin
@@ -23,9 +23,9 @@ homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2       yes
 
-checksums       md5     6ea5e7780488efe4565790cf4937cce3 \
-                sha1    3e67d6e7f9a886ccec7d3da2953176aa4ca553b4 \
-                rmd160  fe05424785308dda87084fd26086d87f473489de
+checksums       md5     c9b676621f1b89245ec5cec0c67198b7 \
+                sha1    2eb9dbcfb285feabf79873441f14c229ae0d0e68 \
+                rmd160  3eddca9c9c635537a3b9e11e7eb52e2742b35a58
 
 depends_lib \
     port:libxml2 \
