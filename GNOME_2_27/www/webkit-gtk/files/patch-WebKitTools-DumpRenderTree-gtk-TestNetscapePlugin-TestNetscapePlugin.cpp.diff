@@ -1,29 +1,33 @@
---- WebKitTools/DumpRenderTree/gtk/TestNetscapePlugin/TestNetscapePlugin.cpp.orig	2009-07-10 03:02:02.000000000 -0700
-+++ WebKitTools/DumpRenderTree/gtk/TestNetscapePlugin/TestNetscapePlugin.cpp	2009-07-13 12:59:40.000000000 -0700
-@@ -26,6 +26,13 @@
+--- WebKitTools/DumpRenderTree/gtk/TestNetscapePlugin/TestNetscapePlugin.cpp.orig	2009-07-14 08:05:33.000000000 -0700
++++ WebKitTools/DumpRenderTree/gtk/TestNetscapePlugin/TestNetscapePlugin.cpp	2009-07-14 08:07:37.000000000 -0700
+@@ -26,6 +26,15 @@
   */
  
  #include "config.h"
 +
++#ifdef __APPLE__
 +#define Cursor       QD_Cursor
 +#define WindowPtr    QD_WindowPtr
 +#define Picture      QD_Picture
 +#define BOOL         OSX_BOOL
 +#define EventType    HIT_EventType
++#endif
 +
  #include "PluginObject.h"
  
  #include "npapi.h"
-@@ -36,6 +43,13 @@
+@@ -36,6 +45,15 @@
  #include <stdio.h>
  #include <string.h>
  #include <stdlib.h>
 +
++#ifdef __APPLE__
 +#undef Cursor
 +#undef WindowPtr
 +#undef Picture
 +#undef BOOL
 +#undef EventType
++#endif
 +
  #include <X11/Xlib.h>
  
