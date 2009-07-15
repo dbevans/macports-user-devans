@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		nautilus
-version		2.26.3
+version		2.27.4
 set branch  [join [lrange [split ${version} .] 0 1] .]
 description	The GNOME filemanager
 long_description       	Nautilus is the official file manager for the \
@@ -15,9 +15,10 @@ categories	gnome
 platforms	darwin
 homepage	http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
-checksums       md5     e05f1b61c27f506451f7d46509631e7b \
-                sha1    e9ec2daac93eac185cef42a688c3ebefcca1f7fe \
-                rmd160  ba8b6dcd14c9d8615900d5ec236555223b3c315e
+
+checksums       md5     17fefc8d3f65cd5349213cd70c25c44f \
+                sha1    e62e04c62561c5263bbe85fefb4abb168cf5ddb8 \
+                rmd160  cb406419e52fa64a0b45f2274f903e1b6632cc48
 
 depends_build   port:pkgconfig \
                 port:intltool \
