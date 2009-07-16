@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name            libxklavier
-version         3.9
+version         4.0
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     libxklavier - utility library to make XKB stuff easier
 long_description    ${description}
@@ -14,19 +14,22 @@ platforms       darwin
 homepage        http://www.freedesktop.org/Software/LibXklavier
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     c8ff3ba6daf899be7ec2a626894852b9 \
-                sha1    f093950923361310f80c2c434f7cc1a17c09f301 \
-                rmd160  b92ce43e0c18183029aaf3d94b8960c022854f5d
+checksums       md5     1b714ba04835fb49511f9e1444a5ea4c \
+                sha1    37c6e9fb8b436d6a646a6eea09cf196baad28756 \
+                rmd160  e99904f7886701c7d37177999dff87261fd94ef3
 
 use_bzip2       yes
 
-depends_lib \
-    port:libxml2 \
-    port:libiconv \
-    port:zlib \
-    path:lib/pkgconfig/glib-2.0.pc:glib2
+depends_build   port:pkgconfig
 
-configure.args --disable-xkb-support
+depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                port:xkbcomp \
+                port:xorg-libXi \
+                port:libxml2 \
+                port:iso-codes
+
+configure.args  --x-includes=${prefix}/include \
+                --x-libraries=${prefix}/lib
 
 livecheck.check regex
 livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
