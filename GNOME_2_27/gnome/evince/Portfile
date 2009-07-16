@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name            evince
-version         2.26.2
+version         2.27.4
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Evince is a document viewer for multiple document formats like pdf, and many others.
 long_description \
@@ -16,9 +16,9 @@ homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2       yes
 
-checksums       md5     ed8b9fb5c5d6feafd19f0114b736c9ef \
-                sha1    1a789e078b4c95f3e3387a45092ae2f222135013 \
-                rmd160  00dd3dfa006dc019f8f951a356d7260283bf8bab
+checksums       md5     bfd1488d0c8d41d9c54bc2b69946bb65 \
+                sha1    939c74932376fcc5d54066cc9b60dda0c11ac70c \
+                rmd160  6a6345ec515f53185405544f49c65cf3ea5dc527
 
 depends_lib     port:gconf \
                 port:gnome-keyring \
@@ -31,8 +31,7 @@ depends_lib     port:gconf \
 depends_build   port:gnome-doc-utils \
                 port:m4 \
                 path:bin/perl:perl5 \
-                port:pkgconfig \
-                port:rarian
+                port:pkgconfig
 
 configure.args  --disable-scrollkeeper \
                 --disable-schemas-install \
