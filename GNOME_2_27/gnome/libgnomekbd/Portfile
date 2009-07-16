@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name                libgnomekbd
-version             2.26.0
+version             2.27.4
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Libgnomekbd is something new.
 long_description    Libgnomekbd is something new.
@@ -15,29 +15,32 @@ homepage            http://www.gnome.org/
 
 master_sites        gnome:sources/${name}/${branch}/
 
-checksums           md5     aee58c088c4fd980e1bf813ea813c156 \
-                    sha1    0b7543df516271e16198135323471b2107dca0ec \
-                    rmd160  0a4b5d133efc8b08482d1dc27cdf2ca56655fd48
+checksums           md5     f5bd68f8e71d093e0f9721ff952b179b \
+                    sha1    121e3910ab21244844389500f9e881324a772a81 \
+                    rmd160  1ed17fac296a233498e197ce2dafd34c02be75cc
+
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:p5-xml-parser
 
 depends_lib         port:libxklavier \
-                    port:libgnomeui
+                    port:gconf
 
 use_bzip2           yes
 
-post-patch {
-    reinplace "s|test capplet|capplet|" ${worksrcpath}/Makefile.in
-}
+#post-patch {
+#    reinplace "s|test capplet|capplet|" ${worksrcpath}/Makefile.in
+#}
 
-configure.args      --mandir=${prefix}/share/man
+configure.args      --mandir=${prefix}/share/man \
+                    --x-includes=${prefix}/include \
+                    --x-libraries=${prefix}/lib
 
-variant no_x11 {
-        configure.args-append --without-x
-}
-
-if {![variant_isset no_x11]} {
-        configure.args-append --x-includes=${prefix}/include \
-                              --x-libraries=${prefix}/lib
-}
+#variant no_x11 {
+#        configure.args-append --without-x
+#        configure.args-delete --x-includes=${prefix}/include \
+#                              --x-libraries=${prefix}/lib
+#}
 
 livecheck.check   regex
 livecheck.url     http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
