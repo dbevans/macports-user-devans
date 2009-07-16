@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            totem-pl-parser
-version         2.26.2
+version         2.27.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome
 maintainers     devans openmaintainer
@@ -17,31 +17,16 @@ homepage        http://live.gnome.org/Totem
 platforms       darwin
 master_sites    gnome:sources/${name}/${branch}/
 
-patchfiles      patch-configure.in.diff
-
-post-patch {
-    # http://bugzilla.gnome.org/show_bug.cgi?id=578358
-    reinplace "s:libtotem_glibc_la_SOURCES =:libtotem_glibc_la_SOURCES = stub.c:" ${worksrcpath}/lib/Makefile.am
-    copy ${filespath}/stub.c ${worksrcpath}/lib/stub.c
-}
-
-checksums       md5     daffda80cfead2a1473ca3ff71e1057b \
-                sha1    18becb89d674b5025dcf7cf35935a7c8d6330283 \
-                rmd160  f328f0fa8def9993378362072c8828b7cadca0c2
+checksums       md5     397c8e850647d38a446a16a62f11cd0c \
+                sha1    15632c2fb887b72d0a76094b52f50a02ba70ee92 \
+                rmd160  230c28a217f149d91cce46ca3fb909cbf8804758
 
 use_bzip2       yes
 
 depends_build   port:pkgconfig \
-                port:autoconf \
-                port:automake \
-                port:libtool \
                 port:gtk-doc
 
 depends_lib     port:evolution-data-server
-
-
-use_autoreconf  yes
-autoreconf.args -fvi
 
 livecheck.check regex
 livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
