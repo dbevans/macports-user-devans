@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		bug-buddy
-version		2.26.0
+version		2.27.1
 set branch  [join [lrange [split ${version} .] 0 1] .]
 description	A graphical bug reporting tool.
 long_description        This is a graphical bug reporting tool. It can \
@@ -16,9 +16,9 @@ platforms	darwin
 homepage	http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     f92663a1a819f83e3eb3004f9e8a687a \
-                sha1    6b96ea35d58b969fe0129af2bfb4aa144c207e6d \
-                rmd160  51dac975a5752c910928ddf07bab3bc9c0225649
+checksums       md5     8d25ed28439daf64f8b8807ddf3529e9 \
+                sha1    a058d15cc48cb891fd83e60a6ea3b01a7c3815cb \
+                rmd160  8d30dd39ea0e7bf922b15cdb886ac97b3a0e3d5e
 
 depends_lib     port:libelf \
 		port:gnome-desktop \
