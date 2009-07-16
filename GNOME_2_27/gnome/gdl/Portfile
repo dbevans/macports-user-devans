@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gdl
-version             2.26.2
+version             2.27.3
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome devel
 maintainers         devans openmaintainer
@@ -20,9 +20,9 @@ homepage            http://www.anjuta.org/
 master_sites        gnome:sources/${name}/${branch}/
 use_bzip2           yes
 
-checksums           md5     461b077f33ee7a447964f521e5455fd1 \
-                    sha1    29402c29c42fef5dc37748d4ff52e1f96e94f2b4 \
-                    rmd160  c4a2dee8355f6b005490eda2cd0ef2399e2e5179
+checksums           md5     1a01f8c43f7ed7dbae75307f0b6cc843 \
+                    sha1    e38b1a6eec14d71247978a083217749dfc2689b1 \
+                    rmd160  9a804dbf98cacd56cfae549767cb2167b4608189
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -30,10 +30,8 @@ depends_build       port:pkgconfig \
                     port:gtk-doc
 
 depends_lib         port:gtk2 \
-                    port:libglade2 \
                     port:libxml2
 
 livecheck.check   regex
 livecheck.url     http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
 livecheck.regex   {LATEST-IS-(\d+(?:\.\d+)*)}
-
