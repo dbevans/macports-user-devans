@@ -3,7 +3,7 @@
 PortSystem 1.0
 
 name            gnome-settings-daemon
-version         2.26.1
+version         2.27.4
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Gnome 2 settings daemon.
 long_description ${description}
@@ -12,15 +12,21 @@ categories      gnome
 platforms       darwin
 homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
-checksums           md5     7be383de54c0707c64843ae51563c43a \
-                    sha1    0c2cef37a0a3333c314a8205cefea9edb8f0669a \
-                    rmd160  5cca5fdcbf144d6fc950c5b5f7d5f1304168f4bd
+
+checksums       md5     edaae22cdd76a5617036d8742f94b365 \
+                sha1    fe22e4d379f51cd7ff5b28b2db5e48d26012273b \
+                rmd160  85466e7e5925ae5472f885ce85f32b009710cc5c
 
 depends_lib     port:gnome-desktop \
+                port:libnotify \
                 port:libgnomekbd \
+                port:libglade2 \
                 port:gst-plugins-good
 
-depends_build	port:gnome-doc-utils
+depends_build	port:pkgconfig \
+                port:intltool \
+                port:p5-xml-parser \
+                port:gnome-doc-utils
 
 use_bzip2 	yes
 
@@ -28,7 +34,13 @@ pre-configure {
     reinplace "s|-bundle|-bundle -undefined dynamic_lookup|g" ${worksrcpath}/configure
 }
 
-configure.args  --enable-gstreamer
+configure.args  --disable-schemas-install \
+                --disable-pulse
+
+post-activate    {
+    system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+        gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
+}
 
 livecheck.check regex
 livecheck.url   http://ftp.gnome.org/pub/GNOME/sources/${name}/${branch}/
