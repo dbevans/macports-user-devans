@@ -1,0 +1,16 @@
+--- src/core/main.c.orig	2009-07-17 12:26:02.000000000 -0700
++++ src/core/main.c	2009-07-17 12:27:57.000000000 -0700
+@@ -58,7 +58,13 @@
+ 
+ #include <stdlib.h>
+ #include <sys/types.h>
++
++#ifdef __APPLE__
++#include <sys/wait.h>
++#else
+ #include <wait.h>
++#endif
++
+ #include <stdio.h>
+ #include <string.h>
+ #include <signal.h>
