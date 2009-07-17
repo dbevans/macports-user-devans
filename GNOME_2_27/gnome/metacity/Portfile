@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		metacity
-version		2.26.0
+version		2.27.0
 set branch  [join [lrange [split ${version} .] 0 1] .]
 description	A window manager for the adult in you.
 long_description        ${description}
@@ -14,24 +14,43 @@ platforms	darwin
 homepage	http://www.gnome.org
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     eafb624e79fbcdab6da59acc222430b1 \
-                sha1    70593f69148960a0248527c8ae8d442a3d251d08 \
-                rmd160  26b75abb9b705f9fd7711dfbbff134e600dcfd56
+checksums       md5     52871631cc13b7fde1403aaee3db32d4 \
+                sha1    9b72168f8f66bcfc8d2e83252c17e1d0eae5f0e5 \
+                rmd160  64afadedc802e65ae71ec7fe20756ea186818097
 
 depends_lib     port:gconf \
+                port:libcanberra \
+                port:xrender \
+                port:xorg-libXcursor \
+                port:xorg-libXrandr \
+                port:xorg-libXext \
+                port:xorg-libsm \
+                port:libgtop \
                 port:startup-notification \
    	        port:gnome-themes \
                 port:zenity
 
-depends_build   port:gnome-doc-utils \
+# compositing depends
+
+depends_lib-append \
+                port:xorg-libXcomposite \
+                port:xorg-libXfixes \
+                port:xorg-libXdamage
+                
+depends_build   port:intltool \
+                port:p5-xml-parser \
+                port:gnome-doc-utils \
 	        port:pkgconfig
 
 use_bzip2 	yes
 
+patchfiles      patch-src-core-main.c.diff
+
 configure.args  --mandir=${prefix}/share/man \
                 --x-includes=${prefix}/include \
                 --x-libraries=${prefix}/lib \
-                --disable-scrollkeeper
+                --disable-scrollkeeper \
+                --disable-schemas-install
 
 pre-fetch {
     if {![file exists $prefix/lib/libgdk-x11-2.0.dylib]} {
@@ -42,6 +61,8 @@ pre-fetch {
 
 post-activate {
 	system "${prefix}/bin/scrollkeeper-update"
+        system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+            gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
 }
 
 livecheck.check regex
