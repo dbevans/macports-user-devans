@@ -4,7 +4,7 @@
 PortSystem	1.0
 
 name            gnome-python-desktop
-version         2.26.0
+version         2.27.2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome python
 maintainers     devans openmaintainer
@@ -14,14 +14,17 @@ platforms       darwin
 homepage        http://www.pygtk.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     fbcf4ef5ec4a8c4eec4d390c5889c80f \
-                sha1    9f30c470ea73cb11b1daa6e10f1e980ec5698086 \
-                rmd160  dda34b9fe39567d591f654af9a9c9f6dab5f9a15
+checksums       md5     3e1da41c3223687e812c0b1bd1f0ed55 \
+                sha1    3737a606aed433299841c3d50c4d734610787810 \
+                rmd160  e875a3e08441e933aa2709b133a005187cb173a3
 
 use_bzip2       yes
 
+depends_build   port:pkgconfig \
+                port:gtk-doc
+
 depends_lib	port:py25-gtk \
-                port:py25-cairo \
+                port:py25-gnome \
                 port:gtksourceview \
                 port:libgtop \
                 port:gnome-media \
@@ -34,7 +37,9 @@ depends_lib	port:py25-gtk \
 # TODO  port:nautilus-cd-burner
 
 configure.args 	--enable-metacity \
-                --disable-nautilusburn
+                --disable-nautilusburn \
+                --disable-braseromedia \
+                --disable-braseroburn
 
 configure.python ${prefix}/bin/python2.5
 configure.pkg_config_path  ${prefix}/Library/Frameworks/Python.framework/Versions/2.5/lib/pkgconfig
