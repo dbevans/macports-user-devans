@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		gnome-system-monitor
-version		2.26.2
+version		2.27.4
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	A system monitor.
 long_description        A nicer, simpler, easier to use replacement to gtop. \
@@ -16,9 +16,9 @@ platforms	darwin
 homepage	http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     d69ddb569e51ba381b6bf2d8d32f3b78 \
-                sha1    a24d042ac3eefc77970a2ebdf56a94d77df96e34 \
-                rmd160  31cc3c0e531275254bf9ba33cb94ad5258ea936c
+checksums       md5     c7bbae45719f8b1a167c0c0763ffe68a \
+                sha1    91acfaaa8c82cf97b8b4ea75cfabfd7a1f660839 \
+                rmd160  a220f483bd1d6612eb035f0bf0cdf9cac8e734d4
 
 depends_build   port:pkgconfig \
                 port:intltool \
