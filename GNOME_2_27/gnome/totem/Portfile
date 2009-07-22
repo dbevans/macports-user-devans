@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            totem
-version         2.26.3
+version         2.27.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome
 maintainers     devans openmaintainer
@@ -24,9 +24,9 @@ homepage        http://live.gnome.org/Totem
 platforms       darwin
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums      md5     f8f7390f5d93268cd200086a1b4f765a \
-               sha1    ea6fa7244eb993a3038bc76f5e561c8a0661466c \
-               rmd160  f265ec3997c130f28bf5e5455c0aef6921e71ece
+checksums       md5     586d08291bdd5e0673baeae0f93ab790 \
+                sha1    d3d1095ad02b35f820957ef3476913794b97e8cd \
+                rmd160  0dc5c2549362427a3e939fb0a3689fa1b5271b0b
 
 use_bzip2       yes
 
@@ -38,7 +38,8 @@ depends_build   port:pkgconfig \
                 port:intltool \
                 port:p5-xml-parser \
                 port:gnome-doc-utils \
-                port:gtk-doc
+                port:gtk-doc \
+                port:gsed
 
 depends_lib     port:gconf \
                 port:totem-pl-parser \
@@ -46,11 +47,34 @@ depends_lib     port:gconf \
                 port:xorg-libXxf86vm \
                 port:py25-gtk \
                 port:gst-plugins-good \
+                port:gst-plugins-bad \
+                port:gst-plugins-ugly \
+                port:gst-ffmpeg \
                 port:nautilus
 
 configure.python  ${prefix}/bin/python2.5
 
-configure.args  --with-plugins="thumbnail screensaver ontop gromit media-player-keys properties sidebar-test skipto youtube pythonconsole" \
+#
+# missing dependencies for plugins
+#
+#configure: WARNING: you need libgalago >= 0.5.2 installed for the galago plugin (disabling plugin)
+#configure: WARNING: you need lirc_client installed for the lirc plugin (disabling plugin)
+#configure: WARNING: you need GMyth >= 0.7 installed for the MythTV plugin (disabling plugin)
+#configure: WARNING: you need vala installed to use the sample-vala plugin (disabling plugin)
+#configure: WARNING: you need the bluez libraries installed for the Bemused plugin (disabling plugin)
+#configure: WARNING: you need libgdata >= 0.1.1 installed for the YouTube plugin (disabling plugin)
+#configure: WARNING: you need the easy-publish-and-consume library installed for the publish plugin (disabling plugin)
+#configure: WARNING: you need the tracker development headers installed for the tracker plugin (disabling plugin)
+#checking which plugins to compile...  thumbnail screensaver ontop gromit media-player-keys properties sidebar-test skipto sample-python pythonconsole jamendo opensubtitles screenshot brasero-disc-recorder coherence_upnp dbus-service iplayer
+
+#configure.args  --with-plugins="all" \
+
+                lappend default_plugins \
+                    thumbnail screensaver ontop gromit media-player-keys \
+                    properties sidebar-test skipto pythonconsole jamendo \
+                    opensubtitles screenshot coherence_upnp dbus-service iplayer
+
+configure.args  --with-plugins="${default_plugins}" \
                 --disable-static \
                 --enable-browser-plugins \
                 --enable-complex-plugin \
@@ -62,16 +86,9 @@ configure.args  --with-plugins="thumbnail screensaver ontop gromit media-player-
                 --x-libraries=${prefix}/lib \
                 BROWSER_PLUGIN_DIR=${prefix}/lib/nsplugins
 
-variant xine description {Use xine-lib instead of gstreamer} {
-    depends_lib-delete port:gst-plugins-good
-    depends_lib-append port:xine-lib
-    configure.args-append --enable-xine
-    configure.args-delete --enable-easy-codec-installation
-    configure.args-append --disable-easy-codec-installation
-}
-
 post-patch {
     reinplace "s:libdbus-glib-1.so.2:${prefix}/lib/libdbus-glib-1.2.dylib:" ${worksrcpath}/browser-plugin/totemPluginGlue.cpp
+    reinplace "s: sed : ${prefix}/bin/gsed :g" ${worksrcpath}/help/Makefile.in
 }
 
 post-destroot {
