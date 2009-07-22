@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		gnome-utils
-version		2.26.0
+version		2.27.2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	GNOME utilities
 long_description Utilities for the GNOME 2.0 desktop.
@@ -14,13 +14,12 @@ platforms	darwin
 homepage	http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     667400cfb9bee954028024ac3cf91a09 \
-                sha1    ac1078ad2d75a561f7aa562d06316a221d6dcbc4 \
-                rmd160  7ef1bc0d7a497135426fa79505726b50acb75547
+checksums       md5     b7ee7d23f2713334c68ebf5121186219 \
+                sha1    14a227c7d4d3c58eba2ddce1892c150699c1cdab \
+                rmd160  d20f296a316547772271efc14855e2d0798791b5
 
-depends_lib     port:libgnomeui \
+depends_lib     port:gconf \
                 port:libgtop \
-                port:gnome-desktop \
                 port:gnome-panel
 
 use_bzip2 	yes
@@ -28,8 +27,9 @@ use_bzip2 	yes
 configure.args  --mandir=${prefix}/share/man \
 		--x-includes=${prefix}/include \
                 --x-libraries=${prefix}/lib \
-                --disable-hal \
-                --enable-gfloppy=no \
+                --disable-shave \
+                --enable-maintainer-flags=no \
+                --disable-schemas-install \
                 --disable-scrollkeeper
 
 post-extract {
@@ -38,6 +38,8 @@ post-extract {
 
 post-activate	{
 	system "scrollkeeper-update"
+        system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+            gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
 }
 
 platform darwin 7 {
