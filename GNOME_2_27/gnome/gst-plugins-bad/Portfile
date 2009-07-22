@@ -1,0 +1,88 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem 1.0
+
+name		gst-plugins-bad
+version		0.10.13
+revision        2
+description	This is gst-plugins, a set of plug-ins for GStreamer.
+long_description        ${description}
+maintainers	nomaintainer
+categories	gnome
+platforms	darwin
+homepage	http://www.gnome.org/
+master_sites    http://gstreamer.freedesktop.org/src/${name}/
+use_bzip2 	yes
+
+checksums       md5     bc77146c6af89b52f26ebfc8f06d0dfe \
+                sha1    c5c2404aab55a04c57c4847f814d3e02e3ab914b \
+                rmd160  34ca2d43501e4c4e365bc88e5acb48a933acf111
+
+depends_lib	\
+	port:gst-plugins-base \
+	port:gtk2 \
+        port:XviD \
+	port:dirac \
+        port:exempi \
+        port:faac \
+	port:faad2 \
+	port:jack \
+	port:jasper \
+        port:libdca \
+	port:libexif \
+        port:libglade2 \
+        port:libmms \
+	port:libmodplug \
+        port:libmpcdec \
+        port:liboil \
+	port:libsndfile \
+	port:neon
+
+	#
+        # could depend on tons for multimedia stuff +variants
+	# the following ports are available but don't configure
+        # and/or build correctly
+        #
+        # port:mjpegtools (mpeg2enc mplex build fails)
+	# port:libmusicbrainz (configure wants pkg-config libmusicbrainz, we have libmusicbrainz3)
+        # port:libsdl (builds but sdlvideosink is broken)
+	# port:soundtouch (fails to configure)
+        # port:swfdec (configure wants pkg-config swfdec-0.3, we have swfdec-0.8)
+        #
+
+configure.compiler gcc-4.0
+
+configure.args	--disable-dc1394 \
+                --disable-quicktime \
+                --disable-mpeg2enc \
+                --disable-mplex \
+                --disable-musicbrainz \
+                --disable-sdl \
+                --disable-soundtouch \
+                --disable-swfdec \
+                --enable-experimental \
+                --enable-static
+
+configure.cppflags-append "-L${prefix}/lib"
+configure.cflags-append "-no-cpp-precomp -funroll-loops -fstrict-aliasing"
+
+patchfiles modplug.patch
+
+post-patch {
+	reinplace "s|-flat_namespace -undefined suppress|-undefined define_a_way|g" \
+		${worksrcpath}/configure
+	reinplace "s|libSoundTouch|soundtouch-1.0|g" \
+		${worksrcpath}/configure
+}
+
+universal_variant no
+
+variant dc1394 description {Enable Firewire digital camera support using libdc1394} {
+        configure.args-delete --disable-dc1394
+        depends_lib-append port:libdc1394
+}
+
+livecheck.check regex
+livecheck.url   ${master_sites}
+livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

@@ -1,0 +1,66 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem 1.0
+
+name		gst-plugins-base
+version		0.10.23
+revision        2
+description	This is gst-plugins, a set of plug-ins for GStreamer.
+long_description        ${description}
+maintainers	nomaintainer
+categories	gnome
+platforms	darwin
+homepage	http://www.gnome.org/
+
+# port:liboil is not universal
+universal_variant no
+
+use_bzip2 	yes
+master_sites    gnome:sources/gst-plugins-base/0.10/ http://gstreamer.freedesktop.org/src/${name}/
+
+checksums       md5     641cc7def2d8667b9b4df15e69dba25f \
+                sha1    f0b66ddca22187c8011b37a5d806c7dc7e68b7f1 \
+                rmd160  3b08bdeeb5237fb0e6e918ac5d6a97064fa8fe98
+
+depends_lib	\
+	port:gstreamer \
+	port:gnome-vfs \
+	port:liboil \
+	port:libogg \
+	port:libtheora \
+	port:libvorbis
+
+depends_build \
+	port:autoconf \
+	port:automake \
+	port:libtool
+
+use_autoreconf  yes
+autoreconf.args -fvi
+
+configure.args \
+        --enable-experimental \
+        --disable-libvisual\
+        --disable-gst_v4l \
+        --disable-alsa \
+        --disable-cdparanoia
+
+variant no_x11 {
+       configure.args-append --without-x --disable-x --disable-xvideo --disable-xshm
+}
+
+#
+# current cdparanoia port (cdparanoia III 10.2) appears to not be API compatible
+# with gst-plugins-base.  See #19843. 
+# disable by default until this is rectified.
+#
+
+variant cdparanoia description {Enable (currently broken) cdparanoia plugin} {
+       depends_lib-append port:cdparanoia
+       configure.args-delete --disable-cdparanoia
+}
+
+livecheck.check regex
+livecheck.url   http://gstreamer.freedesktop.org/src/${name}/
+livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"
