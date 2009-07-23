@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name            gnome-applets
-version         2.26.3
+version         2.27.3
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     GNOME panel applets.
 long_description This package contains applets for use with the \
@@ -15,9 +15,9 @@ platforms       darwin
 homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     23fb47b3e35ef2136d6ade3f0203328b \
-                sha1    52279066e6b0e0af664b4cf6404123bf51fe2791 \
-                rmd160  34035faeac68a44433a3a558963f2b571e650c41
+checksums       md5     04ce905d42f1e1d3c472b28463443dda \
+                sha1    f6db44ca474771b7e050932d0206f5e492ad3e6f \
+                rmd160  ad67fa43660c5acbc27ec51101731a551080a3f1
 
 depends_build   port:pkgconfig \
                 port:intltool \
