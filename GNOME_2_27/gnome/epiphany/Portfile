@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		epiphany
-version		2.26.3
+version		2.27.4
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	A GNOME Web browser.
 long_description	A web browser is more than an application, it is a \
@@ -18,41 +18,31 @@ homepage	http://www.gnome.org/projects/${name}
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2	yes
 
-checksums       md5     16f44012bc376077e1443e049d725847 \
-                sha1    d1143fd2f287efe3eab648e1feded9f4911e3236 \
-                rmd160  ef2474c8523a6787227d3dfa5e8fc9d443708a0c
+checksums       md5     35f37bf3150614f1d8ff3f21864737ca \
+                sha1    8b320d1e2d8f6c546eb2b51bb479fd5c67b2fa6a \
+                rmd160  fcd0058be788805124bd2499effa67706956c89e
 
 depends_build   port:pkgconfig \
                 port:intltool \
                 port:p5-xml-parser \
-                port:gnome-doc-utils
+                port:gnome-doc-utils \
+                port:gtk-doc
 
-depends_lib	port:gconf \
+depends_lib     port:gconf \
                 port:libxslt \
-                port:libglade2 \
-                port:libgnomeui \
-                port:gnome-desktop \
                 port:startup-notification \
                 port:libnotify \
-                port:libcanberra \
-                port:py25-gtk \
-                port:py25-gnome \
-                port:enchant \
-                port:iso-codes \
-                port:xulrunner
+                port:webkit-gtk \
+                port:libsoup \
+                port:iso-codes
 
-configure.args  --enable-spell-checker \
-                --with-distributor-name=MacPorts \
+configure.args  --with-distributor-name=MacPorts \
                 --disable-zeroconf \
+                --disable-introspection \
+                --disable-seed \
                 --disable-network-manager \
                 --disable-schemas-install \
                 --disable-scrollkeeper
-
-configure.python  ${prefix}/bin/python2.5
-
-pre-configure {
-    reinplace "s|--rpath=|-rpath |g" ${worksrcpath}/configure
-}
 
 post-activate {
         system "${prefix}/bin/gtk-update-icon-cache -f -t ${prefix}/share/icons/hicolor"
