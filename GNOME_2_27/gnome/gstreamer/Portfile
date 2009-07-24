@@ -4,8 +4,7 @@
 PortSystem 1.0
 
 name		gstreamer
-version		0.10.23
-revision        1
+version		0.10.23.4
 description	A framework for streaming media.
 long_description	This is GStreamer, a framework for streaming media. \
 			The fundamental design comes from the video pipeline at \
@@ -22,23 +21,22 @@ platforms	darwin
 homepage	http://www.gnome.org/
 
 master_sites	gnome:sources/gstreamer/[join [lrange [split ${version} .] 0 1] .]/ \
-	http://gstreamer.freedesktop.org/src/${name}/
+	        http://gstreamer.freedesktop.org/src/${name}/pre/
 
-checksums       md5     f7b2e300d2d85756407ec529424ab237 \
-                sha1    861af545b51be56b5782a636844f2e888ea7c90c \
-                rmd160  7491281501adca311fd0d2cb8c92cd278e095fd2
+checksums       md5     539aa9e2c4f9bb906bdb222c8a5c7d1a \
+                sha1    840f614a65245b266cb00514bfaaf6ddde431ded \
+                rmd160  5186b0e83cbcf0a639ce7b9ea3c74d318abd17c9
 
 depends_build   \
     port:gzip \
     port:m4 \
     path:bin/perl:perl5 \
     port:pkgconfig
+
 depends_lib \
     port:bison \
     port:flex \
-    port:gettext \
     path:lib/pkgconfig/glib-2.0.pc:glib2 \
-    port:libiconv \
     port:libxml2 \
     port:zlib
 
@@ -57,5 +55,5 @@ pre-build	{
 }
 
 livecheck.check regex
-livecheck.url   http://gstreamer.freedesktop.org/src/${name}/
+livecheck.url   http://gstreamer.freedesktop.org/src/${name}/pre
 livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"
