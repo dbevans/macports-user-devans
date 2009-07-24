@@ -1,0 +1,47 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            anjuta-extras
+version         2.27.3
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     Additional plugins for Anjuta
+long_description        ${description}
+maintainers     devans openmaintainer
+categories      gnome devel
+platforms       darwin
+homepage        http://anjuta.sourceforge.net/
+master_sites    gnome:sources/${name}/${branch}/
+
+use_bzip2       yes
+
+checksums       md5     90ea2d04054db334a8a4a6fd52ce7a2c \
+                sha1    af158ea566b16564d5139ea40228a837da7325d7 \
+                rmd160  33bdba75bf1d19a7961d1aadccda5ed0c4cac77b
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:p5-xml-parser
+
+depends_lib     port:anjuta \
+                port:gconf \
+                path:lib/pkgconfig/libgvc.pc:graphviz
+
+configure.args  --enable-static \
+                --disable-schemas-install \
+                --disable-plugin-valgrind \
+                --disable-plugin-scintilla
+
+variant scintilla description {Enable scintilla based editor in anjuta} {
+                configure.args-delete   --disable-plugin-scintilla
+}
+
+post-activate {
+        system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+             gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}
