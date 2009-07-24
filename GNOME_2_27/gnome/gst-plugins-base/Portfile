@@ -4,8 +4,7 @@
 PortSystem 1.0
 
 name		gst-plugins-base
-version		0.10.23
-revision        2
+version		0.10.23.4
 description	This is gst-plugins, a set of plug-ins for GStreamer.
 long_description        ${description}
 maintainers	nomaintainer
@@ -17,11 +16,11 @@ homepage	http://www.gnome.org/
 universal_variant no
 
 use_bzip2 	yes
-master_sites    gnome:sources/gst-plugins-base/0.10/ http://gstreamer.freedesktop.org/src/${name}/
+master_sites    gnome:sources/gst-plugins-base/0.10/ http://gstreamer.freedesktop.org/src/${name}/pre
 
-checksums       md5     641cc7def2d8667b9b4df15e69dba25f \
-                sha1    f0b66ddca22187c8011b37a5d806c7dc7e68b7f1 \
-                rmd160  3b08bdeeb5237fb0e6e918ac5d6a97064fa8fe98
+checksums       md5     78594c5672b3bf41b37a3a9f7c16bb3b \
+                sha1    610357bd6d6e82d05f8f0276892926e3a4976a6d \
+                rmd160  ac6081497fca27732d28a69e695cb52d994cd0ca
 
 depends_lib	\
 	port:gstreamer \
@@ -35,9 +34,6 @@ depends_build \
 	port:autoconf \
 	port:automake \
 	port:libtool
-
-use_autoreconf  yes
-autoreconf.args -fvi
 
 configure.args \
         --enable-experimental \
@@ -62,5 +58,5 @@ variant cdparanoia description {Enable (currently broken) cdparanoia plugin} {
 }
 
 livecheck.check regex
-livecheck.url   http://gstreamer.freedesktop.org/src/${name}/
+livecheck.url   http://gstreamer.freedesktop.org/src/${name}/pre
 livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"
