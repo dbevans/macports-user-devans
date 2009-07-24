@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            totem-pl-parser
-version         2.27.1
+version         2.27.2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome
 maintainers     devans openmaintainer
@@ -17,16 +17,18 @@ homepage        http://live.gnome.org/Totem
 platforms       darwin
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     397c8e850647d38a446a16a62f11cd0c \
-                sha1    15632c2fb887b72d0a76094b52f50a02ba70ee92 \
-                rmd160  230c28a217f149d91cce46ca3fb909cbf8804758
+checksums       md5     65fe6b0f523e4d90fda97736bbdaf637 \
+                sha1    a5b445f0162ff8aa0665213bcdb97e64c0d6f86b \
+                rmd160  860881f055c16bf6f7af0645125467a49dd1d79b
 
 use_bzip2       yes
 
 depends_build   port:pkgconfig \
                 port:gtk-doc
 
-depends_lib     port:evolution-data-server
+depends_lib     port:gtk2 \
+                port:libxml2 \
+                port:gmime
 
 livecheck.check regex
 livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
