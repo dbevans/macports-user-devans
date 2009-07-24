@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		eog
-version		2.26.3
+version		2.27.4
 set branch	[join [lrange [split ${version} .] 0 1] .]
 description	An image viewing program.
 long_description        This is the Eye of Gnome, an image viewer program. \
@@ -16,9 +16,9 @@ platforms	darwin
 homepage	http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     0660a0ce0fa4a46656fad84d61895917 \
-                sha1    dce3dc99d3df80bcfad1401bd6efdcd7dfc88e30 \
-                rmd160  53710759e71a304789eaaeeddefa56ac80af8494
+checksums       md5     4d7ee8a76a62aca29086cc26b1bc4344 \
+                sha1    d9356ff3e36eac714fff9e9573b1a900906715bb \
+                rmd160  77304d4a6ebafc96ba02cfb4bbc9c6cf6b88bf55
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -28,7 +28,6 @@ depends_build   port:pkgconfig \
 
 depends_lib     port:gnome-desktop \
                 port:gconf \
-                port:libart_lgpl \
                 port:gnome-icon-theme \
                 port:shared-mime-info \
                 port:libexif \
@@ -36,7 +35,7 @@ depends_lib     port:gnome-desktop \
                 port:exempi \
                 port:py25-gtk \
                 port:py25-gobject
-               
+
 use_bzip2 	yes
 
 configure.args  --mandir=${prefix}/share/man \
