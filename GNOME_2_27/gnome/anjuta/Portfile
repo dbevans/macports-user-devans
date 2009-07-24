@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            anjuta
-version         2.26.2.2
+version         2.27.3.0
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A GNOME/GTK IDE
 long_description        ${description}
@@ -14,9 +14,11 @@ platforms       darwin
 homepage        http://anjuta.sourceforge.net/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     03191602895a4b0dd15a8298fc255657 \
-                sha1    e631bd5abc1ac3513b0b3af180a443f8d8687bf6 \
-                rmd160  c38fd4c200987d5f080a1a6e11dce08d7d498c37
+use_bzip2       yes
+
+checksums       md5     cd2c1e1cc6ad44d55c6fd6e76a6fd5f9 \
+                sha1    080b2389b13974ff668eb9199cc8dd6e007d74ad \
+                rmd160  a6839a5af2aaa20b6901fede8b7b91bef0646294
 
 patchfiles      patch-libanjuta-anjuta-launcher.c.diff \
                 patch-libanjuta-anjuta-utils.c.diff
@@ -24,18 +26,21 @@ patchfiles      patch-libanjuta-anjuta-launcher.c.diff \
 depends_build   port:pkgconfig \
                 port:intltool \
                 port:p5-xml-parser \
+                port:p5-locale-gettext \
                 port:gnome-doc-utils \
                 port:gtk-doc
 
 depends_lib     port:autogen \
                 port:gconf \
+                port:libunique \
+                port:libgnomeui \
+                port:vte \
                 port:gdl \
                 port:libgda4 \
-                port:libunique \
-                port:vte
+                port:gtksourceview2
 
 post-patch {
-        reinplace "s|/usr/bin/perl|${prefix}/bin/perl|" ${worksrcpath}/scripts/glade2schema.pl
+        reinplace "s|/usr/bin/perl|${prefix}/bin/perl|" ${worksrcpath}/scripts/builder2schema.pl
 }
 
 configure.args  --enable-static \
@@ -43,9 +48,6 @@ configure.args  --enable-static \
                 --disable-schemas-install \
                 --disable-plugin-devhelp \
                 --disable-plugin-glade \
-                --disable-graphviz \
-                --disable-plugin-sourceview \
-                --disable-plugin-valgrind \
                 --disable-plugin-subversion
 
 variant devhelp description {Enable devhelp plugin support} {
@@ -56,17 +58,6 @@ variant devhelp description {Enable devhelp plugin support} {
 variant glade description {Enable glade plugin support} {
                 configure.args-delete   --disable-plugin-glade
                 depends_lib-append      port:glade3
-}
-
-variant graphviz description {Enable class inheritance plugin support using graphviz} {
-                configure.args-delete   --disable-graphviz
-                depends_lib-append      path:bin/dot:graphviz
-}
-
-variant sourceview description {Enable gtksourceview editor plugin support instead of scintilla} {
-                configure.args-append   --disable-plugin-scintilla
-                configure.args-delete   --disable-plugin-sourceview
-                depends_lib-append      port:gtksourceview2
 }
 
 variant subversion description {Enable subversion plugin support} {
