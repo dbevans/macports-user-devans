@@ -26,9 +26,11 @@ depends_build   port:pkgconfig \
 
 depends_lib     port:gconf \
                 port:librsvg \
+                port:clutter-gtk \
                 port:py25-gtk \
-                port:gnome-python-desktop \
+                port:libcanberra \
                 port:libsdl_mixer \
+                port:xorg-libsm \
                 port:ggz-client-libs \
                 port:guile
               
