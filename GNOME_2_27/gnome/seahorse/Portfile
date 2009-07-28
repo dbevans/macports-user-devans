@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		seahorse
-version		2.27.1
+version		2.27.5
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	Seahorse is a Gnome interface for GnuPG.
 long_description \
@@ -18,9 +18,9 @@ homepage	http://www.gnome.org/projects/${name}/
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2	yes
 
-checksums       md5     cf2f94eb7f7aa85f3b0400ea8020f4b6 \
-                sha1    6c62ed96ca8be6e9c77f209b2b00b5187d9df559 \
-                rmd160  0967a91275b43a39ba77796e32d7a6aa288a0e8d
+checksums       md5     229fd5cd7209d64c9abf4c609715f05c \
+                sha1    ad48266da0d857b19a1328e740e2a3f46c26b93d \
+                rmd160  13aba022eb6eb7061446f782f2b414518da976e9
 
 depends_lib	\
                 port:gpgme \
