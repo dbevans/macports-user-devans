@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            libsoup
-version         2.27.4
+version         2.27.5
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome net
 platforms       darwin
@@ -23,16 +23,19 @@ homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2       yes
 
-checksums       md5     c9b676621f1b89245ec5cec0c67198b7 \
-                sha1    2eb9dbcfb285feabf79873441f14c229ae0d0e68 \
-                rmd160  3eddca9c9c635537a3b9e11e7eb52e2742b35a58
+checksums       md5     3ae21aec88358a88b5552388446eb62e \
+                sha1    c20181bab445628a51ca7a92fb7a3cdb487a5a1d \
+                rmd160  39eec756b5a1739a3fc916d457d37b1e9807feb5
 
-depends_lib \
-    port:libxml2 \
-    port:gnutls \
-    port:sqlite3 \
-    port:gconf \
-    port:libproxy
+depends_build   port:pkgconfig \
+                port:gtk-doc \
+                port:curl
+
+depends_lib     port:libxml2 \
+                port:gnutls \
+                port:sqlite3 \
+                port:gconf \
+                port:libproxy
 
 use_parallel_build  yes
 
