@@ -3,7 +3,7 @@
 PortSystem 1.0
 
 name            gnome-settings-daemon
-version         2.27.4
+version         2.27.5
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Gnome 2 settings daemon.
 long_description ${description}
@@ -13,9 +13,9 @@ platforms       darwin
 homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     edaae22cdd76a5617036d8742f94b365 \
-                sha1    fe22e4d379f51cd7ff5b28b2db5e48d26012273b \
-                rmd160  85466e7e5925ae5472f885ce85f32b009710cc5c
+checksums       md5     bdb36927b3060b66b88fe5a0f132e8ae \
+                sha1    637aa03f2cf02cce183313c9e5ae38c6731dda2b \
+                rmd160  9cb056824bc4cf8387417f630fdbfe327000479e
 
 depends_lib     port:gnome-desktop \
                 port:libnotify \
