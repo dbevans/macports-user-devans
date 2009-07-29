@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            anjuta
-version         2.27.3.0
+version         2.27.5.0
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A GNOME/GTK IDE
 long_description        ${description}
@@ -16,9 +16,9 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_bzip2       yes
 
-checksums       md5     cd2c1e1cc6ad44d55c6fd6e76a6fd5f9 \
-                sha1    080b2389b13974ff668eb9199cc8dd6e007d74ad \
-                rmd160  a6839a5af2aaa20b6901fede8b7b91bef0646294
+checksums       md5     b0c6e99a69ae618899c581c42f295b2c \
+                sha1    ba28fe86abd9b8237dbd23d29b9f91114c90cdbf \
+                rmd160  386035cb2877ad55e6eec9705ba88c0801655100
 
 patchfiles      patch-libanjuta-anjuta-launcher.c.diff \
                 patch-libanjuta-anjuta-utils.c.diff
@@ -33,7 +33,6 @@ depends_build   port:pkgconfig \
 depends_lib     port:autogen \
                 port:gconf \
                 port:libunique \
-                port:libgnomeui \
                 port:vte \
                 port:gdl \
                 port:libgda4 \
