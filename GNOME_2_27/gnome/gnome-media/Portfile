@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-media
-version         2.27.4
+version         2.27.5
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A collection of utilities for simple multimedia handling.
 long_description	\
@@ -17,9 +17,9 @@ platforms       darwin
 homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     a075d1ffe8af9665fdd3a41aa4e6befb \
-                sha1    ffb7e09a8bf700c284a0f44712209da0a31415fb \
-                rmd160  8e9387e96ebe245f8f8865b2ee80e9a8f8f90e2a
+checksums       md5     f08b077bc635acd9abe93192b7410049 \
+                sha1    4b8639ed6baef9897c969077453765cb6ce37afa \
+                rmd160  b089fd83518c80510733ad3c204596a71bea108a
 
 use_bzip2       yes
 
@@ -29,29 +29,14 @@ depends_build	port:pkgconfig \
                 port:gnome-doc-utils
 
 depends_lib     port:libcanberra \
-                port:libunique \
                 port:gconf \
                 port:libglade2 \
                 port:gst-plugins-base
 
-configure.args  --disable-gstmix \
-                --disable-gnomecd \
+configure.args  --enable-gstmix \
                 --disable-scrollkeeper \
                 --disable-schemas-install \
                 --disable-pulseaudio
-
-variant deprecated description {Enable deprecated functionality} {
-        depends_lib-append    port:libgnomeui
-        configure.args-delete --disable-gstmix
-        configure.args-append --enable-vumeter \
-                              --enable-cddbslave \
-                              --enable-gstmix
-#
-#  this is untested and may not work
-#
-#        --enable-gnomecd
-#        depends_lib-append port:nautilus-cd-burner
-}
 
 post-activate    {
     system "${prefix}/bin/scrollkeeper-update"
