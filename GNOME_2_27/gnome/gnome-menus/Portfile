@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-menus
-version         2.27.0
+version         2.27.5
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      gnome
@@ -18,9 +18,9 @@ homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2       yes
 
-checksums       md5     23a7375dd20238184f2fcccc4d83846b \
-                sha1    ab914a083ef63bacd960349b3dee3dbd3a005a82 \
-                rmd160  a3b526d908448c52737edecb8f83c6c99e0d72e9
+checksums       md5     501ed0054d43a1c7b27756ef72e44c6c \
+                sha1    77298a0257d3607c1caa1915f32b044e8062a49b \
+                rmd160  7cec25492cc91c047c5abd943e5fa7b67dc17cff
 
 post-patch {
     reinplace "s|/usr/bin/env python|${prefix}/bin/python2.6|g" \
