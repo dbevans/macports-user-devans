@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		gst-plugins-base
-version		0.10.23.4
+version		0.10.23.5
 description	This is gst-plugins, a set of plug-ins for GStreamer.
 long_description        ${description}
 maintainers	nomaintainer
@@ -18,9 +18,9 @@ universal_variant no
 use_bzip2 	yes
 master_sites    gnome:sources/gst-plugins-base/0.10/ http://gstreamer.freedesktop.org/src/${name}/pre
 
-checksums       md5     78594c5672b3bf41b37a3a9f7c16bb3b \
-                sha1    610357bd6d6e82d05f8f0276892926e3a4976a6d \
-                rmd160  ac6081497fca27732d28a69e695cb52d994cd0ca
+checksums       md5     0080dc5542bc96cd0482efd64bea1a0b \
+                sha1    0df0d96d7f4b1a29405a82ec9fe6c17813e27b9a \
+                rmd160  d1b5fd88f76bfdc604b8ad9f98ee1e049cc8029e
 
 depends_lib	\
 	port:gstreamer \
