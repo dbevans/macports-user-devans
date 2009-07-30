@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		gnome-control-center
-version		2.27.0
+version		2.27.4.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	Control center for GNOME 2.0 project.
 long_description        ${description}
@@ -15,9 +15,9 @@ homepage	http://www.gnome.org/
 
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     eed8feccc37712e34d88bd3b20e46962 \
-                sha1    4730780aaab599869a2dfe2d72d68dd54bb77058 \
-                rmd160  d22c75b21d63bad9321ad1221e442f381da8dd35
+checksums       md5     fff294342dc0064c8e2b5e25ca0cc9c9 \
+                sha1    d03096225edc1528e2dbebb368a2647f7e4dbfde \
+                rmd160  83f74afe3e292bcc28b691cc23029ae0c2b50ced
 
 depends_lib	port:metacity \
 	        port:nautilus \
