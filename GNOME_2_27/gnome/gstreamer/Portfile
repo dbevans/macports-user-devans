@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		gstreamer
-version		0.10.23.4
+version		0.10.23.5
 description	A framework for streaming media.
 long_description	This is GStreamer, a framework for streaming media. \
 			The fundamental design comes from the video pipeline at \
@@ -23,9 +23,9 @@ homepage	http://www.gnome.org/
 master_sites	gnome:sources/gstreamer/[join [lrange [split ${version} .] 0 1] .]/ \
 	        http://gstreamer.freedesktop.org/src/${name}/pre/
 
-checksums       md5     539aa9e2c4f9bb906bdb222c8a5c7d1a \
-                sha1    840f614a65245b266cb00514bfaaf6ddde431ded \
-                rmd160  5186b0e83cbcf0a639ce7b9ea3c74d318abd17c9
+checksums       md5     4f5d33321a68388e9e5cdad22792e638 \
+                sha1    6d877ac1d396cf1a1d1a812b8047b160a6960fe1 \
+                rmd160  d07062549786719989aac57516039b3c016b0343
 
 depends_build   \
     port:gzip \
