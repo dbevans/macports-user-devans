@@ -1,0 +1,47 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            gnome-menus
+version         2.27.0
+set branch      [join [lrange [split ${version} .] 0 1] .]
+maintainers     devans openmaintainer
+categories      gnome
+platforms       darwin
+description     Panel component for the GNOME 2 Desktop.
+
+long_description \
+    ${description}
+
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+use_bzip2       yes
+
+checksums       md5     23a7375dd20238184f2fcccc4d83846b \
+                sha1    ab914a083ef63bacd960349b3dee3dbd3a005a82 \
+                rmd160  a3b526d908448c52737edecb8f83c6c99e0d72e9
+
+post-patch {
+    reinplace "s|/usr/bin/env python|${prefix}/bin/python2.6|g" \
+        ${worksrcpath}/simple-editor/gmenu-simple-editor.in \
+        ${worksrcpath}/simple-editor/GMenuSimpleEditor/config.py.in \
+        ${worksrcpath}/simple-editor/GMenuSimpleEditor/main.py \
+        ${worksrcpath}/simple-editor/GMenuSimpleEditor/maindialog.py \
+        ${worksrcpath}/simple-editor/GMenuSimpleEditor/menufilewriter.py \
+        ${worksrcpath}/simple-editor/GMenuSimpleEditor/menutreemodel.py
+}
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:p5-xml-parser \
+                port:gnome-doc-utils
+
+depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                port:py26-gtk
+
+configure.python   ${prefix}/bin/python2.6
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}
