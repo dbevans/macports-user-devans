@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name            gedit
-version         2.27.2
+version         2.27.3
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     GNOME editor.
 long_description \
@@ -15,9 +15,9 @@ platforms       darwin
 homepage        http://www.gnome.org/projects/gedit/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     b691903e22c0206ecd10c1b9b5125be3 \
-                sha1    b4ed36cd071cb23eaefd00388a81039e7f7ce6c0 \
-                rmd160  7edd85d3cb6dcb950917c90dc4ce55237395d48a
+checksums       md5     1ef74d1e49a36c1eb53cfcd5695d2d8e \
+                sha1    3998050c0469f9144e142609a892f76865dd3ff4 \
+                rmd160  bbf6e05430549e0bd9756d8bf9dc8237eca77e6a
 
 depends_build    \
         port:p5-xml-parser \
