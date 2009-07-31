@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name            yelp
-version         2.27.2
+version         2.27.3
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Help browser for GNOME.
 long_description Yelp is the default help browser for the \
@@ -17,9 +17,9 @@ platforms       darwin
 homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     d505151c9bc39278119f4edf5dd636c1 \
-                sha1    68e5943159ed81cda66c427376e56be645af48e8 \
-                rmd160  87252fa631e2e4a3d6dceb30d82a1fe2ab05506a
+checksums       md5     d1a2294818e6fd5baa2b528df482a873 \
+                sha1    8df1eff88d5029fe170d3548fc12ff271faf8174 \
+                rmd160  cf8193a231d7cef7f7f5ea289509df55c0e48c51
 
 depends_build   port:pkgconfig \
                 port:intltool \
