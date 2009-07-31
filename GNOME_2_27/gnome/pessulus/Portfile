@@ -4,7 +4,7 @@
 PortSystem	1.0
 
 name		pessulus
-version		2.27.0
+version		2.27.5
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories	gnome python
 platforms	darwin
@@ -18,9 +18,9 @@ long_description	\
 homepage	http://www.gnome.org/~vuntz/pessulus/
 master_sites	gnome:sources/${name}/${branch}/
 
-checksums       md5     255ec0743714b6fc50da796f6bc95009 \
-                sha1    93bdd6884150c9ad88c2f997a48f6ec23aab2dea \
-                rmd160  cad567c52a00c95c430eba82f36d7e91b4fe9d96
+checksums       md5     5813ab0c1f6bba8a8d0be5fd9f3fdc81 \
+                sha1    90ba1cbf075e5221263a1414499f6530e11f34a1 \
+                rmd160  63bc1a96769f733f079413feb37a54f9a6cded2b
 
 use_bzip2	yes
 
