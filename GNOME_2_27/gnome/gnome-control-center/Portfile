@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		gnome-control-center
-version		2.27.4.1
+version		2.27.5
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	Control center for GNOME 2.0 project.
 long_description        ${description}
@@ -15,17 +15,32 @@ homepage	http://www.gnome.org/
 
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     fff294342dc0064c8e2b5e25ca0cc9c9 \
-                sha1    d03096225edc1528e2dbebb368a2647f7e4dbfde \
-                rmd160  83f74afe3e292bcc28b691cc23029ae0c2b50ced
+checksums       md5     ee1c62f934a1f89aadfe8bdb33cec99a \
+                sha1    b17fe254e55727ce0da936ae477cb44f90c00a4f \
+                rmd160  149c786a3929ac901d7ae8b28d558660600e8541
 
-depends_lib	port:metacity \
-	        port:nautilus \
-	        port:libcanberra \
-	        port:gnome-panel \
-	        port:gnome-settings-daemon
+depends_lib	port:xorg-libXScrnSaver \
+                port:xorg-libXxf86misc \
+                port:xorg-libXrandr \
+                port:xorg-libXcursor \
+                port:xorg-libXi \
+                port:evolution-data-server \
+                port:gconf \
+                port:gnome-desktop \
+                port:gnome-menus \
+                port:gnome-panel \
+	        port:gnome-settings-daemon \
+                port:libcanberra \
+                port:libgnomeui \
+                port:libgnomekbd \
+                port:librsvg \
+                port:libxklavier \
+                port:libxml2 \
+                port:metacity \
+                port:policykit-gnome
 
-depends_build	port:gnome-doc-utils
+depends_build	port:pkgconfig \
+                port:gnome-doc-utils
 
 if {${os.platform} == "darwin" && ${os.major} < 9} {
     patchfiles      patch-libslab-director-tile.c.diff
@@ -37,6 +52,7 @@ configure.args	\
 		--mandir=${prefix}/share/man \
 		--x-includes=${prefix}/include \
                 --x-libraries=${prefix}/lib \
+                --enable-aboutme \
                 --disable-hal \
 		--disable-scrollkeeper \
 		--disable-update-mimedb \
