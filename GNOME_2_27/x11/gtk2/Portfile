@@ -5,7 +5,7 @@ PortSystem      1.0
 PortGroup       muniversal 1.0
 
 name            gtk2
-version         2.17.6
+version         2.17.7
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      x11
 maintainers     nox openmaintainer
@@ -61,9 +61,9 @@ pre-fetch {
     }
 }
 
-checksums       md5     6e812cfed1caae289705876d84f2be79 \
-                sha1    6658b238f9abb670fb7f44dac86abd108ffd0f01 \
-                rmd160  0b585a697a41227573e8fbaaa82d40b60226ac1a
+checksums       md5     94a359d5929a1306bb3267a02f9707d0 \
+                sha1    c697ade3567649da2b3ffff6bfa4881714a5177e \
+                rmd160  a6278081e75309a86ede93db31e07596500ea9b0
 
 patchfiles      patch-gtk-builder-convert.diff \
                 patch-modules-gail.diff \
