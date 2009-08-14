@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            libsoup
-version         2.27.5
+version         2.27.90
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome net
 platforms       darwin
@@ -23,9 +23,9 @@ homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2       yes
 
-checksums       md5     3ae21aec88358a88b5552388446eb62e \
-                sha1    c20181bab445628a51ca7a92fb7a3cdb487a5a1d \
-                rmd160  39eec756b5a1739a3fc916d457d37b1e9807feb5
+checksums       md5     5bad95448a9ea59ca590567c41854fbb \
+                sha1    174c28edd6c19f52dd019f4d64d89e7c451f13ae \
+                rmd160  c81ae6f37f907784138d75650c6fa66f20dfb2ff
 
 depends_build   port:pkgconfig \
                 port:gtk-doc \
