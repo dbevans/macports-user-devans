@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-themes
-version         2.27.4
+version         2.27.90
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      gnome
@@ -20,9 +20,9 @@ homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2       yes
 
-checksums       md5     05b17f77d7c9837260637e59148574d0 \
-                sha1    85934194f53e52ce017642b36ef322c72731d073 \
-                rmd160  78d57076045bf5f7ffd190418e834156267b5549
+checksums       md5     08d107578b73f037c7abee2b0069df39 \
+                sha1    ba35da9d8a7defffc8003adcbc82715410525e8e \
+                rmd160  e9e38711bd543a34df8e4cf4df6a36804e10cfd8
 
 depends_build   port:icon-naming-utils \
                 port:pkgconfig \
