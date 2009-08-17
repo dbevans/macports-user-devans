@@ -4,7 +4,7 @@
 PortSystem	1.0
 
 name		vino
-version         2.27.5
+version         2.27.90
 set branch      [join [lrange [split ${version} .] 0 1] .]
 homepage	http://www.gnome.org
 description	Vino is a VNC server for the current GNOME user
@@ -14,9 +14,9 @@ platforms	darwin
 maintainers	devans openmaintainer
 master_sites	gnome:sources/${name}/${branch}/
 
-checksums       md5     070c96efa0337c8d92f6d84ec876e74c \
-                sha1    11f26c5590fdac4b29a9b52a5571fbebd91af91d \
-                rmd160  c436687ab01d6c40d55347a49fed8f91af9ae9b7
+checksums       md5     9279cf89bfceeab8fe8cae515e6a5232 \
+                sha1    54d74a31959e5c74ec9de259394dd41137dd352b \
+                rmd160  911f781368adb9eb9d228e948a715c6e1993956e
 
 use_bzip2	yes
 
@@ -27,13 +27,14 @@ depends_build   port:pkgconfig \
                 port:gtk-doc
 
 depends_lib     port:gconf \
-                port:libgnomeui \
                 port:libsoup \
-                port:libglade2 \
                 port:gnome-keyring \
+                port:telepathy-glib \
                 port:libnotify \
                 port:gnutls \
                 port:libgcrypt \
+                port:xorg-libXdamage \
+                port:xorg-libXtst \
                 port:libunique
 
 
