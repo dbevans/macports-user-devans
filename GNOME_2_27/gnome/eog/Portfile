@@ -13,7 +13,7 @@ long_description        This is the Eye of Gnome, an image viewer program. \
 maintainers	devans openmaintainer
 categories	gnome
 platforms	darwin
-homepage	http://www.gnome.org/
+homepage	http://projects.gnome.org/eog/
 master_sites    gnome:sources/${name}/${branch}/
 
 checksums       md5     3f44ee2f23c612a242f060b1e85a976b \
