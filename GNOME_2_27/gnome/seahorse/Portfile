@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		seahorse
-version		2.27.5
+version		2.27.90
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	Seahorse is a GNOME application for managing encryption keys.
 long_description \
@@ -18,14 +18,13 @@ homepage	http://projects.gnome.org/${name}/
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2	yes
 
-checksums       md5     229fd5cd7209d64c9abf4c609715f05c \
-                sha1    ad48266da0d857b19a1328e740e2a3f46c26b93d \
-                rmd160  13aba022eb6eb7061446f782f2b414518da976e9
+checksums       md5     f93e734d5d778ff19585696ccce65458 \
+                sha1    d67f4bba2db77f3b603199c368e93cdd9e6f2ab3 \
+                rmd160  8fb0735700e274fec3bb4ab99d5d8a899b99459b
 
 depends_lib	\
                 port:gpgme \
                 port:gnome-keyring \
-		port:libglade2 \
 		port:libsoup \
 		port:libnotify \
                 bin:ssh:openssh
