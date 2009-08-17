@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            libgtkhtml3
 set my_name     gtkhtml
-version         3.27.5
+version         3.27.90
 set branch      [join [lrange [split ${version} .] 0 1] .]
 
 maintainers     nomaintainer
@@ -23,9 +23,9 @@ master_sites    gnome:sources/${my_name}/${branch}/
 distname        ${my_name}-${version}
 use_bzip2       yes
 
-checksums       md5     93d8517c7fe9d5ef2e705be41fa73c2e \
-                sha1    152a4aa43811e78d532a8ce9fd68d95bcdff1b99 \
-                rmd160  33d572ef9e385ee38384ca327316b5c52ba577e7
+checksums       md5     6e17cf6415852dbc7bbc44a362dfa7ac \
+                sha1    78307ed0782e3b7a58c982f961bc91a3a728ed28 \
+                rmd160  d300cd4b601910d165da5edb5406da4d06e470d2
 
 depends_build   port:pkgconfig \
                 port:intltool \
