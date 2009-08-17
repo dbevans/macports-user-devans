@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		epiphany
-version		2.27.5
+version		2.27.90
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	A GNOME Web browser.
 long_description	A web browser is more than an application, it is a \
@@ -18,9 +18,9 @@ homepage	http://www.gnome.org/projects/${name}
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2	yes
 
-checksums       md5     3120755f874853e69f9f501bbd4da1ba \
-                sha1    8e3d2298ac2cf2555b33699bcf86ecd0880212ca \
-                rmd160  61f6bfb92e0ec5e970a771dfde2ed5605a06a755
+checksums       md5     afdba03b15e6e4e40b5e46edc592d847 \
+                sha1    8c51c6f1e661518f1d1a25308a270ac88786e260 \
+                rmd160  614cce1f9c97aace8c2a98f9f3f2019d71518693
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -34,6 +34,9 @@ depends_lib     port:gconf \
                 port:libnotify \
                 port:webkit-gtk \
                 port:libsoup \
+                port:gnome-keyring \
+                port:xorg-libsm \
+                port:xorg-libX11 \
                 port:iso-codes
 
 configure.args  --with-distributor-name=MacPorts \
