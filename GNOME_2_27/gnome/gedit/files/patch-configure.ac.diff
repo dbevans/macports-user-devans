@@ -1,6 +1,6 @@
---- configure.ac.orig	2009-04-13 08:46:20.000000000 -0700
-+++ configure.ac	2009-05-10 17:41:50.000000000 -0700
-@@ -93,6 +93,25 @@
+--- configure.ac.orig	2009-08-10 12:42:42.000000000 -0700
++++ configure.ac	2009-08-17 12:11:59.000000000 -0700
+@@ -100,6 +100,25 @@
  	AC_DEFINE([PLATFORM_OSX],[1],[Defined if platform is Mac OSX])
  fi
  
@@ -26,9 +26,9 @@
  dnl ===============================================================
  dnl Expanded dirs
  dnl ===============================================================
-@@ -233,8 +252,8 @@
+@@ -270,8 +289,8 @@
  
- AM_CONDITIONAL(BUILD_SEXY, test "$gtkatleast" = "no")
+ AM_CONDITIONAL(BUILD_MESSAGE_AREA, test "$gtkatleast" = "no")
  
 -if test "$platform_osx" = "no" &&
 -   test "$os_win32" = no; then

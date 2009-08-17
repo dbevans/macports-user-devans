@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name            gedit
-version         2.27.3
+version         2.27.4
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     GNOME editor.
 long_description \
@@ -15,15 +15,16 @@ platforms       darwin
 homepage        http://www.gnome.org/projects/gedit/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     1ef74d1e49a36c1eb53cfcd5695d2d8e \
-                sha1    3998050c0469f9144e142609a892f76865dd3ff4 \
-                rmd160  bbf6e05430549e0bd9756d8bf9dc8237eca77e6a
+checksums       md5     4797c4f48806f91b4770a5278ffa3d1e \
+                sha1    45f2101e0582d0b7e262f4a61f47d66e4604bda9 \
+                rmd160  81ca764520a50a0797fdc4c7cd547ab22d3d5ca5
 
 depends_build    \
         port:p5-xml-parser \
         port:gtk-doc \
         port:intltool \
         port:gnome-doc-utils \
+        port:libtool \
         port:autoconf \
         port:automake
 
@@ -35,12 +36,12 @@ depends_lib    \
         port:py25-pygtksourceview \
         port:iso-codes \
         port:enchant \
-        port:policykit \
         port:xorg-libsm
 
 use_bzip2       yes
 
-patchfiles      patch-configure.ac.diff \
+patchfiles      patch-m4-python.m4.diff \
+                patch-configure.ac.diff \
                 patch-gedit-smclient-Makefile.am.diff
 
 use_autoreconf  yes
