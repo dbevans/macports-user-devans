@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		gnome-games
-version		2.27.5
+version		2.27.90
 set branch  [join [lrange [split ${version} .] 0 1] .]
 description	Collection of small but addictive games for GNOME
 long_description    ${description}
@@ -14,9 +14,9 @@ platforms	darwin
 homepage	http://live.gnome.org/GnomeGames/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     07be56cc17cf8e1df16942caafd24d79 \
-                sha1    8a08ebcd43c6480e512de408958294c92a18aa64 \
-                rmd160  ae65e86722978e376b2a88630675ee90d67c52c1
+checksums       md5     7b2da877c34ac13009adf64d0f89ba31 \
+                sha1    13473ac05d1ec56169675255be9154eac9a78cfa \
+                rmd160  0228039c6e6b1e20ca997733496b9de67e1d5034
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -29,7 +29,6 @@ depends_lib     port:gconf \
                 port:clutter-gtk \
                 port:py25-gtk \
                 port:libcanberra \
-                port:libsdl_mixer \
                 port:xorg-libsm \
                 port:ggz-client-libs \
                 port:guile
