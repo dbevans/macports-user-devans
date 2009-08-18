@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		gnome-control-center
-version		2.27.5
+version		2.27.90
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	Control center for GNOME 2.0 project.
 long_description        ${description}
@@ -15,9 +15,9 @@ homepage	http://www.gnome.org/
 
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     ee1c62f934a1f89aadfe8bdb33cec99a \
-                sha1    b17fe254e55727ce0da936ae477cb44f90c00a4f \
-                rmd160  149c786a3929ac901d7ae8b28d558660600e8541
+checksums       md5     e60ba889c281e23079da2889144e5b48 \
+                sha1    cb8f2f63a90958a540f1c2bc1cf230b00ef48bc0 \
+                rmd160  6899693af3c0bf4a2fdb0498be09654891d63aaa
 
 depends_lib	port:xorg-libXScrnSaver \
                 port:xorg-libXxf86misc \
@@ -28,18 +28,19 @@ depends_lib	port:xorg-libXScrnSaver \
                 port:gconf \
                 port:gnome-desktop \
                 port:gnome-menus \
-                port:gnome-panel \
 	        port:gnome-settings-daemon \
                 port:libcanberra \
                 port:libgnomeui \
                 port:libgnomekbd \
                 port:librsvg \
+                port:libunique \
                 port:libxklavier \
                 port:libxml2 \
-                port:metacity \
-                port:policykit-gnome
+                port:metacity
 
 depends_build	port:pkgconfig \
+                port:intltool \
+                port:p5-xml-parser \
                 port:gnome-doc-utils
 
 if {${os.platform} == "darwin" && ${os.major} < 9} {
