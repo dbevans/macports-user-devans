@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                clutter
-version             1.0.0
+version             1.0.2
 set branch          [string range $version 0 [expr [string last "." $version] - 1]]
 categories          graphics
 maintainers         pixane.net:idan
@@ -17,9 +17,9 @@ homepage            http://www.clutter-project.org/
 master_sites        http://www.clutter-project.org/sources/${name}/${branch}/
 use_bzip2           yes
 
-checksums           md5     eb1a3db895d914dc29caadd15bc1f5e0 \
-                    sha1    3f7e9703e26399a4818ddc6b6d87d8184a1d215f \
-                    rmd160  bd39285d6472d3ce92e112ae8f241d643f715944
+checksums           md5     498ac921fbe5881a03701877b7ea3edd \
+                    sha1    8f1164624e02c1c8eeaf3b802937082c6c09a5a3 \
+                    rmd160  4da6299851f523228252d3724761f359199be434
 
 depends_build       port:pkgconfig
 
