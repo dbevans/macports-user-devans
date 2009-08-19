@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name                gnome-session
-version             2.27.5
+version             2.27.4
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Session component for the GNOME 2 desktop
 long_description \
@@ -16,9 +16,9 @@ platforms           darwin
 homepage            http://www.gnome.org/
 master_sites        gnome:sources/${name}/${branch}/
 
-checksums           md5     d0512f7f514262c52fe27228bdbba804 \
-                    sha1    2557252480367c42c4e507f38fd005891fab33d3 \
-                    rmd160  4b55c00156b88a8c2b11f0e4bc99ffda6c208e18
+checksums           md5     bf4d141f72c182d8eadc68e42a4a5343 \
+                    sha1    d357f7f9d0ef5de34f19ef503b6cd897e933ab0d \
+                    rmd160  fe12e8056e3a4b06b7d50300186bdadedfef4108
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -32,6 +32,8 @@ depends_lib         port:gconf \
                     port:xorg-libXtst
 
 use_bzip2           yes
+
+patchfiles          patch-gnome-session-main.c.diff
 
 configure.args      --x-includes=${prefix}/include \
                     --x-libraries=${prefix}/lib \
