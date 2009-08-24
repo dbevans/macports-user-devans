@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name            evolution-data-server
-version         2.27.90
+version         2.27.91
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Addressbook and calender libs for GNOME.
 long_description    Evolution Data Server provides a central location for \
@@ -15,9 +15,9 @@ platforms       darwin
 homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     526cce784d1d8ede8ca1c1fec4d25739 \
-                sha1    cff127b6959b26614526e2869e91d5f694bd76b8 \
-                rmd160  dc4833828152e77cecfe6319e9e3a5ce8028c669
+checksums       md5     00503d1ad0c6afba8ed8543fd80e1adb \
+                sha1    9ff9500cd8b7e09a2db7370dc4e9c34c2554bf89 \
+                rmd160  8c64a6820052db05140fb4d3621b502de1a501b5
 
 depends_build   port:pkgconfig \
                 port:intltool \
