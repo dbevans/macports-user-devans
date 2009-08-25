@@ -1,0 +1,44 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem 1.0
+
+name		libunique
+version		1.1.2
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description	Unique is a library for writing single instance applications.
+long_description \
+                Unique is a library for writing single instance applications. \
+                If you launch a single instance application twice, the second \
+                instance will either just quit or will send a message to the \
+                running instance.
+maintainers     devans openmaintainer
+categories	gnome devel
+platforms	darwin
+homepage	http://live.gnome.org/LibUnique
+master_sites    gnome:sources/${name}/${branch}/
+
+checksums       md5     a99799e72779baa98352fbac7f91c910 \
+                sha1    02577b7cc2483e4d03e15a40b88b967240941562 \
+                rmd160  7c86260af179bcf253b0fa759cb968c42279d053
+
+depends_build   port:pkgconfig
+
+depends_lib     port:gtk2 \
+                port:dbus-glib \
+                port:xorg-libX11
+
+configure.args  --enable-maintainer-flags=no \
+                --x-includes=${prefix}/include \
+                --x-libraries=${prefix}/lib
+                
+variant no_x11 {
+    depends_lib-delete port:xorg-libX11
+    configure.args-delete --x-includes=${prefix}/include \
+                          --x-libraries=${prefix}/lib
+    configure.args-append --without-x
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}
