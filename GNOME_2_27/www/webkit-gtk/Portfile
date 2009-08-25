@@ -4,7 +4,8 @@
 PortSystem	1.0
 
 name		webkit-gtk
-version		1.1.13
+version		1.1.12
+revision        1
 epoch           1
 description	Apple's WebKit HTML rendering library for GTK+
 long_description ${description}
@@ -16,9 +17,9 @@ master_sites    ${homepage}
 
 distname        webkit-${version}
 
-checksums       md5     627d5ac4b2c7a967e5a5ccb175e459ea \
-                sha1    d9cecf107ac744785f3e9ab7dfc95781fcf95bda \
-                rmd160  e864da620688e3883977943e26ff39df4ad01d94
+checksums       md5     1a10c117a0dd3717c2bcaa7a115cf218 \
+                sha1    a06bb5729faae195096991d01089216df110a2c2 \
+                rmd160  7f5a464dfe3a218f98d103abf1440194c4c606c9
 
 patchfiles      patch-WebKitTools-DumpRenderTree-gtk-TestNetscapePlugin-TestNetscapePlugin.cpp.diff
 
