@@ -1,0 +1,62 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            vte
+version         0.21.0
+set branch      [join [lrange [split $version .] 0 1] .]
+maintainers     nomaintainer
+categories      gnome
+platforms       darwin
+description     Terminal widget with improved accessibility and I18N support.
+
+long_description \
+    Terminal widget with improved font, internationalisation and \
+    accessibility support for the GNOME 2 desktop.  Designed to \
+    replace libzvt.
+
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/$name/$branch/
+use_bzip2       yes
+
+checksums       md5     90de70ddd1340be308430ded74d6b8d6 \
+                sha1    8e3a471183258d5f0ca807465e5b86bb29a3d110 \
+                rmd160  88e2067a67eea8a6f067d4a5851c0222fde7d468
+
+depends_lib     port:py25-gtk \
+                port:gtk2 \
+                port:ncurses
+
+depends_build   port:p5-xml-parser \
+                port:intltool \
+                port:pkgconfig
+
+if { ![file exists ${prefix}/include/gtk-2.0/gdk/gdkx.h] } {
+    patchfiles patch-x-display-missing.diff
+}
+
+configure.args  --disable-freetypetest
+configure.python ${prefix}/bin/python2.5
+
+configure.cflags-append -fstrict-aliasing
+
+use_parallel_build  yes
+
+variant without_python description {Disable Python support} {
+    depends_lib-delete  port:py25-gtk
+    configure.args-append   --disable-python
+}
+
+platform darwin 9 {
+    post-patch {
+        reinplace "s| -export-symbols-regex.*||g" \
+            ${worksrcpath}/python/Makefile.in
+        reinplace "s|-export-symbols-regex.*| \\\\|g" \
+            ${worksrcpath}/src/Makefile.in
+    }
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/$name/$branch/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}
