@@ -4,7 +4,7 @@
 PortSystem  1.0
 
 name           gnome-doc-utils
-version        0.17.3
+version        0.17.4
 set branch     [join [lrange [split ${version} .] 0 1] .]
 description    GNOME document utils.
 long_description \
@@ -19,9 +19,9 @@ platforms      darwin
 homepage       http://www.gnome.org/
 master_sites   gnome:sources/${name}/${branch}/
 
-checksums      md5     eac1ee2a039a2e66c4de32bc656f7be6 \
-               sha1    1966903adedd7f75a7eb3b60bb34d48d1044ecc5 \
-               rmd160  d3a794a45ca8ecf3e0e5e2d1633d87fc4e82d8d7
+checksums      md5     708ec43e56a1e07f70bb435d2142dcd2 \
+               sha1    d23488d6e52bcc113457cd5ca67332087a7bfc17 \
+               rmd160  e4f9dc3fb328cdeaf2141c30d3bd28eedd78a4d9
 
 use_bzip2      yes
 
