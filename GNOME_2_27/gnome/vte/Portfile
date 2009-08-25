@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            vte
-version         0.21.0
+version         0.21.1
 set branch      [join [lrange [split $version .] 0 1] .]
 maintainers     nomaintainer
 categories      gnome
@@ -20,9 +20,9 @@ homepage        http://www.gnome.org/
 master_sites    gnome:sources/$name/$branch/
 use_bzip2       yes
 
-checksums       md5     90de70ddd1340be308430ded74d6b8d6 \
-                sha1    8e3a471183258d5f0ca807465e5b86bb29a3d110 \
-                rmd160  88e2067a67eea8a6f067d4a5851c0222fde7d468
+checksums       md5     311b1ee9861c3572307d9a7404797505 \
+                sha1    2c743fa1fc1d4a3779128a8460a2b07ba84a63d9 \
+                rmd160  3effa23deb9e93f579269f774fe226a6a97e972f
 
 depends_lib     port:py25-gtk \
                 port:gtk2 \
@@ -42,6 +42,11 @@ configure.python ${prefix}/bin/python2.5
 configure.cflags-append -fstrict-aliasing
 
 use_parallel_build  yes
+
+variant glade_catalogue description {Enable installing the glade catalogue} {
+    configure.args-append --enable-glade-catalogue
+    depends_lib-append    port:glade3
+}
 
 variant without_python description {Disable Python support} {
     depends_lib-delete  port:py25-gtk
