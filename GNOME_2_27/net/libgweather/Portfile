@@ -1,0 +1,53 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            libgweather
+version         2.27.91
+set branch      [join [lrange [split ${version} .] 0 1] .]
+maintainers     devans openmaintainer
+categories      net gnome
+platforms       darwin
+description     Library to accessing online weather informations.
+
+long_description \
+    libgweather is a library to access weather \
+    information from online services for numerous \
+    locations.
+
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+use_bzip2       yes
+
+checksums       md5     0f9cc594f17b94b60f12bfe444743964 \
+                sha1    4a733a410d7bee85c3c073dc49bb77ef62b75f2e \
+                rmd160  1010a61eeeca8ec341e9b38b93965a7e3a9aaed3
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:p5-xml-parser \
+                port:gtk-doc
+
+depends_lib     port:gconf \
+                port:libsoup \
+                port:py25-gtk
+
+configure.args  --disable-schemas-install \
+                --disable-glibtest \
+                --enable-python
+
+configure.python ${prefix}/bin/python2.5
+
+use_parallel_build  yes
+
+post-activate {
+    system "\
+        GCONF_CONFIG_SOURCE= \
+        gconftool-2 --makefile-install-rule \
+            ${prefix}/etc/gconf/schemas/gweather.schemas"
+}
+
+livecheck.check regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/$name/$branch/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}
