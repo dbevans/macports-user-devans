@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		gnome-user-docs
-version		2.27.0
+version		2.27.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	End-user documentation for GNOME2
 long_description        This package contains documents which will be \
@@ -16,12 +16,16 @@ categories	gnome
 platforms	darwin
 homepage	http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
-checksums       md5     b259de6dcb6a0421fcb28a66e3d20da1 \
-                sha1    95c66b850e52300f4ed0d3769e0b04cb91d21c31 \
-                rmd160  ee43875a78186d21031079efd9f9fa7beff373c5
-depends_lib	port:rarian
-depends_build	port:gnome-doc-utils
+
 use_bzip2 	yes
+
+checksums       md5     e98cc366e36568c39da66d2e4523fd2e \
+                sha1    57ebd7fadc0b42b5bab6980ff592b6a9739894fb \
+                rmd160  e24dcd4e196d9b2d7dac8bc9904b23440a5e8878
+
+depends_build	port:pkgconfig \
+                port:gnome-doc-utils
+
 configure.args	--disable-scrollkeeper
 
 post-activate	{
