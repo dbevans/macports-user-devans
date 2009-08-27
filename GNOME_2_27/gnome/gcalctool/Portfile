@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		gcalctool
-version		5.27.90
+version		5.27.91
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	a GNOME 2 desktop calculator.
 long_description        gcalctool is the desktop calculator that has been proposed \
@@ -15,9 +15,9 @@ platforms	darwin
 homepage	http://calctool.sourceforge.net/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     483bad0a53fb15f142fa82204ce118af \
-                sha1    0acc04b63df31bbb696779ced2bcce348a412d6e \
-                rmd160  b971f7934338dc75700a6c41afad229ce312569e
+checksums       md5     c7d622fc9a61c5d0960337bc9b002ff9 \
+                sha1    ea9fb4666dfe7252b75fdbad475b3e52f45b581f \
+                rmd160  b48277838ad6944d28507f5daa1103c7bc63fea3
 
 use_bzip2	yes
 
