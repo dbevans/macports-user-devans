@@ -4,8 +4,7 @@
 PortSystem 1.0
 
 name		empathy
-version		2.27.5
-revision        1
+version		2.27.91.1
 set branch	[join [lrange [split ${version} .] 0 1] .]
 description	Empathy is an instant-messaging(chat) program for GNOME
 long_description \
@@ -18,9 +17,9 @@ platforms	darwin
 homepage	http://live.gnome.org/Empathy
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     27d69e0db8874ae40d924dbf80703be6 \
-                sha1    3c78666180f79b6550656298269533642d365600 \
-                rmd160  98095eeed4f211df1d34547163e2a778287c86e6
+checksums       md5     6845b138d9f597932886345aeac82bc5 \
+                sha1    843f0c26155aba2c83535a4720cd3f2ddc7b8f10 \
+                rmd160  cb62b6c926e60b4b2f35127a6e4c7af739df4ae4
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -28,23 +27,24 @@ depends_build   port:pkgconfig \
                 port:gnome-doc-utils \
                 port:gtk-doc
 
-depends_lib     port:gconf \
-                port:libglade2 \
-                port:gnome-panel \
-                port:telepathy-glib \
-                port:telepathy-mission-control \
-                port:telepathy-haze \
+depends_lib     port:telepathy-glib \
                 port:telepathy-farsight \
-                port:enchant \
-                port:iso-codes \
-                port:libnotify \
-                port:evolution-data-server \
-                port:libcanberra \
-                port:webkit-gtk \
                 port:gst-plugins-good \
                 port:gst-plugins-bad \
+                port:gconf \
+                port:libcanberra \
+                port:xorg-libX11 \
+                port:evolution-data-server \
+                port:libunique \
+                port:gnome-keyring \
+                port:libnotify \
+                port:webkit-gtk \
+                port:enchant \
+                port:iso-codes \
                 port:py25-gtk \
-                port:xorg-libX11
+                port:telepathy-mission-control \
+                port:telepathy-haze \
+                port:gnome-panel
 
 use_bzip2 	yes
 
