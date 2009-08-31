@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		gnome-utils
-version		2.27.2
+version		2.27.91
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	GNOME utilities
 long_description Utilities for the GNOME 2.0 desktop.
@@ -14,9 +14,9 @@ platforms	darwin
 homepage	http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     b7ee7d23f2713334c68ebf5121186219 \
-                sha1    14a227c7d4d3c58eba2ddce1892c150699c1cdab \
-                rmd160  d20f296a316547772271efc14855e2d0798791b5
+checksums       md5     5c795e19e03274d838197ea1e0e9b516 \
+                sha1    4cd4516024ff3060e4c054426d83e885f8244d62 \
+                rmd160  940ff45273153571c79fc9dd032a441795608e71
 
 depends_lib     port:gconf \
                 port:libgtop \
