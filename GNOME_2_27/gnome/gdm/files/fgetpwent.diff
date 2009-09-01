@@ -1,23 +1,5 @@
 --- gui/simple-greeter/gdm-user-manager.c.orig	2008-11-19 09:38:43.000000000 +1100
 +++ gui/simple-greeter/gdm-user-manager.c	2009-01-17 02:26:07.000000000 +1100
-@@ -1274,17 +1274,11 @@
-         GSList        *old_users;
-         GSList        *new_users;
-         GSList        *list;
--        FILE          *fp;
- 
-         old_users = NULL;
-         new_users = NULL;
- 
-         errno = 0;
--        fp = fopen (PATH_PASSWD, "r");
--        if (fp == NULL) {
--                g_warning ("Unable to open %s: %s", PATH_PASSWD, g_strerror (errno));
--                goto out;
--        }
- 
-         g_hash_table_foreach (manager->priv->users, listify_hash_values_hfunc, &old_users);
-         g_slist_foreach (old_users, (GFunc) g_object_ref, NULL);
 @@ -1297,7 +1291,7 @@
                  }
          }
