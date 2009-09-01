@@ -4,7 +4,7 @@
 PortSystem	1.0
 
 name		vino
-version         2.27.90
+version         2.27.91
 set branch      [join [lrange [split ${version} .] 0 1] .]
 homepage	http://www.gnome.org
 description	Vino is a VNC server for the current GNOME user
@@ -14,9 +14,9 @@ platforms	darwin
 maintainers	devans openmaintainer
 master_sites	gnome:sources/${name}/${branch}/
 
-checksums       md5     9279cf89bfceeab8fe8cae515e6a5232 \
-                sha1    54d74a31959e5c74ec9de259394dd41137dd352b \
-                rmd160  911f781368adb9eb9d228e948a715c6e1993956e
+checksums       md5     8c220bb3c0770c4f9820e8f30395c65d \
+                sha1    4ff656e724d1cfeaaf12ded9be0d5214da64598d \
+                rmd160  44e64e74de2cf283423cba7416bebfab5a782ab2
 
 use_bzip2	yes
 
