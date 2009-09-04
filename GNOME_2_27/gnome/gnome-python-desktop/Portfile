@@ -4,7 +4,7 @@
 PortSystem	1.0
 
 name            gnome-python-desktop
-version         2.27.2
+version         2.27.3
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome python
 maintainers     devans openmaintainer
@@ -14,9 +14,9 @@ platforms       darwin
 homepage        http://www.pygtk.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     3e1da41c3223687e812c0b1bd1f0ed55 \
-                sha1    3737a606aed433299841c3d50c4d734610787810 \
-                rmd160  e875a3e08441e933aa2709b133a005187cb173a3
+checksums       md5     8f727b090818327f92fe7b50704339c0 \
+                sha1    35002617b562edd0f918c3b2c86e9f5166e16d74 \
+                rmd160  48e15e1635e460c9af429b16a1ed05f67e75f1a2
 
 use_bzip2       yes
 
