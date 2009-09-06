@@ -5,7 +5,7 @@ PortGroup               muniversal 1.0
 
 name                    glib2
 set my_name             glib
-version                 2.21.5
+version                 2.21.6
 set branch              [join [lrange [split ${version} .] 0 1] .]
 categories              devel
 maintainers             ryandesign
@@ -29,9 +29,9 @@ master_sites \
     ftp://ftp.gtk.org/pub/${my_name}/${branch}/
 
 checksums \
-    md5     5f3f19c4a8088c51e21cad5b8ea166e5 \
-    sha1    acb983c293c4f5cf7cb117f7574a61c7d09db2fd \
-    rmd160  02d1a45ecb50fa3beb7f74eb288523bce9075d72
+    md5     3b0452fbd877db53dafabdc074600cb8 \
+    sha1    a05f74a1cc9ae7a77efa988be72575c192da1afc \
+    rmd160  683102b179137cce26f0e071ae7a0822ade679bd
 
 # ${prefix}/include/glib-2.0/glib/gi18n.h requires -I${prefix}/include to find libintl.h
 # See http://trac.macports.org/changeset/27148
