@@ -4,8 +4,7 @@
 PortSystem	1.0
 
 name		webkit-gtk
-version		1.1.12
-revision        1
+version		1.1.14
 epoch           1
 description	Apple's WebKit HTML rendering library for GTK+
 long_description ${description}
@@ -17,9 +16,9 @@ master_sites    ${homepage}
 
 distname        webkit-${version}
 
-checksums       md5     1a10c117a0dd3717c2bcaa7a115cf218 \
-                sha1    a06bb5729faae195096991d01089216df110a2c2 \
-                rmd160  7f5a464dfe3a218f98d103abf1440194c4c606c9
+checksums       md5     bff87d1ddc562223cb99201950d7e138 \
+                sha1    5cbbc11a157a32ace3fefdc11e293b90daa44562 \
+                rmd160  e41bc0ce4ffb9397e917081b9585eb7665d3ff28
 
 patchfiles      patch-WebKitTools-DumpRenderTree-gtk-TestNetscapePlugin-TestNetscapePlugin.cpp.diff
 
@@ -42,6 +41,13 @@ post-patch {
 }
 
 #
+# enable SVG filters by default
+#
+
+configure.args  --enable-filters \
+                --disable-fast-install
+
+#
 # video is now enabled by default so make the variant no_video
 #
 
@@ -50,30 +56,6 @@ variant no_video description {Disable HTML5 video support using gstreamer} {
 	configure.args-append	--disable-video
 }
 
-#
-# add new variant to support gnome_keyring
-#
-
-variant gnome_keyring description {Enable support for gnomekeyring} {
-        depends_lib-append      port:gnome-keyring
-        configure.args-append   --enable-gnomekeyring
-}
-
-#
-# variant to enable filter support which is disabled by default
-# was svg_filters previously but renamed to follow configure arg usage
-#
-
-variant filters description {Enable support for SVG filters (experimental)} {
-	configure.args-append	--enable-filters
-}
-
-#
-# include dummy variant to ease transition from svg_filters to filters
-#
-
-variant svg_filters requires filters description {Build with +filters if +svg_filters was previously installed} {
-}
 
 #
 # all svg support (except filters) is enabled by default
@@ -83,6 +65,6 @@ variant no_svg description {Disable all SVG support} {
 	configure.args-append	--disable-svg
 }
 
-livecheck.check regex
+livecheck.type  regex
 livecheck.url   http://webkitgtk.org/?page=download
 livecheck.regex "webkit-(\\d+(?:\\.\\d+)*)${extract.suffix}"

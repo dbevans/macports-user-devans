@@ -30,6 +30,6 @@ depends_lib     port:py25-twisted \
                 port:telepathy-glib \
                 port:gconf
 
-livecheck.check regex
+livecheck.type  regex
 livecheck.url   ${master_sites}
 livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

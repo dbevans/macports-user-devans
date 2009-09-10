@@ -33,6 +33,6 @@ configure.args  --x-includes=${prefix}/include \
                 --disable-xkb-support \
                 --with-xmodmap-base=${prefix}/share/xmodmap
 
-livecheck.check regex
+livecheck.type  regex
 livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
 livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}
