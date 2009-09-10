@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            libwnck
-version         2.27.5
+version         2.27.92
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     nomaintainer
 categories      gnome
@@ -20,9 +20,9 @@ homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2       yes
 
-checksums       md5     9136894e3a078c0c79ec719f0105a630 \
-                sha1    a39af367ac57cccfa7da92453275fd0419c655d5 \
-                rmd160  12e56ec78c57f765c11631909e72992c9165e43c
+checksums       md5     ff5cb1fdf251dc5f268c545ced722459 \
+                sha1    8b93a0790b2f8f613c42d5f92bae5d5fb02fd559 \
+                rmd160  460aa9e740c6c9f1590b047b46976feba40de6af
 
 depends_build   port:pkgconfig \
                 port:intltool \
