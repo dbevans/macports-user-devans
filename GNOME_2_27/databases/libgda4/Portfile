@@ -27,7 +27,6 @@ checksums       md5     7d16798c63e0d1de94bee1fe70dedd33 \
 patchfiles      patch-configure.in.diff
 
 depends_build	port:pkgconfig \
-                port:autoconf \
                 port:flex \
 	        port:m4 \
 	        port:intltool \
