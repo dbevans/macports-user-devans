@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            libgweather
-version         2.27.91
+version         2.27.92
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      net gnome
@@ -20,9 +20,9 @@ homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2       yes
 
-checksums       md5     0f9cc594f17b94b60f12bfe444743964 \
-                sha1    4a733a410d7bee85c3c073dc49bb77ef62b75f2e \
-                rmd160  1010a61eeeca8ec341e9b38b93965a7e3a9aaed3
+checksums       md5     b33d4e453b652b3ade3b365033d0c0cf \
+                sha1    27136b286aae8479bf74640213ad93503e9d9553 \
+                rmd160  3270bcfe975c23a1805182983a6092b0856f389b
 
 depends_build   port:pkgconfig \
                 port:intltool \
