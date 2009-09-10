@@ -9,7 +9,7 @@ version		    2.7.4
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers	    nomaintainer
 categories	    gnome
-platforms	    darwin 
+platforms	    darwin
 description	    GtkSourceView is a text widget
 
 long_description \

@@ -23,7 +23,7 @@ checksums       md5     2245c6f836e61d0115a826648d85758b \
 depends_build   port:pkgconfig \
                 port:intltool \
                 port:p5-xml-parser \
-                port:gnome-doc-utils 
+                port:gnome-doc-utils
 
 depends_lib     port:gtk2 \
 	        port:libnotify
