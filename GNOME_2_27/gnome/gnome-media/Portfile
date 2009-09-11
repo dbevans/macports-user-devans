@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-media
-version         2.27.90.fix
+version         2.27.91
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A collection of utilities for simple multimedia handling.
 long_description	\
@@ -17,9 +17,9 @@ platforms       darwin
 homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     b2a95ada8b70385ce965338a152242e9 \
-                sha1    ce5a19e59c0385c1ae9cf8dbab10b100a588c054 \
-                rmd160  2308a8399c4af860cc0c9f87e7ba1818e3622adf
+checksums       md5     56a5c6ba6c67b3f6efd2920404febcc2 \
+                sha1    2c96dc10ded95bae12b9b0ba117656a52d02fe07 \
+                rmd160  46eb680fd0f9e033a3c9d210a329ea8a96f92233
 
 use_bzip2       yes
 
