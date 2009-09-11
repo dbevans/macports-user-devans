@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		gnome-user-docs
-version		2.27.1
+version		2.27.2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	End-user documentation for GNOME2
 long_description        This package contains documents which will be \
@@ -19,9 +19,9 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_bzip2 	yes
 
-checksums       md5     e98cc366e36568c39da66d2e4523fd2e \
-                sha1    57ebd7fadc0b42b5bab6980ff592b6a9739894fb \
-                rmd160  e24dcd4e196d9b2d7dac8bc9904b23440a5e8878
+checksums       md5     cca915e452ff6ec51215ae4d50ef1bfd \
+                sha1    b9517a26feec5504c215c341e7c5984744444965 \
+                rmd160  026ad9982614b998572a8f7953f4b6ad1b568881
 
 depends_build	port:pkgconfig \
                 port:gnome-doc-utils
