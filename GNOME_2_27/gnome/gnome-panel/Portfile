@@ -3,7 +3,7 @@
 PortSystem      1.0
 
 name            gnome-panel
-version         2.27.91
+version         2.27.92
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      gnome
@@ -17,9 +17,9 @@ homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2       yes
 
-checksums       md5     9453fed0d5fec7b9904b408e3f2826f7 \
-                sha1    6d1a3d21d4cbe2d0967531d5cc8b18e5d2be6515 \
-                rmd160  30695f4aee91aa2680a2d91dd00edea686aa27af
+checksums       md5     835fb6cc641e08b15ba4a7d4d0bec58b \
+                sha1    c780eb0ca5b17fb69d8ca7c9d127d64c4dcc7e8a \
+                rmd160  2f61648e00f0eae37bae05e1dc5eb3c2ba18fe44
 
 depends_build   port:pkgconfig \
                 port:intltool \

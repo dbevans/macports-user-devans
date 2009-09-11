@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		eog
-version		2.27.91
+version		2.27.92
 set branch	[join [lrange [split ${version} .] 0 1] .]
 description	An image viewing program.
 long_description        This is the Eye of Gnome, an image viewer program. \
@@ -16,9 +16,9 @@ platforms	darwin
 homepage	http://projects.gnome.org/eog/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     b23c7b143ab2599834a184886ba24483 \
-                sha1    dae551cfc8f03193aa43a7cc5e4ccad6dd114b8b \
-                rmd160  94157f57cf4ae839dcc7fe5467c06f5dd9bebc71
+checksums       md5     2fc072e451d7c46127feb44589671a5a \
+                sha1    ef69e2a0fcca6909a7980bac0a4361f73b3c6a49 \
+                rmd160  42eb9d8c46d1aba78c886111e0327364fc1ed356
 
 depends_build   port:pkgconfig \
                 port:intltool \

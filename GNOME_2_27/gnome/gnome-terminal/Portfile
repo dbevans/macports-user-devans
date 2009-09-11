@@ -4,7 +4,7 @@
 PortSystem  1.0
 
 name		gnome-terminal
-version		2.27.91
+version		2.27.92
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	Terminal component for the GNOME 2 Desktop
 long_description        Terminal component for the GNOME 2 Desktop
@@ -14,9 +14,9 @@ platforms	darwin
 homepage	http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     42b643e0d1940c473af31e752e17a482 \
-                sha1    59051c63fa7027188be5201cc1a2c35351aec7e0 \
-                rmd160  4f2f886e131a6b27afaee53a4b5cd9c8c0441fcc
+checksums       md5     12638697d4070223f3c314b386ca7c3e \
+                sha1    408f80dcf8d13436734f9e28c70ccfef11213ce6 \
+                rmd160  28b501dfecff09fe8ec330439e2ef01386194845
 
 depends_lib     port:gconf \
 	        port:startup-notification \

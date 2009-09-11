@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		empathy
-version		2.27.91.1
+version		2.27.92
 set branch	[join [lrange [split ${version} .] 0 1] .]
 description	Empathy is an instant-messaging(chat) program for GNOME
 long_description \
@@ -17,9 +17,9 @@ platforms	darwin
 homepage	http://live.gnome.org/Empathy
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     6845b138d9f597932886345aeac82bc5 \
-                sha1    843f0c26155aba2c83535a4720cd3f2ddc7b8f10 \
-                rmd160  cb62b6c926e60b4b2f35127a6e4c7af739df4ae4
+checksums       md5     888f07eada6eea765123f987d208ea13 \
+                sha1    2a7087ff93af341d2e627a8eee41b5b9f85b3a57 \
+                rmd160  db9b190129ed78caf8670d837b8006ffe63a6909
 
 depends_build   port:pkgconfig \
                 port:intltool \

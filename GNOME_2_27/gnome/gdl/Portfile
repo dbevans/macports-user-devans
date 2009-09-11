@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gdl
-version             2.27.3
+version             2.27.92
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome devel
 maintainers         devans openmaintainer
@@ -20,9 +20,9 @@ homepage            http://www.anjuta.org/
 master_sites        gnome:sources/${name}/${branch}/
 use_bzip2           yes
 
-checksums           md5     1a01f8c43f7ed7dbae75307f0b6cc843 \
-                    sha1    e38b1a6eec14d71247978a083217749dfc2689b1 \
-                    rmd160  9a804dbf98cacd56cfae549767cb2167b4608189
+checksums           md5     c032acc5f292124c503fd916324b9e26 \
+                    sha1    555721ddbd36b851bb6231861e943d6d388e802e \
+                    rmd160  60a53dc993bd27ca7843f6d646fa2b67b34ffc32
 
 depends_build       port:pkgconfig \
                     port:intltool \

@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name            gnome-settings-daemon
-version         2.27.91
+version         2.27.92
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Gnome 2 settings daemon.
 long_description ${description}
@@ -14,9 +14,9 @@ platforms       darwin
 homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     cb5ce91b824bb46031531195f9dbe4c4 \
-                sha1    f9c9816b7e8faf6731e5e90fd410c02452c318cc \
-                rmd160  eb10cf7b9e86cf19eab9b3d523c45160b2d06850
+checksums       md5     6f35379b8bddc729dd4144b54b3557bc \
+                sha1    70a63393888f568cf2a58749a1f457ab2b1f746d \
+                rmd160  c09326e30ce9c6cdc7b92cea7355290241cfbd15
 
 depends_lib     port:gconf \
                 port:gnome-desktop \

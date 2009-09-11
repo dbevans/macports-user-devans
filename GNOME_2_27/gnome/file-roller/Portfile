@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		file-roller
-version		2.27.91
+version		2.27.92
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	An archive manager for GNOME
 long_description        File Roller is an archive manager for the GNOME \
@@ -19,9 +19,9 @@ platforms	darwin
 homepage	http://fileroller.sourceforge.net/
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     6bded6c57b3489c926d089fea388f788 \
-                sha1    9c0cf4e5479e3dd933766fd8afc7c06e776d81f0 \
-                rmd160  cfcc06b07d1616ff7061a5594da24638f9d2d56e
+checksums       md5     92eb4195b1c78a33db881af17acd5868 \
+                sha1    a9e31941bfdd57c3477e1551a85c17e57014387d \
+                rmd160  e9b8a0184d2661818a5596a3cee1d5c396286321
 
 depends_build   port:pkgconfig \
                 port:intltool \
