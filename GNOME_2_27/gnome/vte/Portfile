@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            vte
-version         0.21.4
+version         0.21.5
 set branch      [join [lrange [split $version .] 0 1] .]
 maintainers     nomaintainer
 categories      gnome
@@ -20,9 +20,9 @@ homepage        http://www.gnome.org/
 master_sites    gnome:sources/$name/$branch/
 use_bzip2       yes
 
-checksums       md5     b9597bb6c4ed3d48602b53f90c5fd85b \
-                sha1    984110dadbf6da7e091859366db042705631fa93 \
-                rmd160  84e22daf26e24acc1df0e8326511b1a6cf8b3186
+checksums       md5     9b4d97dfc40e4f77b7ecf2e9e89da368 \
+                sha1    8759a949eb326daeb7e80079346f146c22b84c7e \
+                rmd160  be9c5d026cee544caaaa660e12f2473c49ad70f8
 
 depends_lib     port:py25-gtk \
                 port:gtk2 \
