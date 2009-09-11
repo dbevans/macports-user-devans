@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name		metacity
-version		2.27.0
+version		2.27.1
 set branch  [join [lrange [split ${version} .] 0 1] .]
 description	A window manager for the adult in you.
 long_description        ${description}
@@ -14,9 +14,9 @@ platforms	darwin
 homepage	http://www.gnome.org
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     52871631cc13b7fde1403aaee3db32d4 \
-                sha1    9b72168f8f66bcfc8d2e83252c17e1d0eae5f0e5 \
-                rmd160  64afadedc802e65ae71ec7fe20756ea186818097
+checksums       md5     9a952cdb925912d9b3b12ad460e25894 \
+                sha1    1109ff6ff9a78b19b0c9c6a13be34b0ec839819d \
+                rmd160  cfad0328505ec318722597cf9c2988eb90f84f62
 
 depends_lib     port:gconf \
                 port:libcanberra \
