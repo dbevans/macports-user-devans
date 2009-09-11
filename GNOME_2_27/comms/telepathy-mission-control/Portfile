@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            telepathy-mission-control
-version         5.2.1
+version         5.2.3
 categories      comms
 maintainers     devans openmaintainer
 platforms       darwin
@@ -18,9 +18,9 @@ long_description \
                 providing a way for "end-user" applications to abstract some details of low \
                 level telepathy components such as connection managers.
 
-checksums       md5     a27780ecced46c87132fb96d6d604355 \
-                sha1    8b7b1aa4e43282f3a8a6ab22fc734cbe0d06e8bc \
-                rmd160  203c6f0d3b70f9aa801c125d5eaf017054ec2ea6
+checksums       md5     ce241d3d28d9381afd4c0ffd03bd7093 \
+                sha1    33ba075c5d283690d53f52861925c3265059d3ee \
+                rmd160  9d1d433c9b2159b25f9de07d6035a661fc460f31
 
 depends_build   port:pkgconfig \
                 port:libxslt \
