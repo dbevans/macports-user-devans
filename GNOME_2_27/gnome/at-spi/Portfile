@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name                at-spi
-version             1.27.91
+version             1.27.92
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Gnome Accesibility Technology Service
 long_description \
@@ -17,9 +17,9 @@ platforms           darwin
 homepage            http://www.gnome.org/
 master_sites        gnome:sources/${name}/${branch}/
 
-checksums           md5     2d872beac64c9311851f1120ce0ae50d \
-                    sha1    ad0635362aed3cfd045d03fcbd951b86f18449ff \
-                    rmd160  2a38d92c907d314c86b55710d3565c103e7e711c
+checksums           md5     5431fe32d10190cf755f950934e4f68b \
+                    sha1    135f7d4a11fcbf8bac2faf9b57361f54cf5a2c3f \
+                    rmd160  d5ef866274be5162f3560aab54a377dad1a3dbb2
 
 depends_build       port:p5-xml-parser \
                     port:pkgconfig
