@@ -69,7 +69,7 @@ patchfiles      patch-gtk-builder-convert.diff \
                 patch-modules-gail.diff \
                 patch-modules-printbackends.diff \
                 patch-which-gtkdoc-rebase.diff \
-                patch-disable-demos.diff
+                patch-disable-demos-and-tests.diff
 
 depends_build   port:pkgconfig
 
