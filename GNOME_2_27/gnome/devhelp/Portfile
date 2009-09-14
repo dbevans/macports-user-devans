@@ -1,0 +1,46 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem 1.0
+
+name            devhelp
+version         2.27.92
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     Devhelp is an API documentation browser for GTK+ and GNOME.
+long_description \
+                Devhelp is an API documentation browser for GTK+ and GNOME. It works \
+                natively with gtk-doc (the API reference framework developed for GTK+ \
+                and used throughout GNOME for API documentation). If you use gtk-doc \
+                with your project, you can use Devhelp to browse the documentation.
+
+maintainers     devans openmaintainer
+categories      gnome
+platforms       darwin
+homepage        http://live.gnome.org/${name}
+master_sites    gnome:sources/${name}/${branch}/
+use_bzip2       yes
+
+checksums       md5     b796dacbff2c9cd2b7f5f44113a34a0b \
+                sha1    ce6a3e7a45181ee3d31bf1b5151a862843cd5938 \
+                rmd160  1e8437739e6a391dc64be2d1acd07f2db7021b1f
+
+depends_build   port:pkgconfig \
+                port:python25
+
+depends_lib     port:webkit-gtk \
+                port:gconf  \
+                port:libwnck
+
+configure.args  --disable-schemas-install \
+                --with-compile-warnings=yes
+
+configure.python ${prefix}/bin/python2.5
+
+post-activate {
+        system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+            gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
+}
+
+livecheck.type  regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}
