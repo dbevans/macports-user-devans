@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-keyring
-version         2.27.90
+version         2.27.92
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      gnome
@@ -21,9 +21,9 @@ homepage        http://live.gnome.org/GnomeKeyring/
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2       yes
 
-checksums       md5     0734f60d9f0eb3667244cdcf6b4b44fe \
-                sha1    e76fcf70549681d9d82cb3167b0ef036e38b7514 \
-                rmd160  1479685bb4f17c8e777d91d2ac80acc47777a490
+checksums       md5     2680e94500f540247af9d89f6aa9270b \
+                sha1    0e571f31b18e6e11939def3bcb9a628f7da2dbb4 \
+                rmd160  4d08d646d63f69bcb9e0952e19273ac6318b3ca9
 
 depends_build   port:pkgconfig \
                 port:intltool
