@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            totem-pl-parser
-version         2.27.2
+version         2.27.92
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome
 maintainers     devans openmaintainer
@@ -17,9 +17,9 @@ homepage        http://live.gnome.org/Totem
 platforms       darwin
 master_sites    gnome:sources/${name}/${branch}/
 
-checksums       md5     65fe6b0f523e4d90fda97736bbdaf637 \
-                sha1    a5b445f0162ff8aa0665213bcdb97e64c0d6f86b \
-                rmd160  860881f055c16bf6f7af0645125467a49dd1d79b
+checksums       md5     f01c54af09eeb65950a9b339e150978f \
+                sha1    580dc27ce31614034a9c6fa10c83c427f7dd5390 \
+                rmd160  231727dbe01cd0ec6a65910badebe40c8122a57c
 
 use_bzip2       yes
 
