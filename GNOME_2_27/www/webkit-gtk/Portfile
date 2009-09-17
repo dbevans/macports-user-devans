@@ -20,7 +20,8 @@ checksums       md5     bff87d1ddc562223cb99201950d7e138 \
                 sha1    5cbbc11a157a32ace3fefdc11e293b90daa44562 \
                 rmd160  e41bc0ce4ffb9397e917081b9585eb7665d3ff28
 
-patchfiles      patch-WebKitTools-DumpRenderTree-gtk-TestNetscapePlugin-TestNetscapePlugin.cpp.diff
+patchfiles      patch-WebKitTools-DumpRenderTree-gtk-TestNetscapePlugin-TestNetscapePlugin.cpp.diff \
+                patch-GNUmakefile.in.diff
 
 depends_lib	\
 	port:gtk2 \
@@ -44,8 +45,7 @@ post-patch {
 # enable SVG filters by default
 #
 
-configure.args  --enable-filters \
-                --disable-fast-install
+configure.args  --enable-filters
 
 #
 # video is now enabled by default so make the variant no_video
@@ -56,9 +56,8 @@ variant no_video description {Disable HTML5 video support using gstreamer} {
 	configure.args-append	--disable-video
 }
 
-
 #
-# all svg support (except filters) is enabled by default
+# all svg support is enabled by default
 #
 
 variant no_svg description {Disable all SVG support} {
