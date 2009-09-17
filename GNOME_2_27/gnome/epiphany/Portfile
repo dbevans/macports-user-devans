@@ -4,8 +4,7 @@
 PortSystem 1.0
 
 name		epiphany
-version		2.27.90
-revision        1
+version		2.27.92
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	A GNOME Web browser.
 long_description	A web browser is more than an application, it is a \
@@ -19,9 +18,9 @@ homepage	http://www.gnome.org/projects/${name}
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2	yes
 
-checksums       md5     afdba03b15e6e4e40b5e46edc592d847 \
-                sha1    8c51c6f1e661518f1d1a25308a270ac88786e260 \
-                rmd160  614cce1f9c97aace8c2a98f9f3f2019d71518693
+checksums       md5     abb1d7171c9910cf722360674bfaf3bf \
+                sha1    06a420daec66a9d27bec0350d6ae1b7d2f6829c0 \
+                rmd160  952cae1dbe0f7de43215d223f2e4814b1feef115
 
 depends_build   port:pkgconfig \
                 port:intltool \
