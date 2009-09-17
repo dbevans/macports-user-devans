@@ -1,0 +1,11 @@
+--- GNUmakefile.in.orig	2009-09-16 11:52:07.000000000 -0700
++++ GNUmakefile.in	2009-09-16 11:53:26.000000000 -0700
+@@ -84,7 +84,7 @@
+ host_triplet = @host@
+ bin_PROGRAMS = Programs/jsc$(EXEEXT)
+ noinst_PROGRAMS = Programs/minidom$(EXEEXT) \
+-	Programs/GtkLauncher$(EXEEXT) Programs/DumpRenderTree$(EXEEXT) \
++	Programs/GtkLauncher$(EXEEXT) \
+ 	$(am__EXEEXT_1)
+ 
+ # For the Gtk port we want to use XP_UNIX both in X11 and Mac
