@@ -1,0 +1,20 @@
+--- configure.orig	2013-05-13 02:14:59.000000000 -0700
++++ configure	2013-07-07 07:58:47.000000000 -0700
+@@ -12604,7 +12604,7 @@
+ GSTPBU_REQUIRED=1.0
+ GIO_REQUIRED=2.26
+ GEE_REQUIRED=0.8.0
+-UUID_REQUIRED=1.41.3
++UUID_REQUIRED=1.6.2
+ LIBSOUP_REQUIRED=2.34.0
+ GTK_REQUIRED=2.90.3
+ 
+@@ -17260,7 +17260,7 @@
+ fi
+ 
+ 
+-RYGEL_PLUGIN_LINKER_FLAGS="-shared -fPIC -module -avoid-version -Wl,-z,defs"
++RYGEL_PLUGIN_LINKER_FLAGS="-shared -fPIC -module -avoid-version Wl,defs"
+ 
+ RYGEL_PLUGIN_DIR=${libdir}/rygel-2.0/plugins
+ 
