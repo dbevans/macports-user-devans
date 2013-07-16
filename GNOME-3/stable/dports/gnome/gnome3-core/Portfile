@@ -1,0 +1,194 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            gnome3-core
+version         3.8.2
+categories      gnome
+license         Permissive
+maintainers     devans openmaintainer
+description     The Core GNOME 3 User Experience module set
+long_description \
+                ${description}
+homepage        https://help.gnome.org/misc/release-notes/3.8/
+master_sites
+platforms       darwin
+distfiles
+
+#
+# This is a metaport
+#
+
+supported_archs noarch
+
+#
+# TODO
+#
+# The following modules are included in the current GNOME core
+# module set but have not yet been ported to MacPorts
+#
+# ModemManager
+# NetworkManager
+# deskbar-applet
+# baobab
+# cantarell-fonts
+# caribou
+# dconf (not required, GIO (glib2) includes a native gsettings backend for Mac OS X)
+# gcr
+# geocode-glib
+# gjs
+# gnome-bluetooth
+# gnome-calculator
+# gnome-contacts
+# gnome-dictionary
+# gnome-disk-utility
+# gnome-icon-theme-extras
+# gnome-js-common
+# gnome-online-accounts
+# gnome-packagekit
+# gnome-screenshot
+# gnome-shell
+# gnome-shell-extensions
+# gnome-system-log
+# gnome-user-share
+# gnome-video-effects
+# grilo
+# grilo-plugins
+# gtksourceview3
+# libgxps
+# libpeas
+# libqmi
+# rest
+# libzapojit
+# mousetweaks
+# mutter
+# network-manager-applet
+# seed
+# sushi
+# tracker
+#
+# BROKEN PORTS
+#
+# The following ports are included in the current GNOME desktop
+# environment specification and have been ported to MacPorts but
+# are currently broken and/or need to be updated
+#
+# gnome-system-monitor (builds but segfaults on processes/resources -- probably due to lack of support for MacOSX in libgtop)
+#
+
+depends_lib     port:at-spi2-atk \
+                port:at-spi2-core \
+                port:atk \
+                port:atkmm \
+                port:clutter \
+                port:clutter-gst \
+                port:clutter-gtk \
+                port:cogl \
+                port:empathy \
+                port:eog \
+                port:epiphany \
+                port:evince \
+                port:evolution-data-server \
+                port:folks \
+                port:gdk-pixbuf2 \
+                port:gdm \
+                path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                port:glib-networking \
+                port:glibmm \
+                port:gmime \
+                port:gnome-backgrounds \
+                port:gnome-control-center \
+                port:gnome-desktop \
+                port:gnome-doc-utils \
+                port:gnome-icon-theme \
+                port:gnome-icon-theme-symbolic \
+                port:gnome-keyring \
+                port:gnome-menus \
+                port:gnome-session \
+                port:gnome-settings-daemon \
+                port:gnome-terminal \
+                port:gnome-themes-standard \
+                port:gnome-user-docs \
+                port:gobject-introspection \
+                port:gsettings-desktop-schemas \
+                port:gssdp \
+                port:gstreamer1-gst-plugins-base \
+                port:gstreamer1-gst-plugins-good \
+                port:gstreamer1 \
+                port:gtk3 \
+                port:gtk2 \
+                port:gtk-doc \
+                port:gtk-engines2 \
+                port:gtkmm3 \
+                port:gucharmap \
+                port:gupnp \
+                port:gupnp-igd \
+                port:gvfs \
+                port:json-glib \
+                port:libchamplain \
+                port:libcroco \
+                port:libgdata \
+                port:libgee \
+                port:libgnomekbd \
+                port:libgtop \
+                port:libgweather \
+                port:libnotify \
+                port:librsvg \
+                port:libsecret \
+                port:libsigcxx2 \
+                port:libsoup \
+                port:libwnck \
+                port:mm-common \
+                port:nautilus \
+                port:pango \
+                port:pangomm \
+                port:totem \
+                port:totem-pl-parser \
+                port:vala \
+                port:vino \
+                port:vte \
+                port:yelp \
+                port:yelp-xsl \
+                port:zenity
+
+use_configure   no
+build           { }
+
+variant broken description {Build ports that are broken or need work} {
+    depends_lib-append \
+        port:gnome-system-monitor
+}
+
+variant python27 conflicts python31 python32 python33 description {Use python 2.7} {
+    depends_lib-append \
+        port:py27-gobject3
+}
+
+variant python31 conflicts python27 python32 python33 description {Use python 3.1} {
+    depends_lib-append \
+        port:py31-gobject3
+}
+
+variant python32 conflicts python27 python31 python33 description {Use python 3.2} {
+    depends_lib-append \
+        port:py32-gobject3
+}
+
+variant python33 conflicts python27 python31 python32 description {Use python 3.3} {
+    depends_lib-append \
+        port:py33-gobject3
+}
+
+
+if {![variant_isset python25] && ![variant_isset python26]} {
+    default_variants +python27
+}
+
+destroot        {
+    file mkdir ${destroot}${prefix}/share/doc/gnome
+    file copy ${filespath}/README.${name}.txt.in ${destroot}${prefix}/share/doc/gnome/README.${name}.txt
+    reinplace "s|@PREFIX@|${prefix}|g" ${destroot}${prefix}/share/doc/gnome/README.${name}.txt
+}
+
+livecheck.type  none
