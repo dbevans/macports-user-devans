@@ -1,0 +1,89 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem 1.0
+
+name            evolution-data-server
+version         2.32.3
+
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     Addressbook and calender libs for GNOME.
+long_description    Evolution Data Server provides a central location for \
+                    addressbook and calendar in the GNOME Desktop.
+maintainers     geekdaily.org:jim
+categories      gnome
+license         LGPL-2+
+platforms       darwin
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+
+use_bzip2       yes
+
+checksums       rmd160  adc8b07aef41a89d16fc426541c12190a3688b8f \
+                sha256  744026a745b711b3e393b61fed21c4926d1b10a3aa7da64f4b33a3e3bf5b085c
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:gtk-doc
+
+depends_lib     port:gconf \
+                port:kerberos5 \
+                port:libcomerr \
+                port:libgnome-keyring \
+                port:libgdata \
+                port:libgweather \
+                port:libical \
+                port:nss \
+                port:gnuregex \
+                port:db46
+
+patchfiles      patch-configure.ac.diff \
+                patch-m4-evo_krb5_support.m4.diff \
+                patch-libgdata07-compat.diff \
+                patch-calendar-libedata-cal-Makefile.am.diff \
+                patch-calendar-libedata-cal-e-cal-backend-intervaltree.c.diff \
+                patch-calendar-backends-caldav-e-cal-backend-caldav.c.diff
+
+use_autoreconf    yes
+autoreconf.args  -fvi
+
+configure.args  \
+        --enable-static \
+        --enable-smime \
+        --enable-gnome-keyring \
+        --enable-ipv6 \
+        --enable-nntp \
+        --enable-calendar \
+        --with-nspr-includes=${prefix}/include/nspr  \
+        --with-nspr-libs=${prefix}/lib/nspr  \
+        --with-nss-includes=${prefix}/include/nss \
+        --with-nss-libs=${prefix}/lib/nss \
+        --with-krb5=/usr \
+        --disable-gtk3 \
+        --disable-silent-rules \
+        --disable-schemas-install
+
+#
+# port nss is not universal
+#
+universal_variant no
+
+platform darwin 8 {
+    post-patch {
+        reinplace "s|#include <stdio.h>|#include <stdio.h>\\\n#include <sys/types.h>|g" \
+        ${worksrcpath}/camel/camel-block-file.h
+    }
+    configure.args-delete --with-krb5=/usr
+    configure.args-append --without-krb5
+}
+
+variant gtk_doc description {Build gtk-doc documentation} {
+  configure.args-append --enable-gtk-doc
+}
+
+post-activate    {
+    system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+        gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
+}
+
+livecheck.type  gnome

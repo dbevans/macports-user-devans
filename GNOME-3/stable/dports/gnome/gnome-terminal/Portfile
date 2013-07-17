@@ -1,0 +1,86 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            gnome-terminal
+version         2.32.1
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description Terminal component for the GNOME 2 Desktop
+long_description \
+                ${description}
+maintainers     devans openmaintainer
+categories      gnome
+license         GPL-2+
+platforms       darwin
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+
+use_bzip2       yes
+
+checksums       rmd160  d381b468113bae89505436a931238e22f3f7794c \
+                sha256  7f41e4b185a2cf65ff417b89e429fc3b625c5e3f042ee1763bda6490fa4676fb
+
+depends_build   port:pkgconfig \
+                port:gnome-common \
+                port:intltool \
+                port:gnome-doc-utils
+
+depends_lib     port:desktop-file-utils \
+                port:gtk2 \
+                port:gconf \
+                port:vte \
+                port:xorg-libsm \
+                port:xorg-libice
+
+depends_run     port:gnome-settings-daemon \
+                port:yelp
+
+#
+# gnome-terminal does not directly depend on libgnome itself
+# but references the gconf key /desktop/gnome/interface/monospace_font_name
+# the schema for which is provided by libgnome
+# hence this unusual run time dependency (#27235)
+#
+
+depends_run     port:libgnome
+
+patchfiles      missing-links.patch
+
+use_autoreconf  yes
+autoreconf.args -fvi
+
+configure.args  --with-gtk=2.0 \
+                --disable-silent-rules \
+                --disable-schemas-install \
+                --disable-scrollkeeper
+
+#
+# while there is an attempt at a quartz version of this port
+# it has not been maintained upstream for some time and
+# the quartz build is massively broken at this time due to:
+#
+#     * explicit use of X11 API in terminal.c even though configured to use quartz
+#     * use of obsolete Carbon/QuickDraw API in eggsmclient-osx.c
+#
+# if +quartz is asserted disable X11 dependencies to avoid polluting a clean quartz environment
+# but terminate with error before build phase, #32059
+#
+
+variant quartz {
+        depends_lib-delete    port:xorg-libsm
+        pre-build {
+            ui_error "${name} does not currently support +quartz builds."
+            ui_error "Please try again without the +quartz variant."
+            return -code error "+quartz build broken."
+        }
+}
+
+post-activate   {
+    system "${prefix}/bin/scrollkeeper-update"
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+    system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+            gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
+}
+
+livecheck.type  gnome

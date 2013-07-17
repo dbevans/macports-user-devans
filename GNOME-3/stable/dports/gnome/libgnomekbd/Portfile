@@ -1,0 +1,66 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem 1.0
+
+name                libgnomekbd
+version             2.32.0
+revision            2
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         A GNOME library which manages keyboard configuration
+long_description    Libgnomekbd is ${description} and offers various \
+                    widgets related to keyboard configuration.
+maintainers         devans openmaintainer
+categories          gnome
+license             LGPL-2+
+platforms           darwin
+homepage            http://www.gnome.org/
+
+master_sites        gnome:sources/${name}/${branch}/
+
+use_bzip2           yes
+
+checksums           sha256  ddd52c4cc7d83ad7ef964a1bcb4db87407e65b00ffc3e70c088ca4ee7383d256 \
+                    rmd160  5ecca30979373f746224693c6b9ff8b6fe2a8e18
+
+depends_build       port:intltool \
+                    port:pkgconfig
+
+depends_lib         port:desktop-file-utils \
+                    port:gtk2 \
+                    port:gconf \
+                    port:libxklavier
+
+patchfiles          patch-configure.in.diff
+
+post-patch {
+    reinplace "s|test capplet|capplet|" ${worksrcpath}/Makefile.in
+}
+
+use_autoreconf      yes
+autoreconf.args     -fvi
+configure.args      --without-x \
+                    --disable-schemas-install
+
+# Legacy no_x11 variant to be removed after June 2014.
+variant no_x11 conflicts x11 description {Legacy compatibility variant} {}
+
+variant x11 conflicts no_x11 {
+    configure.args-append   --x-includes=${prefix}/include \
+                            --x-libraries=${prefix}/lib
+    configure.args-delete   --without-x
+}
+
+if {[variant_isset no_x11]} {
+    default_variants -x11
+} else {
+    default_variants +x11
+}
+
+post-activate {
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+    system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+        gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
+}
+
+livecheck.type    gnome

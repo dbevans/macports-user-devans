@@ -1,0 +1,38 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem 1.0
+
+name            libgdata
+version         0.8.1
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     libgdata is a GLib-based library for accessing online service APIs using the \
+                GData protocol --- most notably, Google's services.
+
+long_description \
+                ${description} \
+                It provides APIs to access the common Google services, and has full asynchronous support.
+
+maintainers     devans openmaintainer
+categories      gnome net
+license         LGPL-2.1+
+platforms       darwin
+homepage        http://live.gnome.org/TwoPointTwentynine/ExternalDependencies
+master_sites    gnome:sources/${name}/${branch}/
+
+use_bzip2       yes
+
+checksums       rmd160  ff56052332399e29a0a615d9128524cb2a178d47 \
+                sha256  080be3e677e6098d0f1bbcbaf8e474b4b94fad8a0d07b5a2969c3ab95b68d0b9
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:gnome-doc-utils \
+                port:gtk-doc
+
+depends_lib     port:gdk-pixbuf2 \
+                port:libsoup
+
+configure.args  --enable-introspection=no
+
+livecheck.type  gnome
