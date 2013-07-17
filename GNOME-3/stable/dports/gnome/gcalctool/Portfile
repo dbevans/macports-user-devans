@@ -1,0 +1,46 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            gcalctool
+version         5.32.2
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     A GNOME 2 desktop calculator.
+long_description \
+                gcalctool is the desktop calculator that has been proposed \
+                for GNOME. It has Basic, Financial and Scientific modes.
+maintainers     nomaintainer
+categories      gnome math
+license         GPL-2+
+platforms       darwin
+homepage        http://calctool.sourceforge.net/
+master_sites    gnome:sources/${name}/${branch}/
+
+use_bzip2       yes
+
+checksums       rmd160  df98f5ff659f8abc877a20e146ea791b7411a8a2 \
+                sha256  b281cc545f27b37a0fd120366b1be517574d9f505b59dfc34f9860007df0b788
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:gnome-doc-utils \
+                port:flex \
+                port:bison
+
+depends_lib     port:desktop-file-utils \
+                port:gtk2
+
+depends_run     port:gnome-settings-daemon \
+                port:yelp
+
+configure.args  --with-gtk=2.0 \
+                --disable-scrollkeeper \
+                --disable-schemas-compile
+
+post-activate   {
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type  gnome
