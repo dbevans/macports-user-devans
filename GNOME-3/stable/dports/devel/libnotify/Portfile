@@ -4,15 +4,14 @@
 PortSystem          1.0
 
 name                libnotify
-version             0.5.2
-revision            4
+version             0.7.5
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          devel gnome
 maintainers         nomaintainer
 description         pop-up notification library
 long_description \
-   The Desktop Notifications framework provides a standard way of doing \
-   passive pop-up notifications.
+                    The Desktop Notifications framework provides a standard way of doing \
+                    passive pop-up notifications.
 
 platforms           darwin
 license             LGPL-2.1+
@@ -20,20 +19,19 @@ license             LGPL-2.1+
 homepage            http://library.gnome.org/devel/libnotify/
 master_sites        gnome:sources/${name}/${branch}
 
-use_bzip2           yes
+use_xz              yes
 
-checksums           sha1    bb088a318cfccb4261674065838860fa940fc04a \
-                    rmd160  97c7d295683d6a093e46611d354fe8bfd799fb7d
+checksums           rmd160  9f166a6b17f1f00e85e658e2effa8da93ac5497f \
+                    sha256  4378cb47874ba4d5f759b7890d8d28d086e81d3f0bd4f6e84e5ab66d82ffb652
 
 depends_build       port:pkgconfig
 
-depends_lib         port:dbus-glib \
-                    port:gtk2 \
-                    port:libpng
+depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                    port:gdk-pixbuf2 \
+                    port:gtk3 \
+                    port:xorg-libsm
 
-variant quartz {
-    patchfiles-append   patch-libnotify-notification-c.diff
-}
+configure.args      --enable-introspection=no
 
 pre-activate {
 	if {${os.major} == 11 && [lindex [split ${os.version} .] 1] < 2 && ${os.platform} == "darwin"} {
