@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-user-docs
-version         2.32.0
+version         3.8.2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     End-user documentation for GNOME2
 long_description \
@@ -21,20 +21,13 @@ supported_archs noarch
 homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-use_bzip2       yes
+use_xz          yes
 
-checksums       sha256  d42c4435590e5b79c8fcf1d917aee485096c02cdc84338bc31f769219ccc87f7 \
-                rmd160  d01a316adce5407c14bb9316eb695122e91faf84
+checksums       sha256  eeb96fcd0c253ce9869fe2007402220f2924fa37217c6fac357db236797cadb7 \
+                rmd160  41d5cbeedb6f26e3d78443431c8615b2e3e51bd1
 
 depends_build   port:pkgconfig \
-                port:gnome-doc-utils
-
-depends_lib     port:rarian
-
-configure.args  --disable-scrollkeeper
-
-post-activate   {
-    system "${prefix}/bin/scrollkeeper-update"
-}
+                port:libxml2 \
+                port:itstool
 
 livecheck.type  gnome
