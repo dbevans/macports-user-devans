@@ -6,7 +6,7 @@ PortSystem      1.0
 name            gnome-user-docs
 version         3.8.2
 set branch      [join [lrange [split ${version} .] 0 1] .]
-description     End-user documentation for GNOME2
+description     End-user documentation for GNOME3
 long_description \
                 This package contains documents which will be \
                 packaged together and shipped as gnome-user-docs \
