@@ -27,10 +27,10 @@ depends_build   port:pkgconfig \
                 port:itstool
 
 depends_lib     port:desktop-file-utils \
+                port:gnome-icon-theme \
                 port:gdk-pixbuf2 \
                 port:gtk3 \
                 port:libxml2 \
-                port:gnome-icon-theme \
                 port:xorg-libsm \
                 port:xorg-libice \
                 port:libsecret \
