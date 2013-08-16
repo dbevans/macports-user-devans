@@ -2,10 +2,10 @@
 # $Id$
 
 PortSystem      1.0
+PortGroup       active_variants 1.1
 
 name            libwnck
-version         2.30.7
-revision        4
+version         3.4.6
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     nomaintainer
 categories      gnome
@@ -20,25 +20,22 @@ long_description \
 
 homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
+
 use_xz          yes
 
-checksums       sha256  8be84d5333f0ade0e61af9f4cbf7685cb7cce2aa0ee32f53bac32107a81fe194
+checksums       rmd160  cf8bc1e57bd950b10b2ee3b5c4c47a602e9f1457 \
+                sha256  e3ae2d25b684910f49fc548dc96b8a54b77c431d94ad1fd5a37cbecab7bb1851
 
 depends_build   port:pkgconfig \
-                port:intltool \
-                port:gnome-doc-utils
+                port:intltool
 
 depends_lib     port:startup-notification \
                 port:gobject-introspection \
-                port:gtk2 \
+                port:gtk3 \
+                port:xorg-libX11 \
                 port:xorg-libXres
 
-pre-fetch {
-    if {![file exists $prefix/lib/libgdk-x11-2.0.dylib]} {
-        ui_error "gtk2 must be installed with +x11 variant enabled."
-        error "gtk2 must be installed with +x11 variant."
-    }
-}
+require_active_variants gtk3 x11
 
 configure.args  --x-includes=${prefix}/include \
                 --x-libraries=${prefix}/lib \
