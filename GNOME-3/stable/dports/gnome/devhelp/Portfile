@@ -31,6 +31,7 @@ depends_build   port:pkgconfig \
                 port:intltool
 
 depends_lib     port:desktop-file-utils \
+                port:gnome-icon-theme \
                 port:gtk3 \
                 port:webkit-gtk3
 
