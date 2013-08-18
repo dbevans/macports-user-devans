@@ -35,9 +35,7 @@ supported_archs noarch
 # cantarell-fonts
 # caribou
 # dconf (not required, GIO (glib2) includes a native gsettings backend for Mac OS X)
-# gcr
 # geocode-glib
-# gjs
 # gnome-bluetooth
 # gnome-calculator
 # gnome-contacts
@@ -64,7 +62,6 @@ supported_archs noarch
 # mousetweaks
 # mutter
 # network-manager-applet
-# seed
 # sushi
 # tracker
 #
@@ -92,7 +89,9 @@ depends_lib     port:at-spi2-atk \
                 port:evolution-data-server \
                 port:folks \
                 port:gdk-pixbuf2 \
+                port:gcr \
                 port:gdm \
+                port:gjs \
                 path:lib/pkgconfig/glib-2.0.pc:glib2 \
                 port:glib-networking \
                 port:glibmm \
@@ -143,6 +142,7 @@ depends_lib     port:at-spi2-atk \
                 port:nautilus \
                 port:pango \
                 port:pangomm \
+                port:seed \
                 port:totem \
                 port:totem-pl-parser \
                 port:vala \
