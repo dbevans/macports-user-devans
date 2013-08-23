@@ -26,6 +26,7 @@ depends_build   port:pkgconfig \
                 port:intltool
 
 depends_lib     port:desktop-file-utils \
+                port:rarian \
                 port:gtk3 \
                 port:gconf
                 
