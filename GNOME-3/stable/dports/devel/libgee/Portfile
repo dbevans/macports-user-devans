@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                libgee
-version             0.10.2
+version             0.10.4
 license             LGPL-2.1+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          devel
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${name}/${branch}
 
 use_xz              yes
 
-checksums           rmd160  d4c40cbeeccb5d88005dcc385da83c3e7b576d59 \
-                    sha256  b365b3afccbf9a9ecf4282be0b8ce7dcd56afa3c59c19d2ca79bb7f2724a966c
+checksums           rmd160  e9337a0db9e5b2027824bc1d93e62752eb15dfc8 \
+                    sha256  bb18fbdd048a9fb474def98f8b038db62d391b658b6bdebd2504cb638798ef6b
 
 depends_build       port:pkgconfig \
                     port:vala
