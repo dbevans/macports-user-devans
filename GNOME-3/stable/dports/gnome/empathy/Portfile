@@ -28,6 +28,8 @@ depends_build   port:pkgconfig \
                 port:itstool
 
 depends_lib     port:desktop-file-utils \
+                port:gnome-icon-theme \
+                port:gnome-icon-theme-symbolic \
                 port:gtk3 \
                 port:dbus-glib \
                 port:folks \
