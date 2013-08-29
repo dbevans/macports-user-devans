@@ -1,0 +1,64 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            eog-plugins
+version         3.8.1
+license         GPL-2+
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     Extra plugins for the Eye of GNOME image viewer
+long_description \
+                $description
+maintainers     devans openmaintainer
+categories      gnome
+platforms       darwin
+homepage        https://projects.gnome.org/eog/
+master_sites    gnome:sources/${name}/${branch}/
+
+use_xz          yes
+
+checksums       rmd160  2f2e10e323d6c83c89928e0c81429bbe034c6f28 \
+                sha256  5cf8dab5b6622b9e712da4094185112cc84baa96f2775cc76bf654b1c443cfb9
+
+depends_build   port:pkgconfig \
+                port:intltool \
+
+depends_lib     port:eog \
+                port:gtk3 \
+                port:libpeas \
+                port:libgdata \
+                port:libchamplain \
+                port:clutter \
+                port:clutter-gtk \
+                port:libexif \
+                port:gsettings-desktop-schemas
+
+patchfiles      patch-configure.diff
+
+configure.args  --disable-python \
+                --disable-schemas-compile \
+                --disable-silent-rules
+
+# provided python plugins use libpeas python2 loader only
+# libpeas python2 loader supports python27
+
+variant python27 description {Use python 2.7} {
+    depends_lib-append        port:py27-pygtk
+    configure.python          ${prefix}/bin/python2.7
+    set python_framework      ${frameworks_dir}/Python.framework/Versions/2.7
+    configure.pkg_config_path ${python_framework}/lib/pkgconfig 
+    configure.args-replace    --disable-python --enable-python
+}
+
+default_variants +python27
+
+# rdep py*-numpy +universal build fails (#40037)
+
+universal_variant no
+
+post-activate {
+   system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type  gnome
