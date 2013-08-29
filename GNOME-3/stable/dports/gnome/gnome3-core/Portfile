@@ -41,9 +41,6 @@ supported_archs noarch
 # gnome-contacts
 # gnome-dictionary
 # gnome-disk-utility
-# gnome-icon-theme-extras
-# gnome-js-common
-# gnome-online-accounts
 # gnome-packagekit
 # gnome-screenshot
 # gnome-shell
@@ -53,11 +50,8 @@ supported_archs noarch
 # gnome-video-effects
 # grilo
 # grilo-plugins
-# gtksourceview3
 # libgxps
-# libpeas
 # libqmi
-# rest
 # libzapojit
 # mousetweaks
 # mutter
@@ -101,9 +95,12 @@ depends_lib     port:at-spi2-atk \
                 port:gnome-desktop \
                 port:gnome-doc-utils \
                 port:gnome-icon-theme \
+                port:gnome-icon-theme-extras \
                 port:gnome-icon-theme-symbolic \
+                port:gnome-js-common \
                 port:gnome-keyring \
                 port:gnome-menus \
+                port:gnome-online-accounts \
                 port:gnome-session \
                 port:gnome-settings-daemon \
                 port:gnome-terminal \
@@ -120,6 +117,7 @@ depends_lib     port:at-spi2-atk \
                 port:gtk-doc \
                 port:gtk-engines2 \
                 port:gtkmm3 \
+                port:gtksourceview3 \
                 port:gucharmap \
                 port:gupnp \
                 port:gupnp-igd \
@@ -133,6 +131,7 @@ depends_lib     port:at-spi2-atk \
                 port:libgtop \
                 port:libgweather \
                 port:libnotify \
+                port:libpeas \
                 port:librsvg \
                 port:libsecret \
                 port:libsigcxx2 \
@@ -142,6 +141,7 @@ depends_lib     port:at-spi2-atk \
                 port:nautilus \
                 port:pango \
                 port:pangomm \
+                port:rest \
                 port:seed \
                 port:totem \
                 port:totem-pl-parser \
