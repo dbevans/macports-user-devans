@@ -5,7 +5,7 @@ PortSystem      1.0
 PortGroup       active_variants 1.1
 
 name            libwnck
-version         3.4.6
+version         3.4.7
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     nomaintainer
 categories      gnome
@@ -23,8 +23,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  cf8bc1e57bd950b10b2ee3b5c4c47a602e9f1457 \
-                sha256  e3ae2d25b684910f49fc548dc96b8a54b77c431d94ad1fd5a37cbecab7bb1851
+checksums       rmd160  e0f887fad60546082e36e1fbe5ef6c8b1eb105fd \
+                sha256  d48ac9c7f50c0d563097f63d07bcc83744c7d92a1b4ef65e5faeab32b5ccb723
 
 depends_build   port:pkgconfig \
                 port:intltool
