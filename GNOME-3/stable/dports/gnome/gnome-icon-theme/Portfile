@@ -1,39 +1,38 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # $Id$
 
-PortSystem      1.0
+PortSystem          1.0
 
-name            gnome-icon-theme
-version         3.8.2
-set branch      [join [lrange [split ${version} .] 0 1] .]
-maintainers     nomaintainer
-categories      gnome
-platforms       darwin
-license         LGPL-3
-description     A collection of icons for the GNOME 3 desktop.
+name                gnome-icon-theme
+version             3.8.2
+set branch          [join [lrange [split ${version} .] 0 1] .]
+maintainers         nomaintainer
+categories          gnome
+platforms           darwin
+license             LGPL-3
+description         A collection of icons for the GNOME 3 desktop.
 
-long_description \
-                gnome-icon-theme is a collection of icons and \
-                emblems for the GNOME 3 desktop.
+long_description    gnome-icon-theme is a collection of icons and \
+                    emblems for the GNOME 3 desktop.
 
-homepage        http://www.gnome.org/
-master_sites    gnome:sources/${name}/${branch}/
+homepage            http://www.gnome.org/
+master_sites        gnome:sources/${name}/${branch}/
 
-use_xz          yes
+use_xz              yes
 
-checksums       rmd160  f4c270270fa4e42e499f12bf6e3a68928f5381d7 \
-                sha256  1a7c518f9d824242389d456259c64c31cd3f15cc495042b022b513321e2de108
+checksums           rmd160  f4c270270fa4e42e499f12bf6e3a68928f5381d7 \
+                    sha256  1a7c518f9d824242389d456259c64c31cd3f15cc495042b022b513321e2de108
 
-depends_build   port:intltool \
-                port:pkgconfig \
-                port:icon-naming-utils \
-                port:gtk3
+depends_build       port:intltool \
+                    port:pkgconfig \
+                    port:icon-naming-utils \
+                    port:gtk3
     
-supported_archs noarch
+supported_archs     noarch
 
 configure.env-append \
-                GTK_UPDATE_ICON_CACHE=${prefix}/bin/gtk-update-icon-cache-3.0
+                    GTK_UPDATE_ICON_CACHE=${prefix}/bin/gtk-update-icon-cache-3.0
 
-configure.args  --enable-icon-mapping
+configure.args      --enable-icon-mapping
 
-livecheck.type  gnome
+livecheck.type      gnome
