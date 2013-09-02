@@ -1,40 +1,39 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id$
 
-PortSystem      1.0
+PortSystem          1.0
 
-name            vte
-version         0.34.7
-set branch      [join [lrange [split $version .] 0 1] .]
-maintainers     nomaintainer
-categories      gnome
-license         LGPL
-platforms       darwin
-description     VTE is a library (libvte) implementing a terminal emulator widget for GTK+, \
-                and a minimal sample application (vte) using that.
+name                vte
+version             0.34.7
+set branch          [join [lrange [split $version .] 0 1] .]
+maintainers         nomaintainer
+categories          gnome
+license             LGPL
+platforms           darwin
+description         VTE is a library (libvte) implementing a terminal emulator widget for GTK+, \
+                    and a minimal sample application (vte) using that.
 
-long_description \
-                ${description} \
-                Vte is mainly used in gnome-terminal, but can also be used to embed a \
-                console/terminal in games, editors, IDEs, etc.
+long_description    ${description} \
+                    Vte is mainly used in gnome-terminal, but can also be used to embed a \
+                    console/terminal in games, editors, IDEs, etc.
 
-homepage        http://www.gnome.org/
-master_sites    gnome:sources/$name/$branch/
+homepage            http://www.gnome.org/
+master_sites        gnome:sources/$name/$branch/
 
-use_xz          yes
+use_xz              yes
 
 checksums           rmd160  39edc0aab9f04e1925d7f92e9c3ca0a868cb0b79 \
                     sha256  187e49cca574f548d04ceea701e95a1531ff9dd9cd1953ce6455824720dab932
 
-depends_build   port:pkgconfig \
-                port:intltool
+depends_build       port:pkgconfig \
+                    port:intltool
 
-depends_lib     port:gtk3 \
-                port:gobject-introspection
+depends_lib         port:gtk3 \
+                    port:gobject-introspection
 
-configure.args  --disable-glade \
-                --disable-Bsymbolic \
-                --enable-introspection=yes
+configure.args      --disable-glade \
+                    --disable-Bsymbolic \
+                    --enable-introspection=yes
 
 configure.cflags-append -fstrict-aliasing
 
@@ -52,4 +51,4 @@ platform darwin 9 {
     }
 }
 
-livecheck.type  gnome
+livecheck.type      gnome
