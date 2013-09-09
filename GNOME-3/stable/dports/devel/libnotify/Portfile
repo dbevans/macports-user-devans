@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                libnotify
-version             0.7.5
+version             0.7.6
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          devel gnome
 maintainers         nomaintainer
@@ -21,17 +21,18 @@ master_sites        gnome:sources/${name}/${branch}
 
 use_xz              yes
 
-checksums           rmd160  9f166a6b17f1f00e85e658e2effa8da93ac5497f \
-                    sha256  4378cb47874ba4d5f759b7890d8d28d086e81d3f0bd4f6e84e5ab66d82ffb652
+checksums           rmd160  7f2ae9f2e75396607e79c2a5781bbe81b3efc9fd \
+                    sha256  0ef61ca400d30e28217979bfa0e73a7406b19c32dd76150654ec5b2bdf47d837
 
 depends_build       port:pkgconfig
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:gdk-pixbuf2 \
                     port:gtk3 \
+                    port:gobject-introspection \
                     port:xorg-libsm
 
-configure.args      --enable-introspection=no
+configure.args      --enable-introspection=yes
 
 pre-activate {
 	if {${os.major} == 11 && [lindex [split ${os.version} .] 1] < 2 && ${os.platform} == "darwin"} {
