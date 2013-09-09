@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name            libgdata
-version         0.13.4
+version         0.14.0
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     libgdata is a GLib-based library for accessing online service APIs using the \
                 GData protocol --- most notably, Google's services.
@@ -22,8 +22,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  247af928c778dd523836470aca2610b3f86af8ad \
-                sha256  ae405145bb6a2109488b7123206b469b141f17317066471dd485b4ea50499c83
+checksums       rmd160  1538c835a46f52e8cde7a0721f588c319142b4dd \
+                sha256  5d415241ae4ca5a2d952bf7f3e9a372be6bb0537b24d83a05e5fc94948d292e9
 
 depends_build   port:pkgconfig \
                 port:intltool \
