@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-media
-version         2.32.0
+version         3.4.0
 license         GPL-2 GFDL-1.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A collection of utilities for simple multimedia handling.
@@ -18,38 +18,29 @@ platforms       darwin
 homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 
-use_bzip2       yes
+use_xz          yes
 
-checksums       rmd160  c24ec7d76ca1c63610ca78f6291b2abb19f05a3c \
-                sha256  2b0ad4decd75406398f46e82a170e53bcbc6e1bdc3363f03a07b00f59c2fe5e6
+checksums       rmd160  49691b7de60520fb385255c86b704dbe39a77902 \
+                sha256  a76fac286f24d3836137ddbaab66f05e19eb5fb83cca6e375dbef040765a1d1f
 
 depends_build   port:pkgconfig \
-                port:gnome-doc-utils \
-                port:intltool
-
-#
-# dependency on libgladeui-1.0 is required to ensure
-# that port builds consistently
-# if present glade3 ui profiles are installed
-# which allows editing of .ui files in glade3
-# if not they are not
-# no way to turn this behavior off in configure
-# path dependency allows either glade3 or glade3-devel to be used
-#
+                port:intltool \
+                port:gnome-doc-utils
 
 depends_lib     port:desktop-file-utils \
-                port:libcanberra \
-                port:libunique \
+                port:rarian \
+                port:gtk3 \
                 port:gconf \
-                port:gstreamer010-gst-plugins-base \
-                path:lib/pkgconfig/gladeui-1.0.pc:glade3
+                port:libcanberra \
+                port:libxml2 \
+                port:libgnome-media-profiles \
+                port:gstreamer010-gst-plugins-base
 
 depends_run     port:gnome-settings-daemon \
                 port:yelp
 
 configure.args  --disable-schemas-install \
                 --disable-scrollkeeper \
-                --disable-pulseaudio \
                 --disable-gstmix
 
 variant deprecated description {Enable deprecated functionality} {
@@ -59,7 +50,7 @@ variant deprecated description {Enable deprecated functionality} {
 
 post-activate {
     system "${prefix}/bin/scrollkeeper-update"
-    system "${prefix}/bin/gtk-update-icon-cache -f -t ${prefix}/share/icons/hicolor"
+    system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
     system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
     system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
         gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
