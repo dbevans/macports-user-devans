@@ -34,7 +34,6 @@ supported_archs noarch
 # baobab
 # cantarell-fonts
 # caribou
-# dconf (not required, GIO (glib2) includes a native gsettings backend for Mac OS X)
 # gnome-bluetooth
 # gnome-calculator
 # gnome-contacts
@@ -75,6 +74,7 @@ depends_lib     port:at-spi2-atk \
                 port:clutter-gst \
                 port:clutter-gtk \
                 port:cogl \
+                port:dconf \
                 port:empathy \
                 port:eog \
                 port:epiphany \
