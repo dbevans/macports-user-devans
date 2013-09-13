@@ -54,6 +54,11 @@ configure.args  --with-smclient=xsmp \
 use_autoreconf  yes
 autoreconf.args -fvi
 
+variant nautilus description {Build optional nautilus context menu actions} {
+    configure.args-delete   --disable-nautilus-actions
+    depends_lib-append      port:nautilus
+}
+
 post-activate {
     system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
     system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
