@@ -59,8 +59,7 @@ configure.args  --disable-schemas-compile \
                 --enable-tiff \
                 --enable-dvi \
                 --enable-comics \
-                --enable-t1lib \
-                --disable-nautilus
+                --enable-t1lib
 
 variant djvu description {Support for djvu documents using djvulibre} {
     configure.args-replace --disable-djvu --enable-djvu
