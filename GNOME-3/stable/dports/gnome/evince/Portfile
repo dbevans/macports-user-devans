@@ -42,7 +42,6 @@ depends_lib     port:desktop-file-utils \
                 port:tiff \
                 port:texlive-bin \
                 port:t1lib
-#                port:nautilus
 
 depends_run     port:gnome-settings-daemon
 
@@ -52,6 +51,7 @@ configure.args  --disable-schemas-compile \
                 --disable-silent-rules \
                 --disable-djvu \
                 --disable-xps \
+                --disable-nautilus \
                 --enable-introspection=no \
                 --enable-debug \
                 --enable-ps \
@@ -65,6 +65,11 @@ configure.args  --disable-schemas-compile \
 variant djvu description {Support for djvu documents using djvulibre} {
     configure.args-replace --disable-djvu --enable-djvu
     depends_lib-append port:djvulibre
+}
+
+variant nautilus description {Build optional nautilus extensions} {
+    configure.args-replace  --disable-nautilus --enable-nautilus
+    depends_lib-append      port:nautilus
 }
 
 post-activate    {
