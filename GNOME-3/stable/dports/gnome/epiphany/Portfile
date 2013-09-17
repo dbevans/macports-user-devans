@@ -37,7 +37,7 @@ depends_lib     port:desktop-file-utils \
                 port:libsoup \
                 port:libsecret \
                 port:port:libnotify \
-                port:libwnck \
+                port:libwnck3 \
                 port:gsettings-desktop-schemas \
                 port:nss \
                 port:sqlite3 \
