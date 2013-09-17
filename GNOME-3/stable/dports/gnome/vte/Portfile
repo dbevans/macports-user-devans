@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                vte
-version             0.34.7
+version             0.34.8
 set branch          [join [lrange [split $version .] 0 1] .]
 maintainers         nomaintainer
 categories          gnome
@@ -22,8 +22,8 @@ master_sites        gnome:sources/$name/$branch/
 
 use_xz              yes
 
-checksums           rmd160  39edc0aab9f04e1925d7f92e9c3ca0a868cb0b79 \
-                    sha256  187e49cca574f548d04ceea701e95a1531ff9dd9cd1953ce6455824720dab932
+checksums           rmd160  80e6f720a5b5a9ae3fd8d4c4bf1f5fbe27cbd988 \
+                    sha256  126ffb7d5a5da35639df003c84ff11ccc92f3fc8b1556d3e8b0f7314c8d909d0
 
 depends_build       port:pkgconfig \
                     port:intltool
