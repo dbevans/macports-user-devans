@@ -4,7 +4,8 @@
 PortSystem      1.0
 PortGroup       active_variants 1.1
 
-name            libwnck
+name            libwnck3
+set gname       libwnck
 version         3.4.7
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     nomaintainer
@@ -16,12 +17,14 @@ description     Library used for writing pagers and taskslists.
 long_description \
     libwnck is a Window Navigator Construction Kit, i.e. a library \
     to use for writing pagers and taskslists and stuff.  It is \
-    needed for the GNOME 2.0 desktop.
+    needed for the GNOME 3.0 desktop.
 
 homepage        http://www.gnome.org/
-master_sites    gnome:sources/${name}/${branch}/
+master_sites    gnome:sources/${gname}/${branch}/
 
 use_xz          yes
+
+distname        ${gname}-${version}
 
 checksums       rmd160  e0f887fad60546082e36e1fbe5ef6c8b1eb105fd \
                 sha256  d48ac9c7f50c0d563097f63d07bcc83744c7d92a1b4ef65e5faeab32b5ccb723
@@ -51,4 +54,10 @@ platform darwin 8 {
     build.cmd               ${prefix}/bin/gmake
 }
 
+post-destroot {
+    move ${destroot}${prefix}/bin/wnck-urgency-monitor ${destroot}${prefix}/bin/wnck-urgency-monitor-3.0
+    move ${destroot}${prefix}/bin/wnckprop ${destroot}${prefix}/bin/wnckprop-3.0
+}
+
 livecheck.type  gnome
+livecheck.name  ${gname}
