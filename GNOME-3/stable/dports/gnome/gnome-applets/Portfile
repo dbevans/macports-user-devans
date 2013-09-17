@@ -32,7 +32,7 @@ depends_lib     port:gnome-icon-theme \
                 port:gnome-panel \
                 port:libgtop \
                 port:gnome-settings-daemon \
-                port:libwnck \
+                port:libwnck3 \
                 port:libnotify \
                 port:policykit \
                 port:gucharmap \
