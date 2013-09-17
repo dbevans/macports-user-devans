@@ -136,7 +136,7 @@ depends_lib     port:at-spi2-atk \
                 port:libsecret \
                 port:libsigcxx2 \
                 port:libsoup \
-                port:libwnck \
+                port:libwnck3 \
                 port:mm-common \
                 port:nautilus \
                 port:pango \
