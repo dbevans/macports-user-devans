@@ -36,7 +36,7 @@ depends_lib     port:desktop-file-utils \
                 port:policykit \
                 port:libgweather \
                 port:librsvg \
-                port:libwnck \
+                port:libwnck3 \
                 port:xorg-libX11 \
                 port:xorg-libXau \
                 port:xorg-libice \
