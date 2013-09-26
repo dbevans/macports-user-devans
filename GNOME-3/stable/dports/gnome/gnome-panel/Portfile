@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-panel
-version         3.6.2
+version         3.8.0
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      gnome
@@ -20,8 +20,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  427f3fc560c5a39d37f3a7b1fa4b2a0b1abc9cf4 \
-                sha256  a41c45c5512e796b8602ce50bf0d205993eab364c860aae31afa582d77b77079
+checksums       rmd160  b6bd10681666b0aece2e47ce81cf2f0297dc0004 \
+                sha256  d1cda458a38cb4f7d2a50c61b1a72f4bf4c39cab65ae0e6cfdc4e0c122252e7a
 
 depends_build   port:pkgconfig \
                 port:intltool
@@ -46,10 +46,10 @@ depends_lib     port:desktop-file-utils \
 depends_run     port:gnome-settings-daemon \
                 port:yelp
 
-patchfiles      patch-configure.diff \
-                patch-gnome-panel-panel-run-dialog.c.diff \
-                patch-applets-clock-calendar-window.c.diff \
-                patch-applets-clock-clock.c.diff
+patchfiles      patch-configure.diff
+
+configure.cflags-append \
+                -Wno-format-nonliteral
 
 configure.args  --with-in-process-applets=all \
                 --enable-introspection=yes \
@@ -74,13 +74,17 @@ variant python27 conflicts python25 python26 description {Build using Python 2.7
     depends_build-append      port:python27
 }
 
-if {![variant_isset python25] && ![variant_isset python26]} {
+if {![variant_isset python26]} {
     default_variants +python27
 }
 
 variant eds description {Enable evolution data server support} {
     depends_lib-append      port:evolution-data-server
     configure.args-delete   --disable-eds
+}
+
+if {[variant_isset eds]} {
+    universal_variant no
 }
 
 post-activate {
