@@ -39,7 +39,7 @@ depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 \
                 port:zeitgeist \
                 port:libsocialweb \
                 port:gobject-introspection \
-                port:libxml \
+                port:libxml2 \
                 port:vala
 
 configure.args  --disable-eds-backend \
