@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-menus
-version         3.8.0
+version         3.10.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      gnome
@@ -20,8 +20,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  13748ce10b60c306ec099181a6e5979753715dc1 \
-                sha256  33c215ae8d815f4a94d2dbfc8c6679fddbbf8026d30da55a350e67ea940ce14f
+checksums       rmd160  7ea8609b6c142469debd5ef55ebf2e6c68753095 \
+                sha256  46950aba274c1ad58234374fa9b235258650737307f3bc396af48eb983668a71
 
 depends_build   port:pkgconfig \
                 port:intltool \
