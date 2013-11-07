@@ -51,7 +51,7 @@ post-patch {
 }
 
 use_autoreconf  yes
-autoreconf.args -fvi
+autoreconf.args -fi
 
 variant python25 conflicts python26 python27 description {Use python 2.5} {
     configure.python          ${prefix}/bin/python2.5

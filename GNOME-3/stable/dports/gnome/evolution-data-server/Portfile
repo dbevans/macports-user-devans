@@ -48,7 +48,7 @@ patchfiles      patch-configure.ac.diff \
                 patch-addressbook-libebook-contacts-e-phone-number-private.cpp.diff
 
 use_autoreconf  yes
-autoreconf.args -fvi
+autoreconf.args -fi
 
 configure.args  \
                 --enable-smime \

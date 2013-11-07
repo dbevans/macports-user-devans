@@ -58,7 +58,7 @@ patchfiles      patch-disable-color-panel.diff \
                 patch-panels-user-accounts.diff
 
 use_autoreconf  yes
-autoreconf.args -fvi
+autoreconf.args -fi
 
 configure.args  --x-includes=${prefix}/include \
                 --x-libraries=${prefix}/lib \
