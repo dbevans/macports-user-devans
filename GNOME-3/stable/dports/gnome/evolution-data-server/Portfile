@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name            evolution-data-server
-version         3.9.5
+version         3.10.1
 
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Addressbook and calender libs for GNOME.
@@ -19,8 +19,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  69c5098cad0e80aea99d247d45e140fc18d534e3 \
-                sha256  632049ccce90e1c556f144cf4c121ac3993867df1893da1cec4eaef43b471d18
+checksums       rmd160  baad1b88955b4f0d3691d6bd20963e325890968c \
+                sha256  a6b5acbd21767b685d58ebfd4c152baa693387f5654fb738b3645ee39e82f9f5
 
 depends_build   port:pkgconfig \
                 port:gnome-common \
@@ -80,10 +80,8 @@ variant phonenumber description {Phone number parsing/validation using libphonen
     configure.args-append       --with-phonenumber=${prefix}/lib
 }
 
-default_variants +phonenumber
-
 post-activate    {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome
