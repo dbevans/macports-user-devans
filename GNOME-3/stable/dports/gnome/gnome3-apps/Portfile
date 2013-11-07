@@ -68,13 +68,12 @@ supported_archs noarch
 # module set and have been ported to MacPorts but
 # are currently broken and/or need to be updated
 #
-# None at this time
+# gedit (doesn't build 3.8+)
 #
 
 depends_lib     port:anjuta \
                 port:devhelp \
                 port:file-roller \
-                port:gedit \
                 port:glade \
                 port:gnome-devel-docs \
                 port:rygel \
@@ -89,11 +88,6 @@ variant broken description {Build ports that are broken or need work} {
 variant python27 conflicts python31 python32 python33 description {Use python 2.7} {
     depends_lib-append \
         port:py27-gobject3
-}
-
-variant python31 conflicts python27 python32 python33 description {Use python 3.1} {
-    depends_lib-append \
-        port:py31-gobject3
 }
 
 variant python32 conflicts python27 python31 python33 description {Use python 3.2} {
@@ -113,8 +107,7 @@ if {![variant_isset python25] && ![variant_isset python26]} {
 
 destroot        {
     file mkdir ${destroot}${prefix}/share/doc/gnome
-    file copy ${filespath}/README.${name}.txt.in ${destroot}${prefix}/share/doc/gnome/README.${name}.txt
-    reinplace "s|@PREFIX@|${prefix}|g" ${destroot}${prefix}/share/doc/gnome/README.${name}.txt
+    file copy ${filespath}/versions.txt ${destroot}${prefix}/share/doc/gnome/${name}.versions.txt
 }
 
 livecheck.type  none
