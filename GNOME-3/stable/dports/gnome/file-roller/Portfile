@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            file-roller
-version         3.8.4
+version         3.10.1
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     An archive manager for GNOME
@@ -23,8 +23,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  b68173ec9b88e832af238e141b3132e231d1b109 \
-                sha256  3615bc41bbe28030d16ee414a8f5f9a3e37f745733c39032ef1559a06be3eea8
+checksums       rmd160  4946cd1e49a2689c3cd583184c339ac7f93f6071 \
+                sha256  7b180bcf98eaf19835926c694ec5262a421f3a0271f030ca338ccf7f6846a80f
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -52,7 +52,7 @@ configure.args  --with-smclient=xsmp \
 
 # Don't do intltool's INTLTOOL_PERL dance
 use_autoreconf  yes
-autoreconf.args -fvi
+autoreconf.args -fi
 
 variant nautilus description {Build optional nautilus context menu actions} {
     configure.args-delete   --disable-nautilus-actions
