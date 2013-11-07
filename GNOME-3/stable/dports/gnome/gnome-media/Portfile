@@ -3,57 +3,9 @@
 
 PortSystem      1.0
 
+replaced_by     gnome-control-center
+PortGroup       obsolete 1.0
+
 name            gnome-media
 version         3.4.0
-license         GPL-2 GFDL-1.1
-set branch      [join [lrange [split ${version} .] 0 1] .]
-description     A collection of utilities for simple multimedia handling.
-long_description \
-                The GNOME media utilities provide simple applications for basic \
-                multimedia tasks, such as CD playback, volume control or audio \
-                recording.
-maintainers     devans openmaintainer
-categories      gnome
-platforms       darwin
-homepage        http://www.gnome.org/
-master_sites    gnome:sources/${name}/${branch}/
-
-use_xz          yes
-
-checksums       rmd160  49691b7de60520fb385255c86b704dbe39a77902 \
-                sha256  a76fac286f24d3836137ddbaab66f05e19eb5fb83cca6e375dbef040765a1d1f
-
-depends_build   port:pkgconfig \
-                port:intltool \
-                port:gnome-doc-utils
-
-depends_lib     port:desktop-file-utils \
-                port:rarian \
-                port:gtk3 \
-                port:gconf \
-                port:libcanberra \
-                port:libxml2 \
-                port:libgnome-media-profiles \
-                port:gstreamer010-gst-plugins-base
-
-depends_run     port:gnome-settings-daemon \
-                port:yelp
-
-configure.args  --disable-schemas-install \
-                --disable-scrollkeeper \
-                --disable-gstmix
-
-variant deprecated description {Enable deprecated functionality} {
-        configure.args-delete --disable-gstmix
-        configure.args-append --enable-gstmix
-}
-
-post-activate {
-    system "${prefix}/bin/scrollkeeper-update"
-    system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
-    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
-    system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
-        gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
-}
-
-livecheck.type  gnome
+revision        1
