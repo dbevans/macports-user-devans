@@ -43,7 +43,8 @@ depends_lib     port:desktop-file-utils \
                 port:xkeyboard-config \
                 port:xorg-libxkbfile 
 
-patchfiles      patch-gnome-desktop-Makefile.am.diff
+patchfiles      patch-gnome-desktop-Makefile.am.diff \
+                remove-intltool-perl-hack.patch
 
 configure.args  --enable-introspection=no \
                 --disable-maintainer-mode \
@@ -53,7 +54,8 @@ configure.args  --enable-introspection=no \
                 --x-includes=${prefix}/include \
                 --x-libraries=${prefix}/lib
 
-# Don't do intltool's INTLTOOL_PERL dance
+# autoreconf with MacPorts patched intltool.m4
+
 use_autoreconf  yes
 autoreconf.args -fi
 
