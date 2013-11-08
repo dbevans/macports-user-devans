@@ -25,9 +25,17 @@ checksums       rmd160  7ea8609b6c142469debd5ef55ebf2e6c68753095 \
 
 depends_build   port:pkgconfig \
                 port:intltool \
+                port:gnome-common
 
 depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 \
                 port:gobject-introspection
+
+patchfiles      remove-intltool-perl-hack.patch
+
+# autoreconf with MacPorts patched intltool.m4
+
+use_autoreconf  yes
+autoreconf.args -fi
 
 configure.args  --enable-introspection \
                 --disable-silent-rules
