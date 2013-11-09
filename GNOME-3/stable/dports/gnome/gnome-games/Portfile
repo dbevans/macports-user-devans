@@ -8,7 +8,7 @@ version         3.6.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Collection of small but addictive games for GNOME
 long_description ${description}
-maintainers     devans openmaintainer
+maintainers     nomaintainer
 categories      gnome
 license         GPL-3+
 platforms       darwin
@@ -29,7 +29,7 @@ depends_lib     port:desktop-file-utils \
                 port:gtk3 \
                 port:librsvg \
                 port:libcanberra \
-                port:xorg-libX11 
+                port:xorg-libX11
               
 depends_run     port:gnome-settings-daemon \
                 port:yelp
@@ -40,28 +40,21 @@ configure.args  --enable-games="gnect,gnomine,gtali,gnotravex,gnotski,glines,iag
                 --disable-schemas-compile \
                 --disable-silent-rules \
 
-variant python25 conflicts python26 python27 description {Use python 2.5} {
-    configure.python          ${prefix}/bin/python2.5
-    depends_lib-append        port:py25-pygtk
-    set python_framework      ${frameworks_dir}/Python.framework/Versions/2.5
-    configure.pkg_config_path ${python_framework}/lib/pkgconfig
-}
-
-variant python26 conflicts python25 python27 description {Use python 2.6} {
+variant python26 conflicts python27 description {Use python 2.6} {
     configure.python          ${prefix}/bin/python2.6
     depends_lib-append        port:py26-pygtk
     set python_framework      ${frameworks_dir}/Python.framework/Versions/2.6
     configure.pkg_config_path ${python_framework}/lib/pkgconfig
 }
 
-variant python27 conflicts python25 python26 description {Use python 2.7} {
+variant python27 conflicts python26 description {Use python 2.7} {
     configure.python          ${prefix}/bin/python2.7
     depends_lib-append        port:py27-pygtk
     set python_framework      ${frameworks_dir}/Python.framework/Versions/2.7
     configure.pkg_config_path ${python_framework}/lib/pkgconfig
 }
 
-if {![variant_isset python25] && ![variant_isset python26]} {
+if {![variant_isset python26]} {
     default_variants +python27
 }
 
