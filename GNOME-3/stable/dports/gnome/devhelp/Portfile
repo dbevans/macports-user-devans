@@ -38,12 +38,12 @@ depends_lib     port:desktop-file-utils \
 configure.args  --with-webkit2=no \
                 --disable-schemas-compile
 
-variant python26 conflicts python25 python27 description {Build using Python 2.6} {
+variant python26 conflicts python27 description {Build using Python 2.6} {
     configure.python          ${prefix}/bin/python2.6
     depends_build-append      port:python26
 }
 
-variant python27 conflicts python25 python26 description {Build using Python 2.7} {
+variant python27 conflicts python26 description {Build using Python 2.7} {
     configure.python          ${prefix}/bin/python2.7
     depends_build-append      port:python27
 }
