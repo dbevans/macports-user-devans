@@ -9,7 +9,7 @@ set branch      [join [lrange [split ${version} .] 0 1] .]
 description     GNOME utilities
 long_description \
                 Utilities for the GNOME desktop.
-maintainers     devans openmaintainer
+maintainers     nomaintainer
 categories      gnome
 license         GPL-2+
 platforms       darwin
