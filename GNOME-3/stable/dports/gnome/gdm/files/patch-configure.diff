@@ -1,6 +1,6 @@
---- configure.orig	2013-07-30 11:42:00.000000000 -0700
-+++ configure	2013-09-19 10:18:43.000000000 -0700
-@@ -23611,6 +23611,7 @@
+--- configure.orig	2013-10-16 07:46:13.000000000 -0700
++++ configure	2013-11-08 21:31:12.000000000 -0800
+@@ -23256,6 +23256,7 @@
  fi
  
  
@@ -8,7 +8,7 @@
  if test "x$have_pam" = "xyes"; then
     pam_appl_h="$ac_pam_includes/security/pam_appl.h"
     { $as_echo "$as_me:${as_lineno-$LINENO}: checking for const pam_message" >&5
-@@ -25831,7 +25832,17 @@
+@@ -25473,7 +25474,17 @@
  # and /usr/X11 since they often symlink to each other, and configure
  # should use the more stable location (the real directory) if possible.
  #
