@@ -57,9 +57,7 @@ pre-patch {
 patchfiles      patch-plugins.diff
 
 use_autoreconf  yes
-autoreconf.args -ivf
-
-configure.optflags  -g -O0
+autoreconf.args -fi
 
 configure.args  --x-includes=${prefix}/include \
                 --x-libraries=${prefix}/lib \
