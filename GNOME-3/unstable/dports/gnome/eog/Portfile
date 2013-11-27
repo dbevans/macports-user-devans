@@ -4,8 +4,7 @@
 PortSystem      1.0
 
 name            eog
-version         3.10.2
-revision        1
+version         3.11.2
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     An image viewing and cataloging program.
@@ -21,8 +20,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  44527bdd11d8dcf87caeb939f131e7410511cfc6 \
-                sha256  5ccc98609ca666420719383cc7d9b44335bbc0aacf048e38036d1f946ce54763
+checksums       rmd160  3fa1b7bb865daf83f39149288f91902c110d208c \
+                sha256  5c3f6a74b96f682ab3de8bf1bd67dbd4a17f801c21051d70e71c9efb65682a2b
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -52,12 +51,10 @@ depends_run     port:gnome-settings-daemon \
 configure.args  --disable-schemas-compile \
                 --disable-silent-rules
 
-patchfiles      redefinition-buildfix.patch 
-
 post-activate {
    system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-livecheck.type  gnome
+livecheck.type  gnome-with-unstable
