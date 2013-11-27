@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-apps
-version         3.8.2
+version         3.10.2
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -39,15 +39,18 @@ supported_archs noarch
 # gnome-boxes
 # gnome-chess
 # gnome-clocks
-# gnome-color-manager
+# gnome-color-manager (no support for darwin Mac OS X, requires colord, udev)
 # gnome-documents
 # gnome-getting-started-docs
 # gnome-initial-setup
 # gnome-klotski (was part of gnome-games)
 # gnome-mahjongg (was part of gnome-games)
+# gnome-maps
 # gnome-mines (was part of gnome-games)
+# gnome-music
 # gnome-nettool
 # gnome-nibbles (was part of gnome-games)
+# gnome-photos
 # gnome-robots (was part of gnome-games)
 # gnome-sudoku (was part of gnome-games)
 # gnome-tetravex (was part of gnome-games)
@@ -83,26 +86,7 @@ use_configure   no
 build           { }
 
 variant broken description {Build ports that are broken or need work} {
-}
-
-variant python27 conflicts python31 python32 python33 description {Use python 2.7} {
-    depends_lib-append \
-        port:py27-gobject3
-}
-
-variant python32 conflicts python27 python31 python33 description {Use python 3.2} {
-    depends_lib-append \
-        port:py32-gobject3
-}
-
-variant python33 conflicts python27 python31 python32 description {Use python 3.3} {
-    depends_lib-append \
-        port:py33-gobject3
-}
-
-
-if {![variant_isset python25] && ![variant_isset python26]} {
-    default_variants +python27
+                port:gedit
 }
 
 destroot        {
