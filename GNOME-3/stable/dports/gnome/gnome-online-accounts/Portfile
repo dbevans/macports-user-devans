@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-online-accounts
-version         3.8.3
+version         3.10.2
 license         LGPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Single sign-on framework for GNOME
@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  6cd6b4d20eb1d1983baf3cad2b5edecb554a1b46 \
-                sha256  9e5e55c5097b8d7c32c0dfb7d94448795c627723b133e8edd0b846adde63a44b
+checksums       rmd160  73f3124a9d66863d9205ad9e53aa3c386b261215 \
+                sha256  0b2418c1845337b6574a12d2075d319d8aaa5bbc4b0d1d123108c5da00e11b97
 
 depends_build   port:pkgconfig \
                 port:intltool
@@ -33,6 +33,8 @@ depends_lib     port:gtk3 \
                 port:libxml2 \
                 port:gobject-introspection \
                 port:gcr
+
+patchfiles      patch-return-val-if-fail.diff
 
 configure.cflags-append -Wno-format-nonliteral
 configure.args  --enable-introspection=yes
