@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            devhelp
-version         3.8.2
+version         3.10.2
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Devhelp is an API documentation browser for GTK+ and GNOME.
@@ -22,8 +22,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  8d855f485742a0bdc766591d36af09bdbea61801 \
-                sha256  a245b53824c6f2ff89245ff807bb2140bde74951ea6f1d759a0fd0c6959ca9f7
+checksums       rmd160  8aa043fb87408f5c723a1e4a199e6c77a65f5e25 \
+                sha256  498cc367b9cb7924dd4905e9c3e7d9738f572e4735a769fc5de6e2f06bebf793
 
 patchfiles      patch-configure.diff
 
@@ -35,8 +35,7 @@ depends_lib     port:desktop-file-utils \
                 port:gtk3 \
                 port:webkit-gtk3
 
-configure.args  --with-webkit2=no \
-                --disable-schemas-compile
+configure.args  --disable-schemas-compile
 
 variant python26 conflicts python27 description {Build using Python 2.6} {
     configure.python          ${prefix}/bin/python2.6
