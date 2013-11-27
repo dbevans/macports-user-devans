@@ -35,7 +35,7 @@ patchfiles      remove-intltool-perl-hack.patch
 # autoreconf with MacPorts patched intltool.m4
 
 use_autoreconf  yes
-autoreconf.args -fi
+autoreconf.args -fvi
 
 configure.args  --enable-introspection \
                 --disable-silent-rules
