@@ -1,0 +1,88 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            gedit
+version         3.10.2
+license         GPL-2
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     GNOME editor.
+long_description \
+                ${description}
+maintainers     devans openmaintainer
+categories      gnome editors
+platforms       darwin
+homepage        http://www.gnome.org/projects/gedit/
+master_sites    gnome:sources/${name}/${branch}/
+
+use_xz          yes
+
+checksums       rmd160  1cb59a4259f208274ad48d409eba58bdc85030b4 \
+                sha256  cc607f877fb925af5c9a71935c70fb76238a62bf133b163471369bd183f15b69
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:itstool
+
+depends_lib     port:desktop-file-utils \
+                port:gnome-icon-theme \
+                port:gnome-icon-theme-symbolic \
+                port:gsettings-desktop-schemas \
+                port:gtk3 \
+                port:gvfs \
+                port:gtksourceview3 \
+                port:libpeas \
+                port:libsoup \
+                port:libxml2 \
+                port:enchant \
+                port:iso-codes \
+                port:zeitgeist
+
+depends_run     port:gnome-settings-daemon \
+                port:yelp
+
+pre-patch {
+    copy ${worksrcpath}/gedit ${worksrcpath}/gedit.orig
+}
+
+patchfiles      patch-configure.diff \
+                patch-gedit-gedit-app.c.diff
+
+configure.cflags-append \
+                -Wno-format-nonliteral
+
+configure.args  --enable-zeitgeist \
+                --disable-python \
+                --disable-schemas-compile \
+                --disable-silent-rules
+
+# libpeas is not universal
+
+universal_variant no
+
+# minimum python version is 3.2.3
+
+variant python32 description {Use python 3.2} {
+    depends_lib-append        port:py32-gobject3
+    configure.python          ${prefix}/bin/python3.2
+    set python_framework      ${frameworks_dir}/Python.framework/Versions/3.2
+    configure.pkg_config_path ${python_framework}/lib/pkgconfig
+    configure.args-replace    --disable-python --enable-python
+}
+
+variant python33 description {Use python 3.3} {
+    depends_lib-append        port:py33-gobject3
+    configure.python          ${prefix}/bin/python3.3
+    set python_framework      ${frameworks_dir}/Python.framework/Versions/3.3
+    configure.pkg_config_path ${python_framework}/lib/pkgconfig
+    configure.args-replace    --disable-python --enable-python
+}
+
+default_variants +python32
+
+post-activate    {
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+}
+
+livecheck.type  gnome

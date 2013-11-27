@@ -1,0 +1,75 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            epiphany
+version         3.10.2
+license         GPL-2+
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     A GNOME Web browser.
+long_description \
+                A web browser is more than an application, it is a \
+                way of thinking, it is a way of seeing the world. \
+                Epiphany's principles are simplicity and standards \
+                compliance.
+maintainers     devans openmaintainer
+categories      gnome www
+platforms       darwin
+homepage        http://www.gnome.org/projects/${name}
+master_sites    gnome:sources/${name}/${branch}/
+
+use_xz          yes
+
+checksums       rmd160  1cce6919dcda2fedd269fa14d099c106707f0691 \
+                sha256  7788221f775605ab29b26b92f4907ca9d5e8cf7999d103697a5979228d5fdd47
+
+depends_build   port:pkgconfig \
+                port:intltool
+
+depends_lib     port:desktop-file-utils \
+                port:gnome-icon-theme \
+                port:gnome-icon-theme-symbolic \
+                port:gtk3 \
+                port:webkit-gtk3 \
+                port:gnome-desktop \
+                port:libxslt\
+                port:libsoup \
+                port:libsecret \
+                port:port:libnotify \
+                port:libwnck3 \
+                port:gsettings-desktop-schemas \
+                port:nss \
+                port:sqlite3 \
+                port:gcr \
+                port:avahi \
+                port:xorg-libX11 \
+                port:iso-codes
+
+depends_run     port:gnome-settings-daemon
+
+configure.cflags-append -Wno-format-nonliteral
+
+configure.args  --with-distributor-name=MacPorts \
+                --disable-schemas-compile \
+                --disable-tests
+
+pre-configure {
+    reinplace "s|--rpath=|-rpath |g" ${worksrcpath}/configure
+}
+
+post-activate {
+    system "${prefix}/bin/update-desktop-database -q ${prefix}/share/applications"
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+#
+# nss is not universal
+#
+
+if {[variant_isset universal]} {
+    configure.args-append --disable-nss
+    depends_lib-delete port:nss
+}
+
+livecheck.type  gnome
