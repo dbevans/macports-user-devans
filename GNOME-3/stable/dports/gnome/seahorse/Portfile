@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            seahorse
-version         3.8.2
+version         3.10.1
 license         GPL-2+ GFDL-1.1+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Seahorse is a graphical interface for managing and using encryption keys.
@@ -21,29 +21,32 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  4d7e73387371fbd2175341652fa8d46fcdcd9662 \
-                sha256  b3837d088b7e3f7ebc41cb3f11c5c85e2df7e06bdc538a3e85bb1a13c34c9a12
+checksums       rmd160  8a225ad5b3041ebbbd4d8855f95ffb5f9ba5d349 \
+                sha256  1df307481988c272d5648a335b2e8bb545b568a00c3f2ca2f3aa732badb46985
 
 depends_build   port:pkgconfig \
-                port:intltool
+                port:intltool \
+                port:itstool
 
 depends_lib     port:desktop-file-utils \
                 port:gtk3 \
+                port:gcr \
                 port:gpgme \
                 port:openldap \
                 port:libsoup \
                 port:libsecret \
-                port:openssh
+                port:openssh \
+                port:vala
 
 depends_run     port:gnome-settings-daemon \
                 port:yelp
 
+patchfiles      patch-gkr-gkr-backend.vala.diff \
+                patch-ssh-seahorse-ssh-key-properties.c.diff
+
 configure.args  --disable-sharing \
                 --disable-schemas-compile \
                 --disable-silent-rules
-
-patchfiles      patch-gkr-seahorse-gkr-actions.c.diff \
-                patch-gkr-seahorse-gkr-backend.c.diff
 
 post-activate {
     system "${prefix}/bin/update-desktop-database -q ${prefix}/share/applications"

@@ -30,21 +30,21 @@ supported_archs noarch
 #
 # ModemManager
 # NetworkManager
-# baobab
+# baobab (previously part of gnome-utils)
 # cantarell-fonts
 # caribou
 # gnome-bluetooth
 # gnome-calculator
 # gnome-contacts
-# gnome-dictionary
+# gnome-dictionary (previously part of gnome-utils)
 # gnome-disk-utility
-# gnome-font-viewer
+# gnome-font-viewer (previously part of gnome-utils)
 # gnome-online-miners
 # gnome-packagekit
-# gnome-screenshot
+# gnome-screenshot (previously part of gnome-utils)
 # gnome-shell
 # gnome-shell-extensions
-# gnome-system-log
+# gnome-system-log (previously part of gnome-utils)
 # gnome-user-share
 # gnome-video-effects
 # grilo
