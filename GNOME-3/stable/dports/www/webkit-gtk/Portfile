@@ -67,7 +67,8 @@ patchfiles \
         tiger.patch \
         quartz-webcore.patch \
         clang-check.patch \
-        no-WebCoreLayer.a.patch
+        no-WebCoreLayer.a.patch \
+        patch-freetype-includes.diff
 
 conflicts_build     google-test
 
@@ -264,7 +265,8 @@ platform powerpc {
 }
 
 if {[string match *clang* ${configure.compiler}]} {
-    configure.cxxflags-append -Wno-c++11-extensions
+    configure.cxxflags-append -Wno-c++11-extensions -stdlib=libc++
+    configure.ldflags-append -stdlib=libc++
 }
 
 livecheck.type  regex
