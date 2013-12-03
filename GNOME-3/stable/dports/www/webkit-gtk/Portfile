@@ -67,8 +67,8 @@ patchfiles \
         tiger.patch \
         quartz-webcore.patch \
         clang-check.patch \
-        no-WebCoreLayer.a.patch \
-        patch-freetype-includes.diff
+        patch-freetype-includes.diff \
+        no-WebCoreLayer.a.patch
 
 conflicts_build     google-test
 
@@ -83,7 +83,30 @@ configure.args  \
         --enable-geolocation \
         --enable-webgl
 
+platform darwin {
+    set cxx_stdlib {}
+
+    if {[info exists configure.cxx_stdlib] &&
+        ${configure.cxx_stdlib} ne {} &&
+        [string match *clang* ${configure.cxx}]} {
+        set cxx_stdlib ${configure.cxx_stdlib}
+    } elseif {[string match *clang* ${configure.cxx}] &&
+              ${os.major} >= 13} {
+        set cxx_stdlib libc++
+    } else {
+        set cxx_stdlib libstdc++
+    }
+
+    pre-configure {
+        if {${cxx_stdlib} == "libstdc++"} {
+            ui_error "${subport} is not supported for this installation of MacPorts.  It requires libc++ be selected as your C++ runtime.  Please use ${subport}-2.0 instead"
+            error "unsupported configuration"
+        }
+    }
+}
+
 subport webkit-gtk3 {
+    conflicts   webkit-gtk3-2.0
     depends_lib-append      port:gtk3
     configure.args-append   --with-gtk=3.0
 
@@ -114,6 +137,7 @@ subport webkit-gtk3 {
 }
 
 if {${name} == ${subport}} {
+    conflicts   webkit-gtk-2.0
     depends_lib-append      port:gtk2
     configure.args-append   --with-gtk=2.0
 }
@@ -265,8 +289,7 @@ platform powerpc {
 }
 
 if {[string match *clang* ${configure.compiler}]} {
-    configure.cxxflags-append -Wno-c++11-extensions -stdlib=libc++
-    configure.ldflags-append -stdlib=libc++
+    configure.cxxflags-append -Wno-c++11-extensions
 }
 
 livecheck.type  regex
