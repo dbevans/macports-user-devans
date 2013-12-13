@@ -34,7 +34,7 @@ depends_lib     port:desktop-file-utils \
                 port:gnome-icon-theme \
                 port:gnome-icon-theme-symbolic \
                 port:gtk3 \
-                port:webkit-gtk3 \
+                path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3 \
                 port:sqlite3 \
                 port:xz \
                 port:bzip2 \
@@ -57,6 +57,26 @@ configure.args  --x-includes=${prefix}/include \
 post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
     system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+}
+
+platform darwin {
+    set cxx_stdlib {}
+
+    if {[info exists configure.cxx_stdlib] &&
+        ${configure.cxx_stdlib} ne {} &&
+        [string match *clang* ${configure.cxx}]} {
+        set cxx_stdlib ${configure.cxx_stdlib}
+    } elseif {[string match *clang* ${configure.cxx}] &&
+              ${os.major} >= 13} {
+        set cxx_stdlib libc++
+    } else {
+        set cxx_stdlib libstdc++
+    }
+
+    if {${cxx_stdlib} == "libstdc++"} {
+       depends_lib-delete path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3
+       depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
+    }
 }
 
 livecheck.type  gnome
