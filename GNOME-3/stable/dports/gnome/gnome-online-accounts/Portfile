@@ -32,7 +32,8 @@ depends_lib     port:gtk3 \
                 port:libsecret \
                 port:libxml2 \
                 port:gobject-introspection \
-                port:gcr
+                port:gcr \
+                port:telepathy-glib
 
 patchfiles      patch-return-val-if-fail.diff
 
