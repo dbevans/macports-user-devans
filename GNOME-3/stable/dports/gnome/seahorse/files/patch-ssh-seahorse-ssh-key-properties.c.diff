@@ -1,0 +1,11 @@
+--- ssh/seahorse-ssh-key-properties.c.orig	2013-11-25 15:42:57.000000000 -0800
++++ ssh/seahorse-ssh-key-properties.c	2013-11-25 15:43:42.000000000 -0800
+@@ -364,7 +364,7 @@
+     do_details (swidget);
+     
+     widget = seahorse_widget_get_widget (swidget, "comment-entry");
+-    g_return_if_fail (widget != NULL);
++    g_return_val_if_fail (widget != NULL, NULL);
+ 
+     /* A public key only */
+     if (seahorse_object_get_usage (SEAHORSE_OBJECT (skey)) != SEAHORSE_USAGE_PRIVATE_KEY) {
