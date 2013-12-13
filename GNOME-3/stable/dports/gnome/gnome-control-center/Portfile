@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-control-center
-version         3.8.5
+version         3.10.2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     GNOME's main interface for configuration of the various \
                 aspects of your desktop.
@@ -18,13 +18,14 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  4eca6dc99a251e901f57cabd9d8a5cb752b23e1e \
-                sha256  efb9fb47aaa9a308aed3064efc39356db05d71ddb0374561eeccc57c122212e2
+checksums       rmd160  24f773044508175aad252ca883f10aeab88141a8 \
+                sha256  f67a9e88cda62c25e1aa1fbbb36d4fa632e8da11e98ac030e0e40437f12483a9
 
 depends_build   port:pkgconfig \
                 port:intltool \
                 port:libxslt \
-                port:gnome-common
+                port:gnome-common \
+                port:gtk-doc
 
 depends_lib     port:desktop-file-utils \
                 port:gtk3 \
@@ -58,7 +59,7 @@ patchfiles      patch-disable-color-panel.diff \
                 patch-panels-user-accounts.diff
 
 use_autoreconf  yes
-autoreconf.args -fi
+autoreconf.args -fvi
 
 configure.args  --x-includes=${prefix}/include \
                 --x-libraries=${prefix}/lib \
