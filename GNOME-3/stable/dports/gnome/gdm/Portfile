@@ -17,7 +17,7 @@ long_description \
 maintainers     nomaintainer
 categories      gnome
 platforms       darwin
-homepage        http://www.gnome.org/
+homepage        https://wiki.gnome.org/Projects/GDM
 master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
@@ -26,7 +26,8 @@ checksums       rmd160  3e4839d56165e2f68451374d89d70986f5e247a1 \
                 sha256  549a42009af9c79a4e07632e405dcb71ba2e876e766cff02471511ad641b6ae7
 
 depends_build   port:pkgconfig \
-                port:intltool
+                port:intltool \
+                port:itstool
 
 depends_lib     port:desktop-file-utils \
                 port:gtk3 \
@@ -49,7 +50,8 @@ depends_run     port:gnome-session \
                 port:gnome-settings-daemon
                
 patchfiles      patch-configure.diff \
-                patch-daemon-gdm-session.c.diff
+                patch-daemon-gdm-session.c.diff \
+                patch-daemon-gdm-session-worker.c.diff
 
 post-patch {
         reinplace "s|@MP_PREFIX@|${prefix}|" ${worksrcpath}/configure

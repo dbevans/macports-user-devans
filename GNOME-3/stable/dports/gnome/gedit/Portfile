@@ -13,7 +13,7 @@ long_description \
 maintainers     devans openmaintainer
 categories      gnome editors
 platforms       darwin
-homepage        http://www.gnome.org/projects/gedit/
+homepage        https://wiki.gnome.org/Apps/Gedit
 master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes

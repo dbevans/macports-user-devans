@@ -16,7 +16,7 @@ long_description \
 maintainers     devans openmaintainer
 categories      gnome
 platforms       darwin
-homepage        http://live.gnome.org/Empathy
+homepage        https://wiki.gnome.org/Apps/Empathy
 master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
@@ -77,7 +77,7 @@ platform darwin {
         set cxx_stdlib libstdc++
     }
 
-    if {${cxx_stdlib} == "libstdc++"} {
+    if {${cxx_stdlib} eq "libstdc++"} {
        depends_lib-delete path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3
        depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
     }
@@ -103,6 +103,8 @@ configure.args  --x-includes=${prefix}/include \
                 --disable-silent-rules \
                 --disable-Werror
 
+use_parallel_build no
+
 variant map description {Enable map view} {
     depends_lib-append      port:libchamplain
     configure.args-replace  --enable-map=no --enable-map=yes
@@ -124,7 +126,7 @@ variant goa description {Enable GNOME online accounts plugin for mission control
     configure.args-replace  --enable-goa=no --enable-goa=yes
 }
 
-default_variants +map +geocode +goa 
+default_variants +map +geocode +goa
 
 #
 # folks is not universal

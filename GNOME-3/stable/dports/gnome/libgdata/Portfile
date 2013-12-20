@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # $Id$
 
-PortSystem 1.0
+PortSystem      1.0
 
 name            libgdata
-version         0.14.0
+version         0.14.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     libgdata is a GLib-based library for accessing online service APIs using the \
                 GData protocol --- most notably, Google's services.
@@ -17,13 +17,13 @@ maintainers     devans openmaintainer
 categories      gnome net
 license         LGPL-2.1+
 platforms       darwin
-homepage        https://wiki.gnome.org/libgdata
+homepage        https://wiki.gnome.org/Projects/${name}
 master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  1538c835a46f52e8cde7a0721f588c319142b4dd \
-                sha256  5d415241ae4ca5a2d952bf7f3e9a372be6bb0537b24d83a05e5fc94948d292e9
+checksums       rmd160  4e2b2cec260763ba05abcc0e66299cb7764c6bc5 \
+                sha256  68bbb2cb70028d79edfaec17184389275044fd58bf881e36df2663e7e191ff1a
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -42,4 +42,4 @@ configure.args  --enable-introspection=yes \
                 --enable-gnome \
                 --enable-goa
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome

@@ -16,7 +16,7 @@ long_description \
 maintainers     devans openmaintainer
 categories      gnome
 platforms       darwin
-homepage        http://www.gnome.org/
+homepage        https://wiki.gnome.org/Apps/Yelp
 master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
@@ -73,7 +73,7 @@ platform darwin {
         set cxx_stdlib libstdc++
     }
 
-    if {${cxx_stdlib} == "libstdc++"} {
+    if {${cxx_stdlib} eq "libstdc++"} {
        depends_lib-delete path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3
        depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
     }

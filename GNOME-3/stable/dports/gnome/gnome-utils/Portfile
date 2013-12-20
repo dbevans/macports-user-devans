@@ -23,6 +23,7 @@ checksums       rmd160  7fee19ec6b200e727f83514682dd4a81a43cd36a \
 
 depends_build   port:pkgconfig \
                 port:intltool \
+                port:gnome-common \
                 port:gnome-doc-utils \
                 port:gtk-doc
 

@@ -1,5 +1,5 @@
 --- tools/gnome-session-check-accelerated-helper.c.orig	2013-10-04 19:29:25.000000000 -0700
-+++ tools/gnome-session-check-accelerated-helper.c	2013-12-13 12:23:05.000000000 -0800
++++ tools/gnome-session-check-accelerated-helper.c	2013-12-20 12:45:20.000000000 -0800
 @@ -86,6 +86,75 @@
  
  #include "gnome-session-check-accelerated-common.h"
@@ -76,3 +76,45 @@
  #define SIZE_UNSET 0
  #define SIZE_ERROR -1
  static int max_texture_size = SIZE_UNSET;
+@@ -427,24 +496,41 @@
+                 goto out;
+         }
+ 
++/* 
++ *  Mac OS X always fails these checks due to the following
++ *      - No composite extension
++ *      - No GLX_EXT_texture_from_pixmap support
++ *  This is mainly for gnome-shell which we don't support yet.
++ *  For now, print the error but allow gnome-session to
++ *  continue to start up.  We'll deal with any consequences
++ *  down the line.
++ */
+         if (!_has_composite (display)) {
+                 _print_error ("No composite extension.");
++#ifndef __APPLE__
+                 goto out;
++#endif
+         }
+ 
+         if (!_has_hardware_gl (display)) {
+                 _print_error ("No hardware 3D support.");
++#ifndef __APPLE__
+                 goto out;
++#endif
+         }
+ 
+         if (!_has_texture_from_pixmap (display)) {
+                 _print_error ("No GLX_EXT_texture_from_pixmap support.");
++#ifndef __APPLE__
+                 goto out;
++#endif
+         }
+ 
+         if (!_is_max_texture_size_big_enough (display)) {
+                 _print_error ("GL_MAX_{TEXTURE,RENDERBUFFER}_SIZE is too small.");
++#ifndef __APPLE__
+                 goto out;
++#endif
+         }
+ 
+         if (has_llvmpipe) {
