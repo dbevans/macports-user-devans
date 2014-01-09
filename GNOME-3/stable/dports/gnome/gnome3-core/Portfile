@@ -36,7 +36,6 @@ supported_archs noarch
 # gnome-bluetooth
 # gnome-calculator
 # gnome-contacts
-# gnome-dictionary (previously part of gnome-utils)
 # gnome-disk-utility
 # gnome-font-viewer (previously part of gnome-utils)
 # gnome-online-miners
@@ -95,6 +94,7 @@ depends_lib     port:at-spi2-atk \
                 port:gnome-backgrounds \
                 port:gnome-control-center \
                 port:gnome-desktop \
+                port:gnome-dictionary \
                 port:gnome-icon-theme \
                 port:gnome-icon-theme-extras \
                 port:gnome-icon-theme-symbolic \

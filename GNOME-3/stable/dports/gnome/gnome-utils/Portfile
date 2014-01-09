@@ -29,7 +29,9 @@ depends_build   port:pkgconfig \
                 port:gtk-doc
 
 depends_lib     port:desktop-file-utils \
+                port:rarian \
                 port:baobab \
+                port:gnome-dictionary \
                 port:gtk3 \
                 port:gsettings-desktop-schemas \
                 port:gconf \
@@ -42,11 +44,12 @@ depends_lib     port:desktop-file-utils \
 depends_run     port:gnome-settings-daemon \
                 port:yelp
 
-patchfiles	    patch-font-viewer-Makefile.am.diff  \
-                patch-disable-baobab.diff
+patchfiles      patch-font-viewer-Makefile.am.diff  \
+                patch-disable-baobab.diff \
+                patch-disable-gnome-dictionary.diff
 
-use_autoreconf	yes
-autoreconf.args	-fvi
+use_autoreconf  yes
+autoreconf.args -fvi
 
 configure.args  --x-includes=${prefix}/include \
                 --x-libraries=${prefix}/lib \
