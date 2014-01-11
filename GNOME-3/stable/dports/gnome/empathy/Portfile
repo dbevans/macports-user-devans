@@ -144,8 +144,6 @@ variant python27 conflicts python26 description {Build using Python 2.7} {
     depends_build-append      port:python27
 }
 
-default_variants +map +goa
-
 if {![variant_isset python26]} {
     default_variants +python27
 }
