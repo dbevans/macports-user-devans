@@ -1,6 +1,6 @@
---- ssh/seahorse-ssh-key-properties.c.orig	2013-11-25 15:42:57.000000000 -0800
-+++ ssh/seahorse-ssh-key-properties.c	2013-11-25 15:43:42.000000000 -0800
-@@ -364,7 +364,7 @@
+--- ssh/seahorse-ssh-key-properties.c.orig	2014-01-08 07:07:14.000000000 -0800
++++ ssh/seahorse-ssh-key-properties.c	2014-01-12 09:56:13.000000000 -0800
+@@ -366,7 +366,7 @@
      do_details (swidget);
      
      widget = seahorse_widget_get_widget (swidget, "comment-entry");
