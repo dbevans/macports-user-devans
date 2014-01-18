@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-core
-version         3.11.3
+version         3.11.4
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -36,7 +36,6 @@ supported_archs noarch
 # gnome-calculator
 # gnome-contacts
 # gnome-disk-utility
-# gnome-font-viewer (previously part of gnome-utils)
 # gnome-online-miners
 # gnome-packagekit
 # gnome-screenshot (previously part of gnome-utils)
@@ -93,6 +92,7 @@ depends_lib     port:at-spi2-atk \
                 port:gnome-control-center \
                 port:gnome-desktop \
                 port:gnome-dictionary \
+                port:gnome-font-viewer \
                 port:gnome-icon-theme \
                 port:gnome-icon-theme-extras \
                 port:gnome-icon-theme-symbolic \
