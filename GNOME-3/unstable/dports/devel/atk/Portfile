@@ -1,0 +1,48 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 111623 2013-09-27 14:46:09Z cal@macports.org $
+
+PortSystem              1.0
+
+name                    atk
+epoch                   2
+version                 2.11.5
+set branch              [join [lrange [split ${version} .] 0 1] .]
+categories              devel
+license                 LGPL
+maintainers             nomaintainer
+platforms               darwin
+
+description             GNOME accessibility toolkit
+
+long_description        ATK is the GNOME Accessibility ToolKit
+
+homepage                http://projects.gnome.org/accessibility/
+master_sites            gnome:sources/${name}/${branch}/
+
+checksums           rmd160  648b410fda24e25cb2d5b2555f042d36c7f25d64 \
+                    sha256  22ed924d38a8ad3de7ace73a5a323c5d8a2acd307cca6e40d425bd12d70bf69e
+
+use_xz                  yes
+
+depends_build           port:pkgconfig
+
+depends_lib             path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                        port:gettext \
+                        port:libiconv \
+                        port:gobject-introspection
+
+configure.args          --enable-static \
+                        --enable-introspection \
+                        --disable-silent-rules
+
+# The rules enabled by gobject-introspection require GNU make 3.81+, #35200
+platform darwin 8 {
+    depends_build-append    port:gmake
+    build.cmd               ${prefix}/bin/gmake
+}
+
+# gobject-introspection uses g-ir-scanner, which uses $CC from env
+build.args-append       CC="${configure.cc} ${configure.cc_archflags}"
+destroot.args-append    CC="${configure.cc} ${configure.cc_archflags}"
+
+livecheck.type          gnome-with-unstable
