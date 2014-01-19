@@ -72,4 +72,4 @@ if {[variant_isset universal]} {
     depends_lib-delete port:nss
 }
 
-livecheck.type  gnome
+livecheck.type  gnome-with-unstable

@@ -59,4 +59,4 @@ post-activate {
     system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
 }
 
-livecheck.type  gnome
+livecheck.type  gnome-with-unstable

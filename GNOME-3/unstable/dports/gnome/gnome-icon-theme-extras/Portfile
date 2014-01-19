@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-icon-theme-extras
-version         3.6.2
+version         3.11.2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     nomaintainer
 categories      gnome
@@ -20,8 +20,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  04edfd0998a5ba470885f84eae05d1da72f6f758 \
-                sha256  93aaaadf40c85ebc42232a4d8e45ca507754b8e1271e797bbcdaded52bd03ec7
+checksums       rmd160  eb8d89bd2724491c330ff05b260ca909613c2d78 \
+                sha256  bda75e6c82768613423190d1e86c0eb783415ebf34d1f3b41013bb0139d873df
 
 depends_build   port:intltool \
                 port:pkgconfig \
@@ -35,4 +35,4 @@ configure.env-append \
 
 configure.args  --enable-icon-mapping
 
-livecheck.type  gnome
+livecheck.type  gnome-with-unstable

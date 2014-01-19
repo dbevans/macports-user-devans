@@ -39,4 +39,4 @@ patchfiles      patch-return-val-if-fail.diff
 configure.cflags-append -Wno-format-nonliteral
 configure.args  --enable-introspection=yes
             
-livecheck.type  gnome
+livecheck.type  gnome-with-unstable

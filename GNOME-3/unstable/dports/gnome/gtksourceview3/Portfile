@@ -63,5 +63,5 @@ post-destroot {
         NEWS README ${destroot}${docdir}
 }
 
-livecheck.type      gnome
+livecheck.type      gnome-with-unstable
 livecheck.name      ${gname}

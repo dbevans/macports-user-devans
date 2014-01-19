@@ -45,5 +45,4 @@ EOF
 ------------------------------------------------------
 "
 
-livecheck.type  gnome
-livecheck.name  ${name}
+livecheck.type  gnome-with-unstable
