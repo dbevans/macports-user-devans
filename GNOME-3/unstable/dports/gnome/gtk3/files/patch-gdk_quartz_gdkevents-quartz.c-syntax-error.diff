@@ -1,8 +1,8 @@
---- gdk/quartz/gdkevents-quartz.c.orig	2013-11-22 22:49:44.000000000 +0100
-+++ gdk/quartz/gdkevents-quartz.c	2013-11-22 22:53:20.000000000 +0100
-@@ -1681,6 +1681,8 @@
- 
-       GDK_QUARTZ_RELEASE_POOL;
+--- gdk/quartz/gdkevents-quartz.c.orig	2014-01-11 14:13:00.000000000 -0800
++++ gdk/quartz/gdkevents-quartz.c	2014-01-19 09:11:56.000000000 -0800
+@@ -1684,6 +1684,8 @@
+       return TRUE;
+     }
    
 +      return TRUE;
 +    }

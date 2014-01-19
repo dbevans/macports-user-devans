@@ -10,15 +10,15 @@ PortGroup           active_variants 1.1
 name                gtk3
 set real_name       gtk+
 epoch               1
-version             3.10.4
+version             3.11.4
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2.1+
 maintainers         cal openmaintainer
 platforms           darwin
 
-checksums           rmd160  9259494a45ca41d537120c1a73d58383a102761b \
-                    sha256  4fd411fc6377d969d7f8e99c14d078822e8dbe940a417be299e456a3d2c4a52b
+checksums           rmd160  15c43591da14263004518f134818c27d0760a26b \
+                    sha256  1d082b4ac0bd8bdb0bf9e9859cf9e2ee0216869cf123f64881c199e5b34d8660
 
 description         GTK+ widget toolkit
 
@@ -40,7 +40,6 @@ minimum_xcodeversions {9 3.1}
 depends_build       port:pkgconfig
 
 depends_lib         port:atk \
-                    port:libpng \
                     path:lib/pkgconfig/pango.pc:pango \
                     port:gdk-pixbuf2 \
                     path:lib/pkgconfig/glib-2.0.pc:glib2 \
@@ -246,5 +245,5 @@ variant x11 conflicts quartz no_x11 {
 
 variant no_x11 conflicts x11 description {Legacy compatibility variant} {}
 
-livecheck.type  gnome
+livecheck.type  gnome-with-unstable
 livecheck.name  gtk+
