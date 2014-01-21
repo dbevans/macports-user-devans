@@ -6,6 +6,7 @@ PortGroup       muniversal 1.0
 
 name            anjuta
 version         3.10.2
+revision        1
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A GNOME/GTK IDE
@@ -42,6 +43,7 @@ depends_run     port:gnome-settings-daemon \
                 port:xdg-utils
 
 patchfiles      patch-configure.diff \
+                patch-ltmain.sh.diff \
                 patch-plugins-language-support-vala-Makefile.in.diff
 
 configure.cflags-append \

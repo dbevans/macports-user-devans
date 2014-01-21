@@ -5,6 +5,7 @@ PortSystem          1.0
 
 name                vte
 version             0.34.9
+revision            1
 set branch          [join [lrange [split $version .] 0 1] .]
 maintainers         nomaintainer
 categories          gnome
@@ -42,15 +43,6 @@ configure.cflags-append -fstrict-aliasing
 variant glade description {Enable building of glade catalog items} {
     depends_lib-append  port:glade
     configure.args-delete --disable-glade
-}
-
-platform darwin 9 {
-    post-patch {
-        reinplace "s| -export-symbols-regex.*||g" \
-            ${worksrcpath}/python/Makefile.in
-        reinplace "s|-export-symbols-regex.*| \\\\|g" \
-            ${worksrcpath}/src/Makefile.in
-    }
 }
 
 livecheck.type      gnome
