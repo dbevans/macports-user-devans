@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # $Id$
 
-PortSystem 1.0
+PortSystem      1.0
 
 name            empathy
-version         3.10.2
+version         3.11.4
 license         GPL-2+ LGPL-2.1+ GFDL-1.3+ Attribution-ShareAlike-3.0
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Empathy is an instant-messaging(chat) program for GNOME
@@ -15,13 +15,13 @@ long_description \
 maintainers     devans openmaintainer
 categories      gnome
 platforms       darwin
-homepage        http://live.gnome.org/Empathy
+homepage        https://wiki.gnome.org/Apps/Empathy
 master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  118fe2f8910c1d50a5134ce6525bd8fc9e6d9508 \
-                sha256  9d8e082a448f3e9450a31f0ec21f01e34cf1c15b192cfa30842d71537796cfbf
+checksums       rmd160  dbcd74fdc1088f0a42315e704bfdf74b4520269b \
+                sha256  cc965c4e68710548429539e70bb6795da9a397ffd80d88e67e1386b774492d29
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -43,7 +43,7 @@ depends_lib     port:desktop-file-utils \
                 port:libnotify \
                 port:gcr \
                 port:pulseaudio \
-                port:webkit-gtk3 \
+                path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3 \
                 port:libsoup \
                 port:libgee  \
                 port:telepathy-farstream \
@@ -61,6 +61,27 @@ depends_run     port:telepathy-mission-control \
                 port:telepathy-salut \
                 port:gnome-settings-daemon \
                 port:yelp
+
+# TODO: Check ${configure.cxx_stdlib} directly once MacPorts 2.3 is released
+platform darwin {
+    set cxxstdlib {}
+
+    if {[info exists configure.cxx_stdlib] &&
+        ${configure.cxx_stdlib} ne {} &&
+        [string match *clang* ${configure.cxx}]} {
+        set cxxstdlib ${configure.cxx_stdlib}
+    } elseif {[string match *clang* ${configure.cxx}] &&
+              ${os.major} >= 13} {
+        set cxxstdlib libc++
+    } else {
+        set cxxstdlib libstdc++
+    }
+
+    if {${cxxstdlib} eq "libstdc++"} {
+       depends_lib-delete path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3
+       depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
+    }
+}
 
 patchfiles      patch-configure.diff
 
@@ -82,6 +103,8 @@ configure.args  --x-includes=${prefix}/include \
                 --disable-silent-rules \
                 --disable-Werror
 
+use_parallel_build no
+
 variant map description {Enable map view} {
     depends_lib-append      port:libchamplain
     configure.args-replace  --enable-map=no --enable-map=yes
@@ -93,7 +116,7 @@ variant geocode description {Enable geocode support} {
 }
 
 variant location description {Enable location awareness using geoclue} {
-    depends_lib-append      port:geoclue
+    depends_lib-append      port:geoclue2
     configure.args-replace  --enable-location=no --enable-location=yes
 }
 
@@ -103,7 +126,7 @@ variant goa description {Enable GNOME online accounts plugin for mission control
     configure.args-replace  --enable-goa=no --enable-goa=yes
 }
 
-default_variants +map +geocode +goa 
+default_variants +map +geocode +goa +location
 
 #
 # folks is not universal
@@ -120,8 +143,6 @@ variant python27 conflicts python26 description {Build using Python 2.7} {
     configure.python          ${prefix}/bin/python2.7
     depends_build-append      port:python27
 }
-
-default_variants +map +goa
 
 if {![variant_isset python26]} {
     default_variants +python27
