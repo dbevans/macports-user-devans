@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            eog
-version         3.11.2
+version         3.11.4
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     An image viewing and cataloging program.
@@ -15,13 +15,13 @@ long_description \
 maintainers     devans openmaintainer
 categories      gnome
 platforms       darwin
-homepage        https://projects.gnome.org/eog/
+homepage        https://wiki.gnome.org/Apps/EyeOfGnome
 master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  3fa1b7bb865daf83f39149288f91902c110d208c \
-                sha256  5c3f6a74b96f682ab3de8bf1bd67dbd4a17f801c21051d70e71c9efb65682a2b
+checksums       rmd160  626c64094b316ed721879b2c16f9a898b1f209e4 \
+                sha256  e2842b4ccfc59c3a57f74d39faf807be279e4a743fd464c26d803751a1d6da3c
 
 depends_build   port:pkgconfig \
                 port:intltool \
