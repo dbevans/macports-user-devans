@@ -6,7 +6,7 @@ PortGroup           active_variants 1.1
 
 name                gtksourceview3
 set gname           gtksourceview
-version             3.10.1
+version             3.11.3
 license             LGPL-2.1+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
@@ -21,13 +21,13 @@ long_description    GtkSourceView is a text widget that extends the standard \
                     GtkSourceView widget. Port GtkSourceView2 contains version 2 of the \
                     widget and port GtkSourceview contains version 1.
 
-homepage            https://projects.gnome.org/gtksourceview/
+homepage            https://wiki.gnome.org/Projects/GtkSourceView
 master_sites        gnome:sources/${gname}/${branch}/
 distname            ${gname}-${version}
 use_xz              yes
 
-checksums           rmd160  6a48604c9122f224cae5c19bcd6393cd3fbdb047 \
-                    sha256  38de44f832b4110a3442af2fce58fce0a54f4b22a763c490bcdc1b1db2fb0b01
+checksums           rmd160  2bb786ad0077e327593873086fa784ba291b544b \
+                    sha256  0b7a0c8c43fd27752720d21a6760c800a10135aecf1ae1ffd1e890eeb84e961f
 
 depends_build       port:intltool \
                     port:pkgconfig \

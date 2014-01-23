@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-system-monitor
-version         3.10.2
+version         3.11.4
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A system monitor.
@@ -15,13 +15,13 @@ long_description \
 maintainers     devans openmaintainer
 categories      gnome
 platforms       darwin
-homepage        http://www.gnome.org/
+homepage        https://wiki.gnome.org/Apps/SystemMonitor
 master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  767dad0a7f8197bef017568ffe987c0c00c05462 \
-                sha256  bd009e15672afe4ad3ebd7ed286cce79b9f76420fd39bc77a5826b29134b9db0
+checksums       rmd160  68de89436b4c43be89c8a4f2d4bae6cf1417e029 \
+                sha256  0c9d20621e7f30c2532ec76efc8cef4423eefdac971a468557419c2094a491ae
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -39,8 +39,7 @@ depends_lib     port:desktop-file-utils \
 depends_run     port:gnome-settings-daemon \
                 port:yelp
 
-patchfiles      patch-src_openfiles.cpp.diff \
-                patch-src-procproperties.cpp.diff
+patchfiles      patch-src-procproperties.cpp.diff
 
 configure.args  --disable-silent-rules \
                 --enable-wnck \

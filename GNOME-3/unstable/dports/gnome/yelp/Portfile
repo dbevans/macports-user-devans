@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            yelp
-version         3.10.1
+version         3.11.1
 license         GPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Help browser for GNOME.
@@ -16,13 +16,13 @@ long_description \
 maintainers     devans openmaintainer
 categories      gnome
 platforms       darwin
-homepage        http://www.gnome.org/
+homepage        https://wiki.gnome.org/Apps/Yelp
 master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  dcb874dd98611968ffe3e8d42a3514af1fecf0ca \
-                sha256  17736479b7d0b1128c7d6cb3073f2b09e4bbc82670731b2a0d3a3219a520f816
+checksums       rmd160  d56c775cbfdf99e9aa42ffee4cc36c20f309b07c \
+                sha256  89ca8241a431051450ed580d63cd3a568968b6f4ad15e5a5f6793f27d016ddfb
 
 depends_skip_archcheck gnome-settings-daemon
 
@@ -34,7 +34,7 @@ depends_lib     port:desktop-file-utils \
                 port:gnome-icon-theme \
                 port:gnome-icon-theme-symbolic \
                 port:gtk3 \
-                port:webkit-gtk3 \
+                path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3 \
                 port:sqlite3 \
                 port:xz \
                 port:bzip2 \
@@ -57,6 +57,27 @@ configure.args  --x-includes=${prefix}/include \
 post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
     system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+}
+
+# TODO: Check ${configure.cxx_stdlib} directly once MacPorts 2.3 is released
+platform darwin {
+    set cxxstdlib {}
+
+    if {[info exists configure.cxx_stdlib] &&
+        ${configure.cxx_stdlib} ne {} &&
+        [string match *clang* ${configure.cxx}]} {
+        set cxxstdlib ${configure.cxx_stdlib}
+    } elseif {[string match *clang* ${configure.cxx}] &&
+              ${os.major} >= 13} {
+        set cxxstdlib libc++
+    } else {
+        set cxxstdlib libstdc++
+    }
+
+    if {${cxxstdlib} eq "libstdc++"} {
+       depends_lib-delete path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3
+       depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
+    }
 }
 
 livecheck.type  gnome-with-unstable

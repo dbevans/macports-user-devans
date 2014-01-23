@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            epiphany
-version         3.10.2
+version         3.11.3
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A GNOME Web browser.
@@ -16,13 +16,13 @@ long_description \
 maintainers     devans openmaintainer
 categories      gnome www
 platforms       darwin
-homepage        http://www.gnome.org/projects/${name}
+homepage        https://wiki.gnome.org/Apps/Web
 master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  1cce6919dcda2fedd269fa14d099c106707f0691 \
-                sha256  7788221f775605ab29b26b92f4907ca9d5e8cf7999d103697a5979228d5fdd47
+checksums       rmd160  d42d6898fddc74417be4c88a5b75853af25edc48 \
+                sha256  fcb513d099eb00cfe366393f52c8aabc4d86819c176a23da18d65ce79e96194a
 
 depends_build   port:pkgconfig \
                 port:intltool
@@ -31,7 +31,7 @@ depends_lib     port:desktop-file-utils \
                 port:gnome-icon-theme \
                 port:gnome-icon-theme-symbolic \
                 port:gtk3 \
-                port:webkit-gtk3 \
+                path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3 \
                 port:gnome-desktop \
                 port:libxslt\
                 port:libsoup \
@@ -47,6 +47,26 @@ depends_lib     port:desktop-file-utils \
                 port:iso-codes
 
 depends_run     port:gnome-settings-daemon
+
+platform darwin {
+    set cxx_stdlib {}
+
+    if {[info exists configure.cxx_stdlib] &&
+        ${configure.cxx_stdlib} ne {} &&
+        [string match *clang* ${configure.cxx}]} {
+        set cxx_stdlib ${configure.cxx_stdlib}
+    } elseif {[string match *clang* ${configure.cxx}] &&
+              ${os.major} >= 13} {
+        set cxx_stdlib libc++
+    } else {
+        set cxx_stdlib libstdc++
+    }
+
+    if {${cxx_stdlib} eq "libstdc++"} {
+       depends_lib-delete path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3
+       depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
+    }
+}
 
 configure.cflags-append -Wno-format-nonliteral
 
