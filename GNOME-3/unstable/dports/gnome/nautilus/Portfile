@@ -1,0 +1,58 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            nautilus
+version         3.11.3
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     The GNOME filemanager
+long_description \
+                Nautilus is the official file manager for the \
+                GNOME desktop. It is designed to be primarly a file manager, \
+                but there are support for web and file viewing too.
+maintainers     devans openmaintainer
+categories      gnome
+license         GPL-2+
+platforms       darwin
+homepage        https://wiki.gnome.org/Apps/Nautilus
+master_sites    gnome:sources/${name}/${branch}/
+
+use_xz          yes
+
+checksums       rmd160  90eb12d62e0626f81c83d7f2f0815877fd9dfc45 \
+                sha256  1f086a2386774b540d40ffa532c4a7add977550db71b67798bf9d56a779b1345
+
+depends_build   port:pkgconfig \
+                port:intltool
+
+depends_lib     port:desktop-file-utils \
+                port:shared-mime-info \
+                port:gnome-icon-theme \
+                port:gnome-icon-theme-symbolic \
+                port:gtk3 \
+                port:gnome-desktop \
+                port:exempi \
+                port:libexif \
+                port:libnotify \
+                port:libxml2 \
+                port:gsettings-desktop-schemas \
+                port:gobject-introspection \
+                port:xorg-libX11
+
+depends_run     port:gnome-settings-daemon
+
+configure.args  --enable-introspection=yes \
+                --enable-tracker=no \
+                --disable-packagekit \
+                --disable-silent-rules \
+                --disable-update-mimedb \
+                --disable-schemas-compile
+
+post-activate {
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+    system "${prefix}/bin/update-mime-database ${prefix}/share/mime"
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type  gnome-with-unstable

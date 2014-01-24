@@ -1,0 +1,48 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            glib-networking
+version         2.39.3
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     Network-related giomodules for glib
+long_description ${description}
+maintainers     nomaintainer
+categories      gnome
+platforms       darwin
+license         LGPL-2+
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+
+use_xz          yes
+
+checksums       rmd160  55437dbd96e9a8b8c43d5484efc4051cf00bf953 \
+                sha256  6128bc306a05c75ee39f35c89e2b1e4da7397cf8f0feed239c06d210175a05e5
+
+depends_build   port:pkgconfig \
+                port:intltool
+
+depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                port:gnutls \
+                port:libproxy \
+                port:gsettings-desktop-schemas \
+                port:p11-kit
+
+depends_run     path:share/curl/curl-ca-bundle.crt:curl-ca-bundle
+
+configure.args  --with-gnutls \
+                --with-libproxy \
+                --with-gnome-proxy \
+                --with-ca-certificates=${prefix}/share/curl/curl-ca-bundle.crt \
+                --disable-silent-rules
+
+post-patch {
+    reinplace "s|-Werror=|-W|g" ${worksrcpath}/configure
+}
+
+post-activate {
+    system "${prefix}/bin/gio-querymodules ${prefix}/lib/gio/modules"
+}
+
+livecheck.type  gnome-with-unstable

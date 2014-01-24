@@ -1,0 +1,72 @@
+--- configure.ac.orig	2013-11-12 11:02:04.000000000 -0800
++++ configure.ac	2013-12-13 08:57:55.000000000 -0800
+@@ -82,7 +82,7 @@
+ GSD_PLUGIN_LDFLAGS="-export_dynamic -module -avoid-version -no-undefined"
+ case $host_os in
+   darwin*)
+-    GSD_PLUGIN_LDFLAGS="${GSD_PLUGIN_LDFLAGS} -Wl,-bundle_loader,\$(top_builddir)/gnome-settings-daemon/gnome-settings-daemon"
++    GSD_PLUGIN_LDFLAGS="${GSD_PLUGIN_LDFLAGS} -Wl,-bundle_loader,\$(top_builddir)/gnome-settings-daemon/.libs/gnome-settings-daemon"
+     ;;
+ esac
+ AC_SUBST([GSD_PLUGIN_LDFLAGS])
+@@ -245,7 +245,7 @@
+ dnl - color
+ dnl ---------------------------------------------------------------------------
+ 
+-PKG_CHECK_MODULES(COLOR, [colord >= 1.0.2 gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION libcanberra-gtk3])
++dnl PKG_CHECK_MODULES(COLOR, [colord >= 1.0.2 gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION libcanberra-gtk3])
+ 
+ dnl ---------------------------------------------------------------------------
+ dnl - datetime
+--- plugins/Makefile.am.orig	2013-11-11 09:25:13.000000000 -0800
++++ plugins/Makefile.am	2013-12-13 09:01:21.000000000 -0800
+@@ -4,11 +4,9 @@
+ 	a11y-keyboard	\
+ 	a11y-settings	\
+ 	clipboard	\
+-	color		\
+ 	cursor		\
+ 	datetime	\
+ 	dummy		\
+-	power		\
+ 	housekeeping    \
+ 	keyboard	\
+ 	media-keys	\
+@@ -16,11 +14,13 @@
+ 	remote-display	\
+ 	screensaver-proxy \
+ 	sound		\
+-	xrandr		\
+ 	xsettings	\
+ 	$(NULL)
+ 
+-disabled_plugins = $(NULL)
++disabled_plugins = color \
++                   power \
++		   xrandr \
++		   $(NULL)
+ 
+ if HAVE_PACKAGEKIT
+ enabled_plugins += updates
+--- plugins/media-keys/Makefile.am.orig	2013-11-11 09:25:13.000000000 -0800
++++ plugins/media-keys/Makefile.am	2013-12-13 08:52:02.000000000 -0800
+@@ -66,6 +66,7 @@
+ 
+ libmedia_keys_la_LIBADD  = 		\
+ 	$(top_builddir)/plugins/common/libcommon.la			\
++	$(top_builddir)/gnome-settings-daemon/libgsd.la                 \
+ 	$(top_builddir)/plugins/media-keys/gvc/libgvc.la		\
+ 	$(MEDIA_KEYS_LIBS)						\
+ 	$(SETTINGS_PLUGIN_LIBS)						\
+--- plugins/screensaver-proxy/Makefile.am.orig	2013-11-11 09:25:13.000000000 -0800
++++ plugins/screensaver-proxy/Makefile.am	2013-12-13 08:52:02.000000000 -0800
+@@ -20,7 +20,8 @@
+ 
+ libscreensaver_proxy_la_LDFLAGS = $(GSD_PLUGIN_LDFLAGS)
+ 
+-libscreensaver_proxy_la_LIBADD  = $(SETTINGS_PLUGIN_LIBS)
++libscreensaver_proxy_la_LIBADD  = $(SETTINGS_PLUGIN_LIBS) \
++				  $(top_builddir)/gnome-settings-daemon/libgsd.la
+ 
+ libexec_PROGRAMS = gsd-test-screensaver-proxy
+ 

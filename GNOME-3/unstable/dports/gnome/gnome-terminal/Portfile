@@ -1,0 +1,66 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            gnome-terminal
+version         3.11.0
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description Terminal component for the GNOME 2 Desktop
+long_description \
+                ${description}
+maintainers     devans openmaintainer
+categories      gnome
+license         GPL-2+
+platforms       darwin
+homepage        https://wiki.gnome.org/Apps/Terminal
+master_sites    gnome:sources/${name}/${branch}/
+
+use_xz          yes
+
+checksums       rmd160  8286ec98a7efedab8706b6ebc4fcab1c32d0dc09 \
+                sha256  78656d6e2d56e8253991c2ad5251ed52312cc511dfa2073bb8b4cdfc1a001f78
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:itstool \
+                port:libxml2
+
+depends_lib     port:desktop-file-utils \
+                port:gnome-icon-theme \
+                port:gnome-icon-theme-symbolic \
+                port:gsettings-desktop-schemas \
+                port:gtk3 \
+                port:vte \
+                port:dbus \
+                port:dconf \
+                port:xorg-libX11
+
+depends_run     port:gnome-settings-daemon \
+                port:yelp
+
+patchfiles      patch-getcwd.diff \
+                patch-uuid.diff \
+                no-dupfd_cloexec.patch
+
+configure.args  --with-gtk=3.0 \
+                --disable-migration \
+                --disable-silent-rules \
+                --disable-schemas-compile
+
+variant nautilus description {Build optional nautilus extension} {
+    configure.args-append   --with-nautilus-extension
+    depends_lib-append      port:nautilus
+}
+
+variant migration description {Enable prefs migration from GConf to GSettings} {
+    configure.args-delete   --disable-migration
+    depends_lib-append      port:gconf
+}
+
+post-activate   {
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type  gnome-with-unstable

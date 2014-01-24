@@ -1,0 +1,79 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+PortGroup       archcheck 1.0
+
+name            libsoup
+version         2.45.3
+set branch      [join [lrange [split ${version} .] 0 1] .]
+categories      gnome net
+platforms       darwin
+license         LGPL-2+
+maintainers     devans openmaintainer
+description     Soup is an HTTP library implementation in C.
+
+long_description \
+    Soup provides a queued asynchronous callback-based \
+    mechanism for sending and servicing SOAP requests \
+    and a WSDL (Web Service Definition Language) for C \
+    compilers which generates client stubs and server \
+    skeletons for easily calling and implementing SOAP \
+    methods.
+
+homepage        https://wiki.gnome.org/Projects/libsoup
+master_sites    gnome:sources/${name}/${branch}/
+use_xz          yes
+
+checksums       rmd160  533bb0707a56c6bb454fe36e2a52d6cdb960e266 \
+                sha256  6ac317b931efd2cff9cdea7122987acb3ecb0c32564a9441ba72e5cce021aa12
+
+depends_build   port:pkgconfig \
+                port:intltool
+
+depends_lib     port:libxml2 \
+                port:glib-networking \
+                port:gobject-introspection
+
+archcheck.files \
+    lib/gio/modules/libgiognutls.so \
+    lib/gio/modules/libgiolibproxy.so \
+    lib/libxml2.dylib
+
+# Introspection requires gvfs (and others), but gvfs requires libsoup...
+configure.args \
+    --disable-more-warnings \
+    --disable-silent-rules \
+    --without-gnome \
+    --enable-introspection
+
+# Don't do intltool's INTLTOOL_PERL dance
+use_autoreconf  yes
+autoreconf.args -fvi
+
+# gobject-introspection uses g-ir-scanner, which uses $CC from env
+build.args-append       CC="${configure.cc} ${configure.cc_archflags}"
+
+test.run        yes
+test.target     check
+
+variant gnome conflicts no_gnome description {Enable GNOME support} {
+    configure.args-delete   --without-gnome
+}
+
+# Legacy no_gnome variant to be removed after 20150102
+variant no_gnome conflicts gnome description {Legacy compatibility variant} {}
+
+if {[variant_isset no_gnome]} {
+    default_variants -gnome
+} else {
+    default_variants +gnome
+}
+
+platform darwin 8 {
+    # The rules enabled by gobject-introspection require GNU make 3.81+
+    depends_run-append      port:gmake
+    build.cmd               ${prefix}/bin/gmake
+}
+
+livecheck.type  gnome-with-unstable
