@@ -1,0 +1,44 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            gnome-color-manager
+version         3.8.3
+set branch      [join [lrange [split ${version} .] 0 1] .]
+maintainers     devans openmaintainer
+categories      gnome
+license         LGPL-2+
+platforms       darwin
+description     gnome-desktop contains the libgnome-desktop library, the gnome-about \
+                program as well as some desktop-wide documents.
+
+long_description \
+                ${description} The libgnome-desktop library provides API shared \
+                by several applications on the desktop, but that cannot live \
+                in the platform for various reasons. Documentation for the API \
+                is available with gtk-doc.
+
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+
+use_xz          yes
+
+checksums       rmd160  7ea3086e22aa19dd715ff40add567dd1697275ef \
+                sha256  9125f438321c686c578b37f37a7bfab1ec8dbb519c06031a682b1eb49f474279
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:gnome-common \
+                port:gtk-doc
+
+depends_lib     port:desktop-file-utils
+
+configure.args  --enable-introspection=no \
+                --disable-silent-rules
+
+post-activate {
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+}
+
+livecheck.type  gnome

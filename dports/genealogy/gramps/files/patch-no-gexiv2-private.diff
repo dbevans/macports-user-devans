@@ -1,0 +1,30 @@
+--- gramps/plugins/lib/libmetadata.py
++++ gramps/plugins/lib/libmetadata.py
+@@ -19,7 +19,7 @@
+ # along with this program; if not, write to the Free Software
+ # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ #
+-# $Id: libmetadata.py 21985 2013-04-13 14:37:34Z jralls $
++# $Id: libmetadata.py 23475 2013-11-08 14:38:34Z nick-h $
+ #
+ #-------------------------------------------------------------------------
+ #
+@@ -178,7 +178,7 @@
+         except:
+             return False
+ 
+-        get_human = metadata.get_exif_tag_interpreted_string
++        get_human = metadata.get_tag_interpreted_string
+ 
+         for section, key, key2, func in TAGS:
+             if not key in metadata.get_exif_tags():
+@@ -197,7 +197,7 @@
+                 if key2 in metadata.get_exif_tags():
+                     human_value += ' ' + get_human(key2)
+ 
+-            label = metadata.get_exif_tag_label(key)
++            label = metadata.get_tag_label(key)
+             node = self.__add_section(section)
+             if human_value is None:
+                 human_value = ''
+

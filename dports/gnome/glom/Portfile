@@ -1,0 +1,67 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            glom
+version         1.24.0
+set branch      [join [lrange [split ${version} .] 0 1] .]
+license         GPL-2
+description     Glom is an easy-to-use database designer and user interface.
+long_description \
+                ${description} This version supports GTK+ 3 and the libgda-5.0 API.
+maintainers     landonf
+categories      gnome databases
+platforms       darwin
+
+homepage        http://www.glom.org/
+master_sites    gnome:sources/${name}/${branch}/
+
+use_xz          yes
+
+checksums       rmd160  4d1ce27c1e8fe272ad1e33525d4917a51e2f2d8d \
+                sha256  83ff79610ffdede48536c0d07d5288ad84ec26c86aa2aa1db98b46abdebbdcc2
+
+depends_build   port:gnome-doc-utils \
+                port:mm-common \
+                port:graphviz \
+                port:doxygen \
+                port:libxslt \
+                port:py27-sphinx
+
+depends_lib     port:boost \
+                port:libxml2 \
+                port:libgda5 \
+                port:libxmlxx2 \
+                port:goocanvasmm2\
+                port:libgdamm5 \
+                port:gtksourceviewmm3 \
+                port:postgresql91 \
+                port:py27-gobject3 \
+                port:libepc \
+                port:evince
+
+patchfiles      patch-glom-libglom-connectionpool.cc.diff
+
+set python.branch   2.7
+set python.prefix   ${frameworks_dir}/Python.framework/Versions/${python.branch}
+
+configure.pkg_config_path ${python.prefix}/lib/pkgconfig
+configure.python          ${prefix}/bin/python${python.branch}
+
+configure.env   SPHINX_BUILD=${prefix}/bin/sphinx-build-${python.branch}
+
+configure.args  --with-boost-python=mt \
+                --with-postgres-utils=${prefix}/lib/postgresql90/bin \
+                --disable-scrollkeeper \
+                --disable-update-mime-database \
+                --disable-documentation
+
+universal_variant no
+
+post-activate {
+    system "scrollkeeper-update"
+    system "${prefix}/bin/update-mime-database ${prefix}/share/mime"
+}
+
+livecheck.type gnome

@@ -1,0 +1,11 @@
+--- glom/libglom/connectionpool.cc.orig	2013-01-14 00:13:51.000000000 -0800
++++ glom/libglom/connectionpool.cc	2013-08-03 06:17:07.000000000 -0700
+@@ -620,7 +620,7 @@
+ // TODO: This is probably mingw specific
+ static __p_sig_fn_t previous_sig_handler = SIG_DFL;
+ #else
+-static sighandler_t previous_sig_handler = SIG_DFL; /* Arbitrary default */
++static sig_t previous_sig_handler = SIG_DFL; /* Arbitrary default */
+ #endif
+ 
+ /* This is a Linux/Unix signal handler,

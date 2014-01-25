@@ -1,0 +1,42 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            colord
+version         1.1.2
+maintainers     devans openmaintainer
+categories      gnome kde graphics
+license         LGPL-2+
+platforms       darwin
+description     colord is a DBus system service that makes it easy to manage, install and generate \
+                color profiles to accurately color manage input and output devices.
+
+long_description \
+                ${description}
+
+homepage        http://www.freedesktop.org/software/${name}
+master_sites    ${homepage}/releases
+
+use_xz          yes
+
+checksums       rmd160  92a80abc875912dacdac9e97fda3df5198e99917 \
+                sha256  80005b47e13a586ab6fd1a2ca48de3c26212259d6b5037975b72684ab986dc28
+
+depends_build   port:pkgconfig \
+                port:intltool
+
+depends_lib     port:desktop-file-utils
+
+configure.args  --enable-introspection=no \
+                --disable-gusb \
+                --disable-gudev \
+                --disable-silent-rules
+
+post-activate {
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+}
+
+livecheck.type  regex
+livecheck.url   ${master_sites}
+livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

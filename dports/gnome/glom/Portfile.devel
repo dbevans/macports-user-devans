@@ -1,0 +1,92 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 72064 2010-10-01 20:05:13Z jmr@macports.org $
+
+PortSystem 1.0
+
+name		glom
+version		1.18.5
+license         GPL-3
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description	Glom is an easy-to-use database designer and user interface.
+long_description        ${description}
+maintainers	landonf
+categories	gnome databases
+platforms	darwin
+
+homepage	http://www.glom.org/
+master_sites    gnome:sources/${name}/${branch}/
+
+checksums       md5     d040a9ffddfa6a88ab73cd1ce4233796 \
+                sha1    0b3037756b6014e1025c554ff6c4b98c5afe6a62 \
+                rmd160  51d101705825a8f7ee79e9e069f1f0369be6b7f8
+
+use_bzip2 	yes
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:doxygen \
+                port:libxslt
+
+depends_lib	port:bakery \
+                port:boost \
+                port:libepc \
+                port:libgdamm4 \
+                port:gtksourceviewmm2 \
+                port:goocanvasmm \
+		port:iso-codes
+
+patchfiles      patch-glom-libglom-connectionpool.cc.diff
+
+variant python26 conflicts python27 description {Build for Python 2.6} {
+        depends_build-append port:py26-sphinx
+        depends_lib-append   port:py26-gda
+        configure.python    ${prefix}/bin/python2.6
+        set python_prefix  ${frameworks_dir}/Python.framework/Versions/2.6
+        configure.pkg_config_path ${python_prefix}/lib/pkgconfig
+        configure.env   PATH=${python_prefix}/bin:$env(PATH)
+}
+
+variant python27 conflicts python26 description {Build for Python 2.7} {
+        depends_build-append port:py27-sphinx
+        depends_lib-append   port:py27-gda
+        configure.python    ${prefix}/bin/python2.7
+        set python_prefix  ${frameworks_dir}/Python.framework/Versions/2.7
+        configure.pkg_config_path ${python_prefix}/lib/pkgconfig
+        configure.env   PATH=${python_prefix}/bin:$env(PATH)
+}
+
+if {![variant_isset python26]} {
+        default_variants +python27
+}
+
+#post-patch {
+	#reinplace s/-lutil//g	${worksrcpath}/glom/libglom/Makefile.in \
+				#${worksrcpath}/glom/Makefile.in \
+				#${worksrcpath}/glom/python_embed/python_module/Makefile.in
+#}
+
+configure.args	--with-postgres-utils=${prefix}/lib/postgresql84/bin \
+                --disable-update-mime-database \
+                --disable-scrollkeeper
+
+#                --disable-documentation \
+
+use_parallel_build no
+
+#post-destroot {
+#	file delete "${destpath}${prefix}/share/mime/globs"
+#	file delete "${destpath}${prefix}/share/mime/magic"
+#	file delete "${destpath}${prefix}/share/mime/XMLnamespaces"
+#}
+
+post-activate {
+        system "${prefix}/bin/scrollkeeper-update; true"
+        system "${prefix}/bin/update-desktop-database -q ${prefix}/share/applications; true"
+        system "${prefix}/bin/update-mime-database ${prefix}/share/mime; true"
+        system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+            gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
+}
+
+livecheck.type  regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

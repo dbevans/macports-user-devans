@@ -1,0 +1,47 @@
+--- SConstruct.orig	2012-07-20 08:25:16.000000000 -0700
++++ SConstruct	2012-08-10 22:16:11.000000000 -0700
+@@ -772,13 +772,13 @@
+         debug_flags.append ("-DBUILD_VECLIB_OPTIMIZATIONS");
+         libraries['core'].Append(LINKFLAGS= '-framework Accelerate')
+     elif env['DIST_TARGET'] == 'i686' or env['DIST_TARGET'] == 'x86_64':
+-        opt_flags.append ("-DBUILD_SSE_OPTIMIZATIONS")
+-        debug_flags.append ("-DBUILD_SSE_OPTIMIZATIONS")
++#       opt_flags.append ("-DBUILD_SSE_OPTIMIZATIONS")
++#       debug_flags.append ("-DBUILD_SSE_OPTIMIZATIONS")
+         if env['DIST_TARGET'] == 'x86_64' and not env['VST']:
+             opt_flags.append ("-DUSE_X86_64_ASM")
+             debug_flags.append ("-DUSE_X86_64_ASM")
+-        if build_host_supports_sse != 1:
+-            print "\nWarning: you are building Ardour with SSE support even though your system does not support these instructions. (This may not be anerror, especially if you are a package maintainer)"
++#       if build_host_supports_sse != 1:
++#           print "\nWarning: you are building Ardour with SSE support even though your system does not support these instructions. (This may not be anerror, especially if you are a package maintainer)"
+ # end optimization section
+ 
+ # handle x86/x86_64 libdir properly
+@@ -931,7 +931,7 @@
+ 
+ conf = Configure (env)
+ 
+-if conf.CheckHeader ('fftw3.h'):
++if conf.CheckHeader ('/opt/local/include/fftw3.h'):
+     env['RUBBERBAND'] = True
+     libraries['rubberband'] = LibraryInfo (LIBS='rubberband',
+                                            LIBPATH='#libs/rubberband',
+@@ -992,7 +992,7 @@
+ 
+ libraries['boost'] = LibraryInfo ()
+ prep_libcheck(env, libraries['boost'])
+-libraries['boost'].Append(CPPPATH="/usr/local/include", LIBPATH="/usr/local/lib")
++libraries['boost'].Append(CPPPATH="/opt/local/include", LIBPATH="/opt/local/lib")
+ conf = Configure (libraries['boost'])
+ if conf.CheckHeader ('boost/shared_ptr.hpp', language='CXX') == False:
+         print "Boost header files do not appear to be installed. You also might be running a buggy version of scons. Try scons 0.97 if you can."
+@@ -1319,7 +1319,7 @@
+     else:
+         print "Found msgmerge"
+     
+-    if not conf.CheckCHeader('libintl.h'):
++    if not conf.CheckCHeader('/opt/local/include/libintl.h'):
+         nls_error += ' No libintl.h.'
+         env['NLS'] = 0
+         
