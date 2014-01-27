@@ -36,7 +36,8 @@ depends_lib     port:gtk3 \
                 port:libsoup \
                 port:liboauth \
                 port:gnome-online-accounts \
-                port:gcr
+                port:gcr \
+                port:uhttpmock
 
 configure.args  --enable-introspection=yes \
                 --enable-gnome \
