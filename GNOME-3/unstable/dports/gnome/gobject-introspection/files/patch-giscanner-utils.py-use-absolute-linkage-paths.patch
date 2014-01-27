@@ -1,16 +1,16 @@
---- giscanner/utils.py.orig	2012-07-07 12:41:26.000000000 +0200
-+++ giscanner/utils.py	2012-07-07 12:49:08.000000000 +0200
+--- giscanner/utils.py.orig	2014-01-11 08:55:55.000000000 -0800
++++ giscanner/utils.py	2014-01-27 06:23:17.000000000 -0800
 @@ -21,6 +21,7 @@
  import re
  import os
  import subprocess
 +import platform
  
+ 
  _debugflags = None
- def have_debug_flag(flag):
-@@ -78,6 +79,18 @@
-     else:
+@@ -88,6 +89,18 @@
          return None
+ 
  
 +_libtool_libdir_pat = re.compile("libdir='([^']+)'")
 +
@@ -27,7 +27,7 @@
  # Returns the name that we would pass to dlopen() the library
  # corresponding to this .la file
  def extract_libtool_shlib(la_file):
-@@ -85,6 +98,14 @@
+@@ -95,6 +108,14 @@
      if dlname is None:
          return None
  

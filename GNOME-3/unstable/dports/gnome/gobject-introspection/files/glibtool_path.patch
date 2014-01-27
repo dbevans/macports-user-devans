@@ -1,12 +1,12 @@
---- giscanner/utils.py.orig	2013-05-13 18:04:50.000000000 -0700
-+++ giscanner/utils.py	2013-05-13 18:05:53.000000000 -0700
-@@ -140,13 +140,13 @@ def get_libtool_command(options):
+--- giscanner/utils.py.orig	2014-01-27 06:24:28.000000000 -0800
++++ giscanner/utils.py	2014-01-27 06:24:28.000000000 -0800
+@@ -149,13 +149,13 @@
          return libtool_path.split(' ')
  
      try:
 -        subprocess.check_call(['libtool', '--version'],
-+        subprocess.check_call(['glibtool', '--version'],
 -                              stdout=open(os.devnull))
++        subprocess.check_call(['glibtool', '--version'],
 +                              stdout=open(os.devnull, 'wb'))
      except (subprocess.CalledProcessError, OSError):
          # If libtool's not installed, assume we don't need it
