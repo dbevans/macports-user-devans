@@ -44,7 +44,6 @@ depends_lib     port:gtk3 \
                 port:db46
 
 patchfiles      patch-configure.ac.diff \
-                patch-calendar-libedata-cal-e-cal-backend-intervaltree.c.diff \
                 patch-addressbook-libebook-contacts-e-phone-number-private.cpp.diff
 
 use_autoreconf  yes
@@ -56,7 +55,6 @@ configure.env-append \
 
 configure.args  --enable-smime \
                 --enable-ipv6 \
-                --enable-nntp \
                 --enable-weather \
                 --enable-google \
                 --enable-goa \
