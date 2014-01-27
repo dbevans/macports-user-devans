@@ -1,0 +1,15 @@
+--- configure.orig	2013-10-29 03:39:08.000000000 -0700
++++ configure	2014-01-24 10:29:51.000000000 -0800
+@@ -13795,9 +13795,9 @@
+ fi
+ 
+ 
+-if test "x$GCC" = "xyes"; then
+-  LDFLAGS="-Wl,--as-needed $LDFLAGS"
+-fi
++#if test "x$GCC" = "xyes"; then
++#  LDFLAGS="-Wl,--as-needed $LDFLAGS"
++##fi
+ 
+ # i18n support
+ 
