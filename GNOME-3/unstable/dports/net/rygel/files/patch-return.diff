@@ -1,6 +1,6 @@
---- src/librygel-renderer-gst/rygel-playbin-player.c.orig	2013-11-16 12:15:11.000000000 -0800
-+++ src/librygel-renderer-gst/rygel-playbin-player.c	2013-11-16 12:16:52.000000000 -0800
-@@ -192,11 +192,11 @@
+--- src/librygel-renderer-gst/rygel-playbin-player.c.orig	2014-01-14 13:36:53.000000000 -0800
++++ src/librygel-renderer-gst/rygel-playbin-player.c	2014-01-24 16:35:00.000000000 -0800
+@@ -203,11 +203,11 @@
  	g_return_val_if_fail (playbin != NULL, NULL);
  	self = (RygelPlaybinPlayer*) g_object_new (object_type, NULL);
  	_tmp0_ = playbin;
@@ -13,4 +13,4 @@
 +	g_return_val_if_fail (g_strcmp0 (_tmp3_, "GstPlayBin") == 0, NULL);
  	_tmp4_ = playbin;
  	rygel_playbin_player_set_playbin (self, _tmp4_);
- 	self->priv->foreign = TRUE;
+ 	rygel_playbin_player_setup_playbin (self);
