@@ -52,6 +52,10 @@ depends_lib     port:gtk3 \
 # xrandr (works but tries to take over control of display causing problems with Mac OS X)
 #
 
+pre-patch {
+    copy ${worksrcpath}/plugins/Makefile.am ${worksrcpath}/plugins/Makefile.am.orig
+}
+
 patchfiles      patch-plugins.diff
 
 use_autoreconf  yes
