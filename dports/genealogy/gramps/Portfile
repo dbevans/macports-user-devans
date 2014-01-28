@@ -7,7 +7,7 @@ name                    gramps
 
 PortGroup               python 1.0
 
-version                 4.0.2
+version                 4.0.3
 license                 GPL-2
 categories              genealogy python
 platforms               darwin
@@ -24,8 +24,8 @@ long_description        GRAMPS is a genealogy program to store, edit, \
 homepage                http://www.gramps-project.org/
 master_sites            sourceforge:gramps
 
-checksums               rmd160  cf51720699cf341d82b5b2fa3afad730e5ce2633 \
-                        sha256  0788b60618e258bb7cf2a7ba81d71f96141b51e8ff11efe82242f2ff12062dab
+checksums               rmd160  f03a316a0749a3a589edbda95e786a15b21b342c \
+                        sha256  13985235d27332af461311399a90a5280a7aa516d08bcb4979d3d9edc9c7d7bf
 
 depends_build-append    port:intltool
 
@@ -35,12 +35,32 @@ depends_lib-append      port:desktop-file-utils \
                         port:gtkspell3 \
                         port:osm-gps-map \
                         port:gexiv2 \
-                        port:webkit-gtk3 \
+                        path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3 \
                         path:bin/dot:graphviz \
                         port:ghostscript
 
-patchfiles              patch-gramps-gen-utils-resourcepath.py.diff \
-                        patch-no-gexiv2-private.diff
+patchfiles              patch-gramps-gen-utils-resourcepath.py.diff
+
+# TODO: Check ${configure.cxx_stdlib} directly once MacPorts 2.3 is released
+platform darwin {
+    set cxxstdlib {}
+
+    if {[info exists configure.cxx_stdlib] &&
+        ${configure.cxx_stdlib} ne {} &&
+        [string match *clang* ${configure.cxx}]} {
+        set cxxstdlib ${configure.cxx_stdlib}
+    } elseif {[string match *clang* ${configure.cxx}] &&
+              ${os.major} >= 13} {
+        set cxxstdlib libc++
+    } else {
+        set cxxstdlib libstdc++
+    }
+
+    if {${cxxstdlib} eq "libstdc++"} {
+       depends_lib-delete path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3
+       depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
+    }
+}
 
 #
 # supports python27 and python3 >= 3.2
