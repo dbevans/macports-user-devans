@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gedit
-version         3.10.3
+version         3.10.4
 license         GPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     GNOME editor.
@@ -18,12 +18,18 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  73889dcc54f7f4cdf5df0c30f0a061478474a1fa \
-                sha256  d0efec59622061389fcc06d23b88e2621d4d66b4bafe7d4461c1c7d48a54bc82
+checksums       rmd160  0df244792ed9fa2fbfb10423bdae531fb31aa650 \
+                sha256  40dc10b6e26fd8523087e7321a20a063f4c1e586dffd7ce8ee78eead11359f9e
 
 depends_build   port:pkgconfig \
                 port:intltool \
-                port:itstool
+                port:itstool \
+                port:yelp-tools \
+                port:automake \
+                port:autoconf \
+                port:libtool \
+                port:gnome-common \
+                port:gtk-doc
 
 depends_lib     port:desktop-file-utils \
                 port:gnome-icon-theme \
@@ -49,6 +55,14 @@ pre-patch {
 patchfiles      patch-configure.diff \
                 patch-gedit-gedit-app.c.diff
 
+# use autogen.sh from upstream git to update intltool.m4 using intltoolize and autoreconf
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+}
+
+configure.cmd   ./autogen.sh
+
 configure.cflags-append \
                 -Wno-format-nonliteral
 
@@ -56,10 +70,6 @@ configure.args  --enable-zeitgeist \
                 --disable-python \
                 --disable-schemas-compile \
                 --disable-silent-rules
-
-# libpeas is not universal
-
-universal_variant no
 
 # minimum python version is 3.2.3
 
