@@ -5,6 +5,7 @@ PortSystem      1.0
 
 name            devhelp
 version         3.10.2
+revision        1
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Devhelp is an API documentation browser for GTK+ and GNOME.
@@ -17,7 +18,7 @@ long_description \
 maintainers     devans openmaintainer
 categories      gnome
 platforms       darwin
-homepage        http://live.gnome.org/Apps/Devhelp
+homepage        https://wiki.gnome.org/Apps/Devhelp
 master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
@@ -35,21 +36,22 @@ depends_lib     port:desktop-file-utils \
                 port:gtk3 \
                 path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3
 
+# TODO: Check ${configure.cxx_stdlib} directly once MacPorts 2.3 is released
 platform darwin {
-    set cxx_stdlib {}
+    set cxxstdlib {}
 
     if {[info exists configure.cxx_stdlib] &&
         ${configure.cxx_stdlib} ne {} &&
         [string match *clang* ${configure.cxx}]} {
-        set cxx_stdlib ${configure.cxx_stdlib}
+        set cxxstdlib ${configure.cxx_stdlib}
     } elseif {[string match *clang* ${configure.cxx}] &&
               ${os.major} >= 13} {
-        set cxx_stdlib libc++
+        set cxxstdlib libc++
     } else {
-        set cxx_stdlib libstdc++
+        set cxxstdlib libstdc++
     }
 
-    if {${cxx_stdlib} eq "libstdc++"} {
+    if {${cxxstdlib} eq "libstdc++"} {
        depends_lib-delete path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3
        depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
     }
