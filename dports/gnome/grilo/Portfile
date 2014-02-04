@@ -14,7 +14,7 @@ long_description    Grilo is a framework for browsing and searching media \
 maintainers         gmail.com:juanrgar openmaintainer
 categories          gnome
 platforms           darwin
-homepage            https://wiki.gnome.org/Grilo
+homepage            https://wiki.gnome.org/Projects/Grilo
 master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
