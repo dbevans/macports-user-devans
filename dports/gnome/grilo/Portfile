@@ -38,7 +38,7 @@ configure.args      --enable-introspection=yes \
                     --disable-test-ui \
                     --disable-grl-net \
                     --disable-tests \
-                    --disable-vala
+                    --enable-vala
 
 patchfiles          patch-vala022-support.diff \
                     patch-remove-libdir-setting.diff
@@ -54,13 +54,6 @@ autoreconf.args     -fvi
 
 destroot.keepdirs   ${destroot}${prefix}/lib/grilo-0.2
 
-variant vala description {Vala plugin support} {
-    depends_lib-append      port:vala
-
-    configure.args-delete   --disable-vala
-    configure.args-append   --enable-vala
-}
-
 variant net description {Enable Grilo Net library} {
     depends_lib-append      port:libsoup
 
@@ -68,6 +61,6 @@ variant net description {Enable Grilo Net library} {
     configure.args-append   --enable-grl-net
 }
 
-default_variants    +net +vala
+default_variants    +net
 
 livecheck.type  gnome
