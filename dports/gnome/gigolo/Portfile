@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gigolo
-version             0.4.1
+version             0.4.2
 license             LGPL-2.1
 description         Gigolo is a frontend to easily manage connections to remote filesystems using \
                     GIO/GVfs. 
@@ -19,8 +19,8 @@ master_sites        http://files.uvena.de/gigolo
 
 use_bzip2           yes
 
-checksums           rmd160  3bdbd7484854c0cd984b2083ce52787fcd64a211 \
-                    sha256  82f3b5f0ce3ff19c1facac1c89117d67bdf1d4fac66e42fb7a98a8b0d74a17f9
+checksums           rmd160  e113bf0de04047711700a9b995301461dc286015 \
+                    sha256  553fc78fe4e7bd2f01f3851baea7e63f6414fe652dfb4b08c60b5c4b2b909164
 
 depends_build       port:pkgconfig \
                     port:intltool
@@ -29,15 +29,7 @@ depends_lib         port:desktop-file-utils \
                     port:gtk2 \
                     port:xorg-libX11
 
-configure.cmd       ./waf configure
 configure.universal_args-delete --disable-dependency-tracking
-
-build.cmd           ./waf
-build.target        build
-
-destroot.destdir    --destdir=${destroot}
-
-universal_variant   no
 
 variant debug description {Build for debuggins with gdb} {
     configure.optflags  -g -O0
