@@ -1,0 +1,11 @@
+--- configure.ac.orig	2014-02-14 16:17:58.000000000 +0100
++++ configure.ac	2014-02-14 16:37:14.000000000 +0100
+@@ -156,7 +156,7 @@
+                                                    HAVE_GMIME=yes,
+                                                    HAVE_GMIME=no)])
+ 
+-PKG_CHECK_MODULES(AVAHI, avahi-gobject, HAVE_AVAHI=yes, HAVE_AVAHI=no)
++PKG_CHECK_MODULES(AVAHI, [avahi-gobject avahi-glib avahi-client], HAVE_AVAHI=yes, HAVE_AVAHI=no)
+ 
+ # Search available Tracker version
+ trackerpkg="tracker-sparql-0.10"
