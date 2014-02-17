@@ -4,14 +4,14 @@
 PortSystem      1.0
 
 name            gnome3-core
-version         3.11.4
+version         3.11.5
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
 description     The Core GNOME 3 User Experience module set
 long_description \
                 ${description}
-homepage        https://help.gnome.org/misc/release-notes/3.8/
+homepage        https://help.gnome.org/misc/release-notes/3.10/
 master_sites
 platforms       darwin
 distfiles
@@ -43,8 +43,6 @@ supported_archs noarch
 # gnome-shell-extensions
 # gnome-user-share
 # gnome-video-effects
-# grilo
-# grilo-plugins
 # libgxps
 # libqmi
 # libzapojit
@@ -107,6 +105,8 @@ depends_lib     port:at-spi2-atk \
                 path:share/themes/HighContrast/index.theme:gnome-themes-standard \
                 port:gnome-user-docs \
                 port:gobject-introspection \
+                port:grilo \
+                port:grilo-plugins \
                 port:gsettings-desktop-schemas \
                 port:gssdp \
                 port:gstreamer1-gst-plugins-base \
