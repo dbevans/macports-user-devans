@@ -7,7 +7,7 @@
 PortSystem      1.0
 
 name            pulseaudio
-version         4.99.3
+version         5.0
 license         LGPL-2.1
 categories      audio
 maintainers     devans openmaintainer
@@ -27,11 +27,15 @@ master_sites    http://freedesktop.org/software/${name}/releases/
 
 use_xz          yes
 
-checksums       rmd160  f22529a4e23366d7231f17f5805abf54b337f1df \
-                sha256  f2171578a7445212c41f3eec5a9a42a8a3ca33d149cff13f4e5ed3be40de19e4
+checksums       rmd160  4ba13e92c58f8ada4542d521131094a55e3b6991 \
+                sha256  99c13a8b1249ddbd724f195579df79484e9af6418cecf6a15f003a7f36caf939
 
 depends_build   port:pkgconfig \
-                port:intltool
+                port:intltool \
+                port:autoconf \
+                port:automake \
+                port:libtool \
+                port:p5.16-xml-parser
 
 depends_lib     port:libiconv \
                 port:json-c \
@@ -57,8 +61,16 @@ platform darwin {
     }
 }
 
-# https://bugs.freedesktop.org/show_bug.cgi?id=55733 and <rdar://problem/14653996>
-patchfiles      patch-no-inline-asm.diff
+patchfiles      patch-man-Makefile.am.diff
+
+# reconfigure with our intltool.m4 using upstream autogen.sh
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+    reinplace "s|@@MP_PERL@@|${prefix}/bin/perl5.16|" ${worksrcpath}/man/Makefile.am
+}
+
+configure.cmd   ./autogen.sh
 
 configure.args  --with-mac-sysroot=/ \
                 --with-mac-version-min=$macosx_deployment_target \
