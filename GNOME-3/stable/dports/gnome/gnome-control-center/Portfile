@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-control-center
-version         3.10.2
+version         3.10.3
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     GNOME's main interface for configuration of the various \
                 aspects of your desktop.
@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  24f773044508175aad252ca883f10aeab88141a8 \
-                sha256  f67a9e88cda62c25e1aa1fbbb36d4fa632e8da11e98ac030e0e40437f12483a9
+checksums       rmd160  0393db68319d00d14d4d98ac76b4c3f82ceb165b \
+                sha256  059172d5e7f8b6c385bcc1b73f966375b92a8456dd5eba8d7f8b75907c3324a6
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -54,12 +54,7 @@ depends_run     port:yelp
 
 # color panel disabled by patch, dependency colord requires libudev
 
-#                patch-output-is-laptop.diff \
-#                patch-background-linker-fix.diff \
-#                patch-background-libsocialweb.diff \
-
 patchfiles      \
-                patch-users-logged-in-check.diff \
                 patch-disable-color-panel.diff \
                 patch-disable-shell-test-hostname.diff \
                 patch-panels-user-accounts.diff
