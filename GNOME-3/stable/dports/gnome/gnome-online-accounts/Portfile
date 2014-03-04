@@ -23,7 +23,8 @@ checksums       rmd160  73f3124a9d66863d9205ad9e53aa3c386b261215 \
 
 depends_build   port:pkgconfig \
                 port:intltool \
-                port:gtk-doc
+                port:gtk-doc \
+                port:gnome-common
 
 depends_lib     port:gtk3 \
                 path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3 \
@@ -37,6 +38,11 @@ depends_lib     port:gtk3 \
                 port:telepathy-glib
 
 patchfiles      patch-return-val-if-fail.diff
+
+# autoreconf with MacPorts intltool.m4
+
+use_autoreconf  yes
+autoreconf.args -fvi
 
 configure.cflags-append -Wno-format-nonliteral
 configure.args  --enable-introspection=yes
@@ -63,4 +69,3 @@ platform darwin {
 }
 
 livecheck.type  gnome
-

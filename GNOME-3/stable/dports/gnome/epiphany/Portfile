@@ -25,7 +25,8 @@ checksums       rmd160  900d6b1ca9adff11287b6af0f1fafdac22a1c4a4 \
                 sha256  c18235ecceaa9c76e7d90d370861cb2bba45019e1e14391a00dac3d2e94a0db7
 
 depends_build   port:pkgconfig \
-                port:intltool
+                port:intltool \
+                port:gnome-common
 
 depends_lib     port:desktop-file-utils \
                 port:gnome-icon-theme \
@@ -69,15 +70,21 @@ platform darwin {
     }
 }
 
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+    reinplace "s|--rpath=|-rpath |g" ${worksrcpath}/configure.ac
+}
+
+use_autoreconf  yes
+autoreconf.args -fvi
+
 configure.cflags-append -Wno-format-nonliteral
 
 configure.args  --with-distributor-name=MacPorts \
                 --disable-schemas-compile \
                 --disable-tests
-
-pre-configure {
-    reinplace "s|--rpath=|-rpath |g" ${worksrcpath}/configure
-}
 
 post-activate {
     system "${prefix}/bin/update-desktop-database -q ${prefix}/share/applications"

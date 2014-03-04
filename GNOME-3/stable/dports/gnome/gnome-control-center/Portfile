@@ -54,9 +54,19 @@ depends_run     port:yelp
 
 # color panel disabled by patch, dependency colord requires libudev
 
-patchfiles      patch-disable-color-panel.diff \
+#                patch-output-is-laptop.diff \
+#                patch-background-linker-fix.diff \
+#                patch-background-libsocialweb.diff \
+
+patchfiles      \
+                patch-users-logged-in-check.diff \
+                patch-disable-color-panel.diff \
                 patch-disable-shell-test-hostname.diff \
                 patch-panels-user-accounts.diff
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
 
 use_autoreconf  yes
 autoreconf.args -fvi
