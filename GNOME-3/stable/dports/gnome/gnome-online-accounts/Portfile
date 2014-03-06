@@ -39,10 +39,13 @@ depends_lib     port:gtk3 \
 
 patchfiles      patch-return-val-if-fail.diff
 
-# autoreconf with MacPorts intltool.m4
+# use upstream autogen.sh to update m4/intltool.m4 and telepathy-account-widgets/m4/intltool.m4 and reconfigure
 
-use_autoreconf  yes
-autoreconf.args -fvi
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+}
+
+configure.cmd   ./autogen.sh
 
 configure.cflags-append -Wno-format-nonliteral
 configure.args  --enable-introspection=yes
