@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-core
-version         3.11.5
+version         3.11.90
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -28,7 +28,6 @@ supported_archs noarch
 # The following modules are included in the current GNOME core
 # module set but have not yet been ported to MacPorts
 #
-# ModemManager
 # NetworkManager
 # cantarell-fonts
 # caribou
@@ -44,7 +43,7 @@ supported_archs noarch
 # gnome-user-share
 # gnome-video-effects
 # libgxps
-# libqmi
+# libmediaart
 # libzapojit
 # mousetweaks
 # mutter

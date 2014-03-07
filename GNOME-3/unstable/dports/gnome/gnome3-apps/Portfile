@@ -4,14 +4,14 @@
 PortSystem      1.0
 
 name            gnome3-apps
-version         3.11.4
+version         3.11.90
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
 description     The GNOME 3 Apps module set
 long_description \
                 ${description}
-homepage        https://help.gnome.org/misc/release-notes/3.8/
+homepage        https://help.gnome.org/misc/release-notes/3.10/
 master_sites
 platforms       darwin
 distfiles
@@ -80,6 +80,7 @@ supported_archs noarch
 depends_lib     port:anjuta \
                 port:devhelp \
                 port:file-roller \
+                port:gitg \
                 port:glade \
                 port:gnome-devel-docs \
                 port:rygel \
