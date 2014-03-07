@@ -5,7 +5,6 @@ PortSystem      1.0
 
 name            devhelp
 version         3.10.2
-revision        1
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Devhelp is an API documentation browser for GTK+ and GNOME.
@@ -26,10 +25,12 @@ use_xz          yes
 checksums       rmd160  8aa043fb87408f5c723a1e4a199e6c77a65f5e25 \
                 sha256  498cc367b9cb7924dd4905e9c3e7d9738f572e4735a769fc5de6e2f06bebf793
 
-patchfiles      patch-configure.diff
-
 depends_build   port:pkgconfig \
-                port:intltool
+                port:intltool \
+                port:gnome-common \
+                port:autoconf \
+                port:automake \
+                port:libtool
 
 depends_lib     port:desktop-file-utils \
                 port:gnome-icon-theme \
@@ -57,6 +58,14 @@ platform darwin {
     }
 }
 
+# use upstream autogen.sh to update m4/intltool.m4 using intltoolize and autoreconf
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+}
+
+configure.cmd   ./autogen.sh
+
 configure.args  --disable-schemas-compile
 
 variant python26 conflicts python27 description {Build using Python 2.6} {
@@ -74,7 +83,7 @@ if {![variant_isset python26]} {
 }
 
 post-activate {
-    system "${prefix}/bin/gtk-update-icon-cache -f -t ${prefix}/share/icons/hicolor"
+    system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
     system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
