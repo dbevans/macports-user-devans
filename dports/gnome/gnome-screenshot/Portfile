@@ -34,6 +34,19 @@ depends_lib         port:desktop-file-utils \
 depends_run         port:gnome-settings-daemon \
                     port:yelp
 
+# update m4/intltool.m4 and autoreconf
+
+post-patch {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf      yes
+autoreconf.args     -fvi
+
+# generate symbols for debugging
+
+configure.optflags  -O0 -g
+
 configure.args      --disable-schemas-compile \
                     --disable-silent-rules
 
