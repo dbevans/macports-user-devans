@@ -1,0 +1,10 @@
+--- configure.ac.orig	2014-03-12 23:12:37.000000000 -0700
++++ configure.ac	2014-03-12 23:12:54.000000000 -0700
+@@ -21,7 +21,6 @@
+ AC_SUBST(GETTEXT_PACKAGE)
+ AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"],
+                    [The domain to use with gettext])
+-AM_GLIB_GNU_GETTEXT
+ LOCALEDIR=[${datadir}/locale]
+ AC_SUBST(LOCALEDIR)
+ 

@@ -26,13 +26,17 @@ checksums           rmd160  182902a43b34e3c20c8edf06493bd8ab87a20e1a \
                     sha256  b795ae6450622a457b46d28b133f857a56d58746c50a6f8131c94dbe14331b0d
 
 depends_build       port:intltool \
-                    port:pkgconfig
+                    port:pkgconfig \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
 
 depends_lib         port:aubio \
                     port:evince \
                     port:fluidsynth \
                     port:gettext \
                     port:gtksourceview3 \
+                    port:gtk3 \
                     port:guile \
                     port:jack \
                     port:librsvg \
@@ -42,8 +46,17 @@ depends_lib         port:aubio \
 
 depends_run         port:qtplay
 
-patchfiles          patch-configure.diff \
-                    patch-src-prefops.c.diff
+patchfiles          patch-configure.ac.diff
+#                    patch-src-prefops.c.diff
+
+# use upstream autogen.sh to reconfigure with our intltool.m4
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+    reinplace "s|/usr/|${prefix}/|" ${worksrcpath}/autogen.sh
+}
+
+configure.cmd       ./autogen.sh && ./configure
 
 configure.args      --enable-evince \
                     --enable-fluidsynth \
