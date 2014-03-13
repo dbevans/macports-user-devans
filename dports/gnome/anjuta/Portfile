@@ -6,7 +6,7 @@ PortGroup       muniversal 1.0
 
 name            anjuta
 version         3.10.2
-revision        2
+revision        1
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A GNOME/GTK IDE
@@ -25,12 +25,12 @@ checksums       rmd160  d51e40a87cfb9157102c2490c3e78f5b701b8196 \
 depends_build   port:pkgconfig \
                 port:intltool \
                 port:itstool \
+                port:yelp-tools \
+                port:gtk-doc \
+                port:gnome-common \
                 port:autoconf \
                 port:automake \
-                port:libtool \
-                port:gnome-common \
-                port:yelp-tools \
-                port:gtk-doc
+                port:libtool
 
 depends_lib     port:desktop-file-utils \
                 port:autogen \
@@ -49,11 +49,11 @@ depends_run     port:gnome-settings-daemon \
                 port:yelp \
                 port:xdg-utils
 
-patchfiles      patch-configure.diff \
+patchfiles      patch-configure.ac.diff \
                 patch-ltmain.sh.diff \
-                patch-plugins-language-support-vala-Makefile.in.diff
+                patch-plugins-language-support-vala-Makefile.am.diff
 
-# use autogen.sh to reconfigure using MacPorts intltool.m4, autoreconf and intltoolize
+#reconfigure with our intltool.m4 using autogen.sh
 
 configure.cmd   ./autogen.sh
 
