@@ -28,15 +28,15 @@ checksums           sha256 33590e3964092cabb629a6ba8415786b054702063a944eca5fe41
                     rmd160 5ccc191da5ece02691222d57e7b79798b423e9c0
 
 depends_lib         port:desktop-file-utils \
-                    port:dconf \
                     port:gsettings-desktop-schemas \
                     port:libgtop \
-                    port:gdlmm3 \
-                    port:ghex \
                     port:glibmm \
                     port:gtkmm3 \
                     port:gtksourceviewmm3 \
+                    port:gdlmm3 \
+                    port:ghex \
                     port:vte \
+                    port:sqlite3 \
                     port:gdb \
                     port:boost
 
@@ -51,7 +51,8 @@ depends_build       port:pkgconfig \
 depends_run         port:yelp \
                     port:gnome-settings-daemon
 
-patchfiles          nemiver-tr1-osx-patch.diff
+patchfiles          nemiver-tr1-osx-patch.diff \
+                    patch-dconf-configure.ac.diff
 
 # update m4/intltool.m4 and autoreconf
 
