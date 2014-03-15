@@ -5,7 +5,7 @@ PortSystem      1.0
 PortGroup       compiler_blacklist_versions 1.0
 
 name            gjs
-version         1.39.0
+version         1.39.91
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     GObject JavaScriptCore bridge
 long_description \
@@ -21,9 +21,8 @@ homepage        https://wiki.gnome.org/Projects/Gjs
 master_sites    gnome:sources/${name}/${branch}/
 use_xz          yes
 
-checksums       md5     bc344faf932ffe4e7314b10987a6bd04 \
-                sha1    cd65c835e71da745681b9504b1a2848d9b93e54d \
-                rmd160  81e852473581f10d5fe1fb7090ac671ff06fc41e
+checksums       rmd160  7fdfd3480c013f6d2d8f77d60fc7e94934c8ca73 \
+                sha256  3a4263ce190899437c8b7cad1b81c1cb67b2d3f4065704a6c1a4d887b2601a34
 
 depends_build   port:pkgconfig \
                 port:gnome-common \
@@ -34,7 +33,7 @@ depends_lib     port:gobject-introspection \
                 port:readline \
                 path:lib/pkgconfig/cairo.pc:cairo \
                 port:dbus-glib \
-                port:mozjs17 \
+                port:mozjs24 \
                 port:gnome-js-common
 
 # Teach glibtool about -stdlib=libc++

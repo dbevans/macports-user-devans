@@ -1,0 +1,33 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            gnome-user-docs
+version         3.11.91
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     End-user documentation for GNOME3
+long_description \
+                This package contains documents which will be \
+                packaged together and shipped as gnome-user-docs \
+                in the core GNOME distribution. They should be \
+                documents targetted for end-users of GNOME.
+maintainers     nomaintainer
+categories      gnome
+license         GFDL-1.1
+installs_libs   no
+platforms       darwin
+supported_archs noarch
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+
+use_xz          yes
+
+checksums       sha256  5530fe49f97b817aaabce4564e4fcddadf44b28491111399659e76972b2c11d2 \
+                rmd160  58cf00ad94a40b780853cbeced07a0e504b0b142
+
+depends_build   port:pkgconfig \
+                port:libxml2 \
+                port:itstool
+
+livecheck.type  gnome-with-unstable

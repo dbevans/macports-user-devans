@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-icon-theme-symbolic
-version         3.11.2
+version         3.11.91
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     nomaintainer
 categories      gnome
@@ -21,12 +21,15 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  77b142657fe43bf268e64c85ca43ceac8f695df7 \
-                sha256  56d7b5ec2ec68f135e4f722ce70c1ffeef6d9786c5bf6a23ae32a56f0da11759
+checksums       rmd160  38a8c7a022939a56d272b38d1a2cd892c8dc657a \
+                sha256  ad078409037848d257500800a743c7a724c43f1818379518f8b8584ae8fe3083
 
 depends_build   port:pkgconfig \
-                port:icon-naming-utils
+                port:icon-naming-utils \
+                port:gtk3
 
 supported_archs noarch
+
+patchfiles      patch-configure.diff
 
 livecheck.type  gnome-with-unstable

@@ -21,7 +21,8 @@ checksums       rmd160  8656e092a0fd6444ad0ed8af6e347ea894153f78 \
                 sha256  bc6e1f00e728bb3455d902de52e3ee0a66fe55ab127e17f8736ce634fd319f17
 
 depends_build   port:pkgconfig \
-                port:intltool
+                port:intltool \
+                port:gnome-common
 
 depends_lib     port:desktop-file-utils \
                 port:gtk3 \
@@ -37,6 +38,15 @@ depends_lib     port:desktop-file-utils \
                 port:xorg-libXtst \
                 port:jpeg \
                 port:zlib
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf  yes
+autoreconf.args -fvi
 
 configure.cflags-append \
                 -Wno-format-nonliteral

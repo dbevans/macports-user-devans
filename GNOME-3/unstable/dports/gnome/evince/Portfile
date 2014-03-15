@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            evince
-version         3.11.3
+version         3.11.90
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Evince is a document viewer for multiple document formats like pdf, and many others.
@@ -18,15 +18,14 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  639791ca04b36c42e1b2b4ceea980bb2e2ea6bad \
-                sha256  3c449e6921085a19532e12e2680aae50a99c6f219df7aa071aecaee9d8943086
-
-depends_skip_archcheck gnome-settings-daemon
+checksums       rmd160  95939e8fb22b4ce97e4797b6e730d982a01c5b20 \
+                sha256  f91bd14905c7de9b315bcba9cee7240d3b63ef7358c8026e9decaf9346fe4e4d
 
 depends_build   port:pkgconfig \
                 port:intltool \
+                port:itstool \
                 port:yelp-tools \
-                port:itstool
+                port:gnome-common
 
 depends_lib     port:desktop-file-utils \
                 port:gnome-icon-theme \
@@ -47,6 +46,16 @@ depends_lib     port:desktop-file-utils \
 
 depends_run     port:gnome-settings-daemon
 
+# update m4/intltool.m4 and autoreconf
+# teach glibtool about -stdlib=libc++
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf  yes
+autoreconf.args -fvi
+
 configure.cflags-append -Wno-format-nonliteral
 
 configure.args  --disable-schemas-compile \
@@ -62,10 +71,6 @@ configure.args  --disable-schemas-compile \
                 --enable-dvi \
                 --enable-comics \
                 --enable-t1lib
-
-# Teach glibtool about -stdlib=libc++
-use_autoreconf  yes
-autoreconf.args -fvi
 
 variant djvu description {Support for djvu documents using djvulibre} {
     configure.args-replace --disable-djvu --enable-djvu

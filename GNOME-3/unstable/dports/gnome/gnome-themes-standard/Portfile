@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            gnome-themes-standard
 conflicts       gnome-themes
-version         3.11.2
+version         3.11.90
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome
 maintainers     devans openmaintainer
@@ -23,8 +23,8 @@ master_sites    gnome:sources/$name/$branch/
 
 use_xz          yes
 
-checksums       rmd160  c81b3248fb0a7d6212a70b82b7258e1015f7a7f9 \
-                sha256  7322b6d21b49ad0de017ba28dbf79e44459000e8146807ecc1605cf8f01e8132
+checksums       rmd160  1f1213c56e76083dccb5ce9b7967e8f8cd1c5dea \
+                sha256  822eac3a737e0bad500dfc5e57071cb87e916fb9e63e440ca853d88d64bcb146
 
 depends_build   port:intltool \
                 port:pkgconfig
@@ -32,6 +32,15 @@ depends_build   port:intltool \
 depends_lib     port:gtk3 \
                 port:gtk2 \
                 port:librsvg
+
+# update m4/intltool.m4 and autoreconf
+
+post-patch {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf      yes
+autoreconf.args     -fvi
 
 notes "
 You can make Adwaita the default theme with:

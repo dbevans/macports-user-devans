@@ -33,158 +33,8 @@ diff -ur src.orig/terminal-settings-list.c src/terminal-settings-list.c
  #include <dconf.h>
  
  #include "terminal-type-builtins.h"
---- configure.orig	2013-11-20 14:44:41.000000000 -0800
-+++ configure	2014-01-24 15:37:08.000000000 -0800
-@@ -13120,7 +13120,6 @@
-    gtk+-\$GTK_API_VERSION >= \$GTK_REQUIRED
-    gsettings-desktop-schemas >= \$GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
-    dconf >= \$DCONF_REQUIRED
--   uuid
-    \$PLATFORM_DEPS\""; } >&5
-   ($PKG_CONFIG --exists --print-errors "vte$VTE_PC_VERSION >= $VTE_REQUIRED
-    glib-2.0 >= $GLIB_REQUIRED
-@@ -13128,7 +13127,6 @@
-    gtk+-$GTK_API_VERSION >= $GTK_REQUIRED
-    gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
-    dconf >= $DCONF_REQUIRED
--   uuid
-    $PLATFORM_DEPS") 2>&5
-   ac_status=$?
-   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-@@ -13139,7 +13137,6 @@
-    gtk+-$GTK_API_VERSION >= $GTK_REQUIRED
-    gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
-    dconf >= $DCONF_REQUIRED
--   uuid
-    $PLATFORM_DEPS" 2>/dev/null`
- 		      test "x$?" != "x0" && pkg_failed=yes
- else
-@@ -13158,7 +13155,6 @@
-    gtk+-\$GTK_API_VERSION >= \$GTK_REQUIRED
-    gsettings-desktop-schemas >= \$GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
-    dconf >= \$DCONF_REQUIRED
--   uuid
-    \$PLATFORM_DEPS\""; } >&5
-   ($PKG_CONFIG --exists --print-errors "vte$VTE_PC_VERSION >= $VTE_REQUIRED
-    glib-2.0 >= $GLIB_REQUIRED
-@@ -13166,7 +13162,6 @@
-    gtk+-$GTK_API_VERSION >= $GTK_REQUIRED
-    gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
-    dconf >= $DCONF_REQUIRED
--   uuid
-    $PLATFORM_DEPS") 2>&5
-   ac_status=$?
-   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-@@ -13177,7 +13172,6 @@
-    gtk+-$GTK_API_VERSION >= $GTK_REQUIRED
-    gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
-    dconf >= $DCONF_REQUIRED
--   uuid
-    $PLATFORM_DEPS" 2>/dev/null`
- 		      test "x$?" != "x0" && pkg_failed=yes
- else
-@@ -13205,7 +13199,6 @@
-    gtk+-$GTK_API_VERSION >= $GTK_REQUIRED
-    gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
-    dconf >= $DCONF_REQUIRED
--   uuid
-    $PLATFORM_DEPS" 2>&1`
-         else
- 	        TERM_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "vte$VTE_PC_VERSION >= $VTE_REQUIRED
-@@ -13214,7 +13207,6 @@
-    gtk+-$GTK_API_VERSION >= $GTK_REQUIRED
-    gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
-    dconf >= $DCONF_REQUIRED
--   uuid
-    $PLATFORM_DEPS" 2>&1`
-         fi
- 	# Put the nasty error message in config.log where it belongs
-@@ -13226,7 +13218,6 @@
-    gtk+-$GTK_API_VERSION >= $GTK_REQUIRED
-    gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
-    dconf >= $DCONF_REQUIRED
--   uuid
-    $PLATFORM_DEPS) were not met:
- 
- $TERM_PKG_ERRORS
-@@ -13566,13 +13557,13 @@
-    vte\$VTE_PC_VERSION >= \$VTE_REQUIRED
-    gconf-2.0 >= \$GCONF_REQUIRED
-    dconf >= \$DCONF_REQUIRED
--   uuid\""; } >&5
-+   \""; } >&5
-   ($PKG_CONFIG --exists --print-errors "
-    gio-2.0 >= $GIO_REQUIRED
-    vte$VTE_PC_VERSION >= $VTE_REQUIRED
-    gconf-2.0 >= $GCONF_REQUIRED
-    dconf >= $DCONF_REQUIRED
--   uuid") 2>&5
-+   ") 2>&5
-   ac_status=$?
-   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-   test $ac_status = 0; }; then
-@@ -13581,7 +13572,7 @@
-    vte$VTE_PC_VERSION >= $VTE_REQUIRED
-    gconf-2.0 >= $GCONF_REQUIRED
-    dconf >= $DCONF_REQUIRED
--   uuid" 2>/dev/null`
-+   " 2>/dev/null`
- 		      test "x$?" != "x0" && pkg_failed=yes
- else
-   pkg_failed=yes
-@@ -13598,13 +13589,13 @@
-    vte\$VTE_PC_VERSION >= \$VTE_REQUIRED
-    gconf-2.0 >= \$GCONF_REQUIRED
-    dconf >= \$DCONF_REQUIRED
--   uuid\""; } >&5
-+   \""; } >&5
-   ($PKG_CONFIG --exists --print-errors "
-    gio-2.0 >= $GIO_REQUIRED
-    vte$VTE_PC_VERSION >= $VTE_REQUIRED
-    gconf-2.0 >= $GCONF_REQUIRED
-    dconf >= $DCONF_REQUIRED
--   uuid") 2>&5
-+   ") 2>&5
-   ac_status=$?
-   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-   test $ac_status = 0; }; then
-@@ -13613,7 +13604,7 @@
-    vte$VTE_PC_VERSION >= $VTE_REQUIRED
-    gconf-2.0 >= $GCONF_REQUIRED
-    dconf >= $DCONF_REQUIRED
--   uuid" 2>/dev/null`
-+   " 2>/dev/null`
- 		      test "x$?" != "x0" && pkg_failed=yes
- else
-   pkg_failed=yes
-@@ -13639,14 +13630,14 @@
-    vte$VTE_PC_VERSION >= $VTE_REQUIRED
-    gconf-2.0 >= $GCONF_REQUIRED
-    dconf >= $DCONF_REQUIRED
--   uuid" 2>&1`
-+   " 2>&1`
-         else
- 	        MIGRATOR_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "
-    gio-2.0 >= $GIO_REQUIRED
-    vte$VTE_PC_VERSION >= $VTE_REQUIRED
-    gconf-2.0 >= $GCONF_REQUIRED
-    dconf >= $DCONF_REQUIRED
--   uuid" 2>&1`
-+   " 2>&1`
-         fi
- 	# Put the nasty error message in config.log where it belongs
- 	echo "$MIGRATOR_PKG_ERRORS" >&5
-@@ -13656,7 +13647,7 @@
-    vte$VTE_PC_VERSION >= $VTE_REQUIRED
-    gconf-2.0 >= $GCONF_REQUIRED
-    dconf >= $DCONF_REQUIRED
--   uuid) were not met:
-+   ) were not met:
- 
- $MIGRATOR_PKG_ERRORS
- 
---- src/terminal-window.c.orig	2014-01-24 16:02:20.000000000 -0800
-+++ src/terminal-window.c	2014-01-24 16:05:40.000000000 -0800
+--- src/terminal-window.c.orig	2014-03-14 09:31:11.000000000 -0700
++++ src/terminal-window.c	2014-03-14 09:32:14.000000000 -0700
 @@ -29,7 +29,7 @@
  #ifdef GDK_WINDOWING_X11
  #include <gdk/gdkx.h>
@@ -194,3 +44,13 @@ diff -ur src.orig/terminal-settings-list.c src/terminal-settings-list.c
  
  #include "terminal-app.h"
  #include "terminal-debug.h"
+--- configure.ac.orig	2014-02-19 11:59:55.000000000 -0800
++++ configure.ac	2014-03-14 09:33:28.000000000 -0700
+@@ -78,7 +78,6 @@
+    gtk+-$GTK_API_VERSION >= $GTK_REQUIRED
+    gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
+    dconf >= $DCONF_REQUIRED
+-   uuid
+    $PLATFORM_DEPS])
+ 
+ # ****

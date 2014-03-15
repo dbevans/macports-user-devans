@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            evolution-data-server
-version         3.11.4
+version         3.11.91
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Addressbook and calender libs for GNOME.
 long_description    Evolution Data Server provides a central location for \
@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  95645a0b0971b0d2e620caa615d248c20ae81940 \
-                sha256  a0fdb2258b70555f8d54c1b9c517bc973d5f00a4b7a25c6ae3b38f178f69249c
+checksums       rmd160  ac7a05e08699ba04b53b3fe6cda04198b02fde69 \
+                sha256  1edd2da88023b8c804cb5641e537d7d6c79e858f0641686594e72272a2f9fe39
 
 depends_build   port:pkgconfig \
                 port:gnome-common \
@@ -45,6 +45,12 @@ depends_lib     port:gtk3 \
 
 patchfiles      patch-configure.ac.diff \
                 patch-addressbook-libebook-contacts-e-phone-number-private.cpp.diff
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
 
 use_autoreconf  yes
 autoreconf.args -fvi

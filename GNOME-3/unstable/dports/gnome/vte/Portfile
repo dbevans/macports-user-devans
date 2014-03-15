@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                vte
-version             0.35.1
+version             0.35.2
 set branch          [join [lrange [split $version .] 0 1] .]
 maintainers         nomaintainer
 categories          gnome
@@ -22,16 +22,22 @@ master_sites        gnome:sources/$name/$branch/
 
 use_xz              yes
 
-checksums           rmd160  1578d9b9ad046383a8310457127913170db5289b \
-                    sha256  67b97178dfccb9c6e52325dec4757d207b65640ae7ed2a7dfacc4b47d8964c39
+checksums           rmd160  d71109192cadf77fdf59fc6835e2a947c91a64bf \
+                    sha256  9d671ace35c56bf30c0588f5b49871ab0cb5ca6f3bb6c549f9936352a5c88848
 
 depends_build       port:pkgconfig \
-                    port:intltool
+                    port:intltool \
+                    port:gtk-doc
 
 depends_lib         port:gtk3 \
                     port:gobject-introspection
 
 patchfiles          patch-src-vteutils.c.diff
+
+# autoreconf with our intltool.m4
+
+use_autoreconf      yes
+autoreconf.args     -fvi
 
 configure.args      --disable-glade \
                     --disable-Bsymbolic \

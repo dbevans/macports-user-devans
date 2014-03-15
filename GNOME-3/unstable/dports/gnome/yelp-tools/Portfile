@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                yelp-tools
-version             3.11.3
+version             3.11.5
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Tools to help create Yelp documentation.
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  2a5c8959d11f409052a0bc0360056ed8916a7135 \
-                    sha256  89115c949d72fe15a8bb5fc57c2b7bc78ce3fefc7f931dbe78b941ab9ade9fd7
+checksums           rmd160  bab02806e91ec6d83cc4453ecaa85cc9b83ecd5b \
+                    sha256  822a089e30901bb2632f39cdd3a133ebccc6802277dd18acf6fd88be982ba95f
 
 supported_archs     noarch
 

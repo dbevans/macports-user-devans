@@ -7,7 +7,7 @@
 PortSystem      1.0
 
 name            gdm
-version         3.11.4
+version         3.11.90
 license         GPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     The Gnome Display Manager is a re-implementation of the well known xdm program.
@@ -22,8 +22,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  1c9e31b51e68347fbbcb55a281e26afcddbf9679 \
-                sha256  efd7dbd64c4361991e5d796f618fe88a5ce090d879e26b0a90cc8fec48fc90ff
+checksums       rmd160  98ccd8bfc99773264d73ef077c424b0518ae1df8 \
+                sha256  51b54d428aeb1c55d91e992edd8c4603d6e528c888321d39cfc9d17039545482
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -50,7 +50,6 @@ depends_run     port:gnome-session \
                 port:gnome-settings-daemon
                
 patchfiles      patch-configure.diff \
-                patch-daemon-gdm-session.c.diff \
                 patch-daemon-gdm-session-worker.c.diff
 
 post-patch {

@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-desktop
-version         3.11.4
+version         3.11.90
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      gnome
@@ -24,8 +24,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  900d0ec1471eeadc5f411edfa45c15c35cdeaa48 \
-                sha256  c9f03d0ab14ecfa05e4a1f79624a7fb53e53e081983215a3d76c2d5843a0110f
+checksums       rmd160  989027b05285824fab37e7e10d05071110e732c3 \
+                sha256  d3fd6a2b4d4ecd22b2469ae8889238b8f29da35f2fd46b4e951b2a81a4753c09
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -48,8 +48,16 @@ pre-patch {
 }
 
 patchfiles      patch-gnome-desktop-Makefile.am.diff \
-                remove-intltool-perl-hack.patch \
                 patch-libgnome-destktop-libgsystem.diff
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf  yes
+autoreconf.args -fvi
 
 configure.args  --enable-introspection=no \
                 --disable-maintainer-mode \
@@ -58,11 +66,6 @@ configure.args  --enable-introspection=no \
                 --with-gnome-distributor=MacPorts \
                 --x-includes=${prefix}/include \
                 --x-libraries=${prefix}/lib
-
-# autoreconf with MacPorts patched intltool.m4
-
-use_autoreconf  yes
-autoreconf.args -fvi
 
 #
 #  portions of this port are strictly X11 specific

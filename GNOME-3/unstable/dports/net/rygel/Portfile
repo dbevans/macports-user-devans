@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            rygel
-version         0.21.3
+version         0.21.5
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Rygel DLNA media server, renderer
@@ -19,8 +19,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  dfe4f52e937f4dcf080aff0f99feb343f309f91e \
-                sha256  c30722395ce3ef5243cb13b2374aa327698cf443994d82ff4e64b85744b0088c
+checksums       rmd160  6d9e14bf936b3d99dc51fe547de9e43145a85f9f \
+                sha256  a86ec78dc2be184257d8cc93b5b0b7d6a37450f41f8ef5ada09fd3722e3a3253
 
 depends_build   port:pkgconfig \
                 port:intltool
@@ -38,8 +38,16 @@ depends_lib     port:desktop-file-utils \
 
 depends_run     port:gnome-settings-daemon
 
-patchfiles      patch-configure.diff \
-                patch-return.diff
+patchfiles      patch-configure.ac.diff
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf  yes
+autoreconf.args -fvi
 
 configure.args  --disable-silent-rules \
                 --enable-tracker-plugin=no

@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gsettings-desktop-schemas
-version         3.11.4
+version         3.11.90
 license         LGPL-2.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 
@@ -22,8 +22,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  2360468831b7ad82f4cbae051e74ad9769b79a81 \
-                sha256  5846e512e837c28a3bd82e707133be0a12779c3c7f4ddf26edf248027410ab7a
+checksums           rmd160  4123d2d2b304e2d70a9c2eb2a8381505d461d691 \
+                    sha256  45f9ccf718dd32cfc5dffe9dd174578e8dc40f1b5a21c49f154b5461c4260cbb
 
 supported_archs noarch
 
@@ -35,6 +35,16 @@ depends_build   port:pkgconfig \
 depends_lib     path:lib/pkgconfig/gio-2.0.pc:glib2 \
 
 patchfiles      patch-restore-settings-for-deprecated-gtk-settings.diff
+
+# update m4/intltool.m4 and autoreconf
+
+post-patch {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf      yes
+autoreconf.args     -fvi
+
 
 configure.args  --disable-silent-rules \
                 --disable-schemas-compile \

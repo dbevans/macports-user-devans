@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            yelp-xsl
-version         3.11.4
+version         3.11.90
 license         GPL-2 LGPL-2.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A collection of XSLT and other data files required by Yelp.
@@ -19,8 +19,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  f7ae60c09ff5830f3fbdca5c601e1c8f10c33e7a \
-                sha256  e85e67fcc3edec4c34e7edc601fe3c9bd5096de1b91f288e27af6fb663732b36
+checksums           rmd160  b603b76db3e79663ae0869e0200cc4962de32b9d \
+                    sha256  157baa1eeefbd13136f9016831e75eb14816cff49802c0e10b66aeb6e7bc6a85
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -29,6 +29,15 @@ depends_build   port:pkgconfig \
 depends_lib     port:gtk3 \
                 port:libxslt \
                 port:libxml2
+
+# update m4/intltool.m4 and autoreconf
+
+post-patch {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf      yes
+autoreconf.args     -fvi
 
 post-activate   {
     system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"

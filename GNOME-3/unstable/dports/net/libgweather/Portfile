@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            libgweather
-version         3.11.4
+version         3.11.91
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      net gnome
@@ -22,11 +22,15 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  39adeac7a265219db03ac1e5b5ba5f6c57b9840f \
-                sha256  c6ffdb984fcca78110fb5223254d597eccef2ef15cfdc084b5adcd6672efab1b
+checksums       rmd160  695f6729d5d3b17ed0768994ecc93c56bb280930 \
+                sha256  cb54e630268e162db3a87cffeb1be124299d921c1b29c12593722c7e135f4751
 
 depends_build   port:pkgconfig \
                 port:intltool \
+                port:autoconf \
+                port:automake \
+                port:libtool \
+                port:gnome-common \
                 port:gtk-doc
 
 depends_lib     port:gtk3 \
@@ -34,6 +38,15 @@ depends_lib     port:gtk3 \
                 port:libsoup \
                 port:gobject-introspection \
                 port:vala
+
+# use autogen.sh from upstream git to update m4/intltool.m4 using intltoolize and autoreconf
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+    file delete -force ${worksrcpath}/m4
+}
+
+configure.cmd   ./autogen.sh
 
 configure.cflags-append \
                 -Wno-format-nonliteral

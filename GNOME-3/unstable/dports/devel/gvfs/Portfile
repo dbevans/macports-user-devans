@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gvfs
-version         1.19.5
+version         1.19.90
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     nomaintainer
 categories      devel
@@ -35,8 +35,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  bc1aeeeebb6756288a8bf811d6eae360e59378c9 \
-                sha256  f527e6098099eb69b47231a0045dbd236770f3a0407fcd7e48f0dfd468c6934e
+checksums       rmd160  e4e8bdf96d6adcc92e49ffd1ddd2a09e68cf3b71 \
+                sha256  3a59fb24f05549dee332efc811b85a74868ef755899f201b78a98340b196567c
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -52,6 +52,15 @@ depends_lib     port:gtk3 \
                 port:libxml2 \
                 port:libsecret \
                 port:gnome-online-accounts
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf  yes
+autoreconf.args -fvi
 
 configure.args  --disable-avahi \
                 --disable-fuse \

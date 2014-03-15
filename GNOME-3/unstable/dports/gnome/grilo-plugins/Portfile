@@ -85,7 +85,7 @@ configure.args      --disable-silent-rules \
                     --disable-dmap \
                     --enable-tmdb \
                     --enable-freebox \
-                    --enable-pocket \ # requires goa-1.0 >= 3.11.4
+#                    --enable-pocket \ # requires goa-1.0 >= 3.11.4
 #                    --enable-tracker \
 #                    --enable-dmap \ # apparently there is a bug in libdmapsharing
 

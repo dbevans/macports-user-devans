@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            file-roller
-version         3.11.4
+version         3.11.91
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     An archive manager for GNOME
@@ -23,8 +23,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  1f558b862cc3d85fb73953e1b7d57590cf4f7215 \
-                sha256  b6218820787ffdef1d5476c1ca15672b10bf87e769d2a60efbe637f53e8f606e
+checksums       rmd160  7c07e681ee3cc023f793cdaeb3cc75a69eb99404 \
+                sha256  cdc9e8f8629a323a9a04f96fd52bd1c7fdc8f653c609442a5f08516f3babcd5a
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -45,15 +45,20 @@ depends_run     port:gnome-settings-daemon \
 
 patchfiles      patch-src-fr-command-lrzip.c.diff
 
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf      yes
+autoreconf.args     -fvi
+
 configure.args  --with-smclient=xsmp \
                 --disable-nautilus-actions \
                 --disable-packagekit \
                 --disable-schemas-compile \
                 --disable-silent-rules
-
-# Don't do intltool's INTLTOOL_PERL dance
-use_autoreconf  yes
-autoreconf.args -fvi
 
 variant nautilus description {Build optional nautilus context menu actions} {
     configure.args-delete   --disable-nautilus-actions

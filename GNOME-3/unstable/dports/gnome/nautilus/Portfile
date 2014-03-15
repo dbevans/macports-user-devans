@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            nautilus
-version         3.11.3
+version         3.11.90
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     The GNOME filemanager
 long_description \
@@ -20,8 +20,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  90eb12d62e0626f81c83d7f2f0815877fd9dfc45 \
-                sha256  1f086a2386774b540d40ffa532c4a7add977550db71b67798bf9d56a779b1345
+checksums       rmd160  8d190048021716b8ce0c1134260db29a4fb5333b \
+                sha256  0eb2849f0f6cc718baf7a44ceedce6e9309473451dd487b00f961eeebecc7802
 
 depends_build   port:pkgconfig \
                 port:intltool
@@ -41,6 +41,15 @@ depends_lib     port:desktop-file-utils \
                 port:xorg-libX11
 
 depends_run     port:gnome-settings-daemon
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf  yes
+autoreconf.args -fvi
 
 configure.args  --enable-introspection=yes \
                 --enable-tracker=no \

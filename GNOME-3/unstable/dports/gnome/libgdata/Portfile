@@ -27,7 +27,7 @@ checksums       rmd160  9455bc88ded1ecf227bef8863ab7c7eaa52750c7 \
 
 depends_build   port:pkgconfig \
                 port:intltool \
-                port:gnome-doc-utils \
+                port:gnome-common \
                 port:gtk-doc
 
 depends_lib     port:gtk3 \
@@ -38,6 +38,15 @@ depends_lib     port:gtk3 \
                 port:gnome-online-accounts \
                 port:gcr \
                 port:uhttpmock
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf  yes
+autoreconf.args -fvi
 
 configure.args  --enable-introspection=yes \
                 --enable-gnome \

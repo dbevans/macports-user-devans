@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            yelp
-version         3.11.1
+version         3.11.91
 license         GPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Help browser for GNOME.
@@ -21,14 +21,15 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  d56c775cbfdf99e9aa42ffee4cc36c20f309b07c \
-                sha256  89ca8241a431051450ed580d63cd3a568968b6f4ad15e5a5f6793f27d016ddfb
+checksums       rmd160  41a51eb2de0525c6638fecfce82efc5da32657e5 \
+                sha256  770ae831e2b32f2225d2222e44e3aebbb5ecc550729fad96efb9263a0428d509
 
 depends_skip_archcheck gnome-settings-daemon
 
 depends_build   port:pkgconfig \
                 port:intltool \
-                port:itstool
+                port:itstool \
+                port:gnome-common
 
 depends_lib     port:desktop-file-utils \
                 port:gnome-icon-theme \
@@ -47,6 +48,15 @@ depends_lib     port:desktop-file-utils \
 
 depends_run     port:gnome-user-docs \
                 port:gnome-settings-daemon
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf      yes
+autoreconf.args     -fvi
 
 configure.args  --x-includes=${prefix}/include \
                 --x-libraries=${prefix}/lib \

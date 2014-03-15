@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            dconf
-version         0.19.3
+version         0.19.91
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      gnome
@@ -23,19 +23,30 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  aee36864cadd499c23e391159183f7d887ff6518 \
-                sha256  710797c01ea3ff73e06d6251a0f196a056ed686a5191b19a276c7a286bc3cb5a
+checksums       rmd160  4b79b4e21f7eef8aecf8a7d4bf128ab2ffb0f995 \
+                sha256  3fe8276a8a1b73b96204f6743141227d3c3c94b89b6e7b867b9f13eafad0daa9
 
 depends_build   port:pkgconfig \
                 port:intltool \
-                port:gtk-doc
+                port:gtk-doc \
+                port:libxslt
 
 depends_lib     port:desktop-file-utils \
                 port:gtk3 \
                 port:dbus \
-                port:libxml2
+                port:libxml2 \
+                port:vala
 
-patchfiles      patch-fix-lib-names.diff
+patchfiles      patch-fix-lib-names-Makefile.am.diff
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf  yes
+autoreconf.args -fvi
 
 configure.args  --enable-editor \
                 --disable-schemas-compile \

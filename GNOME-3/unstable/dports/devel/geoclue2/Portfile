@@ -1,0 +1,58 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                geoclue2
+set gname           geoclue
+version             2.1.6
+set branch          [join [lrange [split ${version} .] 0 1] .]
+categories          devel net
+license             LGPL-2.1+
+platforms           darwin
+maintainers         nomaintainer
+description         Geolocation library
+long_description    Geoclue is a modular geoinformation service built on top of the D-Bus messaging system. The goal of the Geoclue project is to make creating location-aware applications as simple as possible.
+
+homepage            http://www.freedesktop.org/wiki/Software/GeoClue
+master_sites        http://www.freedesktop.org/software/geoclue/releases/${branch}
+
+distname            ${gname}-${version}
+
+use_xz              yes
+
+checksums           rmd160  d9c4e23ae8692adbdf1d828784936527d6c356fa \
+                    sha256  ae7befcb07b06c89b5d9d7e837f431a0091573070c0a13a5222315ca6e005677
+
+depends_build   \
+        port:intltool \
+        port:pkgconfig
+
+depends_lib     \
+        port:gpsd \
+        port:gtk2 \
+        port:dbus-glib \
+        port:json-glib \
+        port:libsoup
+
+# update m4/intltool.m4 and autoreconf
+
+post-patch {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf      yes
+autoreconf.args     -fvi
+
+configure.args      --disable-3g-source \
+                    --disable-modem-gps-source \
+                    --disable-wifi-source
+
+post-activate {
+	system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas" 
+}
+
+livecheck.type      regex
+livecheck.name      ${gname}
+livecheck.url       ${master_sites}
+livecheck.regex     ${gname}-(\[\\d.\]+)${extract.suffix}

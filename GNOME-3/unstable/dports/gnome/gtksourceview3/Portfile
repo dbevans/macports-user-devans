@@ -6,7 +6,7 @@ PortGroup           active_variants 1.1
 
 name                gtksourceview3
 set gname           gtksourceview
-version             3.11.3
+version             3.11.90
 license             LGPL-2.1+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
@@ -26,11 +26,12 @@ master_sites        gnome:sources/${gname}/${branch}/
 distname            ${gname}-${version}
 use_xz              yes
 
-checksums           rmd160  2bb786ad0077e327593873086fa784ba291b544b \
-                    sha256  0b7a0c8c43fd27752720d21a6760c800a10135aecf1ae1ffd1e890eeb84e961f
+checksums           rmd160  926502cc50bd6ddbf996651a54b3a9acc998196c \
+                    sha256  811c974e79a07a758785a94c9e88c56a3bc3724f27a3e8234ddb774c8b323917
 
 depends_build       port:intltool \
                     port:pkgconfig \
+                    port:gnome-common \
                     port:gtk-doc
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
@@ -38,6 +39,15 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:gtk3 \
                     port:gobject-introspection \
                     port:libxml2
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf      yes
+autoreconf.args     -fvi
 
 configure.cflags-append -Wno-format-nonliteral
 configure.args      --enable-introspection=yes
@@ -54,6 +64,11 @@ if {[variant_isset quartz]} {
     require_active_variants gtk-osx-application gtk3
 } else {
     require_active_variants gtk3 x11
+}
+
+variant glade description {Install a glade catalog file} {
+    configure.args-append   --enable-glade-catalog
+    depends_lib-append      port:glade
 }
 
 post-destroot {

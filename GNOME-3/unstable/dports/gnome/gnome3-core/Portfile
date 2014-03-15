@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-core
-version         3.11.90
+version         3.11.91
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -126,7 +126,6 @@ depends_lib     port:at-spi2-atk \
                 port:libcroco \
                 port:libgdata \
                 port:libgee \
-                port:libgnome-keyring \
                 port:libgnomekbd \
                 port:libgsf \
                 port:libgtop \

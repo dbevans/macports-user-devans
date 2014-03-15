@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            eog
-version         3.11.4
+version         3.11.91
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     An image viewing and cataloging program.
@@ -20,13 +20,15 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  626c64094b316ed721879b2c16f9a898b1f209e4 \
-                sha256  e2842b4ccfc59c3a57f74d39faf807be279e4a743fd464c26d803751a1d6da3c
+checksums       rmd160  c3ac54c55850d0168d0506d1f4f3fc0a3745e5fd \
+                sha256  3288dfd82b03137a0657591b9c6f547607d9a5a04d224c3aebfa443318a6f08b
 
 depends_build   port:pkgconfig \
                 port:intltool \
                 port:itstool \
-                port:gtk-doc
+                port:yelp-tools \
+                port:gtk-doc \
+                port:gnome-common
 
 depends_lib     port:desktop-file-utils \
                 port:gtk3 \
@@ -48,6 +50,15 @@ depends_lib     port:desktop-file-utils \
 depends_run     port:gnome-settings-daemon \
                 port:yelp
                
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf  yes
+autoreconf.args -fvi
+
 configure.args  --disable-schemas-compile \
                 --disable-silent-rules
 

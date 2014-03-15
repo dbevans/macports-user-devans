@@ -1,5 +1,5 @@
---- configure.ac.orig	2014-01-08 12:49:10.000000000 -0800
-+++ configure.ac	2014-01-21 22:10:12.000000000 -0800
+--- configure.ac.orig	2014-01-17 12:19:46.000000000 -0800
++++ configure.ac	2014-02-10 20:05:35.000000000 -0800
 @@ -317,8 +317,8 @@
  
  dnl This must appear after AC_CANONICAL_HOST, which defines $host.
@@ -11,3 +11,14 @@
  	;;
  *)
  	LDFLAGS="$LDFLAGS -Wl,--no-undefined"
+@@ -605,8 +605,8 @@
+ 	AS_HELP_STRING([--with-libdb=PREFIX],
+ 	[Prefix where libdb is installed]),
+ 	[
+-		DB_CFLAGS="-I$withval/include"
+-		DB_LIBS="-L$withval/lib -ldb"
++		DB_CFLAGS="-I$prefix/include/db46"
++		DB_LIBS="-L$prefix/lib/db46 -ldb"
+ 	],
+ 	[
+ 		if test -z "$DB_CFLAGS" -a -z "$DB_LIBS"; then

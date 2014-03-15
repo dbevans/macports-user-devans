@@ -5,7 +5,7 @@ PortSystem      1.0
 PortGroup       muniversal 1.0
 
 name            anjuta
-version         3.11.4
+version         3.11.90
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A GNOME/GTK IDE
@@ -18,18 +18,25 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  6db77a88dd0a725b5d53a5ff4c02b05bc41ba74f \
-                sha256  00835a410fb8553640b88b5a2eef6fbffdfa87f7ae1217996ca1c8fc27affa12
+checksums       rmd160  0a872516ea547b34829cb629d1c630e135fbb7ac \
+                sha256  00b51f06a4093c0b147e731236d0ce35914495e05d9ca18e17f5280cfb5941fc
 
 depends_build   port:pkgconfig \
                 port:intltool \
-                port:itstool
+                port:itstool \
+                port:yelp-tools \
+                port:gtk-doc \
+                port:gnome-common \
+                port:autoconf \
+                port:automake \
+                port:libtool
 
 depends_lib     port:desktop-file-utils \
                 port:autogen \
                 port:shared-mime-info \
                 port:gtk3 \
                 port:gdl3 \
+                port:gjs \
                 port:gobject-introspection \
                 port:gtksourceview3 \
                 port:libgda5 \
@@ -41,8 +48,12 @@ depends_run     port:gnome-settings-daemon \
                 port:yelp \
                 port:xdg-utils
 
-patchfiles      patch-configure.diff \
+patchfiles      patch-configure.ac.diff \
                 patch-ltmain.sh.diff
+
+#reconfigure with our intltool.m4 using autogen.sh
+
+configure.cmd   ./autogen.sh
 
 configure.cflags-append \
                 -std=gnu89 -Wno-format-nonliteral
