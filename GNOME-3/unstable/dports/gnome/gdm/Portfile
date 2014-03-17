@@ -49,15 +49,24 @@ depends_lib     port:desktop-file-utils \
 depends_run     port:gnome-session \
                 port:gnome-settings-daemon
                
-patchfiles      patch-configure.diff \
-                patch-daemon-gdm-session-worker.c.diff
+patchfiles      patch-daemon-gdm-session-worker.c.diff \
+                patch-configure.ac.diff
 
 post-patch {
-        reinplace "s|@MP_PREFIX@|${prefix}|" ${worksrcpath}/configure
-        file attributes ${worksrcpath}/install-sh -permissions +x
+    reinplace "s|@MP_PREFIX@|${prefix}|" ${worksrcpath}/configure.ac
+    file attributes ${worksrcpath}/install-sh -permissions +x
 }
 
 use_parallel_build no
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf  yes
+autoreconf.args -fvi
 
 configure.args  --enable-ipv6 \
                 --without-console-kit \
