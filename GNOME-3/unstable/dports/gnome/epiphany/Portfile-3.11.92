@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            epiphany
-version         3.11.91
+version         3.11.92
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A GNOME Web browser.
@@ -21,8 +21,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  c6026eaa19388baa8efc0364a64ea9ec531e74cf \
-                sha256  2348042e31c1c080f4c444d18e451960c07c669d34fab9717f0dab80f32eef4a
+checksums       rmd160  3d737cd1317877eebc82387215015d8cc63b997b \
+                sha256  65d40ffbe8db6aff926e19fefe056eefe1facb44cf94e3f8027bad23bc2f79da
 
 depends_build   port:pkgconfig \
                 port:intltool \

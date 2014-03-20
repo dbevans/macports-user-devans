@@ -27,8 +27,9 @@ checksums       rmd160  eca9535d478587b938a8f9dbd53ca596a79566f5 \
                 sha256  a2943e02e37e76b63239dc7ce37864e5d152201b766bb848ac8851cadbd4e24b
 
 patchfiles      patch-egg-egg-asn1x.h.diff \
-                patch-egg-egg-armor.c.diff \
-                patch-disable-pkcs11-tests.diff
+                patch-egg-egg-armor.c.diff
+
+#                patch-disable-pkcs11-tests.diff
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -40,7 +41,12 @@ depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 \
                 port:gcr \
                 port:libgcrypt
 
-# Don't do intltool's INTLTOOL_PERL dance
+# update build/m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/build/m4
+}
+
 use_autoreconf  yes
 autoreconf.args -fvi
 

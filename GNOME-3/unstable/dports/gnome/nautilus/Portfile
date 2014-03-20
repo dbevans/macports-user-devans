@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            nautilus
-version         3.11.90
+version         3.11.92
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     The GNOME filemanager
 long_description \
@@ -20,8 +20,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  8d190048021716b8ce0c1134260db29a4fb5333b \
-                sha256  0eb2849f0f6cc718baf7a44ceedce6e9309473451dd487b00f961eeebecc7802
+checksums       rmd160  58d260474d444fdc0dfcdd377f43443727601d18 \
+                sha256  46cb9451a6e3b93d2de3842a45741eb8ed94c368c22087fcf3fb5da10b94642d
 
 depends_build   port:pkgconfig \
                 port:intltool

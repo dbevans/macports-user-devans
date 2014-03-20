@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id$
+# $Id: Portfile 117912 2014-03-17 03:26:10Z devans@macports.org $
 
 # TODO: figure out how to make PAM happy without blowing a large hole
 #       in the security of the OS or touching PAM
@@ -7,7 +7,7 @@
 PortSystem      1.0
 
 name            gdm
-version         3.11.90
+version         3.11.92.1
 license         GPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     The Gnome Display Manager is a re-implementation of the well known xdm program.
@@ -22,8 +22,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  98ccd8bfc99773264d73ef077c424b0518ae1df8 \
-                sha256  51b54d428aeb1c55d91e992edd8c4603d6e528c888321d39cfc9d17039545482
+checksums       rmd160  6403ac087921c79aa7cd5f751b1b7a0c02ceabc3 \
+                sha256  731d72f43b01fc0f36ecfed80d9d04c62e7c537fa5d13078bc56114692213014
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -50,8 +50,8 @@ depends_lib     port:desktop-file-utils \
 depends_run     port:gnome-session \
                 port:gnome-settings-daemon
                
-patchfiles      patch-daemon.diff \
-                patch-daemon-gdm-session-worker.c.diff \
+#patchfiles      patch-daemon.diff
+patchfiles      patch-daemon-gdm-session-worker.c.diff \
                 patch-configure.ac.diff
 
 post-patch {

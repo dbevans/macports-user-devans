@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name            telepathy-glib
-version         0.23.2
+version         0.23.3
 license         LGPL-2.1+
 description     The ${name} component of Telepathy - a Flexible Communications Framework.
 long_description \
@@ -19,8 +19,8 @@ platforms       darwin
 homepage        http://telepathy.freedesktop.org/wiki
 master_sites    http://telepathy.freedesktop.org/releases/${name}/
 
-checksums       rmd160  cd17ada2c365f5829066d5a643d34fe2699bd1e6 \
-                sha256  37d5d0eb8cb801822d579182b84a9abdc24e51e5a54b663f865fd1ba2e062c83
+checksums       rmd160  876fb26c24c2d1523880a3d0f392861bc5037421 \
+                sha256  d60277fdc6974e0f8eabc41b36c975342e440eddfe6c1b830c91176364764ee0
 
 depends_build   port:pkgconfig \
                 port:gnome-doc-utils \
@@ -71,4 +71,4 @@ platform darwin 8 {
 
 livecheck.type  regex
 livecheck.url   ${master_sites}
-livecheck.regex ${name}-(\[0-9\]+\\.\[0-9\]*(\\.\[0-9\]+)*)${extract.suffix}
+livecheck.regex ${name}-(\[0-9\]+\\.\[0-8]\[0-9\]*(\\.\[0-9\]+)*)${extract.suffix}

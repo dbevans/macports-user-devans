@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            rygel
-version         0.21.5
+version         0.21.6
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Rygel DLNA media server, renderer
@@ -19,8 +19,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  6d9e14bf936b3d99dc51fe547de9e43145a85f9f \
-                sha256  a86ec78dc2be184257d8cc93b5b0b7d6a37450f41f8ef5ada09fd3722e3a3253
+checksums       rmd160  0565d756df8a789da35a043de7477bccb40249c3 \
+                sha256  208bf46b7116bfd06159bf09f6c85f953257874751e3949865587fe5994164b1
 
 depends_build   port:pkgconfig \
                 port:intltool

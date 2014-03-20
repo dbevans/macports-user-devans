@@ -6,7 +6,7 @@ PortGroup           python 1.0
 
 name                py-gobject3
 set my_name         pygobject
-version             3.11.91
+version             3.11.92
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories-append   gnome
 license             LGPL-2.1+
@@ -18,15 +18,15 @@ long_description \
     PyGObject is a Python dynamic module that enables developers to use the \
     power of GObject, which is part of the GNOME platform.
 
-homepage            https://live.gnome.org/PyGObject
+homepage            https://wiki.gnome.org/Projects/PyGObject
 master_sites        gnome:sources/${my_name}/${branch}/
 distname            ${my_name}-${version}
 use_xz              yes
 
-checksums           sha256  58fcd2934da25498ea734b43482c91add76a05e50e209f5f89f4516bcb77ecd5 \
-                    rmd160  92ecc1c5cb025746ddfadd6c05401f9a5971bc73
+checksums           sha256  5a7a72937d6aada6d61b7e16925d0c319d480454a16936b383e0529da4be9769 \
+                    rmd160  73a60dfe2da78c3535caa983473a501717f401cf
 
-python.versions     27 32 33
+python.versions     27 32 33 34
 
 if {${name} ne ${subport}} {
     depends_build-append    port:pkgconfig

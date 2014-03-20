@@ -1,0 +1,37 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                gnome-devel-docs
+version             3.11.92
+license             GFDL-1.1
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         The GNOME Developer Documentation Package
+long_description    This is the GNOME Developer Documentation package including the following: \
+                        - GNOME Platform Overview  \
+                        - GNOME Integration Guide \
+                        - GNOME Optimization Guide \
+                        - GNOME Accessibility Developers Guide \
+                        - GNOME Human Interface Guidelines \
+                        - GNOME Documentation Project Handbook \
+                        - GNOME Documentation Project Style Guide
+             
+maintainers         devans openmaintainer
+categories          gnome devel
+platforms           darwin
+supported_archs     noarch
+homepage            http://www.gnome.org/
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  04bae1d2d2a2c2c335725e036ee8a90e79b02e75 \
+                    sha256  a613a52151fe45711dbc2bfd2326deb70fa9ff9532e5d3d7deaf74591e743f80
+
+depends_build       port:itstool \
+                    port:libxml2
+
+configure.args      --disable-silent-rules
+
+livecheck.type      gnome-with-unstable

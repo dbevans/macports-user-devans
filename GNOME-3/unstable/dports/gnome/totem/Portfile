@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            totem
-version         3.11.90
+version         3.11.91
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome
 # also has an exception allowing use of non-GPL-compatible plugins
@@ -26,16 +26,15 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  72cef08e8ae8ac57f9368ec2233f16b0049ad604 \
-                sha256  3df1bbd72df82a905b6f6a6eaac3def17b0f586f578678f55d22ee7cc59dd7d0
-
-patchfiles      patch-configure.diff
+checksums       rmd160  3c24c9f1ce123b20cfe2efc554fbb85760280bd1 \
+                sha256  913ac2d77e0fe6899a795247c6445bdc504dc5263f0c36b7e4fe27c6f3bd62f2
 
 depends_build   port:pkgconfig \
                 port:intltool \
                 port:itstool \
                 port:gnome-common \
-                port:yelp-tools
+                port:yelp-tools \
+                port:appdata-tools
 
 depends_lib     port:desktop-file-utils \
                 port:gnome-icon-theme \
@@ -71,6 +70,9 @@ pre-configure {
 
 use_autoreconf  yes
 autoreconf.args -fvi
+
+configure.cflags-append \
+                -Wno-error=format-nonliteral
 
 configure.args  --with-plugins=apple-trailers,autoload-subtitles,chapters,dbusservice,im-status,grilo,gromit,media-player-keys,ontop,opensubtitles,properties,recent,skipto \
                 --enable-easy-codec-installation \

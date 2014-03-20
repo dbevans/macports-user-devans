@@ -6,7 +6,7 @@ PortGroup       active_variants 1.1
 
 name            gtkmm3
 set gname       gtkmm
-version         3.11.8
+version         3.11.9
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     C++ interface to GTK+ version 3.
 long_description \
@@ -24,8 +24,8 @@ use_xz          yes
 dist_subdir     ${gname}
 distname        ${gname}-${version}
 
-checksums       rmd160  f485092c9d90db17bacbaa3937cdf5c1316b5941 \
-                sha256  62a9d95748e014ff2a35bb2b417232a256830f1ac9eff96bc16297e643ced6ad
+checksums       rmd160  3ee17c9cf78ff6dc921edb99fd259d85f08da6d2 \
+                sha256  402441b05b4b36ee1b12a6c903e3f1c7cb194355a0d335dae554c67c058ad213
 
 depends_build   port:pkgconfig \
                 port:mm-common \

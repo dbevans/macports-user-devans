@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-system-monitor
-version         3.11.90
+version         3.11.92
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A system monitor.
@@ -20,12 +20,17 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  9b107aaff6dac00bc02ab4f47796deff3eddef0b \
-                sha256  d540cfaa2236fee67e97426c0230688dc58f78bb4da14d620f8c4da98bc279ea
+checksums       rmd160  3948ca158b804937d71b0fad1ffaf432741dd69c \
+                sha256  22b9525d50d9cf2ad5c6923fb0b275dec897ada0077cbb6f35a7665c8d560131
 
 depends_build   port:pkgconfig \
+                port:autoconf \
+                port:automake \
+                port:libtool \
                 port:intltool \
-                port:itstool
+                port:gnome-common \
+                port:itstool \
+                port:yelp-tools
 
 depends_lib     port:desktop-file-utils \
                 port:gnome-icon-theme \
@@ -40,6 +45,15 @@ depends_run     port:gnome-settings-daemon \
                 port:yelp
 
 patchfiles      patch-src-procproperties.cpp.diff
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf  yes
+autoreconf.args -fvi
 
 configure.args  --disable-silent-rules \
                 --enable-wnck \
