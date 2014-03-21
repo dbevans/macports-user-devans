@@ -1,0 +1,138 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                tracker
+version             0.17.7
+license             GPL-2
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         Metadata database, indexer and search tool.
+long_description    Tracker is an advanced framework for first class objects \
+                    with associated metadata and tags. It provides a one stop \
+                    solution for all metadata, tags, shared object databases, \
+                    search tools and indexing.
+
+maintainers         gmail.com:juanrgar openmaintainer
+categories          gnome
+platforms           darwin
+homepage            https://wiki.gnome.org/Projects/Tracker
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  313fe92498cc240c279ba5d302985850dd1952ca \
+                    sha256  8f76ff3251dba4b175316717eae83572243cf95015a27a9d6c8244d1a91b331b
+
+depends_build       port:pkgconfig \
+                    port:intltool
+
+depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                    port:gobject-introspection \
+                    port:libpng \
+                    port:sqlite3 \
+                    port:ossp-uuid \
+                    port:libgee \
+                    port:libgrss \
+                    port:vala \
+                    port:upower \
+                    port:libunistring \
+                    port:libmediaart \
+                    port:libexif \
+                    port:libiptcdata \
+                    port:exempi \
+                    port:taglib \
+                    port:libxml2 \
+                    port:poppler \
+                    port:libgsf \
+                    port:giflib \
+                    port:libpng \
+                    port:libvorbis \
+                    port:flac \
+                    port:totem-pl-parser
+
+#depends_run         port:gnome-settings-daemon \
+#                    port:yelp
+
+configure.args      --disable-schemas-compile \
+                    --disable-silent-rules \
+                    --disable-functional-tests \
+                    --disable-maemo \
+                    --enable-journal \
+                    --enable-tracker-fts \
+                    --disable-unit-tests \
+                    --disable-hal \
+                    --disable-network-manager \
+                    --enable-libmediaart \
+                    --enable-libexif \
+                    --enable-libiptcdata \
+                    --enable-exempi \
+                    --disable-meegotouch \
+                    --enable-miner-fs \
+                    --enable-miner-rss \
+                    --disable-miner-evolution \
+                    --disable-miner-thunderbird \
+                    --disable-miner-firefox \
+                    --disable-nautilus-extension \
+                    --enable-taglib \
+                    --enable-tracker-needle \
+                    --enable-tracker-preferences \
+                    --without-enca \
+                    --enable-libxml2 \
+                    --enable-unzip-psgz-files \
+                    --enable-poppler \
+                    --disable-libgxps \
+                    --enable-libgsf \
+                    --disable-libosinfo \
+                    --enable-libgif \
+                    --enable-libjpeg \
+                    --enable-libtiff \
+                    --enable-libpng \
+                    --enable-libvorbis \
+                    --enable-libflac \
+                    --disable-libcue \
+                    --enable-abiword \
+                    --enable-dvi \
+                    --enable-mp3 \
+                    --enable-ps \
+                    --enable-text \
+                    --enable-icon \
+                    --enable-playlist
+
+variant evolution description {} {
+}
+
+variant nautilus description {} {
+}
+
+variant enca description {} {
+    configure.args-delete   --without-enca
+    configure.args-append   --with-enca
+
+    depends_lib-append      port:enca
+}
+
+variant gstreamer description {Enable gstreamer generic media extractor backend} {
+    configure.args-append   --enable-generic-media-extractor=gstreamer \
+                            --with-gstreamer-backend=discoverer
+
+    depends_lib-append      port:gstreamer1 \
+                            port:gstreamer1-gst-plugins-base
+}
+
+variant mplayer description {Enable libav generic media extractor backend} {
+    configure.args-append   --enable-generic-media-extractor=libav
+
+    depends_lib-append      port:ffmpeg
+}
+
+default_variants    +gstreamer
+
+# port installs hicolor icons, desktop application file, and gschemas
+post-activate {
+#    system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
+#    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+#    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type  gnome-with-unstable

@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            inkscape-devel
 conflicts       inkscape
-set bzr_rev     13158
+set bzr_rev     13163
 version         0.48.99.${bzr_rev}
 epoch           1
 license         GPL-2 LGPL-2.1
@@ -25,8 +25,8 @@ long_description \
 homepage        http://www.inkscape.org/
 master_sites    file:///Users/devans/macports/distfiles/${name}
 
-checksums       rmd160  db67b0f32ad61fba857079ecd8de639022bdcd1a \
-                sha256  223c3eb3708ed77790e6ec684894084b4d39bf8f7146eadfc1c0a04a8a3d2e7f
+checksums       rmd160  37df0c4dcd5275aaa24f8f0113107f496a311f9b \
+                sha256  618709808cfde0b262cb92b37c6262abed1fe2804a51978b612610d9f24e3abb
 
 worksrcdir      inkscape
 
@@ -52,8 +52,6 @@ depends_lib     port:desktop-file-utils \
                 port:libvisio \
                 port:libwpg \
                 port:gtkspell2
-
-patchfiles      patch-src-extension-internal-grid.cpp.diff
 
 configure.cflags-append -Wno-unused-function
 
