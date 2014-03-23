@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            libgweather
-version         3.10.2
+version         3.11.92
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      net gnome
@@ -22,8 +22,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  d0139d2e198e4ec65b044a6fbea6f75199de2a30 \
-                sha256  454d8d681114f7f9522df2710b63f33198d0d7ca6f0726eef7fcf72e1b580005
+checksums       rmd160  92ec797d393d91f7bc903ccdeac57ad3fe9117ac \
+                sha256  601c7ec366018bac9fe296daf91105344043e59f31631e2196924373302d33ee
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -38,9 +38,6 @@ depends_lib     port:gtk3 \
                 port:libsoup \
                 port:gobject-introspection \
                 port:vala
-
-patchfiles      patch-libgweather-gweather-location.c.diff \
-                patch-libgweather-weather.c.diff
 
 # use autogen.sh from upstream git to update m4/intltool.m4 using intltoolize and autoreconf
 
@@ -64,4 +61,4 @@ post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-livecheck.type  gnome
+livecheck.type  gnome-with-unstable

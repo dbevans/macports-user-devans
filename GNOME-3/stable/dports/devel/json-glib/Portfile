@@ -1,0 +1,41 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                json-glib
+version             0.99.2
+set branch          [join [lrange [split ${version} .] 0 1] .]
+categories          devel
+license             LGPL-2.1+
+maintainers         otherware.org:nefar openmaintainer
+homepage            https://wiki.gnome.org/Projects/JsonGlib
+description         provides JSON support
+long_description    JSON-GLib is a library providing serialization and \
+                    deserialization support for the JavaScript Object Notation \
+                    (JSON) format described by RFC 4627.
+
+platforms           darwin
+depends_build       port:pkgconfig port:gtk-doc
+depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                    port:gobject-introspection
+
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  e6fabe61b282611eb2790746e11f39dd726fbc3a \
+                    sha256  88254eac2f6f0ac9df3d4bb494d61152212e70829309eb5c586b48ca3aec388b
+
+configure.args      --enable-introspection=yes
+
+# gobject-introspection uses g-ir-scanner, which uses $CC from env
+build.args-append       CC="${configure.cc} ${configure.cc_archflags}"
+
+platform darwin 8 {
+        configure.args-delete --enable-introspection=yes
+        configure.args-append --enable-introspection=no
+        depends_lib-delete    port:gobject-introspection
+}
+
+livecheck.type      gnome-with-unstable

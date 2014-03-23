@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id$
+# $Id: Portfile 117326 2014-02-22 04:50:33Z devans@macports.org $
 
 PortSystem      1.0
 
 name            epiphany
-version         3.10.3
+version         3.8.2
+revision        3
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A GNOME Web browser.
@@ -21,8 +22,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  900d6b1ca9adff11287b6af0f1fafdac22a1c4a4 \
-                sha256  c18235ecceaa9c76e7d90d370861cb2bba45019e1e14391a00dac3d2e94a0db7
+checksums       rmd160  2aacd8b02f456e345b9f23ff6114d341bbf0013a \
+                sha256  ae89d6902ed243304d2cbf2fa361f6dd0cb3401fdaf726e6fdd4acc09197d50a
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -70,6 +71,8 @@ platform darwin {
     }
 }
 
+patchfiles      patch-configure.ac.diff
+
 # update m4/intltool.m4 and autoreconf
 
 pre-configure {
@@ -77,8 +80,8 @@ pre-configure {
     reinplace "s|--rpath=|-rpath |g" ${worksrcpath}/configure.ac
 }
 
-use_autoreconf  yes
-autoreconf.args -fvi
+use_autoreconf      yes
+autoreconf.args     -fvi
 
 configure.cflags-append -Wno-format-nonliteral
 

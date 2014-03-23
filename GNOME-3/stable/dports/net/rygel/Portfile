@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            rygel
-version         0.20.3
+version         0.21.6
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Rygel DLNA media server, renderer
@@ -19,8 +19,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  ed387b49a5941dcab43b935d5524cb814711678f \
-                sha256  4e7e3105a1d27d126938b7530f60bd7867121188651cee806f36694fbd7dd349
+checksums       rmd160  0565d756df8a789da35a043de7477bccb40249c3 \
+                sha256  208bf46b7116bfd06159bf09f6c85f953257874751e3949865587fe5994164b1
 
 depends_build   port:pkgconfig \
                 port:intltool
@@ -38,8 +38,7 @@ depends_lib     port:desktop-file-utils \
 
 depends_run     port:gnome-settings-daemon
 
-patchfiles      patch-configure.ac.diff \
-                patch-return.diff
+patchfiles      patch-configure.ac.diff
 
 # update m4/intltool.m4 and autoreconf
 
@@ -58,4 +57,4 @@ post-activate {
     system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
 }
 
-livecheck.type  gnome
+livecheck.type  gnome-with-unstable

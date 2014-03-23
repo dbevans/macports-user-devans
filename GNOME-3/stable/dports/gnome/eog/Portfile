@@ -4,8 +4,7 @@
 PortSystem      1.0
 
 name            eog
-version         3.10.2
-revision        3
+version         3.11.92
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     An image viewing and cataloging program.
@@ -21,8 +20,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  44527bdd11d8dcf87caeb939f131e7410511cfc6 \
-                sha256  5ccc98609ca666420719383cc7d9b44335bbc0aacf048e38036d1f946ce54763
+checksums           rmd160  ef39dccc772130813644dc0d99fa87412d5a00be \
+                    sha256  997e7b192a45f738d44c9f2367c16fb7d8eb75a6588e7b1a7b00da545d71c213
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -51,8 +50,6 @@ depends_lib     port:desktop-file-utils \
 depends_run     port:gnome-settings-daemon \
                 port:yelp
                
-patchfiles      redefinition-buildfix.patch
-
 # update m4/intltool.m4 and autoreconf
 
 pre-configure {
@@ -71,4 +68,4 @@ post-activate {
    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-livecheck.type  gnome
+livecheck.type  gnome-with-unstable

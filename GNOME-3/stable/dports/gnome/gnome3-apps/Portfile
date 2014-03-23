@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-apps
-version         3.10.2
+version         3.11.92
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -52,6 +52,8 @@ supported_archs noarch
 # gnome-nibbles (previously part of gnome-games)
 # gnome-photos
 # gnome-robots (previously part of gnome-games)
+# gnome-software
+# gnome-sound-recorder
 # gnome-sudoku (previously part of gnome-games)
 # gnome-tetravex (previously part of gnome-games)
 # gnome-weather
@@ -60,6 +62,7 @@ supported_archs noarch
 # nautilus-sendto
 # nemiver
 # orca
+# polari
 # quadrapassel (previously part of gnome-games)
 # swell-foop
 # tali (previously part of gnome-games)
@@ -77,6 +80,7 @@ supported_archs noarch
 depends_lib     port:anjuta \
                 port:devhelp \
                 port:file-roller \
+                port:gitg \
                 port:glade \
                 port:gnome-devel-docs \
                 port:rygel \

@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-user-docs
-version         3.10.3
+version         3.11.92
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     End-user documentation for GNOME3
 long_description \
@@ -23,11 +23,11 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       sha256  960b6373ea52e41e3deb3501930e024005b29d2cc958bfadc87450a291d2a905 \
-                rmd160  b703b4cc3a64666d103cf0133064f1ae676064d6
+checksums           sha256  3f9e50294425e567e7a14011292ae403ad71d3c1aa6a54517d37d14617148977 \
+                    rmd160  5548eebdf789916efb2368d1e58f2b1f8313a0bb
 
 depends_build   port:pkgconfig \
                 port:libxml2 \
                 port:itstool
 
-livecheck.type  gnome
+livecheck.type  gnome-with-unstable

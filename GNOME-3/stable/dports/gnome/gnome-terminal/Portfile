@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-terminal
-version         3.10.2
+version         3.11.3
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description Terminal component for the GNOME 2 Desktop
 long_description \
@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  b25d2782052cf65f7b8b4dc591762cf69e21f630 \
-                sha256  e02827c29de45c09973483d821ab29ea60ab3fbba34b62a81d67b8304a9ad913
+checksums       rmd160  59c19a4b4fb81662b631e13e5cb1315744ae4055 \
+                sha256  135d85cf2643c5b523451ff0dd42cc88970d4f34a7ce307fbc9b52055ed78ea8
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -41,9 +41,7 @@ depends_lib     port:desktop-file-utils \
 depends_run     port:gnome-settings-daemon \
                 port:yelp
 
-patchfiles      patch-getcwd.diff \
-                patch-uuid.diff \
-                patch-gschema.xml.in.diff \
+patchfiles      patch-uuid.diff \
                 no-dupfd_cloexec.patch
 
 # update m4/intltool.m4 and autoreconf
@@ -56,12 +54,14 @@ use_autoreconf  yes
 autoreconf.args -fvi
 
 configure.args  --with-gtk=3.0 \
+                --with-nautilus-extension=no \
                 --disable-migration \
+                --disable-search-provider \
                 --disable-silent-rules \
                 --disable-schemas-compile
 
 variant nautilus description {Build optional nautilus extension} {
-    configure.args-append   --with-nautilus-extension
+    configure.args-replace  --with-nautilus-extension=no --with-nautilus-extension=yes
     depends_lib-append      port:nautilus
 }
 
@@ -70,9 +70,11 @@ variant migration description {Enable prefs migration from GConf to GSettings} {
     depends_lib-append      port:gconf
 }
 
+default_variants +nautilus
+
 post-activate   {
     system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-livecheck.type  gnome
+livecheck.type  gnome-with-unstable

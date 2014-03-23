@@ -1,6 +1,6 @@
 --- shell/Makefile.am.orig	2013-09-16 22:44:57.000000000 -0700
 +++ shell/Makefile.am	2013-09-16 22:45:38.000000000 -0700
-@@ -120,6 +120,6 @@
+@@ -111,6 +111,6 @@
  
  EXTRA_DIST += hostnames-test.txt
  check-local: test-hostname

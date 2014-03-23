@@ -1,15 +1,15 @@
---- gedit/gedit-app.c.orig	2013-09-29 07:56:34.000000000 -0700
-+++ gedit/gedit-app.c	2013-11-03 01:37:41.000000000 -0800
-@@ -95,7 +95,7 @@
+--- gedit/gedit-app.c.orig	2014-01-11 05:54:03.000000000 -0800
++++ gedit/gedit-app.c	2014-01-31 12:12:54.000000000 -0800
+@@ -96,7 +96,7 @@
  static gboolean new_window = FALSE;
  static gboolean new_document = FALSE;
  static gchar *geometry = NULL;
 -static gboolean wait = FALSE;
 +static gboolean gwait = FALSE;
+ static gboolean gapplication_service = FALSE;
  static gboolean standalone = FALSE;
  static gchar **remaining_args = NULL;
- static const GeditEncoding *encoding = NULL;
-@@ -161,7 +161,7 @@
+@@ -171,7 +171,7 @@
  	/* Wait for closing documents */
  	{
  		"wait", 'w', 0, G_OPTION_ARG_NONE,
@@ -18,7 +18,7 @@
  		N_("Open files and block process until files are closed"),
  		NULL
  	},
-@@ -753,7 +753,7 @@
+@@ -811,7 +811,7 @@
  	new_window = FALSE;
  	new_document = FALSE;
  	geometry = NULL;
@@ -27,3 +27,12 @@
  	standalone = FALSE;
  	remaining_args = NULL;
  	encoding = NULL;
+@@ -874,7 +874,7 @@
+ 	}
+ 	else
+ 	{
+-		if (wait)
++		if (gwait)
+ 		{
+ 			command_line = cl;
+ 		}

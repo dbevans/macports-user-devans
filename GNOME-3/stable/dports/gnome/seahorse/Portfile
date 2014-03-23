@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            seahorse
-version         3.10.2
+version         3.11.92
 license         GPL-2+ GFDL-1.1+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Seahorse is a graphical interface for managing and using encryption keys.
@@ -21,8 +21,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  0102c9ff96ffdec8375d597ee2fc9ef3e0f48f5f \
-                sha256  89cabf19f77a55f220bc61a3b97e4db845a0980f0f1d9c66147cc9a4ced8cd16
+checksums       rmd160  9bdc53b5f3107d4a96897f189947b17b504804bc \
+                sha256  16beb9aae1cd0e64ee2164c039c1e58993f85629b4e3ded796cd0410a6dd7fc4
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -43,21 +43,21 @@ depends_lib     port:desktop-file-utils \
 depends_run     port:gnome-settings-daemon \
                 port:yelp
 
-patchfiles      patch-gkr-gkr-backend.vala.diff \
-                patch-ssh-seahorse-ssh-key-properties.c.diff
-
-configure.args  --disable-sharing \
-                --disable-schemas-compile \
-                --disable-silent-rules
-
-# update m4/intltool.m4 and autoreconf
+# update build/m4/intltool.m4 and autoreconf
 
 pre-configure {
-    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/build/m4
 }
 
 use_autoreconf  yes
 autoreconf.args -fvi
+
+configure.cflags-append \
+                -Wno-return-type
+
+configure.args  --disable-sharing \
+                --disable-schemas-compile \
+                --disable-silent-rules
 
 post-activate {
     system "${prefix}/bin/update-desktop-database -q ${prefix}/share/applications"
@@ -65,4 +65,4 @@ post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-livecheck.type  gnome
+livecheck.type  gnome-with-unstable

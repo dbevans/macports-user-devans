@@ -1,0 +1,11 @@
+--- gdk/quartz/gdkevents-quartz.c.orig	2014-01-11 14:13:00.000000000 -0800
++++ gdk/quartz/gdkevents-quartz.c	2014-01-19 09:11:56.000000000 -0800
+@@ -1684,6 +1684,8 @@
+       return TRUE;
+     }
+   
++      return TRUE;
++    }
+   /* FIXME: Add more settings */
+ 
+   return FALSE;

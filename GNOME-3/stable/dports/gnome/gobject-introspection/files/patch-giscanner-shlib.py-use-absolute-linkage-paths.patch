@@ -1,0 +1,11 @@
+--- giscanner/shlibs.py.orig	2014-01-11 08:55:55.000000000 -0800
++++ giscanner/shlibs.py	2014-01-27 06:19:42.000000000 -0800
+@@ -50,7 +50,7 @@
+ # is crazy enough to name a library liblib<foo> when lib<foo> exists.
+ #
+ def _ldd_library_pattern(library_name):
+-    return re.compile("(?<![A-Za-z0-9_-])(lib*%s[^A-Za-z0-9_-][^\s\(\)]*)"
++    return re.compile("([^\s]*lib*%s[^A-Za-z0-9_-][^\s\(\)]*)"
+                       % re.escape(library_name))
+ 
+ 

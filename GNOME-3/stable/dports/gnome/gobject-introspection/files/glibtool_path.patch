@@ -1,0 +1,19 @@
+--- giscanner/utils.py.orig	2014-01-27 06:24:28.000000000 -0800
++++ giscanner/utils.py	2014-01-27 06:24:28.000000000 -0800
+@@ -149,13 +149,13 @@
+         return libtool_path.split(' ')
+ 
+     try:
+-        subprocess.check_call(['libtool', '--version'],
+-                              stdout=open(os.devnull))
++        subprocess.check_call(['glibtool', '--version'],
++                              stdout=open(os.devnull, 'wb'))
+     except (subprocess.CalledProcessError, OSError):
+         # If libtool's not installed, assume we don't need it
+         return None
+ 
+-    return ['libtool']
++    return ['glibtool']
+ 
+ 
+ def files_are_identical(path1, path2):

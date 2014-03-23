@@ -4,8 +4,7 @@
 PortSystem      1.0
 
 name            dconf
-version         0.18.0
-revision        1
+version         0.19.92
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      gnome
@@ -24,8 +23,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  2d010c1998f093878f4be4ce8b46ee6066c9f9af \
-                sha256  109b1bc6078690af1ed88cb144ef5c5aee7304769d8bdc82ed48c3696f10c955
+checksums       rmd160  e3ee36b0b82936126860ddadec79c37639d312c6 \
+                sha256  634bd8437fd08d864be4c2f47d18e01778b50ff890633837a2fbd2b2adf6707f
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -60,4 +59,4 @@ post-activate {
     system "${prefix}/bin/gio-querymodules ${prefix}/lib/gio/modules"
 }
 
-livecheck.type  gnome
+livecheck.type  gnome-with-unstable

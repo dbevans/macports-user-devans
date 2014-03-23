@@ -4,8 +4,7 @@
 PortSystem      1.0
 
 name            totem
-version         3.10.1
-revision        3
+version         3.11.91
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome
 # also has an exception allowing use of non-GPL-compatible plugins
@@ -27,16 +26,15 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  80dce2fb0f61b442800aaa800a49991cd87c93d9 \
-                sha256  b6b6038c9104965671a6d25e98496a487c3a9c590c9c104f668bd9f4fa7be9e2
-
-patchfiles      patch-configure.diff
+checksums       rmd160  3c24c9f1ce123b20cfe2efc554fbb85760280bd1 \
+                sha256  913ac2d77e0fe6899a795247c6445bdc504dc5263f0c36b7e4fe27c6f3bd62f2
 
 depends_build   port:pkgconfig \
                 port:intltool \
                 port:itstool \
                 port:gnome-common \
-                port:yelp-tools
+                port:yelp-tools \
+                port:appdata-tools
 
 depends_lib     port:desktop-file-utils \
                 port:gnome-icon-theme \
@@ -72,6 +70,9 @@ pre-configure {
 
 use_autoreconf  yes
 autoreconf.args -fvi
+
+configure.cflags-append \
+                -Wno-error=format-nonliteral
 
 configure.args  --with-plugins=apple-trailers,autoload-subtitles,chapters,dbusservice,im-status,grilo,gromit,media-player-keys,ontop,opensubtitles,properties,recent,skipto \
                 --enable-easy-codec-installation \
@@ -109,4 +110,4 @@ post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-livecheck.type  gnome
+livecheck.type  gnome-with-unstable

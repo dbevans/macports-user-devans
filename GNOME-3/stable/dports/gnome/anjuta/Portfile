@@ -5,8 +5,7 @@ PortSystem      1.0
 PortGroup       muniversal 1.0
 
 name            anjuta
-version         3.10.2
-revision        1
+version         3.11.92
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A GNOME/GTK IDE
@@ -19,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  d51e40a87cfb9157102c2490c3e78f5b701b8196 \
-                sha256  ff16c646dbf0234f7056c697b2546125c89d43f8c1f5138a21409053c016d3bc
+checksums       rmd160  4021f89b350864ca04416920c81efda6d7afca62 \
+                sha256  2a1bd681b5e8c65e7fa09d84f06edd205748fa923de26536bb30001cb7f41196
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -50,8 +49,7 @@ depends_run     port:gnome-settings-daemon \
                 port:xdg-utils
 
 patchfiles      patch-configure.ac.diff \
-                patch-ltmain.sh.diff \
-                patch-plugins-language-support-vala-Makefile.am.diff
+                patch-ltmain.sh.diff
 
 #reconfigure with our intltool.m4 using autogen.sh
 
@@ -134,4 +132,4 @@ post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-livecheck.type  gnome
+livecheck.type  gnome-with-unstable
