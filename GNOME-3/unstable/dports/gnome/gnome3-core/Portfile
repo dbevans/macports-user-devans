@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-core
-version         3.11.91
+version         3.11.92
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -43,7 +43,6 @@ supported_archs noarch
 # gnome-user-share
 # gnome-video-effects
 # libgxps
-# libmediaart
 # libzapojit
 # mousetweaks
 # mutter
@@ -130,6 +129,7 @@ depends_lib     port:at-spi2-atk \
                 port:libgsf \
                 port:libgtop \
                 port:libgweather \
+                port:libmediaart \
                 port:libnotify \
                 port:libpeas \
                 port:rest \
