@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                tracker
-version             0.17.7
+version             0.17.8
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Metadata database, indexer and search tool.
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  313fe92498cc240c279ba5d302985850dd1952ca \
-                    sha256  8f76ff3251dba4b175316717eae83572243cf95015a27a9d6c8244d1a91b331b
+checksums           rmd160  f690effd787e332e6d6f1b8cba531549b7f35956 \
+                    sha256  55a5fa556e98b33df1f064378f9c0e3f06db2fb302d444890a127f0d14ef2c15
 
 depends_build       port:pkgconfig \
                     port:intltool
@@ -42,6 +42,7 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:libiptcdata \
                     port:exempi \
                     port:taglib \
+                    port:gtk3 \
                     port:libxml2 \
                     port:poppler \
                     port:libgsf \
@@ -53,6 +54,19 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
 
 #depends_run         port:gnome-settings-daemon \
 #                    port:yelp
+
+patchfiles          patch-configure.ac.diff \
+                    patch-extract-configure.ac.diff \
+                    patch-printgiferror.diff
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf      yes
+autoreconf.args     -fvi
 
 configure.args      --disable-schemas-compile \
                     --disable-silent-rules \
