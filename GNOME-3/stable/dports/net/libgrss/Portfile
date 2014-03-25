@@ -19,21 +19,31 @@ checksums           rmd160  398c5b31f5f4b93b8fa26e762070eb0450f275c5 \
                     sha256  a0b5d9cc18b90891c20b3645567b31edda1e6f61e6a4c2f314ac77490bb767b1
 
 depends_build       port:pkgconfig \
-                    port:gnome-doc-utils
+                    port:intltool \
+                    port:gtk-doc \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool \
+                    port:gnome-common
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:libxml2 \
                     port:libsoup \
-                    port:rarian
+                    port:gobject-introspection
 
-configure.args      --disable-scrollkeeper
+patchfiles          patch-netinet-utils.h.diff \
+                    patch-autotools.diff
 
-patchfiles          patch-netinet-utils.h.diff
+# temporary work around for absence of po/POTFILES.in
+# silences non-fatal error during configure
 
-post-activate {
-    system "${prefix}/bin/scrollkeeper-update"
-}
+post-patch {
+    file mkdir ${worksrcpath}/po
+    touch ${worksrcpath}/po/POTFILES.in
+}    
 
-livecheck.type  regex
-livecheck.url   http://gtk.mplat.es/libgrss/tarballs/
-livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"
+configure.cmd       ./autogen.sh
+
+livecheck.type      regex
+livecheck.url       http://gtk.mplat.es/libgrss/tarballs/
+livecheck.regex     "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"
