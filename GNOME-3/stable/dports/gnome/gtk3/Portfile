@@ -245,5 +245,5 @@ variant x11 conflicts quartz no_x11 {
 
 variant no_x11 conflicts x11 description {Legacy compatibility variant} {}
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome
 livecheck.name  gtk+

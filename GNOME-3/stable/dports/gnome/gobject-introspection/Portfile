@@ -68,4 +68,4 @@ if {![catch {set result [active_variants python27 ucs4]}]} {
     }
 }
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome

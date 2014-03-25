@@ -45,4 +45,4 @@ platform darwin 8 {
 build.args-append       CC="${configure.cc} ${configure.cc_archflags}"
 destroot.args-append    CC="${configure.cc} ${configure.cc_archflags}"
 
-livecheck.type          gnome-with-unstable
+livecheck.type          gnome

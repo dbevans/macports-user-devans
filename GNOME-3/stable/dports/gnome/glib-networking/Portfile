@@ -54,4 +54,4 @@ post-activate {
     system "${prefix}/bin/gio-querymodules ${prefix}/lib/gio/modules"
 }
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome

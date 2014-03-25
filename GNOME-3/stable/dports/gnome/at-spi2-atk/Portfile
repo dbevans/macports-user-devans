@@ -32,4 +32,4 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:atk \
                     port:at-spi2-core
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome
