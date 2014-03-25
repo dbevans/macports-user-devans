@@ -57,7 +57,8 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
 
 patchfiles          patch-configure.ac.diff \
                     patch-extract-configure.ac.diff \
-                    patch-printgiferror.diff
+                    patch-printgiferror.diff \
+                    patch-module-flags-no-undefined.diff
 
 # update m4/intltool.m4 and autoreconf
 
