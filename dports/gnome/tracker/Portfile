@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                tracker
-version             0.17.8
+version             1.0.0
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Metadata database, indexer and search tool.
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  f690effd787e332e6d6f1b8cba531549b7f35956 \
-                    sha256  55a5fa556e98b33df1f064378f9c0e3f06db2fb302d444890a127f0d14ef2c15
+checksums           rmd160  0246a1feebf57c54d4d94d3723b1e7802a890a2d \
+                    sha256  a1d033faf2c78f0e239f3c2c961b96623c9a7dabd938c08e3f5660bd70f54ba2
 
 depends_build       port:pkgconfig \
                     port:intltool
@@ -52,13 +52,11 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:flac \
                     port:totem-pl-parser
 
-#depends_run         port:gnome-settings-daemon \
-#                    port:yelp
-
 patchfiles          patch-configure.ac.diff \
                     patch-extract-configure.ac.diff \
                     patch-printgiferror.diff \
-                    patch-module-flags-no-undefined.diff
+                    patch-module-flags-no-undefined.diff \
+                    patch-tracker-extract-libav.diff
 
 # update m4/intltool.m4 and autoreconf
 
@@ -76,6 +74,7 @@ configure.args      --disable-schemas-compile \
                     --enable-journal \
                     --enable-tracker-fts \
                     --disable-unit-tests \
+                    --enable-upower \
                     --disable-hal \
                     --disable-network-manager \
                     --enable-libmediaart \
@@ -120,22 +119,26 @@ variant evolution description {} {
 variant nautilus description {} {
 }
 
-variant enca description {} {
+variant enca description {Enable libenca for Cyrillic language detection in MP3s} {
     configure.args-delete   --without-enca
     configure.args-append   --with-enca
 
     depends_lib-append      port:enca
 }
 
-variant gstreamer description {Enable gstreamer generic media extractor backend} {
+variant gstreamer conflicts libav description {Enable gstreamer generic media extractor backend} {
     configure.args-append   --enable-generic-media-extractor=gstreamer \
                             --with-gstreamer-backend=discoverer
 
     depends_lib-append      port:gstreamer1 \
-                            port:gstreamer1-gst-plugins-base
+                            port:gstreamer1-gst-plugins-base \
+                            port:gstreamer1-gst-plugins-good \
+                            port:gstreamer1-gst-plugins-bad \
+                            port:gstreamer1-gst-plugins-ugly \
+                            port:gstreamer1-gst-libav
 }
 
-variant mplayer description {Enable libav generic media extractor backend} {
+variant libav conflicts gstreamer description {Enable libav generic media extractor backend} {
     configure.args-append   --enable-generic-media-extractor=libav
 
     depends_lib-append      port:ffmpeg
@@ -143,11 +146,4 @@ variant mplayer description {Enable libav generic media extractor backend} {
 
 default_variants    +gstreamer
 
-# port installs hicolor icons, desktop application file, and gschemas
-post-activate {
-#    system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
-#    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
-#    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
-}
-
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome
