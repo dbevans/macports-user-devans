@@ -83,6 +83,8 @@ depends_lib     port:anjuta \
                 port:gitg \
                 port:glade \
                 port:gnome-devel-docs \
+                port:gnome-maps \
+                port:gnome-photos \
                 port:rygel \
                 port:seahorse
 
