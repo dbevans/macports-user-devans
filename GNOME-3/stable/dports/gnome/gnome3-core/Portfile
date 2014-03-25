@@ -48,7 +48,6 @@ supported_archs noarch
 # mutter
 # network-manager-applet
 # sushi
-# tracker
 #
 # BROKEN PORTS
 #
@@ -145,6 +144,7 @@ depends_lib     port:at-spi2-atk \
                 port:seed \
                 port:totem \
                 port:totem-pl-parser \
+                port:tracker \
                 port:vala \
                 port:vino \
                 port:vte \

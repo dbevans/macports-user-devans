@@ -1,6 +1,6 @@
---- configure.orig	2014-02-06 11:58:57.000000000 -0800
-+++ configure	2014-02-06 12:00:04.000000000 -0800
-@@ -2600,7 +2600,7 @@
+--- configure.orig	2014-03-24 21:59:37.000000000 -0700
++++ configure	2014-03-24 23:54:31.000000000 -0700
+@@ -2641,7 +2641,7 @@
  
  
  # Extract the first word of "gtk-update-icon-cache", so it can be a program name with args.

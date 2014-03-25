@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gcr
-version         3.11.91
+version         3.12.0
 license         LGPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     GCR is a library for displaying certificates, and crypto UI, accessing \
@@ -23,8 +23,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  a2c9ff541294cdbc381ce56292b4b52fc3a707ab \
-                sha256  25cbee374cf7fbbf67ef7be6afb1ee6f5636a4d0b2cecd6568a872cdab7ff553
+checksums       rmd160  c30ae9038737c7eb65fa92d77e54c4beaa195fc1 \
+                sha256  9d561d0b0a43aaad55fc1d464b3ee3e1687a5021e444f1bbdce3ae624518de77
 
 depends_build   port:pkgconfig \
                 port:intltool

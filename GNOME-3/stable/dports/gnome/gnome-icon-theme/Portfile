@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-icon-theme
-version             3.11.92
+version             3.12.0
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         nomaintainer
 categories          gnome
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  a3c27c41413b3db1cdd6f3f39752a3759c485181 \
-                    sha256  9214fe976429a6542bd952d507ceb54e623e2036e6798dcba87bf9d84eb41878
+checksums           rmd160  90cde65cc4459f9fdc2b9ab480951c78465a2582 \
+                    sha256  359e720b9202d3aba8d477752c4cd11eced368182281d51ffd64c8572b4e503a
 
 depends_build       port:intltool \
                     port:pkgconfig \

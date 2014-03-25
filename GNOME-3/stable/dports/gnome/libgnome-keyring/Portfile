@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            libgnome-keyring
-version         3.11.92
+version         3.12.0
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      gnome
@@ -22,8 +22,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  0033f8259c40027a61ab3f2cfcfcc263639b0379 \
-                sha256  7d2179360d84de771b59d0522739977f5bcc85b8acbe0238142669ab4b32bfd8
+checksums       rmd160  d088c86fe3900e58a2dd67ef20bec5b23fd5f8ad \
+                sha256  c4c178fbb05f72acc484d22ddb0568f7532c409b0a13e06513ff54b91e947783
 
 depends_build   port:pkgconfig \
                 port:intltool
