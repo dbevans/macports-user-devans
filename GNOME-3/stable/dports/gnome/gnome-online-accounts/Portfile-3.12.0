@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-online-accounts
-version         3.11.92
+version         3.12.0
 license         LGPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Single sign-on framework for GNOME
@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  fe9ef1880ba7c3deea963b8fddb1d4d7cc4ec72c \
-                sha256  013a2e6ee2b9896a5e61a9d045245363f165abef52d9301e0c60844e264bb6cc
+checksums       rmd160  be68c2054eada0c3579ae4766161563df6bf0e71 \
+                sha256  81d44afb3b993b7fb465d19b1b572db423bc7591e309f829d0639c802d7dfcc2
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -70,4 +70,4 @@ platform darwin {
     }
 }
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome
