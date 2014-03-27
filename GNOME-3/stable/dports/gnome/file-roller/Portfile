@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            file-roller
-version         3.11.92
+version         3.12.0
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     An archive manager for GNOME
@@ -23,8 +23,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  b5a41e51abc3e0f5250b218cbbb8a30fdb4c03bc \
-                sha256  c74bc2b3456f7cbfcf76da2277289979314a2b167da5664a7cda3bf7f45cc6db
+checksums       rmd160  ce0605b01cbbd849705a636e1435c4d4556ab833 \
+                sha256  d62c6269e94c65237d970559c6dee0de38390b17f0d48f9ac8836ec85f79a897
 
 depends_build   port:pkgconfig \
                 port:intltool \

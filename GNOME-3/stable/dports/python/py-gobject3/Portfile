@@ -6,7 +6,7 @@ PortGroup           python 1.0
 
 name                py-gobject3
 set my_name         pygobject
-version             3.11.92
+version             3.12.0
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories-append   gnome
 license             LGPL-2.1+
@@ -23,8 +23,8 @@ master_sites        gnome:sources/${my_name}/${branch}/
 distname            ${my_name}-${version}
 use_xz              yes
 
-checksums           sha256  5a7a72937d6aada6d61b7e16925d0c319d480454a16936b383e0529da4be9769 \
-                    rmd160  73a60dfe2da78c3535caa983473a501717f401cf
+checksums           sha256  0d4485311fcfb073dc37432e36ad1d45bcf9f8796a1e8ff20a6494e0297dbd1a \
+                    rmd160  bc4d3c67c6462de24ce3646afb77e37f7f14deb3
 
 python.versions     27 32 33 34
 
@@ -64,6 +64,6 @@ if {${name} ne ${subport}} {
 
     livecheck.type  none
 } else {
-    livecheck.type  gnome-with-unstable
+    livecheck.type  gnome
     livecheck.name  ${my_name}
 }

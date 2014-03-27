@@ -6,7 +6,7 @@ PortSystem      1.0
 name            clutter-gst
 epoch           1
 version         2.0.10
-revision        1
+revision        2
 license         LGPL-2.1+
 set branch      [string range $version 0 [expr [string last "." $version] - 1]]
 categories      graphics
@@ -44,5 +44,5 @@ configure.args  --enable-debug=yes \
                 --enable-introspection=yes \
                 --disable-silent-rules
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome
 livecheck.regex {LATEST-IS-(\d+\.[0-8][0-9]*(?:\.\d+)*)}

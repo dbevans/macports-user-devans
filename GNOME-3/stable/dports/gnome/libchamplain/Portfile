@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            libchamplain
 version         0.12.7
-revision        1
+revision        2
 license         LGPL-2.1+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A Clutter based widget to display rich, interactive maps.
@@ -36,4 +36,4 @@ configure.args  --enable-introspection=yes \
                 --enable-vala \
                 --disable-memphis
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome

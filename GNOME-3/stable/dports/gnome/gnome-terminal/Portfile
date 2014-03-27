@@ -4,9 +4,9 @@
 PortSystem      1.0
 
 name            gnome-terminal
-version         3.11.3
+version         3.12.0
 set branch      [join [lrange [split ${version} .] 0 1] .]
-description Terminal component for the GNOME 2 Desktop
+description     Terminal component for the GNOME 3 Desktop
 long_description \
                 ${description}
 maintainers     devans openmaintainer
@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  59c19a4b4fb81662b631e13e5cb1315744ae4055 \
-                sha256  135d85cf2643c5b523451ff0dd42cc88970d4f34a7ce307fbc9b52055ed78ea8
+checksums       rmd160  149a4da5c39370838a85a1d3fb2b487ab5adc3a3 \
+                sha256  ce690ed798a3e940f2f3a173a7946181e48d899214048d3282c671535c87cea7
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -34,6 +34,7 @@ depends_lib     port:desktop-file-utils \
                 port:gsettings-desktop-schemas \
                 port:gtk3 \
                 port:vte \
+                port:appdata-tools \
                 port:dbus \
                 port:dconf \
                 port:xorg-libX11
