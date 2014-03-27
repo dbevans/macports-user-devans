@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                json-glib
-version             0.99.2
+version             1.0.0
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          devel
 license             LGPL-2.1+
@@ -24,8 +24,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  e6fabe61b282611eb2790746e11f39dd726fbc3a \
-                    sha256  88254eac2f6f0ac9df3d4bb494d61152212e70829309eb5c586b48ca3aec388b
+checksums           rmd160  e9a99e1179b446cca06ad7c17b3c03a94d67efc9 \
+                    sha256  dbf558d2da989ab84a27e4e13daa51ceaa97eb959c2c2f80976c9322a8f4cdde
 
 configure.args      --enable-introspection=yes
 
