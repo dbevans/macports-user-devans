@@ -43,6 +43,7 @@ depends_lib     port:dbus-glib \
                 port:policykit
 
 patchfiles      patch-configure.ac.diff \
+                patch-libupower-glib-up-client.c.diff \
                 patch-doc-man-Makefile.am.diff
 
 # reconfigure with our intltool.m4 using autogen.sh from upstream git
