@@ -40,7 +40,7 @@ patchfiles          patch-netinet-utils.h.diff \
 post-patch {
     file mkdir ${worksrcpath}/po
     touch ${worksrcpath}/po/POTFILES.in
-}    
+}
 
 configure.cmd       ./autogen.sh
 

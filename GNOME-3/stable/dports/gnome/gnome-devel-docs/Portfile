@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-devel-docs
-version             3.11.92
+version             3.12.0
 license             GFDL-1.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         The GNOME Developer Documentation Package
@@ -26,8 +26,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  04bae1d2d2a2c2c335725e036ee8a90e79b02e75 \
-                    sha256  a613a52151fe45711dbc2bfd2326deb70fa9ff9532e5d3d7deaf74591e743f80
+checksums           rmd160  b9c758d6bf29fa6aa60913e9bc3946ff216c1a79 \
+                    sha256  8d88b91f5a1257ad3420f9e51f557a445e918c5c125f76df2d3028a89d9271de
 
 depends_build       port:itstool \
                     port:libxml2

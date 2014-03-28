@@ -49,7 +49,7 @@ configure.args      --disable-3g-source \
                     --disable-wifi-source
 
 post-activate {
-	system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas" 
+	system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
 livecheck.type      regex

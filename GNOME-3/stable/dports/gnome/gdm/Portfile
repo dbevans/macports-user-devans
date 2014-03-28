@@ -56,7 +56,6 @@ patchfiles      patch-daemon.diff \
 
 post-patch {
     reinplace "s|@MP_PREFIX@|${prefix}|" ${worksrcpath}/configure.ac
-    file attributes ${worksrcpath}/install-sh -permissions +x
 }
 
 use_parallel_build no

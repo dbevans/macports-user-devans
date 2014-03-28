@@ -10,7 +10,7 @@ maintainers         nomaintainer
 categories          gnome
 license             GPL-2
 installs_libs       no
-platforms           darwin 
+platforms           darwin
 supported_archs     noarch
 
 description         A collection of backgrounds for GNOME 2.

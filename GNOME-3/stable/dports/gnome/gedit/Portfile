@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gedit
-version         3.11.92
+version         3.12.0
 license         GPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     GNOME editor.
@@ -18,16 +18,13 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  25a173d8a6b1e27f8156bf0e2e0280f361655149 \
-                sha256  6b2c7566a098e3ebef44debb3e06c4dcfe8eef3b3e29f4233d1ee90f6a77a7c8
+checksums       rmd160  661d2e961172f6b616be71350104b71582dcd516 \
+                sha256  6028d535d50c85017739b84e7fe94ad5a1940064bb315375d5d1d6ed99eb38c2
 
 depends_build   port:pkgconfig \
                 port:intltool \
                 port:itstool \
                 port:yelp-tools \
-                port:automake \
-                port:autoconf \
-                port:libtool \
                 port:gnome-common \
                 port:gtk-doc
 
@@ -43,28 +40,25 @@ depends_lib     port:desktop-file-utils \
                 port:libxml2 \
                 port:enchant \
                 port:iso-codes \
-                port:zeitgeist
+                port:zeitgeist \
+                port:vala
 
 depends_run     port:gnome-settings-daemon \
                 port:yelp
 
-pre-patch {
-    copy ${worksrcpath}/gedit ${worksrcpath}/gedit.orig
+patchfiles      patch-configure.ac.diff
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
 }
 
-patchfiles      patch-configure.diff \
-                patch-gedit-gedit-app.c.diff
-
-# use autogen.sh from upstream git to update intltool.m4 using intltoolize and autoreconf
-
-post-patch {
-    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
-}
-
-configure.cmd   ./autogen.sh
+use_autoreconf  yes
+autoreconf.args -fvi
 
 configure.cflags-append \
-                -Wno-format-nonliteral
+                -Wno-error=format-nonliteral
 
 configure.args  --enable-zeitgeist \
                 --disable-python \
@@ -73,7 +67,7 @@ configure.args  --enable-zeitgeist \
 
 # minimum python version is 3.2.3
 
-variant python32 description {Use python 3.2} {
+variant python32 conflicts python33 python34 description {Use python 3.2} {
     depends_lib-append        port:py32-gobject3
     configure.python          ${prefix}/bin/python3.2
     set python_framework      ${frameworks_dir}/Python.framework/Versions/3.2
@@ -81,7 +75,7 @@ variant python32 description {Use python 3.2} {
     configure.args-replace    --disable-python --enable-python
 }
 
-variant python33 description {Use python 3.3} {
+variant python33 conflicts python32 python34 description {Use python 3.3} {
     depends_lib-append        port:py33-gobject3
     configure.python          ${prefix}/bin/python3.3
     set python_framework      ${frameworks_dir}/Python.framework/Versions/3.3
@@ -89,7 +83,17 @@ variant python33 description {Use python 3.3} {
     configure.args-replace    --disable-python --enable-python
 }
 
-default_variants +python32
+variant python34 conflicts python32 python33 description {Use python 3.3} {
+    depends_lib-append        port:py34-gobject3
+    configure.python          ${prefix}/bin/python3.4
+    set python_framework      ${frameworks_dir}/Python.framework/Versions/3.4
+    configure.pkg_config_path ${python_framework}/lib/pkgconfig
+    configure.args-replace    --disable-python --enable-python
+}
+
+if {![variant_isset python32] && ![variant_isset python34]} {
+    default_variants +python33
+}
 
 post-activate    {
     system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"

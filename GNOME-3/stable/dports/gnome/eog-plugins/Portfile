@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            eog-plugins
-version         3.11.92
+version         3.12.0
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Extra plugins for the Eye of GNOME image viewer
@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  ac9cb5b5c77818957839f9d1b6712e76817f3139 \
-                sha256  7d954383659a86971f02f0cef4ce0713dfe404a38697681f0682d1aa60e95662
+checksums       rmd160  c1bded4b72f9dada2328b1c636a7da4e22900e2a \
+                sha256  3f6c4e0dd63c1003f31c08636b6540cf0312b9b42e2e621c96b946c72e3d9742
 
 depends_build   port:pkgconfig \
                 port:intltool

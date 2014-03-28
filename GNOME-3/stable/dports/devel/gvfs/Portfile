@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gvfs
-version         1.19.90
+version         1.20.0
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     nomaintainer
 categories      devel
@@ -35,8 +35,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  e4e8bdf96d6adcc92e49ffd1ddd2a09e68cf3b71 \
-                sha256  3a59fb24f05549dee332efc811b85a74868ef755899f201b78a98340b196567c
+checksums       rmd160  17f179d15a191b4c6c9342f312943f82424546ba \
+                sha256  532a75fe105950a4da449d06b4fef73fb2f17ed795f731db3785c83e360e7e41
 
 depends_build   port:pkgconfig \
                 port:intltool \

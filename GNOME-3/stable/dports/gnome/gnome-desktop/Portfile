@@ -41,7 +41,7 @@ depends_lib     port:desktop-file-utils \
                 port:xorg-libXext \
                 port:xorg-libXrandr \
                 port:xkeyboard-config \
-                port:xorg-libxkbfile 
+                port:xorg-libxkbfile
 
 pre-patch {
     copy ${worksrcpath}/libgnome-desktop/libgsystem ${worksrcpath}/libgnome-desktop/libgsystem.orig
