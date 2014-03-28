@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-control-center
-version         3.11.92
+version         3.12.0
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     GNOME's main interface for configuration of the various \
                 aspects of your desktop.
@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  bddeb18bd18461246b5436b896e61ce627e840d1 \
-                sha256  1465c380308d9399ec2888f4996292c5ec7a6226582f8940c4a628b0607ee131
+checksums       rmd160  376dae26a26ea2a63d67e1c3cfadc4a8e66804a0 \
+                sha256  14fd8334d3f8e1ce36f6948c5092b9437d5563550030cd562a695a6120119058
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -94,4 +94,4 @@ post-activate   {
     system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
 }
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome
