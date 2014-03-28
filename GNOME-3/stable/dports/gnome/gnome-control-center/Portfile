@@ -54,6 +54,7 @@ depends_lib     port:desktop-file-utils \
 depends_run     port:yelp
 
 # color panel disabled by patch, dependency colord requires libudev
+# power panel disabled by patch, doesn't support upower 0.99 API
 
 patchfiles      patch-display-new-config-model.diff \
                 patch-output-is-laptop.diff \
@@ -62,6 +63,7 @@ patchfiles      patch-display-new-config-model.diff \
                 patch-users-logged-in-check.diff \
                 patch-disable-color-panel.diff \
                 patch-disable-shell-test-hostname.diff \
+                patch-disable-power-panel.diff \
                 patch-panels-user-accounts.diff
 
 pre-configure {
