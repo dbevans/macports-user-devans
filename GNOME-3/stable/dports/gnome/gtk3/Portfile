@@ -39,11 +39,15 @@ master_sites        gnome:sources/gtk+/${branch}/ \
 minimum_xcodeversions {9 3.1}
 depends_build       port:pkgconfig
 
+# cloudprint backend requires rest, json-glib
+
 depends_lib         port:atk \
                     path:lib/pkgconfig/pango.pc:pango \
                     port:gdk-pixbuf2 \
                     path:lib/pkgconfig/glib-2.0.pc:glib2 \
-                    port:gobject-introspection
+                    port:gobject-introspection \
+                    port:rest \
+                    port:json-glib
 
 depends_run         port:shared-mime-info \
                     port:hicolor-icon-theme
@@ -60,6 +64,7 @@ archcheck.files \
 configure.args      --enable-static \
                     --disable-glibtest \
                     --enable-introspection \
+                    --enable-cloudprint \
                     --disable-wayland-backend \
                     --disable-schemas-compile \
                     gio_can_sniff=yes
