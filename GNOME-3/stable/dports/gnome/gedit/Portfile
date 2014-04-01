@@ -95,6 +95,8 @@ if {![variant_isset python32] && ![variant_isset python34]} {
     default_variants +python33
 }
 
+notes           "For extra functionality install gedit-plugins"
+
 post-activate    {
     system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
 }
