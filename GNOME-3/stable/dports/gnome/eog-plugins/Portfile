@@ -34,6 +34,9 @@ depends_lib     port:eog \
                 port:libexif \
                 port:gsettings-desktop-schemas
 
+patchfiles      patch-export-to-folder-less-chatty-bz727218.diff \
+                patch-slideshowshuffle-use-python3-bz727222.diff
+
 # update m4/intltool.m4 and autoreconf
 
 pre-configure {
@@ -49,17 +52,33 @@ configure.args  --disable-python \
 
 # requires python32 or later
 
-variant python32 description {Use python 3.2} {
+variant python32 conflicts python33 python34 description {Use python 3.2} {
     configure.python          ${prefix}/bin/python3.2
     set python_framework      ${frameworks_dir}/Python.framework/Versions/3.2
     configure.pkg_config_path ${python_framework}/lib/pkgconfig
     configure.args-replace    --disable-python --enable-python
 }
 
-default_variants +python32
+variant python33 conflicts python32 python34 description {Use python 3.3} {
+    configure.python          ${prefix}/bin/python3.3
+    set python_framework      ${frameworks_dir}/Python.framework/Versions/3.3
+    configure.pkg_config_path ${python_framework}/lib/pkgconfig
+    configure.args-replace    --disable-python --enable-python
+}
+
+variant python34 conflicts python32 python33 description {Use python 3.4} {
+    configure.python          ${prefix}/bin/python3.4
+    set python_framework      ${frameworks_dir}/Python.framework/Versions/3.4
+    configure.pkg_config_path ${python_framework}/lib/pkgconfig
+    configure.args-replace    --disable-python --enable-python
+}
+
+if {![variant_isset python32] && ![variant_isset python34]} {
+    default_variants +python33
+}
 
 post-activate {
    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome
