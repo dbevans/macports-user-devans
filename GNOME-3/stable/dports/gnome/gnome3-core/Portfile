@@ -56,7 +56,7 @@ supported_archs noarch
 # are currently broken and/or need to be updated
 #
 # gdm (builds but doesn't work due to missing OSX specific functionality in glib2)
-# gnome-system-monitor (builds but segfaults on processes/resources -- probably due to lack of support for MacOSX in libgtop)
+# gnome-system-monitor (builds but segfaults on processes/resources due to g_free error in libgtop-server #41542)
 #
 
 depends_lib     port:at-spi2-atk \
