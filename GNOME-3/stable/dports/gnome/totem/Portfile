@@ -102,16 +102,49 @@ variant nautilus description {Build nautilus properties page plugin} {
     depends_lib-append        port:nautilus
 }
 
-variant python27 description {Use python 2.7} {
-    configure.python          ${prefix}/bin/python2.7
+variant python27 description {Use python 3.2} {
+    configure.python          ${prefix}/bin/python3.2
     depends_lib-append        port:py27-gobject3 port:py27-pylint
-    set python_framework      ${frameworks_dir}/Python.framework/Versions/2.7
+    set python_framework      ${frameworks_dir}/Python.framework/Versions/3.2
     configure.pkg_config_path ${python_framework}/lib/pkgconfig
     configure.env              PATH=${python_framework}/bin:$env(PATH)
     configure.args-replace    --disable-python --enable-python
 }
 
-default_variants +python27
+variant python32 description {Use python 3.2} {
+    configure.python          ${prefix}/bin/python3.2
+    depends_lib-append        port:py32-gobject3 port:py32-pylint
+    set python_framework      ${frameworks_dir}/Python.framework/Versions/3.2
+    configure.pkg_config_path ${python_framework}/lib/pkgconfig
+    configure.env              PATH=${python_framework}/bin:$env(PATH)
+    configure.args-replace    --disable-python --enable-python
+}
+
+variant python33 description {Use python 3.3} {
+    configure.python          ${prefix}/bin/python3.3
+    depends_lib-append        port:py33-gobject3 port:py33-pylint
+    set python_framework      ${frameworks_dir}/Python.framework/Versions/3.3
+    configure.pkg_config_path ${python_framework}/lib/pkgconfig
+    configure.env              PATH=${python_framework}/bin:$env(PATH)
+    configure.args-replace    --disable-python --enable-python
+}
+
+# TODO: enable +python34 when py34-pylint is available (#43177)
+
+#variant python34 description {Use python 3.4} {
+#    configure.python          ${prefix}/bin/python3.4
+#    depends_lib-append        port:py34-gobject3 port:py34-pylint
+#    set python_framework      ${frameworks_dir}/Python.framework/Versions/3.4
+#    configure.pkg_config_path ${python_framework}/lib/pkgconfig
+#    configure.env              PATH=${python_framework}/bin:$env(PATH)
+#    configure.args-replace    --disable-python --enable-python
+#}
+
+#if {![variant_isset python27] && ![variant_isset python32] && ![variant_isset python34]} {
+
+if {![variant_isset python27] && ![variant_isset python32]} {
+    default_variants +python33
+}
 
 post-activate {
     system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
@@ -119,4 +152,4 @@ post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome
