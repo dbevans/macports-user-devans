@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            inkscape-devel
 conflicts       inkscape
-set bzr_rev     13163
+set bzr_rev     13250
 version         0.48.99.${bzr_rev}
 epoch           1
 license         GPL-2 LGPL-2.1
@@ -25,8 +25,8 @@ long_description \
 homepage        http://www.inkscape.org/
 master_sites    file:///Users/devans/macports/distfiles/${name}
 
-checksums       rmd160  37df0c4dcd5275aaa24f8f0113107f496a311f9b \
-                sha256  618709808cfde0b262cb92b37c6262abed1fe2804a51978b612610d9f24e3abb
+checksums       rmd160  4a27c2d97a7629254326dbcf085967af49043fcb \
+                sha256  35067afc0bcae97c46c288c4fc155f273f9ea1af6be9b0c5b9f95a6233ad3a35
 
 worksrcdir      inkscape
 
@@ -53,7 +53,9 @@ depends_lib     port:desktop-file-utils \
                 port:libwpg \
                 port:gtkspell2
 
-configure.cflags-append -Wno-unused-function
+patchfiles      patch-revert-r13232.diff
+
+configure.cflags-append -Wno-error=unused-function
 
 variant python26 conflicts python27 description {Configure to use Python version 2.6} {
     depends_lib-append \
