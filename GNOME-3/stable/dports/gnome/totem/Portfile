@@ -55,6 +55,8 @@ depends_lib     port:desktop-file-utils \
                 port:libxml2 \
                 port:shared-mime-info \
                 port:dbus \
+                port:vala \
+                port:zeitgeist \
                 port:xorg-libX11 \
                 port:xorg-libsm \
                 port:xorg-libice
@@ -74,13 +76,19 @@ autoreconf.args -fvi
 configure.cflags-append \
                 -Wno-error=format-nonliteral
 
-configure.args  --with-plugins=apple-trailers,autoload-subtitles,chapters,dbusservice,im-status,grilo,gromit,media-player-keys,ontop,opensubtitles,properties,recent,skipto \
+set withplugins apple-trailers,autoload-subtitles,chapters,dbusservice,im-status,gromit,media-player-keys,ontop,opensubtitles,properties,pythonconsole,recent,rotation,screensaver,screenshot,skipto,zeitgeist-dp,vimeo
+
+if {[variant_isset nautilus]} {
+    set withplugins [string map {"rotation" "rotation,save-file"} ${withplugins}]
+}
+
+configure.args  --with-plugins=${withplugins} \
                 --enable-easy-codec-installation \
                 --enable-browser-plugins=no \
                 --enable-introspection=yes \
                 --enable-debug \
                 --disable-python \
-                --disable-vala \
+                --enable-vala \
                 --disable-nautilus \
                 --disable-schemas-compile \
                 --disable-silent-rules
@@ -96,10 +104,11 @@ variant nautilus description {Build nautilus properties page plugin} {
 
 variant python27 description {Use python 2.7} {
     configure.python          ${prefix}/bin/python2.7
-    depends_lib-append        port:py27-gobject3
+    depends_lib-append        port:py27-gobject3 port:py27-pylint
     set python_framework      ${frameworks_dir}/Python.framework/Versions/2.7
     configure.pkg_config_path ${python_framework}/lib/pkgconfig
     configure.env              PATH=${python_framework}/bin:$env(PATH)
+    configure.args-replace    --disable-python --enable-python
 }
 
 default_variants +python27
