@@ -39,4 +39,4 @@ configure.args      --enable-all-services \
                     --enable-vala-bindings \
                     --disable-silent-rules
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome

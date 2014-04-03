@@ -34,4 +34,4 @@ depends_build       port:itstool \
 
 configure.args      --disable-silent-rules
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome

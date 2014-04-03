@@ -89,5 +89,5 @@ configure.args      --disable-silent-rules \
 #                    --enable-tracker \
 #                    --enable-dmap \ # apparently there is a bug in libdmapsharing
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome
 

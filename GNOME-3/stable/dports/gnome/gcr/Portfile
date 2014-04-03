@@ -81,4 +81,4 @@ platform darwin 8 {
     build.cmd               ${prefix}/bin/gmake
 }
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome

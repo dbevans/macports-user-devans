@@ -57,4 +57,4 @@ autoreconf.args     -fvi
 
 destroot.keepdirs   ${destroot}${prefix}/lib/grilo-0.2
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome

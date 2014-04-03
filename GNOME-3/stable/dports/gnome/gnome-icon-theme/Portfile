@@ -44,4 +44,4 @@ configure.env-append \
 
 configure.args      --enable-icon-mapping
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome

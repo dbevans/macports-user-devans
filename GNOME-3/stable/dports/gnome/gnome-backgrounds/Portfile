@@ -38,4 +38,4 @@ pre-configure {
 use_autoreconf      yes
 autoreconf.args     -fvi
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome

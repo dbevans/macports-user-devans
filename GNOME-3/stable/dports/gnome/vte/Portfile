@@ -50,4 +50,4 @@ variant glade description {Enable building of glade catalog items} {
     configure.args-delete --disable-glade
 }
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome

@@ -36,4 +36,4 @@ installs_libs   no
 
 patchfiles      patch-configure.diff
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome

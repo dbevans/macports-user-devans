@@ -38,4 +38,4 @@ platform darwin 8 {
         depends_lib-delete    port:gobject-introspection
 }
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome

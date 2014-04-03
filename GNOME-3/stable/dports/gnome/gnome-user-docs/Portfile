@@ -30,4 +30,4 @@ depends_build   port:pkgconfig \
                 port:libxml2 \
                 port:itstool
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome

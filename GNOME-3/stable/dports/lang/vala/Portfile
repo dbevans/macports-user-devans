@@ -33,4 +33,4 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2
 
 configure.args      --enable-vapigen
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome

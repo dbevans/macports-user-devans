@@ -39,4 +39,4 @@ patchfiles          patch-geocode-glib-geocode-glib.symbols.diff
 configure.args      --enable-introspection=yes \
                     --disable-silent-rules
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome

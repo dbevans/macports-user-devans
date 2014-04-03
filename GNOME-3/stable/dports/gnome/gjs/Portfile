@@ -43,4 +43,4 @@ autoreconf.args -fvi
 # non-relocatable subtraction expression, "LC0" minus "L00000000001$pb"
 compiler.blacklist gcc-3.3 *gcc-4.0 {gcc-4.2 < 5666}
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome
