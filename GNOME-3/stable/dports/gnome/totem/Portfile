@@ -129,20 +129,16 @@ variant python33 description {Use python 3.3} {
     configure.args-replace    --disable-python --enable-python
 }
 
-# TODO: enable +python34 when py34-pylint is available (#43177)
+variant python34 description {Use python 3.4} {
+    configure.python          ${prefix}/bin/python3.4
+    depends_lib-append        port:py34-gobject3 port:py34-pylint
+    set python_framework      ${frameworks_dir}/Python.framework/Versions/3.4
+    configure.pkg_config_path ${python_framework}/lib/pkgconfig
+    configure.env              PATH=${python_framework}/bin:$env(PATH)
+    configure.args-replace    --disable-python --enable-python
+}
 
-#variant python34 description {Use python 3.4} {
-#    configure.python          ${prefix}/bin/python3.4
-#    depends_lib-append        port:py34-gobject3 port:py34-pylint
-#    set python_framework      ${frameworks_dir}/Python.framework/Versions/3.4
-#    configure.pkg_config_path ${python_framework}/lib/pkgconfig
-#    configure.env              PATH=${python_framework}/bin:$env(PATH)
-#    configure.args-replace    --disable-python --enable-python
-#}
-
-#if {![variant_isset python27] && ![variant_isset python32] && ![variant_isset python34]} {
-
-if {![variant_isset python27] && ![variant_isset python32]} {
+if {![variant_isset python27] && ![variant_isset python32] && ![variant_isset python34]} {
     default_variants +python33
 }
 
