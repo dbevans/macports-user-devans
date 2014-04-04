@@ -40,4 +40,4 @@ depends_lib \
 configure.args  --enable-introspection=yes \
                 --disable-silent-rules
 
-livecheck.type  gnome
+livecheck.type  gnome-with-unstable
