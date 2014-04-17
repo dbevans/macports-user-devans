@@ -34,7 +34,6 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:libgee \
                     port:libgrss \
                     port:vala \
-                    port:upower \
                     port:libunistring \
                     port:libmediaart \
                     port:libexif \
@@ -73,7 +72,7 @@ configure.args      --disable-schemas-compile \
                     --enable-journal \
                     --enable-tracker-fts \
                     --disable-unit-tests \
-                    --enable-upower \
+                    --disable-upower \
                     --disable-hal \
                     --disable-network-manager \
                     --enable-libmediaart \
@@ -139,6 +138,10 @@ variant libav conflicts gstreamer description {Enable libav generic media extrac
 
 if {![variant_isset libav]} {
     default_variants    +gstreamer
+}
+
+post-activate {
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
 livecheck.type  gnome
