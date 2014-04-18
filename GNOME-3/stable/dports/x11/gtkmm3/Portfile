@@ -6,7 +6,7 @@ PortGroup       active_variants 1.1
 
 name            gtkmm3
 set gname       gtkmm
-version         3.11.9
+version         3.12.0
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     C++ interface to GTK+ version 3.
 long_description \
@@ -24,8 +24,8 @@ use_xz          yes
 dist_subdir     ${gname}
 distname        ${gname}-${version}
 
-checksums       rmd160  3ee17c9cf78ff6dc921edb99fd259d85f08da6d2 \
-                sha256  402441b05b4b36ee1b12a6c903e3f1c7cb194355a0d335dae554c67c058ad213
+checksums       rmd160  e16dd67bd02c6e7adf13de1578e63ca33cf547b6 \
+                sha256  86c526ceec15d889996822128d566748bb36f70cf5a2c270530dfc546a2574e1
 
 depends_build   port:pkgconfig \
                 port:mm-common \
@@ -69,5 +69,5 @@ if {[variant_isset x11]} {
     require_active_variants gtk3 "" x11
 }
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome
 livecheck.name  ${gname}

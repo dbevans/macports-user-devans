@@ -93,6 +93,4 @@ post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-# this is the last version that will build on darwin < 13
-
 livecheck.type  none

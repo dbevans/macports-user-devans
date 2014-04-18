@@ -38,13 +38,12 @@ patchfiles      patch-restore-settings-for-deprecated-gtk-settings.diff
 
 # update m4/intltool.m4 and autoreconf
 
-post-patch {
+pre-configure {
     copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
 }
 
 use_autoreconf      yes
 autoreconf.args     -fvi
-
 
 configure.args  --disable-silent-rules \
                 --disable-schemas-compile \

@@ -142,6 +142,7 @@ depends_lib     port:at-spi2-atk \
                 port:nautilus \
                 port:pango \
                 port:pangomm \
+                port:py-gobject3 \
                 port:seed \
                 port:totem \
                 port:totem-pl-parser \
