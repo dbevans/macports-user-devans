@@ -13,7 +13,7 @@ maintainers     devans
 categories      graphics gnome
 platforms       darwin
 description     Unstable development version of Inkscape from \
-                recent BZR trunk leading up to release of version 0.49.
+                recent BZR trunk leading up to release of version 0.91.
 
 long_description \
                 Inkscape is an open source SVG editor with \
