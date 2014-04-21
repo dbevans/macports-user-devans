@@ -58,7 +58,7 @@ variant python33 conflicts python32 python34 description {Build with support for
     configure.env-append    PYTHON3=${prefix}/bin/python3.3
 }
 
-variant python34 conflicts python33 python34 description {Build with support for Python 3.3} {
+variant python34 conflicts python32 python33 description {Build with support for Python 3.4} {
     depends_lib-append      port:py34-gobject3
     configure.env-append    PYTHON3=${prefix}/bin/python3.4
 }
