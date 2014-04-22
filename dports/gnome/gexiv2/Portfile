@@ -25,16 +25,17 @@ use_xz          yes
 checksums       rmd160  b53717fbc50d74aa76717af5cc57ba6a86b5f18d \
                 sha256  9c8c97b36a0d4ca6656488b88908e4c94efb0dfc1b0e3e0850e38b90a9a30031
 
-depends_build   port:pkgconfig \
-                port:libtool
+depends_build   port:pkgconfig
 
 depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 \
                 port:gobject-introspection \
                 port:vala \
                 port:exiv2
 
-#patchfiles      patch-configure.diff \
-#                patch-Makefile.diff
+patchfiles      patch-configure.ac.diff
+
+use_autoreconf  yes
+autoreconf.args -fvi
 
 configure.args  --enable-introspection
 
