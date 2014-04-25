@@ -1,0 +1,47 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                libgit2-glib
+version             0.0.12
+license             LGPL-2.1
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         Glib wrapper library around the libgit2 git access library.
+long_description    ${description}
+
+maintainers         gmail.com:juanrgar openmaintainer
+categories          gnome devel
+platforms           darwin
+homepage            https://wiki.gnome.org/action/show/Apps/Gitg
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  c17367d448516a1cf12ec3f06fdd067330e57262 \
+                    sha256  193125b314f588894b769058be28101fb0b2bec345520ca6398ee4e8b7319762
+
+depends_build       port:pkgconfig
+
+depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                    port:libgit2 \
+                    port:gobject-introspection
+
+configure.args      --disable-silent-rules \
+                    --enable-python=no
+
+variant python32 description {Enable Python support, using python32} conflicts python33 {
+    configure.args-delete --enable-python=no
+    configure.args-append --enable-python=yes
+    depends_lib-append port:py32-gobject3
+    configure.pkg_config_path-append ${frameworks_dir}/Python.framework/Versions/3.2/lib/pkgconfig/
+}
+
+variant python33 description {Enable Python support, using python33} conflicts python32 {
+    configure.args-delete --enable-python=no
+    configure.args-append --enable-python=yes
+    depends_lib-append port:py33-gobject3
+    configure.pkg_config_path-append ${frameworks_dir}/Python.framework/Versions/3.3/lib/pkgconfig/
+}
+
+livecheck.type      gnome
