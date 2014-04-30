@@ -1,0 +1,64 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            libgweather
+version         3.13.1
+set branch      [join [lrange [split ${version} .] 0 1] .]
+maintainers     devans openmaintainer
+categories      net gnome
+license         GPL-2+ LGPL-2.1+
+platforms       darwin
+description     Library to accessing online weather informations.
+
+long_description \
+                libgweather is a library to access weather \
+                information from online services for numerous \
+                locations.
+
+homepage        https://wiki.gnome.org/Projects/LibGWeather
+master_sites    gnome:sources/${name}/${branch}/
+
+use_xz          yes
+
+checksums       rmd160  318a9aa905bd6e40e2c0eff2d4a0f25613291a44 \
+                sha256  b9820ef1d2c3818250b06b7a042898b6ebb63d1db8e0df16a3c0aec6e41ef7fd
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:autoconf \
+                port:automake \
+                port:libtool \
+                port:gnome-common \
+                port:gtk-doc
+
+depends_lib     port:gtk3 \
+                port:libxml2 \
+                port:libsoup \
+                port:gobject-introspection \
+                port:vala
+
+# use autogen.sh from upstream git to update m4/intltool.m4 using intltoolize and autoreconf
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+    file delete -force ${worksrcpath}/m4
+}
+
+configure.cmd   ./autogen.sh
+
+configure.cflags-append \
+                -Wno-error=format-nonliteral
+
+configure.args  --enable-introspection=yes \
+                --enable-vala=yes \
+                --disable-schemas-compile \
+                --disable-silent-rules \
+                --disable-glibtest
+
+post-activate {
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type  gnome-with-unstable
