@@ -1,0 +1,42 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                adwaita-icon-theme
+version             3.13.1
+set branch          [join [lrange [split ${version} .] 0 1] .]
+categories          gnome
+maintainers         devans openmaintainer
+license             LGPL-3
+platforms           darwin
+description         Adwaita icon theme
+
+long_description    Fullcolor, symbolic and cursor assets for the $description
+
+homepage            http://www.gnome.org/
+master_sites        gnome:sources/$name/$branch/
+
+use_xz              yes
+
+checksums           rmd160  f3a4681bd197f35abbbd71f0e034c0f32a7ded1c \
+                    sha256  bf9fb89667b742bd231d034273610ca23a1330bd401fdc0e9d1e2690d1bffbaa
+
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:icon-naming-utils
+
+depends_lib         port:gtk3
+
+patchfiles          patch-configure.ac.diff
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf      yes
+autoreconf.args     -fvi
+
+livecheck.type      gnome-with-unstable
