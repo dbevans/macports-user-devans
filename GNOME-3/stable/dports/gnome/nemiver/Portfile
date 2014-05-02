@@ -30,6 +30,7 @@ checksums           sha256 33590e3964092cabb629a6ba8415786b054702063a944eca5fe41
 depends_lib         port:desktop-file-utils \
                     port:gsettings-desktop-schemas \
                     port:libgtop \
+                    port:gconf \
                     port:glibmm \
                     port:gtkmm3 \
                     port:gtksourceviewmm3 \
