@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                denemo
-version             1.1.2
+version             1.1.4
 categories          print audio x11
 platforms           darwin
 maintainers         nomaintainer
@@ -22,8 +22,8 @@ long_description    Denemo is a unique score editor which exports notation \
 homepage            http://www.denemo.org/
 master_sites        gnu
 
-checksums           rmd160  182902a43b34e3c20c8edf06493bd8ab87a20e1a \
-                    sha256  b795ae6450622a457b46d28b133f857a56d58746c50a6f8131c94dbe14331b0d
+checksums           rmd160  02dd1a4c27929701fcd53bcc476280f382b9ac13 \
+                    sha256  0e23df8052a21eb911db44373dab423fde666b41458f0f585e5312a02acc3019
 
 depends_build       port:intltool \
                     port:pkgconfig \
@@ -46,8 +46,8 @@ depends_lib         port:aubio \
 
 depends_run         port:qtplay
 
-patchfiles          patch-configure.ac.diff
-#                    patch-src-prefops.c.diff
+patchfiles          patch-configure.ac.diff \
+                    patch-src-audio-pitchrecog.c.diff
 
 # use upstream autogen.sh to reconfigure with our intltool.m4
 
@@ -66,8 +66,6 @@ configure.args      --enable-evince \
                     --enable-portaudio \
                     --enable-portmidi \
                     --enable-rubberband
-
-use_parallel_build  yes
 
 variant csound description "Csound can be used for playback." {
     depends_run-append port:csound
