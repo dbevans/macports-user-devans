@@ -40,7 +40,7 @@ apps:iagno:3.12.1:
 apps:lightsoff:3.13.1:
 apps:nautilus-sendto:3.8.1:
 apps:nemiver:0.9.5:
-apps:orca:3.12.1:
+apps:orca:3.13.1:
 apps:polari:3.13.1:
 apps:quadrapassel:3.13.1:
 apps:rygel:0.22.1:
