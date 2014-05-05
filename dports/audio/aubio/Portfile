@@ -5,7 +5,7 @@ PortSystem              1.0
 PortGroup               waf 1.0
 
 name                    aubio
-version                 0.4.0
+version                 0.4.1
 license                 GPL-2
 categories              audio
 maintainers             devans openmaintainer
@@ -23,8 +23,8 @@ master_sites            ${homepage}pub/
 
 use_bzip2               yes
 
-checksums           rmd160  4160fbfc149293397b51b1d8fb2b92811154e3a0 \
-                    sha256  49de9a06c819d4c4e0a9198a95eac374a1650083aef16c397004258bac2d33a2
+checksums           rmd160  830a1ca49964a550f41419538a734c48466da633 \
+                    sha256  25d7df0a9cd6366fda764a803424caddf5fb819fc75b42a7a03e1e6f8eb3c695
 
 depends_build           port:pkgconfig \
                         port:txt2man
