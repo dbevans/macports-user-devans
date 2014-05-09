@@ -35,6 +35,8 @@ depends_lib         port:desktop-file-utils \
 #depends_run         port:gnome-settings-daemon \
 #                    port:yelp
 
+patchfiles          patch-configure.ac.diff
+
 post-patch {
     reinplace "s|^#!/.*|#!${configure.python}|" ${worksrcpath}/gnome-music.in
 }
