@@ -141,7 +141,7 @@ depends_lib     port:adwaita-icon-theme \
                 port:libwnck3 \
                 port:mm-common \
                 port:nautilus \
-                port:pango \
+                path:lib/pkgconfig/pango.pc:pango \
                 port:pangomm \
                 port:seed \
                 port:totem \
