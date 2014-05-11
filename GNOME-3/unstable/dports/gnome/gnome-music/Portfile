@@ -28,12 +28,15 @@ depends_build       port:pkgconfig \
 
 depends_lib         port:desktop-file-utils \
                     port:gtk3 \
+                    port:gnome-icon-theme \
+                    port:gnome-icon-theme-symbolic \
                     port:gobject-introspection \
-                    port:grilo \
-                    port:tracker
+                    port:grilo-plugins \
+                    port:tracker \
+                    port:libnotify
 
-#depends_run         port:gnome-settings-daemon \
-#                    port:yelp
+depends_run         port:gnome-settings-daemon \
+                    port:yelp
 
 patchfiles          patch-configure.ac.diff
 
