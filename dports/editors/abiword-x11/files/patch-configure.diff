@@ -1,0 +1,17 @@
+--- configure.orig	2013-10-13 12:02:16.000000000 -0700
++++ configure	2014-05-15 09:39:58.000000000 -0700
+@@ -16748,10 +16748,10 @@
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for platform and toolkit" >&5
+ $as_echo_n "checking for platform and toolkit... " >&6; }
+ case ${host_os} in
+-  *darwin*)
+-    PLATFORM="unix"
+-    TOOLKIT="cocoa"
+-    ;;
++#  *darwin*)
++#    PLATFORM="unix"
++#    TOOLKIT="cocoa"
++#    ;;
+   *mingw*)
+     PLATFORM="win"
+     TOOLKIT="win"

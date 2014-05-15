@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gexiv2
-version         0.10.0
+version         0.10.1
 license         GPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     gexiv2 is a GObject-based wrapper around the exiv2 library.
@@ -22,8 +22,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  b53717fbc50d74aa76717af5cc57ba6a86b5f18d \
-                sha256  9c8c97b36a0d4ca6656488b88908e4c94efb0dfc1b0e3e0850e38b90a9a30031
+checksums       rmd160  d5bd9a657171527b1af05ef04ad1073e9be9b7d2 \
+                sha256  7675752a59c2f091560be1f39514ef492ec705b9fdea5f52281672e6b3eba2c7
 
 depends_build   port:pkgconfig
 

@@ -1,0 +1,74 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            abiword-x11
+set dname       abiword
+version         3.0.0
+license         GPL
+description     A word processor with gnome support.
+long_description \
+                ${description}
+maintainers     nomaintainer
+categories      editors textproc gnome
+platforms       darwin
+homepage        http://www.abisource.com/
+master_sites    http://www.abisource.org/downloads/${dname}/${version}/source \
+                http://www.nl.abisource.com/downloads/${dname}/${version}/source
+
+distname        ${dname}-${version}
+
+checksums       rmd160  a3252631bebf28ac22308ce71ad276d9c5280592 \
+                sha256  d17e318c00ff4eb353e0e7994b098b1d4f9ddd8712ac0261a0e38b89081fac01
+
+patchfiles      patch-configure.diff
+
+depends_build   port:pkgconfig
+
+depends_lib     port:gtk3 \
+                port:boost \
+                port:libpng \
+                port:jpeg \
+                port:libwmf \
+                port:librsvg \
+                port:zlib \
+                port:fribidi \
+                port:libgsf \
+                port:libwpd \
+                port:libwpg \
+                port:wv \
+                port:libxslt \
+                port:enchant \
+                port:goffice \
+                port:libchamplain \
+                port:libical \
+                port:redland \
+                port:rasqal \
+                port:dbus-glib \
+                port:telepathy-glib \
+                port:gobject-introspection \
+                port:python27 \
+                port:xorg-libX11
+
+configure.python ${prefix}/bin/python2.7
+
+configure.args  --enable-introspection \
+                --enable-menubutton \
+                --enable-collab-backend-telepathy \
+                --enable-plugins="applix babelfish bmp clarisworks collab command docbook eml epub freetranslation \
+                                  garble gdict gimp goffice google hancom hrtext iscii kword latex loadbindings mht \
+                                  mif mswrite opendocument openwriter openxml opml paint passepartout pdb pdf presentation \
+                                  s5 sdw t602 urldict wikipedia wmf wml wordperfect wpg xslfo"
+
+# port wv is not universal
+
+universal_variant no
+
+post-activate {
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+}
+
+livecheck.type  regex
+livecheck.url   http://www.abisource.com/downloads/${dname}/
+livecheck.regex ">(\[0-9\]+\\.\[0-9\]*\[02468\]\\.\[0-9\]+)/<"

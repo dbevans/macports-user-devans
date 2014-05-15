@@ -29,19 +29,22 @@ use_bzip2           yes
 depends_build       port:pkgconfig \
                     port:intltool
 
-depends_lib         port:audiofile \
-                    port:gconf \
-                    port:gtk2 \
-                    port:gnutls \
-                    port:libao \
-                    port:libidn \
+depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:libxml2 \
+                    port:gconf \
+                    port:libidn \
+                    port:gnutls
+
+if {${subport} ne "libpurple"} {
+    depends_lib-append \
+                    port:libpurple \
+                    port:audiofile \
+                    port:gtk2 \
+                    port:libao \
                     port:nspr \
                     port:nss \
                     port:perl5.16
 
-if {${subport} ne "libpurple"} {
-    depends_lib-append  port:libpurple
     post-destroot {
         foreach file [glob -nocomplain -directory ${destroot}${prefix}/bin purple-*] {
             delete $file
@@ -56,9 +59,6 @@ if {${subport} ne "libpurple"} {
                ${destroot}${prefix}/share/sounds/purple \
     }
 }
-
-# nss is not universal
-universal_variant   no
 
 patchfiles          patch-configure.ac.diff \
                     patch-libpurple-internal.h.diff
@@ -102,6 +102,9 @@ subport libpurple {
 }
 
 if {${subport} eq $name} {
+
+# nss is not universal
+universal_variant   no
 
 variant finch_only requires finch description {Build without pidgin} {
     configure.args-append   --disable-gtkui
