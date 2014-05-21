@@ -32,7 +32,8 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:gobject-introspection
 
 patchfiles          patch-src-daemon.c.diff \
-                    patch-src-libaccountsservice-Makefile.am.diff
+                    patch-src-libaccountsservice-Makefile.am.diff \
+                    patch-src-wtmp-helper.c.diff
 
 post-patch {
     reinplace "s|@@MP_PREFIX@@|${prefix}|" ${worksrcpath}/src/daemon.c
