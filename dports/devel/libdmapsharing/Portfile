@@ -27,11 +27,18 @@ depends_build   port:pkgconfig
 
 # gst-plugins-base for libgstapp.
 depends_lib     port:gtk2 \
+                port:avahi \
                 port:libgee \
                 port:libsoup \
                 port:gstreamer1-gst-plugins-base
 
-configure.args  --with-mdns=dns_sd \
+patchfiles      patch-configure.ac.diff
+
+use_autoreconf  yes
+autoreconf.args -fvi
+
+configure.args  --with-mdns=avahi \
+                --enable-introspection=no \
                 --disable-silent-rules
 
 livecheck.type  regex
