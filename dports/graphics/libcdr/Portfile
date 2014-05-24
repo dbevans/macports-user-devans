@@ -26,10 +26,9 @@ checksums       sha256  a9bd1faca049cf1e2285b27da213a499434591919227beb209b191ad
 
 depends_build   port:pkgconfig
 
-depends_lib     port:boost \
+depends_lib     port:librevenge \
+                port:boost \
                 port:icu \
-                port:libwpd \
-                port:libwpg \
                 port:lcms2 \
                 port:zlib
 
@@ -42,7 +41,7 @@ if {${os.platform} eq "darwin" && ${os.major} < 10} {
 configure.args  --disable-werror \
                 --without-docs
 
-variant docs description {Build reference documentation} {
+variant docs description {Build API documentation} {
     depends_build-append  port:doxygen
     configure.args-replace --without-docs --with-docs
 }
