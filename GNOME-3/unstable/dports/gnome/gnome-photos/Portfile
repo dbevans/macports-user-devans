@@ -3,46 +3,50 @@
 
 PortSystem          1.0
 
-name                gnome-music
-version             3.13.2
+name                gnome-photos
+version             3.12.1
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
-description         Music is the GNOME music playing application.
-long_description    ${description}
+description         Photo manager for GNOME.
+long_description    GNOME Photos is a simple standalone application to find, organize and view your photos.
 
-maintainers         devans openmaintainer
+maintainers         gmail.com:juanrgar openmaintainer
 categories          gnome
 platforms           darwin
-homepage            https://wiki.gnome.org/Apps/Music
+homepage            https://wiki.gnome.org/Apps/Photos
 master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  b2c3c1429054f2f34cbbbf742d77caa60bfb1072 \
-                    sha256  d72dcc55226ef2b768bd706d207f23e13b9addd301ca5fd7a238c8e527ddb8f2
+checksums           rmd160  60db13a2e6d87c19dbbd1788a889bdad6f23b5ae \
+                    sha256  077cc6c2ae28680457fba435a22184e25f3a60a6fbe1901a75e42f6f6136538f
 
 depends_build       port:pkgconfig \
                     port:intltool \
+                    port:itstool \
                     port:yelp-tools \
-                    port:itstool
+                    port:gnome-common 
 
 depends_lib         port:desktop-file-utils \
-                    port:gtk3 \
                     port:gnome-icon-theme \
-                    port:gnome-icon-theme-symbolic \
-                    port:gobject-introspection \
+                    port:gtk3 \
+                    port:babl \
+                    port:cairo \
+                    port:exempi \
+                    port:gfbgraph \
+                    port:gegl \
+                    port:gdk-pixbuf2 \
+                    port:gnome-desktop \
+                    port:gnome-online-accounts \
+                    port:grilo \
                     port:grilo-plugins \
-                    port:tracker \
-                    port:libnotify
+                    port:lcms2 \
+                    port:libexif \
+                    port:librsvg \
+                    port:tracker
 
 depends_run         port:gnome-settings-daemon \
                     port:yelp
-
-patchfiles          patch-configure.ac.diff
-
-post-patch {
-    reinplace "s|^#!/.*|#!${configure.python}|" ${worksrcpath}/gnome-music.in
-}
 
 # update m4/intltool.m4 and autoreconf
 
@@ -56,21 +60,8 @@ autoreconf.args     -fvi
 configure.args      --disable-schemas-compile \
                     --disable-silent-rules
 
-variant python32 conflicts python33 description {Use Python3.2} {
-    depends_lib-append  port:py32-gobject3 \
-                        port:dbus-python32
-    configure.python    ${prefix}/bin/python3.2
-}
-
-variant python33 conflicts python32 description {Use Python3.3} {
-    depends_lib-append  port:py33-gobject3 \
-                        port:dbus-python33
-    configure.python    ${prefix}/bin/python3.3
-}
-
-if {![variant_isset python32] && ![variant_isset python34]} {
-    default_variants +python33
-}
+configure.cflags-append \
+                    -Wno-error=format-nonliteral
 
 # port installs hicolor icons, desktop application file, and gschemas
 post-activate {

@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-apps
-version         3.13.1
+version         3.13.2
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -45,7 +45,6 @@ supported_archs noarch
 # gnome-initial-setup
 # gnome-klotski (previously part of gnome-games)
 # gnome-mahjongg (previously part of gnome-games)
-# gnome-maps
 # gnome-mines (previously part of gnome-games)
 # gnome-nettool
 # gnome-nibbles (previously part of gnome-games)
@@ -80,6 +79,7 @@ depends_lib     port:anjuta \
                 port:gitg \
                 port:glade \
                 port:gnome-devel-docs \
+                port:gnome-maps \
                 port:gnome-music \
                 port:gnome-photos \
                 port:rygel \

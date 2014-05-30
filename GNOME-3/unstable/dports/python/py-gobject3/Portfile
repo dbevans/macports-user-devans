@@ -6,7 +6,7 @@ PortGroup           python 1.0
 
 name                py-gobject3
 set my_name         pygobject
-version             3.13.1
+version             3.13.2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories-append   gnome
 license             LGPL-2.1+
@@ -23,8 +23,8 @@ master_sites        gnome:sources/${my_name}/${branch}/
 distname            ${my_name}-${version}
 use_xz              yes
 
-checksums           sha256  47f16a9736c109fa71653832f776f78aef01f6469834d985e5f504cdd4c7089e \
-                    rmd160  b4cc70625eb1dfae95cb5d1e9a8f46f268a6f131
+checksums           sha256  69eb8b642463ca26644a64019ed539c5185ed2abd06600dfc83e793cd028a8de \
+                    rmd160  2b94a29d3e5fd48fce02746b0127510e20a036ac
 
 python.versions     27 32 33 34
 

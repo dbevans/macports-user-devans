@@ -5,7 +5,7 @@ PortSystem              1.0
 
 name                    atk
 epoch                   2
-version                 2.13.1
+version                 2.13.2
 set branch              [join [lrange [split ${version} .] 0 1] .]
 categories              devel
 license                 LGPL
@@ -19,8 +19,8 @@ long_description        ATK is the GNOME Accessibility ToolKit
 homepage                http://projects.gnome.org/accessibility/
 master_sites            gnome:sources/${name}/${branch}/
 
-checksums               rmd160  b0e7aeae32a65ad9d78ed66cc12652ba6784214e \
-                        sha256  71baf41d5b01f550e63601baf8589cacf9ccec7f3fa6638924d9100def51fa62
+checksums               rmd160  1a2cf65a2f16f4392d73f74a2bb128e6d3f297d3 \
+                        sha256  ebe1be3123da5aaa9a2e95821268ea31e955949cd56f5e1e65ec73e5b292b8f6
 
 use_xz                  yes
 

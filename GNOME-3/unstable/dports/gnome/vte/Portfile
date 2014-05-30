@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                vte
-version             0.37.0
+version             0.37.1
 set branch          [join [lrange [split $version .] 0 1] .]
 maintainers         nomaintainer
 categories          gnome
@@ -22,8 +22,8 @@ master_sites        gnome:sources/$name/$branch/
 
 use_xz              yes
 
-checksums           rmd160  1ae98a06d38bc96eac7834386069fbe93c05f420 \
-                    sha256  cde755dabcbf7553501181ae6e423be4159d99b8d60b2f070c4662be6f865fab
+checksums           rmd160  c9737d8a9a1e765355d55dfdb63c4841f9d5a928 \
+                    sha256  03d7e1109b78bbf6d23f3dd5d5474449a4abdc35ab73d09d88fe538474ed6ac2
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -34,7 +34,11 @@ depends_lib         port:gtk3 \
 
 patchfiles          patch-src-vteutils.c.diff
 
-# autoreconf with our intltool.m4
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
 
 use_autoreconf      yes
 autoreconf.args     -fvi

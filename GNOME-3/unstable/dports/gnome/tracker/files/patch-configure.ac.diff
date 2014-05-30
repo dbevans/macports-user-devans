@@ -1,0 +1,13 @@
+--- configure.ac.orig	2014-03-21 10:36:04.000000000 -0700
++++ configure.ac	2014-03-21 10:37:09.000000000 -0700
+@@ -497,8 +497,8 @@
+ ####################################################################
+ IT_PROG_INTLTOOL([0.40.0])
+ 
+-AM_GNU_GETTEXT_VERSION([0.17])
+-AM_GNU_GETTEXT([external])
++#AM_GNU_GETTEXT_VERSION([0.17])
++#AM_GNU_GETTEXT([external])
+ 
+ GETTEXT_PACKAGE=AC_PACKAGE_NAME
+ AC_SUBST(GETTEXT_PACKAGE)

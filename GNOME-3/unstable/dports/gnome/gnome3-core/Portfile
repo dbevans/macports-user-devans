@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-core
-version         3.13.1
+version         3.13.2
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -90,9 +90,6 @@ depends_lib     port:adwaita-icon-theme \
                 port:gnome-desktop \
                 port:gnome-dictionary \
                 port:gnome-font-viewer \
-                port:gnome-icon-theme \
-                port:gnome-icon-theme-extras \
-                port:gnome-icon-theme-symbolic \
                 port:gnome-js-common \
                 port:gnome-keyring \
                 port:gnome-menus \
@@ -108,9 +105,6 @@ depends_lib     port:adwaita-icon-theme \
                 port:grilo-plugins \
                 port:gsettings-desktop-schemas \
                 port:gssdp \
-                port:gstreamer1-gst-plugins-base \
-                port:gstreamer1-gst-plugins-good \
-                port:gstreamer1 \
                 port:gtk3 \
                 port:gtk2 \
                 port:gtk-doc \
