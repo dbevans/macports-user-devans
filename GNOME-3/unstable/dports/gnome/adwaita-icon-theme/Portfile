@@ -12,7 +12,8 @@ license             LGPL-3
 platforms           darwin
 description         Adwaita icon theme
 
-long_description    Fullcolor, symbolic and cursor assets for the $description
+long_description    Fullcolor, symbolic and cursor assets for the $description. Previously \
+                    part of gnome-themes-standard
 
 homepage            http://www.gnome.org/
 master_sites        gnome:sources/$name/$branch/
@@ -38,5 +39,26 @@ pre-configure {
 
 use_autoreconf      yes
 autoreconf.args     -fvi
+
+pre-activate {
+    if {![catch {set installed [lindex [registry_active gnome-themes-standard] 0]}]} {
+        set _version [lindex $installed 1]
+        if {[vercmp $_version 3.13.0] < 0} {
+            registry_deactivate_composite gnome-themes-standard "" [list ports_nodepcheck 1]
+        }
+    }
+}
+
+notes "
+You can make Adwaita the default GTK+ 3 theme with:
+------------------------------------------------------
+mkdir -p ~/.config/gtk-3.0 &&
+cat > ~/.config/gtk-3.0/settings.ini << \"EOF\"
+\[Settings\]
+gtk-theme-name = Adwaita
+gtk-fallback-icon-theme = gnome
+EOF
+------------------------------------------------------
+"
 
 livecheck.type      gnome-with-unstable
