@@ -31,7 +31,8 @@ depends_build   port:intltool \
 
 depends_lib     port:gtk3 \
                 port:gtk2 \
-                port:librsvg
+                port:librsvg \
+                port:adwaita-icon-theme
 
 # update m4/intltool.m4 and autoreconf
 
@@ -42,16 +43,6 @@ pre-configure {
 use_autoreconf  yes
 autoreconf.args -fvi
 
-notes "
-You can make Adwaita the default theme with:
-------------------------------------------------------
-mkdir -p ~/.config/gtk-3.0 &&
-cat > ~/.config/gtk-3.0/settings.ini << \"EOF\"
-\[Settings\]
-gtk-theme-name = Adwaita
-gtk-fallback-icon-theme = gnome
-EOF
-------------------------------------------------------
-"
+configure.args  --disable-silent-rules
 
 livecheck.type  gnome-with-unstable
