@@ -1,8 +1,8 @@
---- configure.ac.orig	2014-05-01 07:48:24.000000000 -0700
-+++ configure.ac	2014-05-01 07:49:12.000000000 -0700
-@@ -59,9 +59,9 @@
- 
- AC_SUBST(ICONMAP)
+--- configure.ac.orig	2014-06-02 08:12:25.000000000 -0700
++++ configure.ac	2014-06-02 14:40:45.000000000 -0700
+@@ -30,9 +30,9 @@
+ AC_SUBST([render_sizes], ["8x8 16x16 22x22 24x24 32x32 48x48 256x256"])
+ AC_SUBST([symbolic_render_sizes], [""])
  
 -AC_PATH_PROG(GTK_UPDATE_ICON_CACHE, gtk-update-icon-cache)
 +AC_PATH_PROG(GTK_UPDATE_ICON_CACHE, gtk-update-icon-cache-3.0)
