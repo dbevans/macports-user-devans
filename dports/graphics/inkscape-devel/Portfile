@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            inkscape-devel
 conflicts       inkscape
-set bzr_rev     13372
+set bzr_rev     13407
 version         0.48.99.${bzr_rev}
 epoch           1
 license         GPL-2 LGPL-2.1
@@ -25,8 +25,8 @@ long_description \
 homepage        http://www.inkscape.org/
 master_sites    file:///Users/devans/macports/distfiles/${name}
 
-checksums       rmd160  448b3463c3e15e240c59eaacd56332d20047aca0 \
-                sha256  d522f3317459b861c61505465b354fe167c3dd89c82dbde0f16024196fb6550a
+checksums       rmd160  ba31492c3a58e624e245e9978e6a71914af50b61 \
+                sha256  1ab91a31a8c087126daa8506cdfff8581561b1d1924973c2ad39446801a2714d
 
 worksrcdir      inkscape
 
@@ -52,8 +52,6 @@ depends_lib     port:desktop-file-utils \
                 port:libvisio \
                 port:libwpg \
                 port:gtkspell2
-
-patchfiles      patch-revert-r13232.diff
 
 variant python26 conflicts python27 description {Configure to use Python version 2.6} {
     depends_lib-append \
