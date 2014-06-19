@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           github 1.0
 PortGroup           cmake 1.0
 
-github.setup        libgit2 libgit2 0.21.0-rc1 v
+github.setup        libgit2 libgit2 0.21.0-rc2 v
 categories          devel
 platforms           darwin
 maintainers         gmail.com:juanrgar devans openmaintainer
@@ -21,8 +21,8 @@ long_description    libgit2 is a portable, pure C implementation of the \
 
 homepage            http://libgit2.github.com/
 
-checksums           rmd160  9320622f5cf27e22990166c5b7f4ddfd5d535880 \
-                    sha256  2c1eff32f5c16348e74242cc9e2e7a61b29c3189174c9648af48fa2f3964bd6f
+checksums           rmd160  6f96adc93f2d91a8a2ebadd9632379f17b4220aa \
+                    sha256  bb4ef3db098dd09c5d64ab7943d20faca6a5052c55931fd69d343914b3822767
 
 depends_lib         port:libiconv \
                     port:libssh2 \
