@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gedit
-version         3.13.1
+version         3.12.2
 license         GPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     GNOME editor.
@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  0ec27237cbe83ce8bb1efee3cf7689189bebf3da \
-                sha256  e1ed6ec89c2eea9e41cf37073751b3c33f8fe61e2d5c3a5e5509346a2df640e8
+checksums       rmd160  06436d5e3ca0f81bffca5cd1be1e0ca006985c83 \
+                sha256  75460b112bed459a0f9db60e7fb0b9e6341dc8e5c20088d929597ba030d7b653
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -102,4 +102,4 @@ post-activate    {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome

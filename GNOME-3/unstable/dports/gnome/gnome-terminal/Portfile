@@ -37,6 +37,7 @@ depends_lib     port:desktop-file-utils \
                 port:appdata-tools \
                 port:dbus \
                 port:dconf \
+                port:ossp-uuid \
                 port:xorg-libX11
 
 depends_run     port:gnome-settings-daemon \
