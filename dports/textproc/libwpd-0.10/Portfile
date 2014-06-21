@@ -3,7 +3,8 @@
 
 PortSystem      1.0
 
-name            libwpd
+name            libwpd-0.10
+set gname       libwpd
 version         0.10.0
 maintainers     devans openmaintainer
 categories      textproc
@@ -17,6 +18,8 @@ homepage        http://libwpd.sourceforge.net/
 master_sites    sourceforge:project/libwpd/libwpd/libwpd-${version}
 
 use_xz          yes
+
+distname        ${gname}-${version}
 
 checksums       rmd160  b5789de7d3dbb364a1e2999f96a880a4437982a2 \
                 sha256  9d8ba780cb9c0aed7859c59a602138d8ab360b40f6aa655e42f5f769f2cfd32c
@@ -47,4 +50,10 @@ if {[variant_isset doxygen]} {
     default_variants +docs
 }
 
-livecheck.regex /${name}-(\[0-9.\]+)${extract.suffix}
+# delete binaries that conflict with libwpd
+
+post-destroot {
+    file delete -force ${destroot}${prefix}/bin
+}
+
+livecheck.regex /${gname}-(\[0-9.\]+)${extract.suffix}
