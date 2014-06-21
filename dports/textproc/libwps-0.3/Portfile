@@ -3,7 +3,8 @@
 
 PortSystem          1.0
 
-name                libwps
+name                libwps-0.3
+set dname           libwps
 version             0.3.0
 categories          textproc
 platforms           darwin
@@ -17,7 +18,10 @@ long_description    ${name} a is ${description}.
 
 homepage            http://libwps.sourceforge.net/
 master_sites        sourceforge:project/libwps/libwps/libwps-${version}
+
 use_xz              yes
+
+distname            ${dname}-${version}
 
 checksums           rmd160  14b2d16688ce793869aecbc9cb861246b518a2d9 \
                     sha256  e341d340b16b33f1b1fb66612311b3bdf664c103ebd48beb8db87b434333bef3
@@ -34,4 +38,10 @@ variant docs description {Build API documentation} {
     configure.args-delete   --without-docs
 }
 
-livecheck.regex     /${name}-(\[0-9.\]+)${extract.suffix}
+# delete binaries that conflict with libwps
+
+post-destroot {
+    file delete -force ${destroot}${prefix}/bin
+}
+
+livecheck.regex     /${dname}-(\[0-9.\]+)${extract.suffix}
