@@ -3,36 +3,36 @@
 
 PortSystem              1.0
 
-name                    libwpg
+name                    libwpg-0.3
+set dname               libwpg
 version                 0.3.0
 license                 LGPL-2+
 categories              graphics
+
+description             Libwpg is a C++ library for reading and parsing graphics in WPG (Word Perfect Graphics) format.
+
+long_description        ${description} WPG is the format used among others in Corel software such as WordPerfect(tm) \
+                        and Presentations(tm).
+
 maintainers             devans openmaintainer
 platforms               darwin
 homepage                http://libwpg.sourceforge.net/
 master_sites            sourceforge:project/libwpg/libwpg/libwpg-${version}
 use_xz                  yes
 
-description \
-    Libwpg is a C++ library for reading and parsing graphics in WPG (Word Perfect Graphics) format.
-
-long_description \
-    ${description} WPG is the format used among others in Corel software such as WordPerfect(tm) \
-    and Presentations(tm).
+distname                ${dname}-${version}
 
 checksums               rmd160  757c85b9ddecc2351d4831593594fb0e9250adb6 \
                         sha256  6f709199235f4c061c3ffe1a5112ce6430e8434e621bf7b3e3dca16114eaf224
 
-depends_build \
-    port:pkgconfig
+depends_build           port:pkgconfig
 
-depends_lib \
-    port:librevenge \
-    port:libwpd
+depends_lib             port:librevenge \
+                        port:libwpd
 
 # Teach glibtool about -stdlib=libc++
-use_autoreconf  yes
-autoreconf.args -fvi
+use_autoreconf          yes
+autoreconf.args         -fvi
 
 configure.args  --without-docs --disable-werror
 
@@ -41,4 +41,10 @@ variant docs description {Build API documentation} {
     configure.args-delete   --without-docs
 }
 
-livecheck.regex         /${name}-(\[0-9.\]+)${extract.suffix}
+# delete binaries that conflict with libwpd
+
+post-destroot {
+    file delete -force ${destroot}${prefix}/bin
+}
+
+livecheck.regex         /${dname}-(\[0-9.\]+)${extract.suffix}
