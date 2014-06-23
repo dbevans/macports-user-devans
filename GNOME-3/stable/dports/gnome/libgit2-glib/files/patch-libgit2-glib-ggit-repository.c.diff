@@ -1,0 +1,13 @@
+--- libgit2-glib/ggit-repository.c.orig	2014-06-22 20:40:54.000000000 -0700
++++ libgit2-glib/ggit-repository.c	2014-06-22 20:41:50.000000000 -0700
+@@ -1735,8 +1735,8 @@
+ 
+ 	g_return_if_fail (GGIT_IS_REPOSITORY (repository));
+ 	g_return_if_fail (GGIT_IS_OBJECT (target));
+-	g_return_val_if_fail (GGIT_IS_SIGNATURE (signature), FALSE);
+-	g_return_val_if_fail (log_message != NULL, FALSE);
++	g_return_if_fail (GGIT_IS_SIGNATURE (signature));
++	g_return_if_fail (log_message != NULL);
+ 	g_return_if_fail (error == NULL || *error == NULL);
+ 
+ 	ret = git_reset (_ggit_native_get (repository),
