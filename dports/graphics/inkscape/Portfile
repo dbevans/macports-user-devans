@@ -24,8 +24,7 @@ long_description \
 
 use_bzip2       yes
 
-#master_sites    sourceforge:project/inkscape/inkscape/${version}
-master_sites    https://launchpad.net/${name}/0.48.x/${version}/+download/
+master_sites    sourceforge:project/inkscape/inkscape/${version}
 
 checksums       rmd160  c05e861dd458245193373f40790035339aac3e01 \
                 sha256  2b6ce684f9f2a0691ab454656424555cbda131db78e13973360684bc833ad969
