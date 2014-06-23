@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            evolution-data-server
-version         3.13.2
+version         3.13.3
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Addressbook and calender libs for GNOME.
 long_description    Evolution Data Server provides a central location for \
@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  58f371e8dd4d1e6245420b5b996b7ebaa3bbf60a \
-                sha256  b4cca149d421ab44f0ced52e8a9f3e54ffbd1e40e77b28f76706fc63be2a90ab
+checksums       rmd160  dd2207cd12675a55558db218a7b066a406346e63 \
+                sha256  684a4d126bbfb7adb33a45b0e337613d4e0a0a977bf44a11777f7b1eca4592c9
 
 depends_build   port:pkgconfig \
                 port:gnome-common \
