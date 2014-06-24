@@ -53,7 +53,7 @@ depends_lib     port:desktop-file-utils \
                 port:libwpg \
                 port:gtkspell2
 
-patchfiles      patch-revert-r134229.diff
+patchfiles      patch-revert-r13429.diff
 
 post-patch {
     xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
