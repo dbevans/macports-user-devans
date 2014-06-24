@@ -8,7 +8,7 @@ name            gnome-control-center
 if {${os.platform} eq "darwin" && ${os.major} >= 13} {
 
 set mavericks_or_better yes
-version 3.13.1
+version 3.13.2
 
 } else {
 
