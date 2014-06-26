@@ -1,0 +1,79 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            libsoup
+version         2.47.3
+set branch      [join [lrange [split ${version} .] 0 1] .]
+categories      gnome net
+platforms       darwin
+license         LGPL-2+
+maintainers     devans openmaintainer
+description     Soup is an HTTP library implementation in C.
+
+long_description \
+    Soup provides a queued asynchronous callback-based \
+    mechanism for sending and servicing SOAP requests \
+    and a WSDL (Web Service Definition Language) for C \
+    compilers which generates client stubs and server \
+    skeletons for easily calling and implementing SOAP \
+    methods.
+
+homepage        https://wiki.gnome.org/Projects/libsoup
+master_sites    gnome:sources/${name}/${branch}/
+use_xz          yes
+
+checksums       rmd160  f40a68d6a0962cccd0260aa45de32e4d735d5f43 \
+                sha256  8038e60be0cfa93cd29c5fb92e23470c18cf46eb033fecd814ad78f68925e123
+
+depends_build   port:pkgconfig \
+                port:intltool
+
+depends_lib     port:libxml2 \
+                port:glib-networking \
+                port:gobject-introspection
+
+patchfiles      patch-libsoup-libsoup-2.4.sym.diff
+
+configure.args \
+    --disable-more-warnings \
+    --disable-silent-rules \
+    --without-gnome \
+    --enable-introspection
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf  yes
+autoreconf.args -fvi
+
+# gobject-introspection uses g-ir-scanner, which uses $CC from env
+build.args-append       CC="${configure.cc} ${configure.cc_archflags}"
+
+test.run        yes
+test.target     check
+
+variant gnome conflicts no_gnome description {Enable GNOME support} {
+    configure.args-delete   --without-gnome
+}
+
+# Legacy no_gnome variant to be removed after 20150102
+variant no_gnome conflicts gnome description {Legacy compatibility variant} {}
+
+if {[variant_isset no_gnome]} {
+    default_variants -gnome
+} else {
+    default_variants +gnome
+}
+
+platform darwin 8 {
+    # The rules enabled by gobject-introspection require GNU make 3.81+
+    depends_build-append    port:gmake
+    build.cmd               ${prefix}/bin/gmake
+}
+
+livecheck.type  gnome-with-unstable

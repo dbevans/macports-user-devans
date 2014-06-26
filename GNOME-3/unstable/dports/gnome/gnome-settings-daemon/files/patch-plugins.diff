@@ -1,13 +1,3 @@
---- plugins/media-keys/Makefile.am.orig	2013-11-11 09:25:13.000000000 -0800
-+++ plugins/media-keys/Makefile.am	2013-12-13 08:52:02.000000000 -0800
-@@ -66,6 +66,7 @@
- 
- libmedia_keys_la_LIBADD  = 		\
- 	$(top_builddir)/plugins/common/libcommon.la			\
-+	$(top_builddir)/gnome-settings-daemon/libgsd.la                 \
- 	$(top_builddir)/plugins/media-keys/gvc/libgvc.la		\
- 	$(MEDIA_KEYS_LIBS)						\
- 	$(SETTINGS_PLUGIN_LIBS)						\
 --- plugins/screensaver-proxy/Makefile.am.orig	2013-11-11 09:25:13.000000000 -0800
 +++ plugins/screensaver-proxy/Makefile.am	2013-12-13 08:52:02.000000000 -0800
 @@ -20,7 +20,8 @@
@@ -40,26 +30,6 @@
  	$(SETTINGS_PLUGIN_LIBS)
  
  plugin_in_files = mouse.gnome-settings-plugin.in
---- configure.ac.orig	2014-04-16 04:57:10.000000000 -0700
-+++ configure.ac	2014-04-16 11:04:58.000000000 -0700
-@@ -82,7 +82,7 @@
- GSD_PLUGIN_LDFLAGS="-export_dynamic -module -avoid-version -no-undefined"
- case $host_os in
-   darwin*)
--    GSD_PLUGIN_LDFLAGS="${GSD_PLUGIN_LDFLAGS} -Wl,-bundle_loader,\$(top_builddir)/gnome-settings-daemon/gnome-settings-daemon"
-+    GSD_PLUGIN_LDFLAGS="${GSD_PLUGIN_LDFLAGS} -Wl,-bundle_loader,\$(top_builddir)/gnome-settings-daemon/.libs/gnome-settings-daemon"
-     ;;
- esac
- AC_SUBST([GSD_PLUGIN_LDFLAGS])
-@@ -248,7 +248,7 @@
- dnl - color
- dnl ---------------------------------------------------------------------------
- 
--PKG_CHECK_MODULES(COLOR, [colord >= 1.0.2 gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION libcanberra-gtk3])
-+dnl PKG_CHECK_MODULES(COLOR, [colord >= 1.0.2 gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION libcanberra-gtk3])
- 
- dnl ---------------------------------------------------------------------------
- dnl - datetime
 --- plugins/keyboard/Makefile.am.orig	2014-03-04 08:15:05.000000000 -0800
 +++ plugins/keyboard/Makefile.am	2014-04-16 11:04:58.000000000 -0700
 @@ -37,6 +37,7 @@
@@ -70,9 +40,39 @@
  	$(SETTINGS_PLUGIN_LIBS)				\
  	$(XF86MISC_LIBS)				\
  	$(KEYBOARD_LIBS)				\
---- plugins/Makefile.am.orig	2014-04-02 13:09:44.000000000 -0700
-+++ plugins/Makefile.am	2014-05-01 22:28:08.000000000 -0700
-@@ -4,22 +4,23 @@
+--- plugins/media-keys/Makefile.am.orig	2014-06-25 02:50:36.000000000 -0700
++++ plugins/media-keys/Makefile.am	2014-06-25 08:51:35.000000000 -0700
+@@ -67,6 +67,7 @@
+ 
+ libmedia_keys_la_LIBADD  = 		\
+ 	$(top_builddir)/plugins/common/libcommon.la			\
++	$(top_builddir)/gnome-settings-daemon/libgsd.la                 \
+ 	$(top_builddir)/plugins/media-keys/gvc/libgvc.la		\
+ 	$(MEDIA_KEYS_LIBS)						\
+ 	$(SETTINGS_PLUGIN_LIBS)						\
+--- configure.ac.orig	2014-06-25 08:07:27.000000000 -0700
++++ configure.ac	2014-06-25 08:51:35.000000000 -0700
+@@ -83,7 +83,7 @@
+ GSD_PLUGIN_LDFLAGS="-export_dynamic -module -avoid-version -no-undefined"
+ case $host_os in
+   darwin*)
+-    GSD_PLUGIN_LDFLAGS="${GSD_PLUGIN_LDFLAGS} -Wl,-bundle_loader,\$(top_builddir)/gnome-settings-daemon/gnome-settings-daemon"
++    GSD_PLUGIN_LDFLAGS="${GSD_PLUGIN_LDFLAGS} -Wl,-bundle_loader,\$(top_builddir)/gnome-settings-daemon/.libs/gnome-settings-daemon"
+     ;;
+ esac
+ AC_SUBST([GSD_PLUGIN_LDFLAGS])
+@@ -249,7 +249,7 @@
+ dnl - color
+ dnl ---------------------------------------------------------------------------
+ 
+-PKG_CHECK_MODULES(COLOR, [colord >= 1.0.2 gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION libcanberra-gtk3])
++dnl PKG_CHECK_MODULES(COLOR, [colord >= 1.0.2 gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION libcanberra-gtk3])
+ 
+ dnl ---------------------------------------------------------------------------
+ dnl - datetime
+--- plugins/Makefile.am.orig	2014-06-25 02:50:36.000000000 -0700
++++ plugins/Makefile.am	2014-06-25 12:58:02.000000000 -0700
+@@ -4,23 +4,24 @@
  	a11y-keyboard	\
  	a11y-settings	\
  	clipboard	\
@@ -86,16 +86,18 @@
  	media-keys	\
  	mouse		\
  	screensaver-proxy \
+-	sharing		\
  	sound		\
 -	xrandr		\
  	xsettings	\
  	$(NULL)
  
 -disabled_plugins = $(NULL)
-+disabled_plugins = \
-+	color \
-+	power \
-+	xrandr \
++disabled_plugins = 	\
++	color		\
++	power		\
++	sharing		\
++	xrandr		\
 +	$(NULL)
  
  if SMARTCARD_SUPPORT
