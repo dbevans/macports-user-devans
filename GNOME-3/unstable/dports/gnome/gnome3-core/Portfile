@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-core
-version         3.13.2
+version         3.13.3
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -37,7 +37,6 @@ supported_archs noarch
 # gnome-disk-utility
 # gnome-online-miners
 # gnome-packagekit
-# gnome-screenshot (previously part of gnome-utils)
 # gnome-shell
 # gnome-shell-extensions
 # gnome-user-share
@@ -94,6 +93,7 @@ depends_lib     port:adwaita-icon-theme \
                 port:gnome-keyring \
                 port:gnome-menus \
                 port:gnome-online-accounts \
+                port:gnome-screenshot \
                 port:gnome-session \
                 port:gnome-settings-daemon \
                 port:gnome-system-log \
