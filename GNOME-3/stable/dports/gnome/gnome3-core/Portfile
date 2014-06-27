@@ -5,6 +5,7 @@ PortSystem      1.0
 
 name            gnome3-core
 version         3.12.2
+revision        1
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -37,7 +38,6 @@ supported_archs noarch
 # gnome-disk-utility
 # gnome-online-miners
 # gnome-packagekit
-# gnome-screenshot (previously part of gnome-utils)
 # gnome-shell
 # gnome-shell-extensions
 # gnome-user-share
@@ -48,7 +48,6 @@ supported_archs noarch
 # mutter
 # network-manager-applet
 # sushi
-# tracker
 #
 # BROKEN PORTS
 #
@@ -96,6 +95,7 @@ depends_lib     port:at-spi2-atk \
                 port:gnome-keyring \
                 port:gnome-menus \
                 port:gnome-online-accounts \
+                port:gnome-screenshot \
                 port:gnome-session \
                 port:gnome-settings-daemon \
                 port:gnome-system-log \
@@ -145,6 +145,7 @@ depends_lib     port:at-spi2-atk \
                 port:seed \
                 port:totem \
                 port:totem-pl-parser \
+                port:tracker \
                 port:vala \
                 port:vino \
                 port:vte \
