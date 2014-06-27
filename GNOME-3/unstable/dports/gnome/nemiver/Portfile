@@ -20,7 +20,7 @@ long_description    Nemiver is a project to write a standalone graphical debugge
 maintainers         gmail.com:juanrgar devans openmaintainer
 categories          gnome devel
 platforms           darwin
-homepage            http://www.gnome.org/
+homepage            https://wiki.gnome.org/Apps/Nemiver
 master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
