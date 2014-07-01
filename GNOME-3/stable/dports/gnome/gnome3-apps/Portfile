@@ -42,7 +42,6 @@ supported_archs noarch
 # gnome-clocks
 # gnome-color-manager (no support for darwin Mac OS X, requires colord, udev)
 # gnome-documents
-# gnome-getting-started-docs
 # gnome-initial-setup
 # gnome-klotski (previously part of gnome-games)
 # gnome-mahjongg (previously part of gnome-games)
@@ -79,6 +78,7 @@ depends_lib     port:anjuta \
                 port:gitg \
                 port:glade \
                 port:gnome-devel-docs \
+                port:gnome-gettings-started-docs \
                 port:gnome-maps \
                 port:gnome-music \
                 port:gnome-photos \
