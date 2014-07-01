@@ -78,7 +78,7 @@ depends_lib     port:anjuta \
                 port:gitg \
                 port:glade \
                 port:gnome-devel-docs \
-                port:gnome-gettings-started-docs \
+                port:gnome-getting-started-docs \
                 port:gnome-maps \
                 port:gnome-music \
                 port:gnome-photos \
