@@ -1,0 +1,29 @@
+--- src/af/ev/gtk/ev_UnixToolbar.cpp.orig	2014-07-01 14:49:33.000000000 -0700
++++ src/af/ev/gtk/ev_UnixToolbar.cpp	2014-07-01 14:50:57.000000000 -0700
+@@ -201,7 +201,7 @@
+ menubutton_show_cb (GtkWidget *widget, gpointer data)
+ {
+ 	g_signal_stop_emission_by_name (G_OBJECT (widget), "show");
+-	gtk_widget_hide_all (widget);
++	gtk_widget_hide (widget);
+ }
+ 
+ /*!
+@@ -235,7 +235,7 @@
+ 		if (children && children->data)
+ 		{
+ 			GtkWidget * button = GTK_WIDGET (children->data);
+-			gtk_widget_hide_all (button);
++			gtk_widget_hide(button);
+ 
+ 			g_signal_connect(G_OBJECT (button), "show",
+ 							 G_CALLBACK (menubutton_show_cb), NULL);
+@@ -1487,7 +1487,7 @@
+ 		gtk_widget_hide (m_wToolbar);
+ #else
+ 		GtkWidget *widget = gtk_bin_get_child(GTK_BIN(m_wHandleBox));
+-		gtk_widget_hide(m_wHandleBox);
++		gtk_widget_hide (m_wHandleBox);
+ 		gtk_widget_hide (gtk_widget_get_parent(m_wToolbar));
+ 		if (getDetachable()) {
+ 			gtk_widget_hide(widget);

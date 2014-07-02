@@ -1,0 +1,11 @@
+--- src/af/ev/gtk/ev_UnixMenu.cpp.orig	2014-07-01 14:38:22.000000000 -0700
++++ src/af/ev/gtk/ev_UnixMenu.cpp	2014-07-01 14:39:41.000000000 -0700
+@@ -988,7 +988,7 @@
+ 	synthesizeMenu(m_wMenuBar, false);
+ 	gtk_widget_show_all(m_wMenuBar);
+ 
+-#ifdef EMBEDDED_TARGET
++#if defined(EMBEDDED_TARGET) || defined(ENABLE_MENUBUTTON)
+ #else
+ 	gtk_box_pack_start(GTK_BOX(wVBox), m_wMenuBar, FALSE, TRUE, 0);
+ #endif	
