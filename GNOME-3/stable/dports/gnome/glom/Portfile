@@ -33,7 +33,9 @@ depends_build   port:pkgconfig \
                 port:libxslt \
                 port:py27-sphinx
 
-depends_lib     port:libarchive \
+depends_lib     port:desktop-file-utils \
+                port:libarchive \
+                port:gtkmm3 \
                 port:boost \
                 port:libxml2 \
                 port:libxmlxx2 \
@@ -47,11 +49,9 @@ depends_lib     port:libarchive \
                 port:evince \
                 port:shared-mime-info
 
-depends_run     port:gnome-keyring
-
-post-extract {
-    copy ${worksrcpath}/configure.ac ${worksrcpath}/configure.ac.orig
-}
+depends_run     port:gnome-settings-daemon \
+                port:yelp \
+                port:gnome-keyring
 
 patchfiles      patch-configure.ac.diff \
                 patch-glom-libglom-connectionpool.cc.diff
@@ -75,8 +75,8 @@ configure.python          ${prefix}/bin/python${python.branch}
 
 configure.env   SPHINX_BUILD=${prefix}/bin/sphinx-build-${python.branch} \
                 PYTHON_EXTRA_LDFLAGS=' '
-configure.perl  ${prefix}/bin/perl5.16
 
+configure.perl  ${prefix}/bin/perl5.16
 
 configure.args  --with-boost-python=mt \
                 --with-postgres-utils=${prefix}/lib/postgresql93/bin \
@@ -88,6 +88,8 @@ configure.args  --with-boost-python=mt \
 universal_variant no
 
 post-activate {
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+    system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
     system "${prefix}/bin/update-mime-database ${prefix}/share/mime"
 }
 
