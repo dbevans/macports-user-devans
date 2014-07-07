@@ -2,6 +2,7 @@
 # $Id$
 
 PortSystem      1.0
+PortGroup       active_variants 1.1
 
 name            glom
 version         1.26.0
@@ -54,6 +55,8 @@ post-extract {
 
 patchfiles      patch-configure.ac.diff \
                 patch-glom-libglom-connectionpool.cc.diff
+
+require_active_variants libgda5 postgresql93
 
 # update macros/intltool.m4 and autoreconf
 
