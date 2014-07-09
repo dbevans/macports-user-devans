@@ -4,6 +4,7 @@
 PortSystem              1.0
 
 name                    gramps
+conflicts               gramps3
 
 PortGroup               python 1.0
 
@@ -19,7 +20,9 @@ description             GRAMPS is a genealogy program
 long_description        GRAMPS is a genealogy program to store, edit, \
                         and research genealogical data.  It provides \
                         advanced capabilities for research, analysis, and \
-                        correlation to potentially fill relationship gaps.
+                        correlation to potentially fill relationship gaps. This \
+                        version is based on gtk3 and supports both python 2 and 3. \
+                        To use the legacy gtk2 version, install port gramps3.
 
 homepage                http://www.gramps-project.org/
 master_sites            sourceforge:gramps
@@ -31,32 +34,20 @@ depends_build-append    port:intltool
 
 depends_lib-append      port:desktop-file-utils \
                         port:shared-mime-info \
+                        port:xdg-utils \
                         port:gtk3 \
                         port:gtkspell3 \
                         port:osm-gps-map \
                         port:gexiv2 \
                         path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3 \
                         path:bin/dot:graphviz \
-                        port:ghostscript
+                        port:ghostscript \
+                        port:goocanvas2
 
 patchfiles              patch-gramps-gen-utils-resourcepath.py.diff
 
-# TODO: Check ${configure.cxx_stdlib} directly once MacPorts 2.3 is released
 platform darwin {
-    set cxxstdlib {}
-
-    if {[info exists configure.cxx_stdlib] &&
-        ${configure.cxx_stdlib} ne {} &&
-        [string match *clang* ${configure.cxx}]} {
-        set cxxstdlib ${configure.cxx_stdlib}
-    } elseif {[string match *clang* ${configure.cxx}] &&
-              ${os.major} >= 13} {
-        set cxxstdlib libc++
-    } else {
-        set cxxstdlib libstdc++
-    }
-
-    if {${cxxstdlib} eq "libstdc++"} {
+    if {${configure.cxx_stdlib} eq "libstdc++"} {
        depends_lib-delete path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3
        depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
     }
@@ -64,19 +55,21 @@ platform darwin {
 
 #
 # supports python27 and python3 >= 3.2
-# python 3 versions require py-bsddb3 for database access
+# python 3 versions require py-bsddb3 for database access, not yet tested with python34
 #
 
 variant python27 conflicts python32 python33 description {Use Python 2.7} {
     python.default_version  27
     depends_lib-append  port:py27-gobject3 \
-                        port:py27-pyicu
+                        port:py27-pyicu \
+                        port:py27-Pillow
 }
 
 variant python32 conflicts python27 python33 description {Use Python 3.2} {
     python.default_version  32
     depends_lib-append  port:py32-gobject3 \
                         port:py32-pyicu \
+                        port:py32-Pillow \
                         port:py32-bsddb3
 }
 
@@ -84,6 +77,7 @@ variant python33 conflicts python27 python32 description {Use Python 3.3} {
     python.default_version  33
     depends_lib-append  port:py33-gobject3 \
                         port:py33-pyicu \
+                        port:py33-Pillow \
                         port:py33-bsddb3
 }
 
@@ -93,8 +87,8 @@ if {![variant_isset python32] && ![variant_isset python33]} {
 
 post-destroot {
     reinplace "s|${destroot}${python.prefix}|${prefix}|" ${destroot}${python.pkgd}/gramps/gen/utils/resource-path
-    file delete -force ${destroot}${prefix}/share
-    file rename ${destroot}${python.prefix}/share ${destroot}${prefix}
+    delete ${destroot}${prefix}/share
+    move ${destroot}${python.prefix}/share ${destroot}${prefix}
 }
 
 post-activate {
