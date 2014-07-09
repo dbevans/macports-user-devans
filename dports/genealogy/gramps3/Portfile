@@ -4,6 +4,7 @@
 PortSystem              1.0
 
 name                    gramps3
+conflicts               gramps
 set dname               gramps
 version                 3.4.8
 license                 GPL-2
