@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            inkscape-devel
 conflicts       inkscape
-set bzr_rev     13445
+set bzr_rev     13447
 version         0.48.99.${bzr_rev}
 epoch           1
 license         GPL-2 LGPL-2.1
@@ -25,8 +25,8 @@ long_description \
 homepage        http://www.inkscape.org/
 master_sites    file:///Users/devans/macports/distfiles/${name}
 
-checksums       rmd160  36fc104fc956ca2e9e315f8e7a89f705aaedfe8c \
-                sha256  55e844b06bcf4915840f46606e9d9601e675d5caa955b774dc91280f7f5d2c98
+checksums       rmd160  3fe2dd5ab15d30b4a078726dc485285d6dd4811a \
+                sha256  53213fcddadd22fc3f5963b1b076eb3f5c3a7f727679cacffe204292d1017702
 
 worksrcdir      inkscape
 
