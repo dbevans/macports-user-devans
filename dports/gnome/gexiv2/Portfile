@@ -37,7 +37,8 @@ patchfiles      patch-configure.ac.diff
 use_autoreconf  yes
 autoreconf.args -fvi
 
-configure.args  --enable-introspection
+configure.args  --enable-introspection \
+                --disable-silent-rules
 
 # gobject-introspection uses g-ir-scanner, which uses $CC from env
 build.args-append       CC="${configure.cc} ${configure.cc_archflags}"
