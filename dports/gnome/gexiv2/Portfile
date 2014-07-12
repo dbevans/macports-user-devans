@@ -32,7 +32,8 @@ depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 \
                 port:vala \
                 port:exiv2
 
-patchfiles      patch-configure.ac.diff
+patchfiles      patch-configure.ac.diff \
+                patch-Makefile.am.diff
 
 use_autoreconf  yes
 autoreconf.args -fvi
