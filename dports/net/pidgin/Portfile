@@ -103,63 +103,60 @@ subport libpurple {
 
 if {${subport} eq $name} {
 
-# nss is not universal
-universal_variant   no
+    # nss is not universal
+    universal_variant   no
 
-variant finch_only requires finch description {Build without pidgin} {
-    configure.args-append   --disable-gtkui
-}
+    variant finch_only requires finch description {Build without pidgin} {
+        configure.args-append   --disable-gtkui
+    }
 
-variant finch description {Build with finch} {
-    configure.args-delete   --disable-consoleui
-    patchfiles-append       patch-finch_libgnt_Makefile.in.diff patch-finch_libgnt_gntwm.c
-}
+    variant finch description {Build with finch} {
+        configure.args-delete   --disable-consoleui
+        patchfiles-append       patch-finch_libgnt_Makefile.in.diff patch-finch_libgnt_gntwm.c
+    }
 
-variant x11 conflicts no_x11 quartz {
-    depends_lib-append      port:xorg-libX11 \
-                            port:xorg-libXext \
-                            port:xorg-libXScrnSaver \
-                            port:xorg-libice \
-                            port:xorg-libsm
+    variant x11 conflicts no_x11 quartz {
+        depends_lib-append      port:xorg-libX11 \
+                                port:xorg-libXext \
+                                port:xorg-libXScrnSaver \
+                                port:xorg-libice \
+                                port:xorg-libsm
 
-    configure.args-delete   --without-x \
-                            --disable-screensaver \
-                            --disable-sm
+        configure.args-delete   --without-x \
+                                --disable-screensaver \
+                                --disable-sm
 
-    configure.args-append   --with-x \
-                            --x-includes=${prefix}/include \
-                            --x-libraries=${prefix}/lib \
-                            --enable-screensaver \
-                            --enable-sm
-}
+        configure.args-append   --with-x \
+                                --x-includes=${prefix}/include \
+                                --x-libraries=${prefix}/lib \
+                                --enable-screensaver \
+                                --enable-sm
+    }
 
-# Legacy no_x11 variant to be removed after May 2015.
-variant no_x11 conflicts x11 description {Legacy compatibility variant} {}
+    # Legacy no_x11 variant to be removed after May 2015.
+    variant no_x11 conflicts x11 description {Legacy compatibility variant} {}
 
-if {[variant_isset no_x11] || [variant_isset quartz]} {
-    default_variants -x11
-} else {
-    default_variants +x11
-}
+    if {[variant_isset no_x11] || [variant_isset quartz]} {
+        default_variants -x11
+    } else {
+        default_variants +x11
+    }
 
-variant quartz conflicts x11 {
-    configure.args-append   --disable-gestures
-}
+    variant quartz conflicts x11 {
+        configure.args-append   --disable-gestures
+    }
 
-variant spellcheck description {Allow spell checking} {
-    depends_lib-append      port:gtkspell2
-    configure.args-delete   --disable-gtkspell
-}
+    variant spellcheck description {Allow spell checking} {
+        depends_lib-append      port:gtkspell2
+        configure.args-delete   --disable-gtkspell
+    }
 
-post-activate {
-    system "dbus-uuidgen --ensure"
-    system "${prefix}/bin/gtk-update-icon-cache -f -t ${prefix}/share/icons/hicolor"
-    system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
-        gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
-}
-
-# end subport eq name
-
+    post-activate {
+        system "dbus-uuidgen --ensure"
+        system "${prefix}/bin/gtk-update-icon-cache -f -t ${prefix}/share/icons/hicolor"
+        system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+            gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
+    }
 }
     
 # Python is only required if --enable-dbus is used, and only for
