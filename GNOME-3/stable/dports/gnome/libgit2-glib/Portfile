@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                libgit2-glib
-version             0.0.16
+version             0.0.18
 license             LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Glib wrapper library around the libgit2 git access library.
@@ -18,16 +18,14 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  3d99194438b959befabf56e713eeea8371f30697 \
-                    sha256  36fa374e2c01b42aab885c91f9a0da184a21fa06c9e3a273a3d4f593c083627e
+checksums           rmd160  1f310f72a7bdeedfc23e27c2203d7776f8d7fb06 \
+                    sha256  9f27b1dc3cfb5ce0d7685be12757f8549778b63b8a2a0b6565c5cad9ed84470c
 
 depends_build       port:pkgconfig
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:libgit2 \
                     port:gobject-introspection
-
-patchfiles          patch-libgit2-glib-ggit-repository.c.diff
 
 configure.args      --disable-silent-rules \
                     --enable-python=no
