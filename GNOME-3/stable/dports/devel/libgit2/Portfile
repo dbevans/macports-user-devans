@@ -39,3 +39,5 @@ post-extract {
 }
 
 configure.post_args ../${distname}
+
+livecheck.regex     "archive/v(\\d+(?:\\.\\d+)*)${extract.suffix}"
