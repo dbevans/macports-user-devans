@@ -22,7 +22,7 @@ checksums       rmd160  2d369f99c4eb45b19c5348e5520d14c43160a9f6 \
                 sha256  912f4716c2395a14a80620ef982b4af1e2a67a8df9a1ef0b802ecae826057e08
 
 depends_build   port:intltool port:pkgconfig
-depends_lib     port:vte port:dbus port:gtk2 \
+depends_lib     port:vte-gtk2-compat port:dbus port:gtk2 \
                 path:include/glib-2.0/gio/gio.h:glib2 port:hicolor-icon-theme
 
 livecheck.type  regex
