@@ -31,7 +31,12 @@ depends_build   port:intltool \
                 port:pkgconfig
 depends_lib     port:gtk2
 
-patchfiles      patch-configure.diff
+patchfiles      patch-configure.in.diff
+
+# autoreconf to reconfigure with our intltool.m4
+
+use_autoreconf  yes
+autoreconf.args -fvi
 
 configure.args  --with-gtk=2.0 \
                 --disable-introspection \
