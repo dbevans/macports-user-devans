@@ -69,6 +69,12 @@ variant without_python description {Disable Python support (deprecated, use -pyt
     default_variants -python27 -python26
 }
 
+# rename gnome-pty-helper to avoid a conflict with port vte
+
+post-destroot {
+    move ${destroot}${prefix}/libexec/gnome-pty-helper ${destroot}${prefix}/libexec/gnome-pty-helper-0.0
+}
+
 platform darwin 9 {
     post-patch {
         reinplace "s| -export-symbols-regex.*||g" \
