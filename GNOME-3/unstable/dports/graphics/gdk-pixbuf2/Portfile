@@ -1,0 +1,63 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem                  1.0
+
+name                        gdk-pixbuf2
+set my_name                 gdk-pixbuf
+epoch                       2
+version                     2.31.0
+license                     LGPL
+set branch                  [join [lrange [split ${version} .] 0 1] .]
+categories                  graphics
+maintainers                 devans openmaintainer
+homepage                    http://www.gtk.org/
+platforms                   darwin
+distname                    ${my_name}-${version}
+use_xz                      yes
+
+description                 The gdk-pixbuf-2.0 library
+
+long_description            ${description}
+
+master_sites                gnome:sources/${my_name}/${branch}/
+
+checksums                   rmd160  97300ea46ef4a96a2e685ae7abdd3e898bdb96a6 \
+                            sha256  4121f4258af1a3fde70029396314d31ae54cf8fa2b4ea0bff842acf8f195bd78
+
+depends_build               port:pkgconfig
+
+depends_lib                 path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                            port:libpng \
+                            port:jasper \
+                            port:jpeg \
+                            port:tiff \
+                            port:gobject-introspection
+
+configure.args              --with-libjasper \
+                            --enable-introspection=yes
+
+# The rules enabled by gobject-introspection require GNU make 3.81+, #35202
+platform darwin 8 {
+    depends_build-append    port:gmake
+    build.cmd               ${prefix}/bin/gmake
+}
+# gobject-introspection uses $CC from env
+build.args-append           CC="${configure.cc} ${configure.cc_archflags}"
+
+test.run                    yes
+test.target                 check
+
+post-activate {
+        system "${prefix}/bin/gdk-pixbuf-query-loaders --update-cache"
+}
+
+variant x11 {
+    depends_lib-append      port:xorg-libX11
+    configure.args-append   --with-x11
+}
+
+default_variants            +x11
+
+livecheck.type              gnome-with-unstable
+livecheck.name              ${my_name}
