@@ -9,7 +9,6 @@ version             2.13.4
 checksums           rmd160  f9ad7db8c8ef360bfc2ee5622adc5b36fd9db4a9 \
                     sha256  b20ede423cdf95ae34feca08b1f01afccafd75c37a3c8060b04beed31b18af15
 
-conflicts           at-spi
 license             LGPL
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Gnome Accesibility Technology Service
