@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            inkscape-devel
-conflicts       inkscape
+conflicts       inkscape inkscape-experimental inkscape-0.91
 set bzr_rev     13455
 version         0.48.99.${bzr_rev}
 epoch           1

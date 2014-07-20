@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            inkscape-0.91
 set dname       inkscape
-conflicts       inkscape inkscape-devel
+conflicts       inkscape inkscape-devel inkscape-experimental
 version         0.91
 epoch           1
 license         GPL-2 LGPL-2.1
