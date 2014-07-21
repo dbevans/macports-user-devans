@@ -6,7 +6,7 @@ PortGroup           active_variants 1.1
 
 name                gtksourceview3
 set gname           gtksourceview
-version             3.13.1
+version             3.13.2
 license             LGPL-2.1+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
@@ -26,8 +26,8 @@ master_sites        gnome:sources/${gname}/${branch}/
 distname            ${gname}-${version}
 use_xz              yes
 
-checksums           rmd160  08ebd24a27365f9b23cacc5e6d0e988621f17e22 \
-                    sha256  3b1a118bb385a20284b54abdfa26740c6d0bd33be2e89579da8a3854a0340ac4
+checksums           rmd160  d8b367393950108706d08365165b3773e00ee599 \
+                    sha256  5bea9b6b47b848056a4d3f410e5810d8918b6caef408d880b23bc44f05b16918
 
 depends_build       port:intltool \
                     port:pkgconfig \
@@ -75,7 +75,7 @@ variant glade description {Install a glade catalog file} {
 post-destroot {
     set docdir ${prefix}/share/doc/${name}
     xinstall -d ${destroot}${docdir}
-    xinstall -m 644 -W ${worksrcpath} AUTHORS COPYING COPYING.lib MAINTAINERS \
+    xinstall -m 644 -W ${worksrcpath} AUTHORS COPYING MAINTAINERS \
         NEWS README ${destroot}${docdir}
 
 # glade expects catalog modules and libraries to have a .so suffix
