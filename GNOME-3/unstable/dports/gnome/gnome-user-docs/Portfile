@@ -1,0 +1,39 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            gnome-user-docs
+version         3.13.4
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     End-user documentation for GNOME3
+long_description \
+                This package contains documents targetted \
+                for end-users of GNOME. See notes for a list \
+                of documents provided.
+
+maintainers     nomaintainer
+categories      gnome
+license         GFDL-1.1
+installs_libs   no
+platforms       darwin
+supported_archs noarch
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+
+use_xz          yes
+
+checksums       sha256  ffecfb45bc6f3df56db9fdc49c675030b43181ddbc11e8ce1405aa5586ecd35c \
+                rmd160  a3423d22474c589ff158b9d0a365d733c9dad1a8
+
+depends_build   port:pkgconfig \
+                port:libxml2 \
+                port:itstool
+
+notes "
+This port provides the following documents:
+    - GNOME Desktop System Administration Guide (yelp help:system-admin-guide)
+    - GNOME Help (yelp help:gnome-help)
+"
+
+livecheck.type  gnome-with-unstable
