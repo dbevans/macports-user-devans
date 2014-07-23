@@ -40,16 +40,12 @@ depends_lib     port:desktop-file-utils \
                 port:libxml2 \
                 port:enchant \
                 port:iso-codes \
-                port:zeitgeist \
                 port:vala
 
 depends_run     port:gnome-settings-daemon \
                 port:yelp
 
-# remove patch-revert-new-gtk3-dialog-class.diff when gtk3 3.13.3 is released
-
-patchfiles      patch-configure.ac.diff \
-                patch-revert-new-gtk3-dialog-class.diff
+patchfiles      patch-configure.ac.diff
 
 # update m4/intltool.m4 and autoreconf
 
@@ -63,8 +59,7 @@ autoreconf.args -fvi
 configure.cflags-append \
                 -Wno-error=format-nonliteral
 
-configure.args  --enable-zeitgeist \
-                --disable-python \
+configure.args  --disable-python \
                 --disable-schemas-compile \
                 --disable-silent-rules
 
