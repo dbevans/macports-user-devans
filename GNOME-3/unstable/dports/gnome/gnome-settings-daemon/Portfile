@@ -5,7 +5,7 @@ PortSystem      1.0
 PortGroup       active_variants 1.1
 
 name            gnome-settings-daemon
-version         3.13.3
+version         3.13.4
 license         GPL-2 LGPL-2.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Gnome 3 settings daemon.
@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  fc6447999961c661398348b47fedb25c5a1e81dc \
-                sha256  91ab24e3cdbe38883b98b6eba9875bba010592a638687838b20f40700c4b7afe
+checksums       rmd160  47fe990dc6866e4f07801abd6af027c7ee06d029 \
+                sha256  7d7c40b1835d76131d1e5d7e651425e4a2b66fabb33137c61ac35babe6dd0f4d
 
 depends_build   port:pkgconfig \
                 port:intltool \
