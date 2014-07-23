@@ -5,7 +5,7 @@ PortSystem      1.0
 PortGroup       compiler_blacklist_versions 1.0
 
 name            rygel
-version         0.23.1.1
+version         0.23.2
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Rygel DLNA media server, renderer
@@ -20,8 +20,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  97e6e738ecfd9f480d5cdef1b509802343159579 \
-                sha256  0d7040518a5c998e6b3cdf69752c85f592491e8aa539da9359cd606c8cfcfc38
+checksums       rmd160  831f26900f912d2dac5fd934f28337176e49587f \
+                sha256  1d16cf69a465eac1eb19466863d49cad63e427a9a31895cbdc28544e70226979
 
 depends_build   port:pkgconfig \
                 port:intltool
@@ -34,6 +34,7 @@ depends_lib     port:desktop-file-utils \
                 port:gupnp-dlna \
                 port:gstreamer1-gst-plugins-base \
                 port:libgee \
+                port:libmediaart \
                 port:ossp-uuid \
                 port:vala
 
@@ -58,6 +59,11 @@ autoreconf.args -fvi
 
 configure.args  --disable-silent-rules \
                 --enable-tracker-plugin=no
+
+variant tracker description {Enable tracker plugin} {
+    depends_lib-append      port:tracker
+    configure.args-replace  --enable-tracker-plugin=no --enable-tracker-plugin=yes
+}
 
 post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
