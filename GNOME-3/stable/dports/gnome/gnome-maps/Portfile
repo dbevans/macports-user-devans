@@ -37,6 +37,10 @@ depends_lib         port:desktop-file-utils \
 depends_run         port:gnome-settings-daemon \
                     port:yelp
 
+patchfiles          patch-geoclue-handle-not-avail.diff \
+                    patch-geoclue-add-connected.diff \
+                    patch-disable-location-button.diff
+
 configure.args      --disable-silent-rules
 
 # update m4/intltool.m4 and autoreconf
