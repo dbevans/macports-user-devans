@@ -1,0 +1,55 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                libmediaart
+version             0.5.0
+license             GPL-2 LGPL-2.1
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         Library tasked with managing, extracting and handling media art caches.
+long_description    ${description}
+
+maintainers         juanrgar devans openmaintainer
+categories          graphics gnome
+platforms           darwin
+homepage            https://wiki.gnome.org/MediaArtStorageSpec
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  3ec88074de87a8c4e8c0ff276e544d6c00d62ef9 \
+                    sha256  45392cc991a80dd909909e4a2ca7aebc236eec431a67132f7e1759a17bd5f31b
+
+depends_build       port:pkgconfig
+
+depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                    port:gobject-introspection \
+                    port:vala
+
+configure.args      --disable-silent-rules \
+                    --enable-introspection=yes \
+                    --enable-vala \
+                    --enable-gdkpixbuf=no \
+                    --enable-qt=no \
+                    --enable-nemo=no
+
+variant gdkpixbuf conflicts qt4 description {Enable GdkPixbuf support, (MP3 album art)} {
+    configure.args-delete   --enable-gdkpixbuf=no
+    configure.args-append   --enable-gdkpixbuf=yes
+
+    depends_lib-append      port:gdk-pixbuf2
+}
+
+variant qt4 conflicts gdkpixbuf description {Enable Qt4 support, (MP3 album art)} {
+    configure.args-delete   --enable-qt=no
+    configure.args-append   --enable-qt=yes
+
+    depends_lib-append      port:qt4-mac
+}
+
+if {![variant_isset qt4]} {
+    default_variants    +gdkpixbuf
+}
+
+livecheck.type      gnome
