@@ -52,4 +52,4 @@ if {![variant_isset qt4]} {
     default_variants    +gdkpixbuf
 }
 
-livecheck.type      gnome
+livecheck.type      gnome-with-unstable
