@@ -30,16 +30,19 @@ checksums       rmd160  a746d8aeac6472f63912507f3a556121fe9fa21e \
 depends_build   port:pkgconfig \
                 path:lib/pkgconfig/glib-2.0.pc:glib2
 
+# vim is used by some scripts for source highlighting and OS X /usr/bin/vim doesn't always work (#44546)
+
 depends_lib     port:libxml2 \
                 port:libxslt \
-                path:bin/perl:perl5 \
+                port:perl5.16 \
                 port:openjade \
                 port:fop \
                 port:docbook-xml \
                 port:docbook-xsl \
-                port:itstool
+                port:itstool \
+                port:vim
 
-configure.perl  ${prefix}/bin/perl
+configure.perl  ${prefix}/bin/perl5.16
 configure.env-append XSLTPROC=${prefix}/bin/xsltproc
 configure.args  --with-xml-catalog=${prefix}/etc/xml/catalog
 
