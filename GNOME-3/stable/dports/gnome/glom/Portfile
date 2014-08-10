@@ -11,7 +11,7 @@ license         GPL-2
 description     Glom is an easy-to-use database designer and user interface.
 long_description \
                 ${description} This version supports GTK+ 3 and the libgda-5.0 API.
-maintainers     landonf
+maintainers     landonf openmaintainer
 categories      gnome databases
 platforms       darwin
 
@@ -92,5 +92,10 @@ post-activate {
     system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
     system "${prefix}/bin/update-mime-database ${prefix}/share/mime"
 }
+
+notes "
+To work around known locale issues, set LANG=C when starting glom
+    $ LANG=C glom
+"
 
 livecheck.type gnome
