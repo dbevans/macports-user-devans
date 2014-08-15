@@ -3,10 +3,10 @@
 
 PortSystem      1.0
 
-name            inkscape-0.91
+name            inkscape-prerelease
 set dname       inkscape
 conflicts       inkscape inkscape-devel inkscape-experimental
-version         0.91
+version         0.91pre2
 epoch           1
 license         GPL-2 LGPL-2.1
 maintainers     devans
@@ -23,12 +23,12 @@ long_description \
                 gradients, node editing, svg-to-png export, \
                 grouping, and more.
 homepage        http://www.inkscape.org/
-master_sites    https://sourceforge.net/projects/inkscape/files/inkscape/0.91pre1/
+master_sites    https://sourceforge.net/projects/inkscape/files/inkscape/${version}/
 
-distname        ${dname}-${version}pre1
+distname        ${dname}-${version}
 
-checksums       rmd160  9e953839f090e1423aad437f3bbd3fd2cd791d3d \
-                sha256  a37cebf453d9e473845871e4324ca89d4ae93faed19b424c76d5860776c01b81
+checksums       rmd160  49fbb632cea3a38dfd5164b93cc9a29c29bc5523 \
+                sha256  79f4facb4140fce09a55daa464399116cae10a4f92c95e8b427875fe56da798b
 
 depends_build   port:pkgconfig \
                 port:autoconf \
@@ -52,8 +52,6 @@ depends_lib     port:desktop-file-utils \
                 port:libvisio \
                 port:libwpg \
                 port:gtkspell2
-
-patchfiles      patch-revert-r13429.diff
 
 post-patch {
     xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
