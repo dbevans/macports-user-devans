@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            folks
-version         0.9.7.1
+version         0.9.8
 epoch           1
 license         LGPL-2.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
@@ -24,8 +24,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  ac1cf257642c0a4c1ae2dbb1e1061baeba42943f \
-                sha256  8d53cf9f6ccb7d9499a352c7367170b103b14a7d59da0bd06dda8c57b689276a
+checksums       rmd160  29cbe901920b41cda8773bf3b5e41d5a43804e44 \
+                sha256  d2d1da6ba107aa077efdcb05df6250ddc225f1ac7275f47888976b06e3d08b25
 
 depends_build   port:pkgconfig \
                 port:intltool
@@ -37,7 +37,6 @@ depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 \
                 port:evolution-data-server \
                 port:libgee \
                 port:telepathy-glib \
-                port:zeitgeist \
                 port:libsocialweb \
                 port:gobject-introspection \
                 port:libxml2 \
@@ -57,6 +56,7 @@ configure.args  --disable-eds-backend \
                 --enable-libsocialweb-backend=yes \
                 --disable-ofono-backend \
                 --enable-telepathy-backend \
+                --disable-zeitgeist \
                 --disable-tracker-backend \
                 --enable-import-tool \
                 --enable-vala \
@@ -72,6 +72,12 @@ variant eds description {Enable evolution data server backend} {
     depends_lib-append  port:evolution-data-server
     configure.args-delete   --disable-eds-backend
     configure.args-append   --enable-eds-backend
+}
+
+variant zeitgeist description {Enable zeitgeist support in telepathy backend (broken)} {
+    depends_lib-append  port:zeitgeist
+    configure.args-delete   --disable-zeitgeist
+    configure.args-append   --enable-zeitgeist
 }
 
 # for now don't build +eds by default due to runtime problems
