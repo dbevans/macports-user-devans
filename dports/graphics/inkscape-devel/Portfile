@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            inkscape-devel
 conflicts       inkscape inkscape-experimental inkscape-prerelease
-set bzr_rev     13520
+set bzr_rev     13528
 version         0.48.99.${bzr_rev}
 epoch           1
 license         GPL-2 LGPL-2.1
@@ -25,8 +25,8 @@ long_description \
 homepage        http://www.inkscape.org/
 master_sites    file:///Users/devans/macports/distfiles/${name}
 
-checksums       rmd160  34ea250a3e749ef2ac3f44a49d56a07acb586af9 \
-                sha256  b389c0947235345e1ce51400b8687345583903459e8e515d414c18a5822b1251
+checksums       rmd160  000fc83b0cb9407cf0b7963592c18ee1f4c58405 \
+                sha256  d4a6e6a84dce9efa7374e99c5a6eebf40b9fdacb13764206d11abf70f2a7650b
 
 worksrcdir      inkscape
 
@@ -52,6 +52,8 @@ depends_lib     port:desktop-file-utils \
                 port:libvisio \
                 port:libwpg \
                 port:gtkspell2
+
+patchfiles      clang-cxx11-boost-1-56_3.diff
 
 variant revenge description {Experimental upstream patch to build with latest libcdr, libvisio, libwpg based on librevenge} {
     patchfiles-append   patch-librevenge.diff
