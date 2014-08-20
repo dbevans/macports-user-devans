@@ -53,6 +53,8 @@ depends_lib     port:desktop-file-utils \
                 port:libwpg \
                 port:gtkspell2
 
+patchfiles      clang-cxx11-boost-1-56_3.diff
+
 post-patch {
     xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
 }
