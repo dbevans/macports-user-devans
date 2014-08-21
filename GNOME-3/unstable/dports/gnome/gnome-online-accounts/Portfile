@@ -8,7 +8,7 @@ name            gnome-online-accounts
 if {${os.platform} eq "darwin" && ${os.major} >= 13} {
 
 set mavericks_or_better yes
-version         3.13.3
+version         3.13.90
 
 } else {
 
@@ -33,8 +33,8 @@ use_xz          yes
 
 if {$mavericks_or_better} {
 
-checksums       rmd160  9113cbdfe25144d22c6493d5371c582bef8c1c86 \
-                sha256  93aa901a2113e637ea7ca94db963c60b4827eb231ca8bd7a70140da9a2ff0de2
+checksums       rmd160  07e55fe9fb19869f7445671d21bcc20c750fb041 \
+                sha256  cb4443741dc87783c08269c9d130c72f4d8da806fc3b36f36136c96f7e2b471b
 
 depends_build   port:pkgconfig \
                 port:intltool \

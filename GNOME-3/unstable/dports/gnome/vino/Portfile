@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            vino
-version         3.13.3
+version         3.13.90
 license         GPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 homepage        https://wiki.gnome.org/Projects/Vino
@@ -17,8 +17,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  0da059b63487325c30cf4d4bb500b3fbbeacacc8 \
-                sha256  82cb0b1259fb72ac01985457a619ebb3ea5da3473ea06902282c5e5268cab8c9
+checksums       rmd160  716a0f640d89291d01736c560dc2ccf8e41ffbb8 \
+                sha256  f9ac4b6aeeb20ed54a7486a4970e03aa781fe7c12be60d3352bdbadea3cd9204
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -57,7 +57,6 @@ configure.args  --x-includes=${prefix}/include \
                 --disable-schemas-compile \
                 --without-network-manager \
                 --without-avahi \
-                --enable-http-server=no \
                 --enable-ipv6
 
 variant avahi description {Enable mDNS support using avahi} {

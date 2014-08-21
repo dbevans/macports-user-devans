@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            evince
-version         3.13.3.1
+version         3.13.90
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Evince is a document viewer for multiple document formats like pdf, and many others.
@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  fa9850d8b505fa994cfa57a24cf118825ea7fcf2 \
-                sha256  5a2a150a56abc49c40a3fcd6cf7a3c50c86e1bae0e2f442fc84a971f76944bf0
+checksums       rmd160  bb816cb32fcd9388fe580d35420916b76b0cc425 \
+                sha256  d52198b8fc94bead0ea8af48a637dd7a9b46370fef67d85a141ef8e9f76a1f2f
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -45,6 +45,8 @@ depends_lib     port:desktop-file-utils \
                 port:t1lib
 
 depends_run     port:gnome-settings-daemon
+
+patchfiles      patch-browser-plugin-Makefile.am.diff
 
 # update m4/intltool.m4 and autoreconf
 # teach glibtool about -stdlib=libc++

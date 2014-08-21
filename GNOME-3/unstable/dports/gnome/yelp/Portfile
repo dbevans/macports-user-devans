@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            yelp
-version         3.13.3
+version         3.13.90
 license         GPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Help browser for GNOME.
@@ -21,8 +21,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  57b6b053cb9a821a63f3d5786c09d77436dad60c \
-                sha256  d057d544a995e4b3d1b903c45a92b4640cabba9c1f792c097b1a8ff945ded184
+checksums       rmd160  3af6f306ad8a504b33f1f0ecefe5bdc07e08770b \
+                sha256  1413d3f1d404f98ccc7fbdadc0fd31019537a5f5503e8b444bc2f090cf465a48
 
 depends_build   port:pkgconfig \
                 port:intltool \
