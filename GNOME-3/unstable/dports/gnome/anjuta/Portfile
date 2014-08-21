@@ -5,7 +5,7 @@ PortSystem      1.0
 PortGroup       muniversal 1.0
 
 name            anjuta
-version         3.13.1
+version         3.13.90
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A GNOME/GTK IDE
@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  2b6af5941d4bc230bc401374aaa49e4fc4baad71 \
-                sha256  71bdad9a0e427d9481858eec40b9c1facef4b551d732023cc18a50019df4b78b
+checksums       rmd160  992004dcd94b437424ec809a46ab0e43ce0893ee \
+                sha256  f32e7fd4fce96047314c5fd149f5dc4b34455570f64f8b0aa606906834dd58b4
 
 depends_build   port:pkgconfig \
                 port:intltool \
