@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id$
+# $Id: Portfile 124230 2014-08-21 15:49:36Z devans@macports.org $
 
 PortSystem      1.0
 
 name            clutter-gtk
-version         1.5.2
+version         1.5.4
 set branch      [string range $version 0 [expr [string last "." $version] - 1]]
 categories      graphics
 license         LGPL-2.1
@@ -20,8 +20,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  7103bb95781e3b8492f371b177d55217611ccc05 \
-                sha256  3f57438ab01c249cb020e8787e8a72c51a92f817517ee8c0c696111c83891fc8
+checksums       rmd160  d0837ee089f02400fb491bf49a87cb70458a9259 \
+                sha256  db9c710ea3970620278c58d0bc522018353a75c83ac6ad60e272d2532533e772
 
 #
 # gtkdocize provided by gtk-doc is required by autoreconf
