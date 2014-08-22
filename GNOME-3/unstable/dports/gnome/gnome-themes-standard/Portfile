@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            gnome-themes-standard
 conflicts       gnome-themes
-version         3.13.4
+version         3.13.90
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome
 maintainers     devans openmaintainer
@@ -23,8 +23,8 @@ master_sites    gnome:sources/$name/$branch/
 
 use_xz          yes
 
-checksums       rmd160  0abd412c0e946494cef5a51433a5d0210746fbbf \
-                sha256  a1b55eb37c290f406b799572f0f3455fca7af1ec058b7ce36650a2e27af316b3
+checksums       rmd160  9a3a9c0c9d4c8d9fdc505737ee0f9ea32af54ff8 \
+                sha256  76bfbf25cdd6f86fdbf15b085c5bcfbe0abf4715510a917ec023a4d780fb5f53
 
 depends_build   port:intltool \
                 port:pkgconfig
@@ -32,7 +32,8 @@ depends_build   port:intltool \
 depends_lib     port:gtk3 \
                 port:gtk2 \
                 port:librsvg \
-                port:adwaita-icon-theme
+                port:adwaita-icon-theme \
+                port:gnome-backgrounds
 
 # update m4/intltool.m4 and autoreconf
 
