@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                tracker
-version             1.0.2
+version             1.0.3
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Metadata database, indexer and search tool.
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  0696fd1a9e7f0a0bd15170b4759f0affe4cc0660 \
-                    sha256  73491517006a58802630ff28243fc6fe07a24fe8bea563670da0ad28595468c4
+checksums           rmd160  253f331ee66f4d53a56c067a9aa5fcb0b958f4af \
+                    sha256  508433e0c7101a844fc7ba589a8ebbcb4d5c7c3672d1868695f500f81a65f886
 
 depends_build       port:pkgconfig \
                     port:intltool
@@ -50,8 +50,7 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:flac \
                     port:totem-pl-parser
 
-patchfiles          patch-configure.ac.diff \
-                    patch-extract-configure.ac.diff \
+patchfiles          patch-extract-configure.ac.diff \
                     patch-libtracker-sparql-suffix.diff \
                     patch-module-flags-no-undefined.diff
 
