@@ -132,6 +132,10 @@ if {![variant_isset python26] && ![variant_isset python27]} {
     default_variants +python27
 }
 
+variant strict description {Enable strict build} {
+    configure.args-replace  --disable-strict-build --enable-strict-build
+}
+
 #
 # the following dummy variants are used
 # to identify this port's binary dependencies
