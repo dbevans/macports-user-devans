@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            inkscape-experimental
 conflicts       inkscape inkscape-devel inkscape-prerelease
-set bzr_rev     13511
+set bzr_rev     13516
 version         0.48.99.${bzr_rev}
 epoch           1
 license         GPL-2 LGPL-2.1
@@ -25,8 +25,8 @@ long_description \
 homepage        http://www.inkscape.org/
 master_sites    file:///Users/devans/macports/distfiles/${name}
 
-checksums       rmd160  dae225c1c790e73c65db7196b8f5481eb9ec9e72 \
-                sha256  cd08485fee5e829faaef486bea65eeec3c63b0e04cd44f3d448a4b2563d08a76
+checksums       rmd160  09456c55f024e3e64b07747f586b5fda53fdff2b \
+                sha256  2137fe1231958467e793db570b0adae279b3721dbde84f718b48ea44e51e82c0
 
 worksrcdir      ${name}
 
@@ -125,6 +125,10 @@ if {[string match "*clang*" ${configure.compiler}]} {
 
 if {![variant_isset python26] && ![variant_isset python27]} {
     default_variants +python27
+}
+
+variant strict description {Enable strict build} {
+    configure.args-replace  --disable-strict-build --enable-strict-build
 }
 
 #
