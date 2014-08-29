@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gvfs
-version         1.21.90
+version         1.21.91
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     nomaintainer
 categories      devel
@@ -35,12 +35,12 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  adf6c6c38130b659cd0016ce9d8e088848b97f10 \
-                sha256  48c2df61310c9185bae3432479a82986230913371c547812e75089419a13269e
+checksums       rmd160  96d5dad2477eee06aef476567ec11de1fa4c178d \
+                sha256  a15155f82137ad74a505f90b435a485c6b4a6901ff73703549c63c59daacbdaa
 
 depends_build   port:pkgconfig \
                 port:intltool \
-                port:gnome-doc-utils
+                port:gtk-doc
 
 depends_lib     port:gtk3 \
                 port:gettext \
