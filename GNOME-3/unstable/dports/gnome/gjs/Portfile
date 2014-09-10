@@ -5,7 +5,7 @@ PortSystem      1.0
 PortGroup       compiler_blacklist_versions 1.0
 
 name            gjs
-version         1.41.4
+version         1.41.91
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     GObject JavaScriptCore bridge
 long_description \
@@ -21,8 +21,8 @@ homepage        https://wiki.gnome.org/Projects/Gjs
 master_sites    gnome:sources/${name}/${branch}/
 use_xz          yes
 
-checksums       rmd160  154cdb38f99118896bf4a073a4a59dcbb44874f4 \
-                sha256  4cfd593dee8ed7055bb502188d0eb5089818bdd264d09ec06391be51fc46050d
+checksums       rmd160  3e34e605b6df6ac5c49d441c503d3971a5761094 \
+                sha256  ca0b861cce674e757b746f28d331b3419a71e2ada3cacf31fb778cbff3edde62
 
 depends_build   port:pkgconfig \
                 port:gnome-common \

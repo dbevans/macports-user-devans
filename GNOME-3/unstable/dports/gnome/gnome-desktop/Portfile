@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-desktop
-version         3.13.90
+version         3.13.91
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      gnome
@@ -24,8 +24,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  211a6edd66192e1dbb0d8ea92805f6b72104d065 \
-                sha256  03dbce41bcbd24a20083634428932d1c6598581f647dbdafaacca04a3a2fbbb4
+checksums       rmd160  2f199058aae0d64fa477e903b03244e0f65f4fcd \
+                sha256  a8c5dcfd9b850fcaab296335b321aeaab58ce925f9444d339c0bffa39008b6f7
 
 depends_build   port:pkgconfig \
                 port:intltool \

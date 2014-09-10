@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                vala
-version             0.25.2
+version             0.25.3
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          lang
 maintainers         nomaintainer
@@ -23,14 +23,12 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  3ba8c4d511501b1e9e8b103665d9d560bb013b94 \
-                    sha256  4afddd91aff46a1b699c829c14071861110b9ef3ca3801c2773f5653991e3965
+checksums           rmd160  d2cc1fd9051a289a3b9c7f9f45ae7514bd0220cc \
+                    sha256  bdc318480edb176b31e80bf792db0a4d3bb76af846c4379dc285da6318f74ecf
 
 depends_build       path:bin/pkg-config:pkgconfig \
                     port:libxslt
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2
-
-configure.args      --enable-vapigen
 
 livecheck.type      gnome-with-unstable

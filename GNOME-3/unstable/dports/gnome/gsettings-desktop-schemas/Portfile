@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gsettings-desktop-schemas
-version         3.13.91
+version         3.13.92
 license         LGPL-2.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 
@@ -22,8 +22,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  288f21ed4972810544f70a3ead761b0540a3c2fb \
-                sha256  dee7c4977cc19a1324451cfa0696da8a2ff7a591c6d5e4afb910c540de8a2562
+checksums       rmd160  96b17a1104818a41320b25261aff69c1b3ad8802 \
+                sha256  82338a066b48cf39f190ef7a82db46bc6a6a451cbe08d43dca7d03364bf9c034
 
 supported_archs noarch
 
