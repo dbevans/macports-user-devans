@@ -29,8 +29,6 @@ depends_build   port:pkgconfig \
                 port:gtk-doc
 
 depends_lib     port:desktop-file-utils \
-                port:gnome-icon-theme \
-                port:gnome-icon-theme-symbolic \
                 port:gsettings-desktop-schemas \
                 port:gtk3 \
                 port:gvfs \

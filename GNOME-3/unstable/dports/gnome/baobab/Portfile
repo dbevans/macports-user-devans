@@ -32,8 +32,6 @@ depends_build       port:pkgconfig \
                     port:yelp-tools
 
 depends_lib         port:desktop-file-utils \
-                    port:gnome-icon-theme \
-                    port:gnome-icon-theme-symbolic \
                     port:gtk3 \
                     port:vala
 
