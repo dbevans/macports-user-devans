@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            file-roller
-version         3.13.91
+version         3.13.92
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     An archive manager for GNOME
@@ -23,8 +23,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  917a31957e65dbd66a8c4c59009014aa95c69f11 \
-                sha256  73ec5384e9cda67f9a2a93118a7f72396137241ee24e4e7429e9ea4c2349d3d8
+checksums       rmd160  186169460c399bbcf5b679f87c0d40899b86d6d9 \
+                sha256  dd541f2995d7fd42c950489c343103e8c2690303be4708facd5417229993b53d
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -36,9 +36,7 @@ depends_lib     port:desktop-file-utils \
                 port:json-glib \
                 port:libnotify \
                 port:libmagic \
-                port:libarchive \
-                port:xorg-libsm \
-                port:xorg-libice
+                port:libarchive
 
 depends_run     port:gnome-settings-daemon \
                 port:yelp
@@ -54,8 +52,7 @@ pre-configure {
 use_autoreconf      yes
 autoreconf.args     -fvi
 
-configure.args  --with-smclient=xsmp \
-                --disable-nautilus-actions \
+configure.args  --disable-nautilus-actions \
                 --disable-packagekit \
                 --disable-schemas-compile \
                 --disable-silent-rules

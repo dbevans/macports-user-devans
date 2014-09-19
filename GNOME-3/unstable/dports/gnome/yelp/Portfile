@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            yelp
-version         3.13.90
+version         3.13.92
 license         GPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Help browser for GNOME.
@@ -21,8 +21,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  3af6f306ad8a504b33f1f0ecefe5bdc07e08770b \
-                sha256  1413d3f1d404f98ccc7fbdadc0fd31019537a5f5503e8b444bc2f090cf465a48
+checksums       rmd160  af1f2c6c3eb2675c3f688eaf4f17580e4b864fc0 \
+                sha256  289ac4b6e8fdca8ec8e39c80e7f577319fae85e74cc8db7fa3452a769c94a1a6
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -30,8 +30,6 @@ depends_build   port:pkgconfig \
                 port:gnome-common
 
 depends_lib     port:desktop-file-utils \
-                port:gnome-icon-theme \
-                port:gnome-icon-theme-symbolic \
                 port:gtk3 \
                 path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3 \
                 port:sqlite3 \

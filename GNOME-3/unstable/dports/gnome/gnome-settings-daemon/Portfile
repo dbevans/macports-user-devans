@@ -5,7 +5,7 @@ PortSystem      1.0
 PortGroup       active_variants 1.1
 
 name            gnome-settings-daemon
-version         3.13.91
+version         3.13.92
 license         GPL-2 LGPL-2.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Gnome 3 settings daemon.
@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  3a4a58d9a4f21b314ebc1c4d0af97d681567bf7e \
-                sha256  3db57d262ee3c9a63e1bc0f70beb0a53e9052abe314fcb026177fe6215ff147a
+checksums       rmd160  64918999afda48aea9672754aaa8e14e6435067e \
+                sha256  90766e53c78aa6d7990786cae0d8d6993a5499cfcc05e3a2da261c49351ac065
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -69,7 +69,6 @@ autoreconf.args -fvi
 configure.args  --x-includes=${prefix}/include \
                 --x-libraries=${prefix}/lib \
                 --disable-gudev \
-                --disable-ibus \
                 --disable-network-manager \
                 --disable-smartcard-support \
                 --disable-rfkill \

@@ -8,7 +8,7 @@ name            gnome-control-center
 if {${os.platform} eq "darwin" && ${os.major} >= 13} {
 
 set mavericks_or_better yes
-version 3.13.91
+version 3.13.92
 
 } else {
 
@@ -33,8 +33,8 @@ use_xz          yes
 
 if {$mavericks_or_better} {
 
-checksums       rmd160  9de9cf9630dc4e869f18ae65c6fbe4ce9eca120b \
-                sha256  709d744bfa2c50b6cb0eb593bba7132e1d8cafcf1c090caa8efe5caddba8921a
+checksums       rmd160  536ca1d52cee8c2bf8c6e18000132c33d8c758bb \
+                sha256  28e7ab86afdec03c1855b2f6ab590ee69f39182379abde6cb07edb6bd19874a1
 
 depends_build   port:pkgconfig \
                 port:intltool \

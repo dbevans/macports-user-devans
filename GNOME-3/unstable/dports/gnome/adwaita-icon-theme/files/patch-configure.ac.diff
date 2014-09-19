@@ -1,8 +1,8 @@
---- configure.ac.orig	2014-06-02 08:12:25.000000000 -0700
-+++ configure.ac	2014-06-02 14:40:45.000000000 -0700
-@@ -30,9 +30,9 @@
- AC_SUBST([render_sizes], ["8x8 16x16 22x22 24x24 32x32 48x48 256x256"])
+--- configure.ac.orig	2014-08-16 18:59:12.000000000 -0700
++++ configure.ac	2014-08-17 00:20:26.000000000 -0700
+@@ -31,9 +31,9 @@
  AC_SUBST([symbolic_render_sizes], [""])
+ AC_SUBST([install_sizes], ["8x8 16x16 22x22 24x24 32x32 48x48 64x64 96x96 256x256"])
  
 -AC_PATH_PROG(GTK_UPDATE_ICON_CACHE, gtk-update-icon-cache)
 +AC_PATH_PROG(GTK_UPDATE_ICON_CACHE, gtk-update-icon-cache-3.0)

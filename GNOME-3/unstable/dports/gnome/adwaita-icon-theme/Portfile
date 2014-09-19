@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                adwaita-icon-theme
-version             3.13.4
+version             3.13.91
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome
 maintainers         devans openmaintainer
@@ -20,12 +20,13 @@ master_sites        gnome:sources/$name/$branch/
 
 use_xz              yes
 
-checksums           rmd160  b0b72837f41bdc1461705d9cd7f899e90877aa57 \
-                    sha256  0230699f27f81d682513df9e0bca0bb7b86bd854324bc31767e754577e69b189
+checksums           rmd160  ab261ecc3e9600253d9973d60d2a9b1675a21840 \
+                    sha256  d0cf4705d3439c68d344431b62cca5fe6fcf91bd38c745c48b2476d0aa41b8ad
 
 depends_build       port:pkgconfig \
                     port:intltool \
-                    port:icon-naming-utils
+                    port:icon-naming-utils \
+                    port:git
 
 depends_lib         port:gtk3
 
@@ -39,6 +40,8 @@ pre-configure {
 
 use_autoreconf      yes
 autoreconf.args     -fvi
+
+use_parallel_build  no
 
 pre-activate {
     if {![catch {set installed [lindex [registry_active gnome-themes-standard] 0]}]} {

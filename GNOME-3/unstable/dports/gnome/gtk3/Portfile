@@ -10,15 +10,15 @@ PortGroup           active_variants 1.1
 name                gtk3
 set real_name       gtk+
 epoch               1
-version             3.13.8
+version             3.13.9
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2.1+
 maintainers         cal openmaintainer
 platforms           darwin
 
-checksums           rmd160  cdb1fddc8ae30af4fec073e1b9ebb0afe194c6a5 \
-                    sha256  c4bcb3a4bcbfda7eb8737e557fc5ff0e628c367cb7997e56e1e90092a0ab8f3f
+checksums           rmd160  b1e3138166f20c0bfc37f0b22a77268bf58f1d07 \
+                    sha256  ba7f948a019a548c1c324bcead91d724b4decca38f2bed6896b7290ca7135662
 
 description         GTK+ widget toolkit
 

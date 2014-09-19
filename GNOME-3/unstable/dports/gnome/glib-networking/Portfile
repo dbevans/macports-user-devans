@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            glib-networking
-version         2.41.4
+version         2.41.92
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Network-related giomodules for glib
 long_description ${description}
@@ -17,8 +17,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  bff37781041852806c55634c672c937e3d25b400 \
-                sha256  930ad618865dcf81765d0f48cb6f13e22d76203efa59d30604aed0384ce80fd7
+checksums       rmd160  c1c3c39891baa01ea31dec071be855898a7d5b19 \
+                sha256  8f9a5bf8c34dcc7378044aa6ae3e327643d4c973463e655328c4c574d91485de
 
 depends_build   port:pkgconfig \
                 port:intltool

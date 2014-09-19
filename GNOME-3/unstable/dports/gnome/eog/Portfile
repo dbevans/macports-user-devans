@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            eog
-version         3.13.90
+version         3.13.92
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     An image viewing and cataloging program.
@@ -20,8 +20,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  eafdc6df452691b37ec7a25bf609e097a7736897 \
-                sha256  e8d272c30d2a3809c6a56e1ec12c77332b2ff5bb156657330892978b6cfad219
+checksums       rmd160  2ebda96521a3f5b55485fa031c427fd863a33709 \
+                sha256  c6f82defa4309f5e7671c2443c89c62a091cf74822e5153e653f246b1f7d2d7e
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -33,8 +33,6 @@ depends_build   port:pkgconfig \
 depends_lib     port:desktop-file-utils \
                 port:gtk3 \
                 port:gnome-desktop \
-                port:gnome-icon-theme \
-                port:gnome-icon-theme-symbolic \
                 port:shared-mime-info \
                 port:gsettings-desktop-schemas \
                 port:libpeas \

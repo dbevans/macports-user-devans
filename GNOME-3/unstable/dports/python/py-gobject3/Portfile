@@ -6,7 +6,7 @@ PortGroup           python 1.0
 
 name                py-gobject3
 set my_name         pygobject
-version             3.13.3
+version             3.13.92
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories-append   gnome
 license             LGPL-2.1+
@@ -23,8 +23,8 @@ master_sites        gnome:sources/${my_name}/${branch}/
 distname            ${my_name}-${version}
 use_xz              yes
 
-checksums           sha256  28c4d28c4083ce9c249cf7a8621a1452ecc557951650810a09bf946b21df7452 \
-                    rmd160  e810aa59c120f1e014e5e8bf8fe13ce8408165f3
+checksums           sha256  4a405fb49afa357de6cc4138a47c509ae2a5e2e5aff7d5245b22bc8e3bd4c347 \
+                    rmd160  c8447c2cbdf3e2ec31ba8f165ff7d923fece5bca
 
 python.versions     27 32 33 34
 
@@ -39,7 +39,8 @@ if {${name} ne ${subport}} {
     configure.python        ${python.bin}
     configure.env-append    PKG_CONFIG_PATH='${python.prefix}/lib/pkgconfig'
     configure.pre_args      --prefix='${python.prefix}'
-    configure.args          --disable-glibtest
+    configure.args          --disable-glibtest \
+                            --disable-silent-rules
     configure.cppflags-append \
                             -I${python.prefix}/include
 

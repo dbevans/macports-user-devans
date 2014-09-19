@@ -1,0 +1,53 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            zenity
+version         3.13.92
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     zenity allows you to display dialog boxes from the commandline.
+long_description \
+    This is zenity - a rewrite of gdialog, the GNOME port of dialog which \
+    allows you to display dialog boxes from the commandline and shell scripts.
+maintainers     devans openmaintainer
+categories      gnome
+license         LGPL-2+
+platforms       darwin
+homepage        https://wiki.gnome.org/Projects/Zenity
+master_sites    gnome:sources/${name}/${branch}/
+
+use_xz          yes
+
+checksums       rmd160  fa5a58112ab7428cba67dcad24f06f6e2cdc440f \
+                sha256  ee153088982f45ef8a51582860278c5e7422b01a528c1e3b9f5533bfe251fd93
+
+depends_build   port:pkgconfig \
+                port:gnome-common \
+                port:yelp-tools \
+                port:intltool \
+                port:itstool
+
+depends_lib     port:gtk3 \
+                port:libnotify \
+                path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf  yes
+autoreconf.args -fvi
+
+configure.args  --disable-silent-rules
+
+platform darwin {
+    if {${configure.cxx_stdlib} eq "libstdc++"} {
+       depends_lib-delete path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3
+       depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
+    }
+}
+
+livecheck.type  gnome-with-unstable

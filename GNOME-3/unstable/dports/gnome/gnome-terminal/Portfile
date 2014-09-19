@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome-terminal
-version         3.13.90
+version         3.13.92
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Terminal component for the GNOME 3 Desktop
 long_description \
@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  ce22cc35a0113648ead15e63c6e5225c937ad2a7 \
-                sha256  ec6534a26ce970fe3c1c507ad757ff1db6d6200d75b46545af7eb084be59167a
+checksums           rmd160  13a749102809e6ca29b1f8e354609119398eef33 \
+                    sha256  47ae3fb5f8b9a17a8b173234343a4d71464eb3743161a5b00bdc1e6107007d79
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -29,8 +29,6 @@ depends_build   port:pkgconfig \
                 port:gnome-common
 
 depends_lib     port:desktop-file-utils \
-                port:gnome-icon-theme \
-                port:gnome-icon-theme-symbolic \
                 port:gsettings-desktop-schemas \
                 port:gtk3 \
                 port:vte \

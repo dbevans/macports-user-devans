@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            libsigcxx2
 set my_name     libsigc++
-version         2.3.2
+version         2.4.0
 license         LGPL-2.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      devel
@@ -23,8 +23,8 @@ master_sites    gnome:sources/${my_name}/${branch}/
 distname        ${my_name}-${version}
 use_xz          yes
 
-checksums       sha256  f0305bb6d2185de1513b35843f3d4a85abfec7c969034140d56cf14ce70aa411 \
-                rmd160  615db3cb6be0633e9a1fd5b7d80c958a6994db9b
+checksums       sha256  7593d5fa9187bbad7c6868dce375ce3079a805f3f1e74236143bceb15a37cd30 \
+                rmd160  89be646e4ba4f6d5cbf8b4203f252fa23af5a6f5
 
 depends_build   port:mm-common
 

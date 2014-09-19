@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            eog-plugins
-version         3.13.1
+version         3.13.92
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Extra plugins for the Eye of GNOME image viewer
@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  b9230a54801d810555db3637ca82233ae44ed0e3 \
-                sha256  25308effe176e6d051b845c2853bf413c0380ac9472cc4062988d75f17b26054
+checksums       rmd160  96d56d4d7c90a768c39598fbd1cddd21c4b98f89 \
+                sha256  92951a7bcfb6570a693ce7c19696d6340771771c76a295fd141d23506afe9eab
 
 depends_build   port:pkgconfig \
                 port:intltool
@@ -33,6 +33,11 @@ depends_lib     port:eog \
                 port:clutter-gtk \
                 port:libexif \
                 port:gsettings-desktop-schemas
+
+# map plugins uses "gnome-mime-image" from gnome-icon-theme
+
+depends_lib-append \
+                port:gnome-icon-theme
 
 # update m4/intltool.m4 and autoreconf
 
