@@ -55,4 +55,4 @@ configure.args  --enable-introspection=yes \
                 --enable-goa \
                 --disable-silent-rules
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome

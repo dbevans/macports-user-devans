@@ -60,4 +60,4 @@ platform darwin 8 {
 # gobject-introspection uses $CC from env
 build.env-append    CC=${configure.cc}
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome
