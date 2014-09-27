@@ -14,7 +14,7 @@ version             3.14.0
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2.1+
-maintainers         cal openmaintainer
+maintainers         cal devans openmaintainer
 platforms           darwin
 
 checksums           rmd160  7bba8619b20b8a76794b4539b0da4cfb59483361 \
