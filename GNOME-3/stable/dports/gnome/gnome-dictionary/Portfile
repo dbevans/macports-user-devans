@@ -3,12 +3,13 @@
 
 PortSystem          1.0
 
-name                gnome-font-viewer
+name                gnome-dictionary
 version             3.14.0
-license             GPL-2
+license             GPL-2 GFDL-1.1 LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
-description         GNOME font viewer and thumbnailer.
-long_description    GNOME font viewer can preview fonts and create thumbnails for fonts.
+description         GNOME dictionary application.
+long_description    GNOME Dictionary can look for the definition or translation \
+                    of a word in existing databases over the Internet.
 
 maintainers         juanrgar devans openmaintainer
 categories          gnome
@@ -18,20 +19,19 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  631522ecdc10cf8be20acae4d7ef95855ac60541 \
-                    sha256  c32636e449c4d28cf2aaa60a5f8bafb40b870b334ab69c3fdd0e78e57d183a96
+checksums           rmd160  f9f223550f83549465d399196d6b535409ba28f5 \
+                    sha256  b1d7f694a3b63f734e398a08d51a6d7ef864d8fc6d0f160569a283a30b93da57
 
 depends_build       port:pkgconfig \
-                    port:intltool
+                    port:intltool \
+                    port:itstool \
+                    port:yelp-tools
 
 depends_lib         port:desktop-file-utils \
-                    port:gsettings-desktop-schemas \
-                    port:gtk3 \
-                    port:gnome-desktop \
-                    port:fontconfig \
-                    port:freetype
+                    port:gtk3
 
-depends_run         port:gnome-settings-daemon
+depends_run         port:gnome-settings-daemon \
+                    port:yelp
 
 # update m4/intltool.m4 and autoreconf
 
@@ -46,23 +46,24 @@ configure.args      --disable-schemas-compile \
                     --disable-silent-rules
 
 # if port gnome-utils is installed
-# and gnome-font-viewer binary exists
-# and port gnome-font-viewer is NOT installed
+# and gnome-dictionary binary exists
+# and port gnome-dictionary is NOT installed
 # deactivate outdated port gnome-utils
  
 pre-activate {
     if {![catch {registry_active gnome-utils}]} {
-        if {[file exists ${prefix}/bin/gnome-font-viewer]} {
-            if {[catch {registry_active gnome-font-viewer}]} {
+        if {[file exists ${prefix}/bin/gnome-dictionary]} {
+            if {[catch {registry_active gnome-dictionary}]} {
                 registry_deactivate_composite gnome-utils "" [list ports_nodepcheck 1]
             }
         }
     }
 }
 
-# port installs desktop application file
+# port installs desktop application file, and gschemas
 post-activate {
     system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
 livecheck.type  gnome

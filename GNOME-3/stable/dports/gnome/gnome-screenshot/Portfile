@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-screenshot
-version             3.12.0
+version             3.14.0
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME dictionary application.
@@ -19,14 +19,13 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  231a812f7af93e197df6e754e5b8eb108393365b \
-                    sha256  ae4bf706652ae9b28c7930d22c2c37469a78d7f6656d312960b3c75ee5c36eb1
+checksums           rmd160  c1d81deee4ae3c6c8288e261d376aca76a19ee69 \
+                    sha256  d96f108421ab04ee5d26387387df3858764e61d7718c7376cbf87890bf33912a
 
 depends_build       port:pkgconfig \
                     port:intltool
 
 depends_lib         port:desktop-file-utils \
-                    port:gnome-icon-theme \
                     port:gtk3 \
                     port:libcanberra \
                     port:xorg-libXext
@@ -71,4 +70,4 @@ post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-livecheck.type  gnome
+livecheck.type      gnome
