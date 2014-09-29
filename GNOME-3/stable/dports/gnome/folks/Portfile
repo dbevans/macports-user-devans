@@ -37,6 +37,7 @@ depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 \
                 port:evolution-data-server \
                 port:libgee \
                 port:telepathy-glib \
+                port:zeitgeist \
                 port:libsocialweb \
                 port:gobject-introspection \
                 port:libxml2 \
@@ -56,7 +57,7 @@ configure.args  --disable-eds-backend \
                 --enable-libsocialweb-backend=yes \
                 --disable-ofono-backend \
                 --enable-telepathy-backend \
-                --disable-zeitgeist \
+                --enable-zeitgeist \
                 --disable-tracker-backend \
                 --enable-import-tool \
                 --enable-vala \
