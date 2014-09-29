@@ -88,5 +88,5 @@ if {![variant_isset python26]} {
 }
 
 livecheck.type      regex
-livecheck.url       ${master_sites}
-livecheck.regex     "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"
+livecheck.url       ${homepage}/refs
+livecheck.regex     "id=v(\\d+(?:\\.\\d+)*)"
