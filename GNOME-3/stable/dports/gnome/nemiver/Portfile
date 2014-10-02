@@ -55,6 +55,18 @@ patchfiles          nemiver-tr1-osx-patch.diff \
                     patch-dconf-configure.ac.diff \
                     patch-gconf-configure.ac.diff
 
+# proposed upstream patches to port to vte-2.91 API
+# https://bugzilla.gnome.org/show_bug.cgi?id=730243
+
+patchfiles-append   patch-consolidate-gerrorsafeptr-definitions.diff \
+                    patch-vte-2.91-api.diff
+
+# emulation support now removed from vte, xterm behavior hardcoded
+# https://bugzilla.gnome.org/show_bug.cgi?id=728900#c5
+# https://git.gnome.org/browse/vte/commit/src/vte.c?id=4e253be9282829f594c8a55ca08d1299e80e471d
+
+patchfiles-append   patch-src-uicommon-nmv-terminal.cc.diff
+
 # update m4/intltool.m4 and autoreconf
 
 pre-configure {

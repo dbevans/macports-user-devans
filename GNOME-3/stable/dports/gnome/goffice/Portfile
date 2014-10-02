@@ -1,0 +1,83 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem              1.0
+PortGroup               active_variants 1.1
+
+name                    goffice
+description             GOffice is a library of document-centric objects and utilities.
+long_description        GOffice is a library of document-centric objects \
+                        and utilities building on top of GLib and Gtk+ and \
+                        used by software such as Gnumeric.
+
+maintainers             devans openmaintainer
+categories              gnome devel
+platforms               darwin
+
+homepage                http://freecode.com/projects/goffice
+use_xz                  yes
+
+depends_build           port:intltool \
+                        port:pkgconfig
+
+if {${name} eq ${subport}} {
+    epoch               1
+    version             0.10.14
+
+    license             {GPL-2 GPL-3}
+
+checksums           rmd160  47fcf1d4b60a154c6ae71c16773ac08f3f432d31 \
+                    sha256  c0783ca32828a64a65fe57609a692c1cb6627d3dfe8bed4fed8a70f32c8f404e
+
+    depends_lib         port:gtk3 \
+                        port:libgsf \
+                        port:librsvg \
+                        port:libspectre \
+                        port:ghostscript \
+                        port:gobject-introspection \
+                        path:lib/pkgconfig/glib-2.0.pc:glib2
+
+    configure.optflags  -g -O0
+    configure.args-append   --enable-introspection \
+                            --enable-compile-warnings=minimum
+
+    patchfiles-append       patch_quartz-goffice-goffice.c.diff
+
+    livecheck.type      gnome
+} else {
+    livecheck.type      none
+}
+
+# Snapshot of goffice @0.8.17 for gnucash.
+# Can be removed once gnucash no longer needs this version.
+
+subport goffice08 {
+    epoch               1
+    version             0.8.17
+    revision            1
+
+    checksums           sha256  165070beb67b84580afe80a8a100b674a81d553ab791acd72ac0c655f4fadb15 \
+                        rmd160  91d1df371c8164c8c5c9860c7c9c87b9fb69f6c3
+
+    license             GPL-2
+
+    depends_lib         port:gtk2 \
+                        port:gconf \
+                        port:libgsf \
+                        port:libxml2 \
+                        port:pcre
+
+    patchfiles-append   patch-goffice-utils-regutf8.c.diff
+
+    pre-activate {
+        if {![catch {set installed [lindex [registry_active goffice] 0]}]} {
+            set _version [lindex $installed 1]
+            if {[vercmp $_version 0.10] < 0} {
+                registry_deactivate_composite goffice "" [list ports_nodepcheck 1]
+            }
+        }
+    }
+}
+
+set branch              [join [lrange [split ${version} .] 0 1] .]
+master_sites            gnome:sources/${name}/${branch}/

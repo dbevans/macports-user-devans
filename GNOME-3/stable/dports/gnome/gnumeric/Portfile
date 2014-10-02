@@ -1,0 +1,93 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           active_variants 1.0
+
+name                gnumeric
+version             1.12.18
+set branch          [join [lrange [split ${version} .] 0 1] .]
+
+license             GPL-2+
+maintainers         devans openmaintainer
+categories          gnome math science
+platforms           darwin
+
+description         A powerful Gtk3 based spreadsheet with Excel, ODF, R and Python support.
+long_description    A powerful Gtk3 based spreadsheet that features full Excel function \
+                    and file compatibility and additional functions not found in Excel, \
+                    and statistics operations based on R. Functionality can be extended \
+                    with Python and plugins. Other file compatibility includes OASIS ODF, \
+                    Quattro Pro, Psion 5, Paradox DB, and more (see homepage). GDA \
+                    database support is available with the +database variant.
+
+homepage            https://wiki.gnome.org/Apps/Gnumeric
+master_sites        gnome:sources/${name}/${branch}/
+use_xz              yes
+
+checksums           sha256  402224f858cfa4e91503ab1be0491fa3322713dabe56b6eae171def8b736d9e9 \
+                    rmd160  9c8a9fdde1ecb13d18d7d2a2db66a35749a8ef37
+
+depends_build       port:gnome-doc-utils \
+                    port:intltool \
+                    port:pkgconfig
+
+# update-desktop-database is provided by desktop-file-utils
+
+depends_lib         port:desktop-file-utils \
+                    port:gobject-introspection \
+                    port:goffice \
+                    port:psiconv \
+                    port:pxlib
+
+patchfiles          patch-configure.ac.diff
+
+# autoreconf to reconfigure using our intltool.m4
+
+use_autoreconf      yes
+autoreconf.args     -fvi
+
+configure.args      --disable-silent-rules \
+                    --disable-schemas-compile \
+                    --enable-introspection \
+                    --without-gda
+
+variant database description {builds with support for GDA database} {
+    depends_lib-append        port:libgda5
+    configure.args-replace    --without-gda --with-gda
+}
+
+variant python26 conflicts python27 description {Use python 2.6} {
+    configure.python          ${prefix}/bin/python2.6
+    depends_lib-append        port:py26-gobject3
+    set python_framework      ${frameworks_dir}/Python.framework/Versions/2.6
+    configure.pkg_config_path ${python_framework}/lib/pkgconfig
+}
+
+variant python27 conflicts python26 description {Use python 2.7} {
+    configure.python          ${prefix}/bin/python2.7
+    depends_lib-append        port:py27-gobject3
+    set python_framework      ${frameworks_dir}/Python.framework/Versions/2.7
+    configure.pkg_config_path ${python_framework}/lib/pkgconfig
+}
+
+if {![variant_isset python26]} {
+    default_variants +python27
+}
+
+post-activate {
+    system "${prefix}/bin/scrollkeeper-update"
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+# gtk3 provides gtk-update-icon-cache-3.0
+    system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type  gnome
+
+# yelp is currently not available in a +quartz environment due to dependency issues,
+# see #39898 #40282 #40116
+notes \
+"Recommended supplementary ports:
+    gnome-themes-standard  provides the default Gnome Adwaita theme
+    yelp                   provides a help browser for Gnome apps"
