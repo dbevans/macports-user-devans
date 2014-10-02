@@ -26,11 +26,19 @@ use_xz          yes
 checksums       sha256  7593d5fa9187bbad7c6868dce375ce3079a805f3f1e74236143bceb15a37cd30 \
                 rmd160  89be646e4ba4f6d5cbf8b4203f252fa23af5a6f5
 
-depends_build   port:mm-common
+depends_build   port:pkgconfig \
+                port:mm-common \
+                port:m4 \
+                port:perl5.16 \
+                path:bin/dot:graphviz \
+                port:doxygen \
+                port:libxslt
 
+configure.perl  ${prefix}/bin/perl5.16
+configure.env-append \
+                "M4=${prefix}/bin/gm4"
 configure.args  --enable-static \
-                --disable-silent-rules \
-                --disable-documentation
+                --disable-silent-rules
 
 # Teach glibtool about -stdlib=libc++
 use_autoreconf  yes
@@ -41,13 +49,6 @@ post-destroot {
     xinstall -d ${destroot}${docdir}
     xinstall -m 0644 -W ${worksrcpath} AUTHORS COPYING ChangeLog NEWS README TODO \
         ${destroot}${docdir}
-}
-
-variant doc description {Build and install devhelp API documentation} {
-    depends_build-append \
-        port:graphviz \
-        port:doxygen
-    configure.args-delete   --disable-documentation
 }
 
 livecheck.type  gnome
