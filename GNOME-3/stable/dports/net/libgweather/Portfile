@@ -49,9 +49,6 @@ post-patch {
 
 configure.cmd   ./autogen.sh
 
-#configure.cflags-append \
-#                -Wno-error=format-nonliteral
-
 configure.args  --enable-compile-warnings=minimum \
                 --enable-introspection=yes \
                 --enable-vala=yes \
@@ -59,6 +56,9 @@ configure.args  --enable-compile-warnings=minimum \
                 --disable-schemas-compile \
                 --disable-silent-rules \
                 --disable-glibtest
+
+# gobject-introspection uses g-ir-scanner, which uses $CC from env
+build.args-append   CC="${configure.cc} ${configure.cc_archflags}"
 
 variant glade description {Enable building of glade catalog items} {
     depends_lib-append  port:glade
