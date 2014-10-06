@@ -37,9 +37,6 @@ depends_lib \
     port:gobject-introspection \
     port:clutter
 
-#patchfiles      patch-revert-prefer-clutter-gdk-backend.diff \
-#                patch-fix-hiding-embed-inside-container.diff
-
 configure.args  --enable-introspection=yes \
                 --disable-silent-rules
 
