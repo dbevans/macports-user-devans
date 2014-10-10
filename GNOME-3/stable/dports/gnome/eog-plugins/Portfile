@@ -34,7 +34,7 @@ depends_lib     port:eog \
                 port:libexif \
                 port:gsettings-desktop-schemas
 
-# map plugins uses "gnome-mime-image" from gnome-icon-theme
+# map plugin uses "gnome-mime-image" from gnome-icon-theme
 
 depends_lib-append \
                 port:gnome-icon-theme

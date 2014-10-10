@@ -18,8 +18,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums           rmd160  f844123ab325b1f9a59236f4b30706acdb891ed3 \
-                    sha256  3680ffe52a834566f249ad85b44c32d521f34a7a6816e900942ae54a58e0413d
+checksums       rmd160  f844123ab325b1f9a59236f4b30706acdb891ed3 \
+                sha256  3680ffe52a834566f249ad85b44c32d521f34a7a6816e900942ae54a58e0413d
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -42,7 +42,8 @@ depends_run     port:gnome-settings-daemon \
                 port:yelp
 
 patchfiles      patch-uuid.diff \
-                no-dupfd_cloexec.patch
+                no-dupfd_cloexec.patch \
+                patch-src-Makefile.am.diff
 
 # update m4/intltool.m4 and autoreconf
 
