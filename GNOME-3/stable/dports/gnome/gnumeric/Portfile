@@ -21,7 +21,7 @@ long_description    A powerful Gtk3 based spreadsheet that features full Excel f
                     Quattro Pro, Psion 5, Paradox DB, and more (see homepage). GDA \
                     database support is available with the +database variant.
 
-homepage            https://wiki.gnome.org/Apps/Gnumeric
+homepage            http://www.gnumeric.org/
 master_sites        gnome:sources/${name}/${branch}/
 use_xz              yes
 
@@ -51,6 +51,9 @@ configure.args      --disable-silent-rules \
                     --disable-schemas-compile \
                     --enable-introspection \
                     --without-gda
+
+# gobject-introspection uses g-ir-scanner, which uses $CC from env
+build.args-append   CC="${configure.cc} ${configure.cc_archflags}"
 
 variant database description {builds with support for GDA database} {
     depends_lib-append        port:libgda5
