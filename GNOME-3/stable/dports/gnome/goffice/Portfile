@@ -22,12 +22,12 @@ depends_build           port:intltool \
 
 if {${name} eq ${subport}} {
     epoch               1
-    version             0.10.14
+    version             0.10.18
 
     license             {GPL-2 GPL-3}
 
-checksums           rmd160  47fcf1d4b60a154c6ae71c16773ac08f3f432d31 \
-                    sha256  c0783ca32828a64a65fe57609a692c1cb6627d3dfe8bed4fed8a70f32c8f404e
+    checksums           rmd160  8843e0b62cdc7e9f8b34bf0941ccc5e7684fbf75 \
+                        sha256  4743a148d4452743f3484ed28285a6889adb4af2a61b72448e0ddfe7d5142c64
 
     depends_lib         port:gtk3 \
                         port:libgsf \
@@ -37,11 +37,11 @@ checksums           rmd160  47fcf1d4b60a154c6ae71c16773ac08f3f432d31 \
                         port:gobject-introspection \
                         path:lib/pkgconfig/glib-2.0.pc:glib2
 
-    configure.optflags  -g -O0
     configure.args-append   --enable-introspection \
                             --enable-compile-warnings=minimum
 
-    patchfiles-append       patch_quartz-goffice-goffice.c.diff
+    patchfiles-append   patch_quartz-goffice-goffice.c.diff \
+                        patch-goffice-math-go-quad.diff
 
     livecheck.type      gnome
 } else {
