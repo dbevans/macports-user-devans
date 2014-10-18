@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            inkscape-devel
 conflicts       inkscape inkscape-experimental inkscape-prerelease
-set bzr_rev     13613
+set bzr_rev     13625
 version         0.48.99.${bzr_rev}
 epoch           1
 license         GPL-2 LGPL-2.1
@@ -25,8 +25,8 @@ long_description \
 homepage        http://www.inkscape.org/
 master_sites    file:///Users/devans/macports/distfiles/${name}
 
-checksums       rmd160  a890ba2fda2062f1147e0c15e9d3c07ccb78ef5a \
-                sha256  de4ebf97db985f60977c56aa218f2275e030ebd09611b50d92d1ba4ad78b95da
+checksums       rmd160  99b372ad22743a8aac2880c6d78d3d667f04bdfe \
+                sha256  34327f4bef6b8a27aeb6fb7e187871514d5207777d5e4db4d22d282efc54d139
 
 worksrcdir      inkscape
 
@@ -47,21 +47,11 @@ depends_lib     port:desktop-file-utils \
                 port:poppler \
                 port:boost \
                 port:ImageMagick \
-                port:libcdr \
+                port:libcdr-0.1 \
                 port:libexif \
-                port:libvisio \
-                port:libwpg \
+                port:libvisio-0.1 \
+                port:libwpg-0.3 \
                 port:gtkspell2
-
-variant revenge description {Experimental upstream patch to build with latest libcdr, libvisio, libwpg based on librevenge} {
-    patchfiles-append   patch-librevenge.diff
-    depends_lib-delete  port:libcdr \
-                        port:libvisio \
-                        port:libwpg
-    depends_lib-append  port:libcdr-0.1 \
-                        port:libvisio-0.1 \
-                        port:libwpg-0.3
-}
 
 variant python26 conflicts python27 description {Configure to use Python version 2.6} {
     depends_lib-append \
