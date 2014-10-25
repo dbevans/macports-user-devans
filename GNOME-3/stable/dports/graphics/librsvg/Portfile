@@ -1,0 +1,109 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                librsvg
+version             2.40.5
+license             {GPL-2+ LGPL-2+}
+set branch          [join [lrange [split ${version} .] 0 1] .]
+categories          graphics gnome
+platforms           darwin
+maintainers         devans pixilla openmaintainer
+description         Gnome implementation of rsvg.
+
+long_description    ${description}
+
+homepage            https://wiki.gnome.org/Projects/LibRsvg
+master_sites        gnome:sources/${name}/${branch}/
+use_xz              yes
+
+checksums           rmd160  c2690be83442df4ca63f1ee955b4dcca63b0ebba \
+                    sha256  d14d7b3e25023ce34302022fd7c9b3a468629c94dff6c177874629686bfc71a7
+
+depends_build       port:pkgconfig \
+                    port:gtk-doc
+
+depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                    path:lib/pkgconfig/cairo.pc:cairo \
+                    path:lib/pkgconfig/pangocairo.pc:pango \
+                    port:libcroco \
+                    port:libxml2 \
+                    port:gdk-pixbuf2 \
+                    port:vala
+
+
+set pyversion 2.7
+depends_run         port:python[join [split ${pyversion} "."] ""]
+
+configure.args      --enable-introspection=yes \
+                    --enable-vala=yes \
+                    --disable-Bsymbolic
+
+# librsvg's build process includes the gobject-introspection Makefile, causing
+# the build to fail if not using GNU make 3.81+, #35204
+platform darwin 8 {
+    depends_build-append    port:gmake
+    build.cmd               ${prefix}/bin/gmake
+}
+
+# gobject-introspection doesn't use the right compiler
+build.args          CC="${configure.cc} ${configure.cc_archflags}"
+
+set buildpath ${worksrcpath}/macports
+post-build {
+    xinstall -d ${buildpath}
+    set fp [open ${buildpath}/svg2pdf w]
+    puts $fp "#!/bin/sh"
+    puts $fp "if \[ \$# -lt 2 -o \"\$1\" = \"-h\" -o \"\$1\" = \"--help\" \] ; then"
+    puts $fp "	echo \"FAIL: usage: \$0 input_file.svg output_file.pdf\""
+    puts $fp "	exit 255;"
+    puts $fp "fi"
+    puts $fp "rsvg-convert -f pdf -o \"\$2\" \"\$1\""
+    close $fp
+}
+
+# viewer variant can be disabled by people who don't want gtk3 installed
+# at the expense of the rsvg-view-3 utility (#43328)
+
+variant viewer description "Enable the build of the rsvg-view-3 utility." {
+    depends_lib-append  port:gtk3
+}
+
+default_variants +viewer
+
+if {![variant_isset viewer]} {
+    patchfiles-append   patch-disable-viewer.diff
+
+    use_autoreconf      yes
+    autoreconf.args     -fvi
+}
+
+post-destroot {
+    set python.branch ${pyversion}
+    set python.bin ${frameworks_dir}/Python.framework/Versions/${python.branch}/bin/python${python.branch}
+
+    set docdir ${prefix}/share/doc/${name}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 644 -W ${worksrcpath} AUTHORS COPYING COPYING.LIB NEWS README \
+        ${destroot}${docdir}
+    xinstall -m 755 -W ${buildpath} svg2pdf \
+        ${destroot}${prefix}/bin
+    set badfile ${prefix}/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-svg.a
+    if {[file exists ${destroot}${badfile}]} {
+        file delete ${destroot}${badfile}
+    }
+}
+
+post-activate {
+    system "${prefix}/bin/gdk-pixbuf-query-loaders --update-cache"
+}
+
+post-deactivate {
+    system "${prefix}/bin/gdk-pixbuf-query-loaders --update-cache"
+}
+
+variant x11 conflicts quartz {}
+variant quartz conflicts x11 {}
+
+livecheck.type      gnome
