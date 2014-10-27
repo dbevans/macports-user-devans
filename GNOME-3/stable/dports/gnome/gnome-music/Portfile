@@ -54,21 +54,13 @@ autoreconf.args     -fvi
 configure.args      --disable-schemas-compile \
                     --disable-silent-rules
 
-variant python32 conflicts python33 description {Use Python3.2} {
-    depends_lib-append  port:py32-gobject3 \
-                        port:dbus-python32
-    configure.python    ${prefix}/bin/python3.2
-}
+# requires python >= 3.3
+# configure for python34
 
-variant python33 conflicts python32 description {Use Python3.3} {
-    depends_lib-append  port:py33-gobject3 \
-                        port:dbus-python33
-    configure.python    ${prefix}/bin/python3.3
-}
+depends_lib-append  port:py34-gobject3 \
+                    port:dbus-python34
 
-if {![variant_isset python32] && ![variant_isset python34]} {
-    default_variants +python33
-}
+configure.python    ${prefix}/bin/python3.4
 
 # port installs hicolor icons, desktop application file, and gschemas
 post-activate {
