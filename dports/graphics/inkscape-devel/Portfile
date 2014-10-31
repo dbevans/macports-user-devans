@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            inkscape-devel
 conflicts       inkscape inkscape-experimental inkscape-prerelease
-set bzr_rev     13625
+set bzr_rev     13647
 version         0.48.99.${bzr_rev}
 epoch           1
 license         GPL-2 LGPL-2.1
@@ -25,8 +25,8 @@ long_description \
 homepage        http://www.inkscape.org/
 master_sites    file:///Users/devans/macports/distfiles/${name}
 
-checksums       rmd160  99b372ad22743a8aac2880c6d78d3d667f04bdfe \
-                sha256  34327f4bef6b8a27aeb6fb7e187871514d5207777d5e4db4d22d282efc54d139
+checksums       rmd160  11ff650e76e3570669f96cc5c83f50d89aa28107 \
+                sha256  60ff207104499576413126eb9f3d24eb0a469ecdb0437d515da28380941abd4e
 
 worksrcdir      inkscape
 
@@ -43,7 +43,7 @@ depends_lib     port:desktop-file-utils \
                 port:gsl \
                 port:gtkmm \
                 port:dbus-glib \
-                port:lcms \
+                port:lcms2 \
                 port:poppler \
                 port:boost \
                 port:ImageMagick \
@@ -51,36 +51,14 @@ depends_lib     port:desktop-file-utils \
                 port:libexif \
                 port:libvisio-0.1 \
                 port:libwpg-0.3 \
-                port:gtkspell2
+                port:gtkspell2 \
+                port:py27-lxml \
+                port:py27-numpy
 
-variant python26 conflicts python27 description {Configure to use Python version 2.6} {
-    depends_lib-append \
-        port:py26-lxml \
-        port:py26-numpy
-
-    post-patch {
-        reinplace "s|\"python-interpreter\", \"python\"|\"python-interpreter\", \"python2.6\"|g" ${worksrcpath}/src/extension/implementation/script.cpp
-        reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.h
-        reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.cpp
-    }
-
-    configure.python \
-        ${prefix}/bin/python2.6
-}
-
-variant python27 conflicts python26 description {Configure to use Python version 2.7} {
-    depends_lib-append \
-        port:py27-lxml \
-        port:py27-numpy
-
-    post-patch {
-        reinplace "s|\"python-interpreter\", \"python\"|\"python-interpreter\", \"python2.7\"|g" ${worksrcpath}/src/extension/implementation/script.cpp
-        reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.h
-        reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.cpp
-    }
-
-    configure.python \
-        ${prefix}/bin/python2.7
+post-patch {
+    reinplace "s|\"python-interpreter\", \"python\"|\"python-interpreter\", \"python2.7\"|g" ${worksrcpath}/src/extension/implementation/script.cpp
+    reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.h
+    reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.cpp
 }
 
 variant gtk3 description {Enable experimental GTK+ 3 build} {
@@ -97,10 +75,13 @@ variant gtk3 description {Enable experimental GTK+ 3 build} {
 
 variant svg2 description {Enable experimental SVG level 2 proposed features} {
     configure.cppflags-append \
-                        "-DWITH_MESH -DWITH_CSSBLEND -DWITH_CSSCOMPOSITE"
+                        "-DWITH_MESH -DWITH_CSSBLEND -DWITH_CSSCOMPOSITE -DWITH_SVG2"
 }
 
 configure.cmd   ./autogen.sh && ./configure
+
+configure.python \
+                ${prefix}/bin/python2.7
 
 configure.args  --without-gnome-vfs \
                 --enable-lcms \
@@ -116,13 +97,11 @@ if {[string match "*clang*" ${configure.compiler}]} {
     configure.cxxflags-append -std=c++11
 }
 
-if {![variant_isset python26] && ![variant_isset python27]} {
-    default_variants +python27
-}
-
 variant strict description {Enable strict build} {
     configure.args-replace  --disable-strict-build --enable-strict-build
 }
+
+default_variants +strict
 
 #
 # the following dummy variants are used
