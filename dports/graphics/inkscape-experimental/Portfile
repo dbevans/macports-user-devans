@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            inkscape-experimental
 conflicts       inkscape inkscape-devel inkscape-prerelease
-set bzr_rev     13580
+set bzr_rev     13629
 version         0.48.99.${bzr_rev}
 epoch           1
 license         GPL-2 LGPL-2.1
@@ -25,8 +25,8 @@ long_description \
 homepage        http://www.inkscape.org/
 master_sites    file:///Users/devans/macports/distfiles/${name}
 
-checksums       rmd160  9fa04ef2060d1c1f056aa41044fff5020c820ee7 \
-                sha256  ec0e0ebb3322121eb4fc9de95781fd431e935f273f9c6405cc51532614305fe7
+checksums       rmd160  efe5ee615fdfc8d85dc38ad018587dc8857727bf \
+                sha256  2618fbdaaa2fa176ceffb2692f229cc1f11035a8fea504e2a91de0a35d347b85
 
 worksrcdir      ${name}
 
@@ -47,52 +47,18 @@ depends_lib     port:desktop-file-utils \
                 port:poppler \
                 port:boost \
                 port:ImageMagick \
-                port:libcdr \
+                port:libcdr-0.1 \
                 port:libexif \
-                port:libvisio \
-                port:libwpg \
-                port:gtkspell2
+                port:libvisio-0.1 \
+                port:libwpg-0.3 \
+                port:gtkspell2 \
+                port:py27-lxml \
+                port:py27-numpy
 
-patchfiles      clang-cxx11-boost-1-56_3.diff
-
-variant revenge description {Experimental upstream patch to build with latest libcdr, libvisio, libwpg based on librevenge} {
-    patchfiles-append   patch-librevenge.diff
-    depends_lib-delete  port:libcdr \
-                        port:libvisio \
-                        port:libwpg
-    depends_lib-append  port:libcdr-0.1 \
-                        port:libvisio-0.1 \
-                        port:libwpg-0.3
-}
-
-variant python26 conflicts python27 description {Configure to use Python version 2.6} {
-    depends_lib-append \
-        port:py26-lxml \
-        port:py26-numpy
-
-    post-patch {
-        reinplace "s|\"python-interpreter\", \"python\"|\"python-interpreter\", \"python2.6\"|g" ${worksrcpath}/src/extension/implementation/script.cpp
-        reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.h
-        reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.cpp
-    }
-
-    configure.python \
-        ${prefix}/bin/python2.6
-}
-
-variant python27 conflicts python26 description {Configure to use Python version 2.7} {
-    depends_lib-append \
-        port:py27-lxml \
-        port:py27-numpy
-
-    post-patch {
-        reinplace "s|\"python-interpreter\", \"python\"|\"python-interpreter\", \"python2.7\"|g" ${worksrcpath}/src/extension/implementation/script.cpp
-        reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.h
-        reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.cpp
-    }
-
-    configure.python \
-        ${prefix}/bin/python2.7
+post-patch {
+    reinplace "s|\"python-interpreter\", \"python\"|\"python-interpreter\", \"python2.7\"|g" ${worksrcpath}/src/extension/implementation/script.cpp
+    reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.h
+    reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.cpp
 }
 
 variant gtk3 description {Enable experimental GTK+ 3 build} {
@@ -107,7 +73,15 @@ variant gtk3 description {Enable experimental GTK+ 3 build} {
     configure.args-append --enable-gtk3-experimental
 }
 
+variant svg2 description {Enable experimental SVG level 2 proposed features} {
+    configure.cppflags-append \
+                        "-DWITH_MESH -DWITH_CSSBLEND -DWITH_CSSCOMPOSITE -DWITH_SVG2"
+}
+
 configure.cmd   ./autogen.sh && ./configure
+
+configure.python \
+                ${prefix}/bin/python2.7
 
 configure.args  --without-gnome-vfs \
                 --enable-lcms \
@@ -123,13 +97,11 @@ if {[string match "*clang*" ${configure.compiler}]} {
     configure.cxxflags-append -std=c++11
 }
 
-if {![variant_isset python26] && ![variant_isset python27]} {
-    default_variants +python27
-}
-
 variant strict description {Enable strict build} {
     configure.args-replace  --disable-strict-build --enable-strict-build
 }
+
+default_variants +strict
 
 #
 # the following dummy variants are used
