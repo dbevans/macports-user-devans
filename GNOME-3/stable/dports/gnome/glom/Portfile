@@ -16,7 +16,6 @@ categories      gnome databases
 platforms       darwin
 
 homepage        http://www.glom.org/
-#master_sites    https://git.gnome.org/browse/glom/snapshot
 master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
@@ -32,7 +31,7 @@ depends_build   port:pkgconfig \
                 port:itstool \
                 port:yelp-tools \
                 port:mm-common \
-                port:graphviz \
+                path:bin/dot:graphviz \
                 port:doxygen \
                 port:libxslt \
                 port:py27-sphinx
@@ -92,9 +91,15 @@ post-activate {
     system "${prefix}/bin/update-mime-database ${prefix}/share/mime"
 }
 
+# locale issues apparently only effect OS X 10.8 and earlier.
+
+if {${os.major} < 12} {
+
 notes "
 To work around known locale issues, set LANG=C when starting glom
     $ LANG=C glom
 "
+
+}
 
 livecheck.type gnome
