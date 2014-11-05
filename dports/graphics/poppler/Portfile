@@ -7,7 +7,7 @@ PortGroup       muniversal 1.0
 
 name            poppler
 conflicts       pdf2json xpdf-tools
-version         0.26.3
+version         0.28.1
 license         GPL-2+
 maintainers     devans openmaintainer
 categories      graphics
@@ -22,8 +22,8 @@ master_sites    ${homepage}
 
 use_xz          yes
 
-checksums       rmd160  895caef4cba86ebebd189eb2dca3910af54504cc \
-                sha256  88cb1af3574f861bc08853a681be97ae79bf5302782fbac803f877b879a642b1
+checksums       rmd160  85e3b933c14fc27a729c777ff591660c9139795b \
+                sha256  2ccf6e234209aa5082ba99d3547e6798cd8758e7a921c72c00aedf0d5793fd06
 
 depends_build   port:pkgconfig
 
@@ -65,13 +65,14 @@ post-patch {
 }
 
 # gobject-introspection uses g-ir-scanner, which uses $CC from env
-
 if {[variant_isset universal]} {
     foreach arch ${configure.universal_archs} {
         lappend merger_build_args(${arch})  CC='${configure.cc} -arch ${arch}'
+        lappend merger_destroot_args(${arch})  CC='${configure.cc} -arch ${arch}'
     }
 } else {
     build.args-append       CC="${configure.cc} ${configure.cc_archflags}"
+    destroot.args-append    CC="${configure.cc} ${configure.cc_archflags}"
 }
 
 # TODO:
@@ -95,7 +96,7 @@ subport poppler-qt4-mac {
         delete ${destroot}${prefix}/include/poppler/fofi \
                ${destroot}${prefix}/include/poppler/goo \
                ${destroot}${prefix}/include/poppler/splash \
-               ${destroot}${prefix}/lib/libpoppler.46.dylib \
+               ${destroot}${prefix}/lib/libpoppler.47.dylib \
                ${destroot}${prefix}/lib/libpoppler.a \
                ${destroot}${prefix}/lib/libpoppler.dylib \
                ${destroot}${prefix}/lib/libpoppler.la \
@@ -121,7 +122,7 @@ subport poppler-qt5-mac {
         delete ${destroot}${prefix}/include/poppler/fofi \
                ${destroot}${prefix}/include/poppler/goo \
                ${destroot}${prefix}/include/poppler/splash \
-               ${destroot}${prefix}/lib/libpoppler.46.dylib \
+               ${destroot}${prefix}/lib/libpoppler.47.dylib \
                ${destroot}${prefix}/lib/libpoppler.a \
                ${destroot}${prefix}/lib/libpoppler.dylib \
                ${destroot}${prefix}/lib/libpoppler.la \
