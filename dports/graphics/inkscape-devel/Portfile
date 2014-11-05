@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            inkscape-devel
-conflicts       inkscape inkscape-experimental inkscape-prerelease
+conflicts       inkscape inkscape-branched inkscape-prerelease
 set bzr_rev     13669
 version         0.91.99.${bzr_rev}
 epoch           1
@@ -12,8 +12,8 @@ license         GPL-2 LGPL-2.1
 maintainers     devans
 categories      graphics gnome
 platforms       darwin
-description     Unstable development version of Inkscape from \
-                recent BZR trunk leading up to release of version 0.91.
+description     This is the ongoing unstable development version of Inkscape taken from \
+                recent bzr trunk after branching inkscape-0.91.x.
 
 long_description \
                 Inkscape is an open source SVG editor with \
@@ -21,14 +21,14 @@ long_description \
                 Visio, etc. Supported SVG features include basic \
                 shapes, paths, text, alpha blending, transforms, \
                 gradients, node editing, svg-to-png export, \
-                grouping, and more.
+                grouping, and more. ${description}
 homepage        http://www.inkscape.org/
 master_sites    file:///Users/devans/macports/distfiles/${name}
 
-checksums       rmd160  a1a17a1902aef7364a8e2d0327942d3d939fccdd \
-                sha256  d73725186a566d2420f6482f363f8363fc3a55af22df54c7490cb627e7057e29
+checksums       rmd160  b837a883f0129329c92abc40a1173edd128d7b35 \
+                sha256  c8ee4ec3997fd20605022dc74a81a1c419d7e752cb58a0583e9c50116e6567c1
 
-worksrcdir      inkscape
+worksrcdir      ${name}
 
 depends_build   port:pkgconfig \
                 port:autoconf \
@@ -54,6 +54,8 @@ depends_lib     port:desktop-file-utils \
                 port:gtkspell2 \
                 port:py27-lxml \
                 port:py27-numpy
+
+patchfiles      patch-splash-0.91.diff
 
 post-patch {
     reinplace "s|\"python-interpreter\", \"python\"|\"python-interpreter\", \"python2.7\"|g" ${worksrcpath}/src/extension/implementation/script.cpp
