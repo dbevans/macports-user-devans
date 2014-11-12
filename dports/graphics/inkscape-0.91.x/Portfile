@@ -3,10 +3,10 @@
 
 PortSystem      1.0
 
-name            inkscape-branched
+name            inkscape-0.91.x
 conflicts       inkscape inkscape-devel inkscape-prerelease
-set bzr_rev     13634
-version         0.91pre2.${bzr_rev}
+set bzr_rev     13638
+version         ${bzr_rev}
 license         GPL-2 LGPL-2.1
 maintainers     devans
 categories      graphics gnome
@@ -22,12 +22,12 @@ long_description \
                 gradients, node editing, svg-to-png export, \
                 grouping, and more. ${description}
 homepage        http://www.inkscape.org/
-master_sites    file:///Users/devans/macports/distfiles/inkscape-0.91.x
+master_sites    file:///Users/devans/macports/distfiles/${name}
 
-checksums       rmd160  35d6a293bd5cac893e48f60d3ac96cae539a8cb2 \
-                sha256  4c9d400be48ccced5b4461b9fb15bceb88b0e061443ea6b28264fd6353f04962
+checksums       rmd160  967e4b8c640f9e2889c6008292c574066c33bbfb \
+                sha256  c146030d8510c14ad1c2d8f38ef051b0e504abb2657d26711feb2e1b3593d483
 
-worksrcdir      inkscape-0.91.x
+worksrcdir      ${name}
 
 depends_build   port:pkgconfig \
                 port:autoconf \
