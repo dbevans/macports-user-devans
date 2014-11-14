@@ -37,7 +37,8 @@ depends_lib         port:gobject-introspection \
                     port:sqlite3 \
                     port:freetype
 
-patchfiles          patch-configure.ac.diff
+patchfiles          patch-configure.ac.diff \
+                    patch-data-appdata-xml.m4.diff
 
 configure.cmd       ./autogen.sh
 
