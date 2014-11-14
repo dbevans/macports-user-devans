@@ -16,7 +16,7 @@ long_description    \
     GStreamer Ugly Plug-ins is a set of plug-ins that have good quality and \
     correct functionality, but distributing them might pose problems. The \
     license on either the plug-ins or the supporting libraries might not be how \
-    we'd like. The code might be widely known to present patent problems. 
+    we'd like. The code might be widely known to present patent problems.
 maintainers         nomaintainer
 categories          gnome
 platforms           darwin
@@ -55,7 +55,7 @@ post-extract {
     ${worksrcpath}/configure
 }
 
-if {[variant_isset universal]} { 
+if {[variant_isset universal]} {
     set merger_host(x86_64) x86_64-apple-${os.platform}${os.major}
     set merger_host(i386) i686-apple-${os.platform}${os.major}
     set merger_configure_args(x86_64) --build=x86_64-apple-${os.platform}${os.major}
