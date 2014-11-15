@@ -63,7 +63,8 @@ depends_lib         port:gstreamer1-gst-plugins-base \
 use_autoreconf      yes
 autoreconf.args     -fvi
 
-patchfiles          modplug.patch
+patchfiles          modplug.patch \
+                    patch-opengl-10.6.diff
 
 #
 # could depend on tons for multimedia stuff +variants
@@ -103,10 +104,12 @@ platform darwin {
 
 #
 # applemedia video plugin uses CoreMedia which is not available on darwin 10 or earlier
+# gl cocoa build continues to fail due to use of API not available on darwin 10 or earlier
 #
 
 if { ${os.major} < 11 } {
-    configure.args-append   --disable-apple_media
+    configure.args-append   --disable-apple_media \
+                            --disable-cocoa
 }
 
 #
