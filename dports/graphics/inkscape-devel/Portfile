@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            inkscape-devel
 conflicts       inkscape inkscape-branched inkscape-prerelease
-set bzr_rev     13707
+set bzr_rev     13724
 version         0.91.99.${bzr_rev}
 epoch           1
 license         GPL-2 LGPL-2.1
@@ -25,8 +25,8 @@ long_description \
 homepage        http://www.inkscape.org/
 master_sites    file:///Users/devans/macports/distfiles/${name}
 
-checksums       rmd160  bb5b6f9e3b22af5305370dc02f583529dededff7 \
-                sha256  b6e41e4e45f28addcc0b78f25a79457e23dc112467652ef661e221615fa71c6c
+checksums       rmd160  380cb4d0b0960257d04e663799d91f1bf8e42f71 \
+                sha256  44d5279d945447da326c4949838c40daba2f160dda28ad766f73f896ea7de9df
 
 worksrcdir      ${name}
 
@@ -54,8 +54,6 @@ depends_lib     port:desktop-file-utils \
                 port:gtkspell2 \
                 port:py27-lxml \
                 port:py27-numpy
-
-patchfiles      patch-splash-0.91.diff
 
 post-patch {
     reinplace "s|\"python-interpreter\", \"python\"|\"python-interpreter\", \"python2.7\"|g" ${worksrcpath}/src/extension/implementation/script.cpp
