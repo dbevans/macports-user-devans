@@ -4,8 +4,7 @@
 PortSystem          1.0
 
 name                totem
-version             3.14.0
-revision            2
+version             3.14.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome
 # also has an exception allowing use of non-GPL-compatible plugins
@@ -26,8 +25,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  730e75d4fb6a62bdc8297d8fd49fcda66d7bdd47 \
-                    sha256  a57f78126af431b71e44aa0548e672bf884aef51ec23847f82b07a6849ac635e
+checksums           rmd160  2c873013e01da416d94dbbee6c0e33c41404dba0 \
+                    sha256  288150837fd2693a4b672210a1ffdd178d3e542df954af247dc04c666bf97536
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -63,8 +62,7 @@ depends_lib         port:desktop-file-utils \
 depends_run         port:gnome-settings-daemon \
                     port:yelp
 
-patchfiles          patch-use-appstream-glib.diff \
-                    patch-vala-cflags.diff
+patchfiles          patch-vala-cflags.diff
 
 # update m4/intltool.m4 and autoreconf
 
