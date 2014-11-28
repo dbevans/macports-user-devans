@@ -6,7 +6,7 @@ PortGroup           active_variants 1.1
 
 name                gtksourceview3
 set gname           gtksourceview
-version             3.15.1
+version             3.15.2
 license             LGPL-2.1+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
@@ -26,8 +26,8 @@ master_sites        gnome:sources/${gname}/${branch}/
 distname            ${gname}-${version}
 use_xz              yes
 
-checksums           rmd160  b2dd53b293babbcb1b0197cd5764abf173445894 \
-                    sha256  52dc100694a81b16a961c7c2e09f643e8e40a0947e595d5fda62b1ad76b9ae27
+checksums           rmd160  9841c2564b6bfe3f519840c070bc46a4dd1324aa \
+                    sha256  ab30b9b24b2756ef4ccd5851f44dc4f5310ee48759ca043f2edfb6e97eeca58a
 
 depends_build       port:intltool \
                     port:pkgconfig \
