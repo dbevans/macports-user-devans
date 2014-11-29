@@ -41,6 +41,7 @@ supported_archs noarch
 # gnome-shell-extensions
 # gnome-user-share
 # gnome-video-effects
+# gom
 # libgsystem
 # libgxps
 # libzapojit
