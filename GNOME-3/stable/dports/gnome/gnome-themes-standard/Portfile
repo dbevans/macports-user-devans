@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                gnome-themes-standard
 conflicts           gnome-themes
-version             3.14.2.2
+version             3.14.2.3
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome
 maintainers         devans openmaintainer
@@ -22,8 +22,8 @@ master_sites        gnome:sources/$name/$branch/
 
 use_xz              yes
 
-checksums           rmd160  e1fe5db6bd5ce7f5d16a6ae6bd49fdc76c5a8b2e \
-                    sha256  596b3a71d10f1c4d66d0995997d0d8465ef89da390b5e36a4918288ae5bf439c
+checksums           rmd160  67ad96fa1a412a34a49ac4fc4faf332be24bc187 \
+                    sha256  d82a1cf90be3397deadea46d3ba396a46943c7e141ebc70cf833956b5794e479
 
 depends_build       port:intltool \
                     port:pkgconfig
