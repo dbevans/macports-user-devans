@@ -5,7 +5,7 @@ PortSystem      1.0
 
 name            inkscape-devel
 conflicts       inkscape inkscape-branched inkscape-prerelease
-set bzr_rev     13724
+set bzr_rev     13797
 version         0.91.99.${bzr_rev}
 epoch           1
 license         GPL-2 LGPL-2.1
@@ -25,8 +25,8 @@ long_description \
 homepage        http://www.inkscape.org/
 master_sites    file:///Users/devans/macports/distfiles/${name}
 
-checksums       rmd160  380cb4d0b0960257d04e663799d91f1bf8e42f71 \
-                sha256  44d5279d945447da326c4949838c40daba2f160dda28ad766f73f896ea7de9df
+checksums           rmd160  4ef5d5038fb52791610da050120d45698421d378 \
+                    sha256  3cb1635005da694abda4ca9f4ae96395637e23e5b290655ac30febf15bcbcc0e
 
 worksrcdir      ${name}
 
@@ -65,7 +65,8 @@ variant gtk3 description {Enable experimental GTK+ 3 build} {
     depends_lib-delete  port:gtkspell2 \
                         port:gtk2 \
                         port:gtkmm
-    depends_lib-append  port:gtkspell3 \
+    depends_lib-append  port:gnome-themes-standard \
+                        port:gtkspell3 \
                         port:gtk3 \
                         port:gtkmm3 \
                         port:gdl3
