@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                tracker
-version             1.2.4
+version             1.2.5
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Metadata database, indexer and search tool.
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  55f8b4c4b81a763d54ec260b09082c5892627646 \
-                    sha256  438efa29ea1ff7546321d2eb0f7f9edc83c74be24a9d8bef4f993be243647bb7
+checksums           rmd160  f74c73c27b6f4a061bfa336784192d28a08a875e \
+                    sha256  1e614bc33f93d5820f3c90510e11210bf34d02dba6ccbd3dc30097758a6d31aa
 
 depends_build       port:pkgconfig \
                     port:intltool
