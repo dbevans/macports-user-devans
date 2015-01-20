@@ -2,6 +2,7 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           gobject_introspection 1.0
 
 name                gdk-pixbuf2
 set my_name         gdk-pixbuf
@@ -32,19 +33,13 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:libpng \
                     port:jasper \
                     port:jpeg \
-                    port:tiff \
-                    port:gobject-introspection
+                    port:tiff
 
-configure.args      --with-libjasper \
-                    --enable-introspection=yes
+patchfiles          patch-tests-pixbuf-readonly-to-mutable.c.diff
 
-# The rules enabled by gobject-introspection require GNU make 3.81+, #35202
-platform darwin 8 {
-    depends_build-append    port:gmake
-    build.cmd               ${prefix}/bin/gmake
-}
-# gobject-introspection uses $CC from env
-build.args-append   CC="${configure.cc} ${configure.cc_archflags}"
+gobject_introspection yes
+
+configure.args      --with-libjasper
 
 test.run            yes
 test.target         check
