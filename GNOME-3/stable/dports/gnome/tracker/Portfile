@@ -2,6 +2,7 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           gobject_introspection 1.0
 
 name                tracker
 version             1.2.5
@@ -28,7 +29,6 @@ depends_build       port:pkgconfig \
                     port:intltool
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
-                    port:gobject-introspection \
                     port:sqlite3 \
                     port:ossp-uuid \
                     port:libgee \
@@ -53,6 +53,8 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
 patchfiles          patch-extract-configure.ac.diff \
                     patch-libtracker-sparql-suffix.diff \
                     patch-module-flags-no-undefined.diff
+
+gobject_introspection yes
 
 # update m4/intltool.m4 and autoreconf
 
