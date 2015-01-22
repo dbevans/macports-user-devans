@@ -2,6 +2,7 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           gobject_introspection 1.0
 
 name                eog
 version             3.14.3
@@ -35,7 +36,6 @@ depends_lib         port:desktop-file-utils \
                     port:shared-mime-info \
                     port:gsettings-desktop-schemas \
                     port:libpeas \
-                    port:gobject-introspection \
                     port:jpeg \
                     port:librsvg \
                     port:libexif \
@@ -46,6 +46,8 @@ depends_lib         port:desktop-file-utils \
 
 depends_run         port:gnome-settings-daemon \
                     port:yelp
+
+gobject_introspection yes
                
 # update m4/intltool.m4 and autoreconf
 
