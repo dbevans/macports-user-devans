@@ -2,6 +2,7 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           gobject_introspection 1.0
 
 name                gnome-maps
 version             3.14.2
@@ -30,13 +31,14 @@ depends_lib         port:desktop-file-utils \
                     port:gtk3 \
                     port:gjs \
                     port:clutter-gtk \
-                    port:libchamplain \
-                    port:gobject-introspection
+                    port:libchamplain
 
 depends_run         port:gnome-settings-daemon \
                     port:yelp
 
 configure.args      --disable-silent-rules
+
+gobject_introspection yes
 
 # update m4/intltool.m4 and autoreconf
 
