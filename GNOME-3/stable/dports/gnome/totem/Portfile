@@ -2,6 +2,7 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           gobject_introspection 1.0
 
 name                totem
 version             3.14.1
@@ -39,7 +40,6 @@ depends_lib         port:desktop-file-utils \
                     port:gnome-desktop \
                     port:gsettings-desktop-schemas \
                     port:gtk3 \
-                    port:gobject-introspection \
                     port:grilo-plugins \
                     port:gstreamer1-gst-plugins-base \
                     port:gstreamer1-gst-plugins-good \
@@ -64,6 +64,8 @@ depends_run         port:gnome-settings-daemon \
 
 patchfiles          patch-vala-cflags.diff
 
+gobject_introspection yes
+
 # update m4/intltool.m4 and autoreconf
 
 pre-configure {
@@ -81,7 +83,6 @@ if {[variant_isset nautilus]} {
 
 configure.args      --with-plugins=${withplugins} \
                     --enable-easy-codec-installation \
-                    --enable-introspection=yes \
                     --enable-debug \
                     --enable-compile-warnings=minimum \
                     --disable-python \
@@ -89,10 +90,6 @@ configure.args      --with-plugins=${withplugins} \
                     --disable-nautilus \
                     --disable-schemas-compile \
                     --disable-silent-rules
-
-# gobject-introspection uses g-ir-scanner, which uses $CC from env
-build.args-append       CC="${configure.cc} ${configure.cc_archflags}"
-destroot.args-append    CC="${configure.cc} ${configure.cc_archflags}"
 
 variant nautilus description {Build nautilus properties page plugin} {
     configure.args-delete     --disable-nautilus
