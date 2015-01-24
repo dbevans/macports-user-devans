@@ -6,7 +6,7 @@ PortSystem      1.0
 name            inkscape-prerelease
 set dname       inkscape
 conflicts       inkscape inkscape-devel inkscape-branched
-version         0.91pre2
+version         0.91pre4
 epoch           1
 license         GPL-2 LGPL-2.1
 maintainers     devans
@@ -27,8 +27,8 @@ master_sites    https://sourceforge.net/projects/inkscape/files/inkscape/${versi
 
 distname        ${dname}-${version}
 
-checksums       rmd160  49fbb632cea3a38dfd5164b93cc9a29c29bc5523 \
-                sha256  79f4facb4140fce09a55daa464399116cae10a4f92c95e8b427875fe56da798b
+checksums       rmd160  b5784b3b2fcf1e2de4c643c9a0e743ff852b31d2 \
+                sha256  6e05e4092367ff9e3b22c37fbcf6c3135e0bc800ef8b2a50245d4817c58ab836
 
 depends_build   port:pkgconfig \
                 port:autoconf \
@@ -43,50 +43,23 @@ depends_lib     port:desktop-file-utils \
                 port:gsl \
                 port:gtkmm \
                 port:dbus-glib \
-                port:lcms \
+                port:lcms2 \
                 port:poppler \
                 port:boost \
                 port:ImageMagick \
-                port:libcdr \
+                port:libcdr-0.1 \
                 port:libexif \
-                port:libvisio \
-                port:libwpg \
-                port:gtkspell2
-
-patchfiles      clang-cxx11-boost-1-56_3.diff
+                port:libvisio-0.1 \
+                port:libwpg-0.3 \
+                port:gtkspell2 \
+                port:py27-lxml \
+                port:py27-numpy
 
 post-patch {
     xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
-}
-
-variant python26 conflicts python27 description {Configure to use Python version 2.6} {
-    depends_lib-append \
-        port:py26-lxml \
-        port:py26-numpy
-
-    post-patch {
-        reinplace "s|\"python-interpreter\", \"python\"|\"python-interpreter\", \"python2.6\"|g" ${worksrcpath}/src/extension/implementation/script.cpp
-        reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.h
-        reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.cpp
-    }
-
-    configure.python \
-        ${prefix}/bin/python2.6
-}
-
-variant python27 conflicts python26 description {Configure to use Python version 2.7} {
-    depends_lib-append \
-        port:py27-lxml \
-        port:py27-numpy
-
-    post-patch {
-        reinplace "s|\"python-interpreter\", \"python\"|\"python-interpreter\", \"python2.7\"|g" ${worksrcpath}/src/extension/implementation/script.cpp
-        reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.h
-        reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.cpp
-    }
-
-    configure.python \
-        ${prefix}/bin/python2.7
+    reinplace "s|\"python-interpreter\", \"python\"|\"python-interpreter\", \"python2.7\"|g" ${worksrcpath}/src/extension/implementation/script.cpp
+    reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.h
+    reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.cpp
 }
 
 variant gtk3 description {Enable experimental GTK+ 3 build} {
@@ -103,10 +76,13 @@ variant gtk3 description {Enable experimental GTK+ 3 build} {
 
 variant svg2 description {Enable experimental SVG level 2 proposed features} {
     configure.cppflags-append \
-                        "-DWITH_MESH -DWITH_CSSBLEND -DWITH_CSSCOMPOSITE"
+                        "-DWITH_MESH -DWITH_CSSBLEND -DWITH_CSSCOMPOSITE -DWITH_SVG2"
 }
 
 configure.cmd   ./autogen.sh && ./configure
+
+configure.python \
+                ${prefix}/bin/python2.7
 
 configure.args  --without-gnome-vfs \
                 --enable-lcms \
@@ -122,9 +98,11 @@ if {[string match "*clang*" ${configure.compiler}]} {
     configure.cxxflags-append -std=c++11
 }
 
-if {![variant_isset python26] && ![variant_isset python27]} {
-    default_variants +python27
+variant strict description {Enable strict build} {
+    configure.args-replace  --disable-strict-build --enable-strict-build
 }
+
+default_variants +strict
 
 #
 # the following dummy variants are used
