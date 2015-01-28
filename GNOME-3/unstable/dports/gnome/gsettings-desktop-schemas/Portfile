@@ -1,0 +1,56 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           gobject_introspection 1.0
+
+name                gsettings-desktop-schemas
+version             3.15.4
+license             LGPL-2.1
+set branch          [join [lrange [split ${version} .] 0 1] .]
+
+description         gsettings-desktop-schemas contains a collection of GSettings schemas \
+                    for settings shared by various components of a desktop.
+
+long_description    ${description}
+
+maintainers         devans openmaintainer
+categories          gnome
+platforms           darwin
+homepage            http://www.gnome.org
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  fc1dd37a2d0ca4c76f4de015de658344f3042dc7 \
+                    sha256  69786936f1b38fca5454c57a896dced31605465e5edc9e431b885a8a3f811f5b
+
+supported_archs     noarch
+
+depends_build       port:pkgconfig \
+                    port:gsed \
+                    port:intltool
+
+depends_lib         path:lib/pkgconfig/gio-2.0.pc:glib2 \
+
+patchfiles          patch-restore-settings-for-deprecated-gtk-settings.diff
+
+gobject_introspection yes
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf      yes
+autoreconf.args     -fvi
+
+configure.args      --disable-silent-rules \
+                    --disable-schemas-compile
+
+post-activate {
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type      gnome-with-unstable
