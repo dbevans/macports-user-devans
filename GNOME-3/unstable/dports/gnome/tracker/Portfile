@@ -2,9 +2,10 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           gobject_introspection 1.0
 
 name                tracker
-version             1.3.0
+version             1.3.2
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Metadata database, indexer and search tool.
@@ -21,14 +22,13 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  7976634b8a761524bf720891b4c1419da9e8d547 \
-                    sha256  d265151e6ccacfc1d705700f1f81df57b68a9c17c17fe5f6720dcc6213aa5798
+checksums           rmd160  06fe4d79669b17106c123edd5396995a77209bbb \
+                    sha256  4cae42baefd43c6a9b97e2eaf1384e191c9da92fb7b03677fbfeea67f8a01db0
 
 depends_build       port:pkgconfig \
                     port:intltool
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
-                    port:gobject-introspection \
                     port:sqlite3 \
                     port:ossp-uuid \
                     port:libgee \
@@ -52,7 +52,10 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
 
 patchfiles          patch-extract-configure.ac.diff \
                     patch-libtracker-sparql-suffix.diff \
-                    patch-module-flags-no-undefined.diff
+                    patch-module-flags-no-undefined.diff \
+                    patch-libmediaart-2.0.diff
+
+gobject_introspection yes
 
 # update m4/intltool.m4 and autoreconf
 
