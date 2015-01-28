@@ -1,0 +1,72 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                gnome-photos
+version             3.15.4
+license             GPL-2
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         Photo manager for GNOME.
+long_description    GNOME Photos is a simple standalone application to find, organize and view your photos.
+
+maintainers         gmail.com:juanrgar devans openmaintainer
+categories          gnome
+platforms           darwin
+homepage            https://wiki.gnome.org/Apps/Photos
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  43f6805393ad1377b882dccca23e7732b6fb65a4 \
+                    sha256  ca6973b288beaae2f88307d8a13db81af30164e10252e192094ed3650b5ac0ee
+
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:itstool \
+                    port:yelp-tools \
+                    port:gnome-common 
+
+depends_lib         port:desktop-file-utils \
+                    port:gtk3 \
+                    port:babl \
+                    port:cairo \
+                    port:exempi \
+                    port:gfbgraph \
+                    port:gegl \
+                    port:gdk-pixbuf2 \
+                    port:gnome-desktop \
+                    port:gnome-online-accounts \
+                    port:grilo \
+                    port:grilo-plugins \
+                    port:lcms2 \
+                    port:libexif \
+                    port:librsvg \
+                    port:tracker
+
+depends_run         port:gnome-settings-daemon \
+                    port:yelp
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf      yes
+autoreconf.args     -fvi
+
+configure.args      --disable-schemas-compile \
+                    --disable-silent-rules
+
+configure.cflags-append \
+                    -Wno-error=format-nonliteral
+
+# port installs hicolor icons, desktop application file, and gschemas
+post-activate {
+    system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type      gnome-with-unstable
