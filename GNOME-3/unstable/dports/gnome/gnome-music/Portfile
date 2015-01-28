@@ -2,9 +2,10 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           gobject_introspection 1.0
 
 name                gnome-music
-version             3.15.2
+version             3.15.4
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Music is the GNOME music playing application.
@@ -18,8 +19,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  f63b75ad1213bddc662ea96a6725ff1f92523ce5 \
-                    sha256  69989a790361cc69c3bf87afe78c0b41867be9ce21620350c191f787bfaf7ae2
+checksums           rmd160  6bdfb0b787a615bfb08747d5ef0e8c210b9bb672 \
+                    sha256  0f8078cc0cabcd95047a2ca247936e8ca770fcaa56c6945616a0562f6e41fc09
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -28,7 +29,6 @@ depends_build       port:pkgconfig \
 
 depends_lib         port:desktop-file-utils \
                     port:gtk3 \
-                    port:gobject-introspection \
                     port:grilo-plugins \
                     port:tracker \
                     port:libnotify
@@ -41,6 +41,8 @@ patchfiles          patch-configure.ac.diff
 post-patch {
     reinplace "s|^#!/.*|#!${configure.python}|" ${worksrcpath}/gnome-music.in
 }
+
+gobject_introspection yes
 
 # update m4/intltool.m4 and autoreconf
 
