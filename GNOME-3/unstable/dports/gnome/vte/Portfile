@@ -2,9 +2,10 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           gobject_introspection 1.0
 
 name                vte
-version             0.39.0
+version             0.39.1
 set branch          [join [lrange [split $version .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -22,19 +23,20 @@ master_sites        gnome:sources/$name/$branch/
 
 use_xz              yes
 
-checksums           rmd160  13ed075482afd76cb75c6f0df5181962c7e7f303 \
-                    sha256  2b1d5d78c3d72d4dfb871d201f27c8c703b81c1509834089c99e2816edf45978
+checksums           rmd160  3b36d2f77f39afe29cfa9ea02814728bbc18b77c \
+                    sha256  fedb6cb8f41d1d9ea71fdb628e492c6bb3370cc029f6810ebf705754bf7cd253
 
 depends_build       port:pkgconfig \
                     port:intltool \
                     port:gtk-doc
 
 depends_lib         port:gtk3 \
-                    port:gobject-introspection \
                     port:vala
 
 patchfiles          patch-src-vteutils.c.diff \
                     patch-src-Makefile.am.diff
+
+gobject_introspection yes
 
 # update m4/intltool.m4 and autoreconf
 
@@ -47,13 +49,9 @@ autoreconf.args     -fvi
 
 configure.args      --enable-glade-catalogue=no \
                     --disable-Bsymbolic \
-                    --enable-introspection=yes \
                     --enable-vala=yes
 
 configure.cflags-append -fstrict-aliasing
-
-# gobject-introspection uses g-ir-scanner, which uses $CC from env
-build.args-append   CC="${configure.cc} ${configure.cc_archflags}"
 
 variant glade description {Enable building of glade catalog items} {
     depends_lib-append  port:glade
