@@ -2,9 +2,11 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           active_variants 1.1
+PortGroup           gobject_introspection 1.0
 
 name                gnome-desktop
-version             3.15.2
+version             3.15.4
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -23,8 +25,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  f2379bc48bfd03b201827b7f4c8878f6a6004c72 \
-                    sha256  e182c5869e8402d829fa2a007c9f8ad851c4d8f341210c78a7f8ce459e23300a
+checksums           rmd160  006ef2a3d5c1229b9dd7bd1bba59cee44458471d \
+                    sha256  1632703bc9db116562c2f55560742f4709165e46e91e7f6b6d71e654ee6fc7e6
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -36,7 +38,6 @@ depends_lib         port:desktop-file-utils \
                     path:share/themes/HighContrast/index.theme:gnome-themes-standard \
                     port:adwaita-icon-theme \
                     port:gtk3 \
-                    port:gobject-introspection \
                     port:iso-codes \
                     port:xorg-libXext \
                     port:xorg-libXrandr \
@@ -44,6 +45,8 @@ depends_lib         port:desktop-file-utils \
                     port:xorg-libxkbfile
 
 patchfiles          patch-libgnome-destktop-libgsystem.diff
+
+gobject_introspection yes
 
 # update m4/intltool.m4 and autoreconf
 
@@ -54,31 +57,22 @@ pre-configure {
 use_autoreconf      yes
 autoreconf.args     -fvi
 
-configure.args      --enable-introspection=yes \
-                    --disable-maintainer-mode \
+configure.args      --disable-maintainer-mode \
                     --disable-silent-rules \
                     --disable-desktop-docs \
                     --with-gnome-distributor=MacPorts \
                     --x-includes=${prefix}/include \
                     --x-libraries=${prefix}/lib
 
-# gobject-introspection uses g-ir-scanner, which uses $CC from env
-build.args-append       CC="${configure.cc} ${configure.cc_archflags}"
-destroot.args-append    CC="${configure.cc} ${configure.cc_archflags}"
-
 #
 #  portions of this port are strictly X11 specific
 #  so a +quartz build is not possible (fails in configure if X11 is absent)
 #
 
+require_active_variants port:gtk3 x11
+
 post-activate {
     system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
-}
-
-# The rules enabled by gobject-introspection require GNU make 3.81+
-platform darwin 8 {
-    depends_build-append    port:gmake
-    build.cmd               ${prefix}/bin/gmake
 }
 
 livecheck.type      gnome-with-unstable
