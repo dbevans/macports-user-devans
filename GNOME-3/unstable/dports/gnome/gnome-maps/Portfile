@@ -2,9 +2,10 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           gobject_introspection 1.0
 
 name                gnome-maps
-version             3.15.2
+version             3.15.4
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Map application for GNOME 3.
@@ -19,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  70dddc29a30fb556b5d25374e4163366e0ac3c72 \
-                    sha256  fe066ab8072aa37f186720cabdc2f819dae918ab35ca8c2301f995ba416d03e2
+checksums           rmd160  e84c16fb39ebc916ad42fffe34a3f67dcc3ad780 \
+                    sha256  301c537b75c198e437baf0ba45aea961f7b5272ac97978ae06deb0d145220a62
 
 depends_build       port:pkgconfig \
                     port:intltool
@@ -30,13 +31,14 @@ depends_lib         port:desktop-file-utils \
                     port:gtk3 \
                     port:gjs \
                     port:clutter-gtk \
-                    port:libchamplain \
-                    port:gobject-introspection
+                    port:libchamplain
 
 depends_run         port:gnome-settings-daemon \
                     port:yelp
 
 configure.args      --disable-silent-rules
+
+gobject_introspection yes
 
 # update m4/intltool.m4 and autoreconf
 
