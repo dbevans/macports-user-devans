@@ -1,0 +1,67 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                metacity
+version             3.15.2
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         A window manager for the adult in you.
+long_description    ${description}
+maintainers         devans openmaintainer
+categories          gnome x11-wm
+license             GPL-2+
+platforms           darwin
+homepage            https://wiki.gnome.org/Projects/Metacity
+master_sites        gnome:sources/${name}/${branch}
+
+use_xz              yes
+
+checksums           rmd160  eb29ab54de34111bc68834a4a39165c46bd413fc \
+                    sha256  b2e1f417901f7a2c5f4c7b559cd51680d477fda4313c132e98308f1fabd98971
+
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:gnome-common \
+                    port:itstool
+
+depends_lib         port:desktop-file-utils \
+                    port:gtk3 \
+                    port:startup-notification \
+                    port:xorg-libXcomposite \
+                    port:xorg-libXfixes \
+                    port:xrender \
+                    port:xorg-libXdamage \
+                    port:xorg-libXcursor \
+                    port:xorg-libXinerama \
+                    port:xorg-libXext \
+                    port:xorg-libxkbfile \
+                    port:xorg-libXrandr \
+                    port:xorg-libsm \
+                    port:xorg-libice \
+                    port:libgtop \
+                    port:libcanberra \
+                    port:gsettings-desktop-schemas \
+                    port:zenity
+
+depends_run         port:gnome-settings-daemon
+
+# autoreconf to reconfigure with our intltool.m4
+
+use_autoreconf      yes
+autoreconf.args     -fvi
+
+configure.args      --x-includes=${prefix}/include \
+                    --x-libraries=${prefix}/lib \
+                    --enable-debug \
+                    --disable-silent-rules \
+                    --disable-schemas-compile \
+                    --disable-themes-documentation \
+                    --disable-compositor
+
+post-activate {
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+}
+
+livecheck.type      gnome-with-unstable
