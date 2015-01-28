@@ -1,0 +1,78 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           gobject_introspection 1.0
+
+name                libgweather
+version             3.15.1
+set branch          [join [lrange [split ${version} .] 0 1] .]
+maintainers         devans openmaintainer
+categories          net gnome
+license             GPL-2+ LGPL-2.1+
+platforms           darwin
+description         Library to accessing online weather informations.
+
+long_description    libgweather is a library to access weather \
+                    information from online services for numerous \
+                    locations.
+
+homepage            https://wiki.gnome.org/Projects/LibGWeather
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  5d3614bb1a234bae3a08b98773bb90a273f1cc18 \
+                    sha256  adb77f81be586ba700b75d48c179b87a4f3e7bcb843a98f3bc5cfffe8020937a
+
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool \
+                    port:gnome-common \
+                    port:gtk-doc
+
+depends_lib         port:gtk3 \
+                    port:libxml2 \
+                    port:libsoup \
+                    port:geocode-glib \
+                    port:vala
+
+gobject_introspection yes
+
+# use autogen.sh from upstream git to update m4/intltool.m4 using intltoolize and autoreconf
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+    file delete -force ${worksrcpath}/m4
+}
+
+configure.cmd       ./autogen.sh
+
+configure.args      --enable-compile-warnings=minimum \
+                    --enable-vala=yes \
+                    --enable-glade-catalog=no \
+                    --disable-schemas-compile \
+                    --disable-silent-rules \
+                    --disable-glibtest
+
+variant glade description {Enable building of glade catalog items} {
+    depends_lib-append  port:glade
+    configure.args-replace --enable-glade-catalog=no --enable-glade-catalog=yes
+}
+
+# glade expects catalog modules and libraries to have a .so suffix
+
+post-destroot {
+    if {[variant_isset glade]} {
+        set libdir ${prefix}/lib
+        ln -s ${libdir}/libgweather-3.dylib ${destroot}${libdir}/libgweather-3.so
+    }
+}
+
+post-activate {
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type      gnome-with-unstable
