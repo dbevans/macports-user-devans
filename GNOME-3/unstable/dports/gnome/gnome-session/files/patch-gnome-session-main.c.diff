@@ -1,0 +1,25 @@
+--- gnome-session/main.c.orig	2014-12-15 13:17:00.000000000 -0800
++++ gnome-session/main.c	2015-01-24 04:26:36.000000000 -0800
+@@ -179,6 +179,14 @@
+         if (g_getenv ("DBUS_SESSION_BUS_ADDRESS"))
+                 return TRUE;
+ 
++#ifdef __APPLE__
++        /* See if we can get the session DBus address */
++	if (!g_dbus_address_get_for_bus_sync (G_BUS_TYPE_SESSION, NULL, error)) {
++		g_critical("gsm error: %s", (*error)->message);
++		exit(1);
++	}
++	return TRUE;
++#else
+         /* Just a sanity check to prevent infinite recursion if
+          * dbus-launch fails to set DBUS_SESSION_BUS_ADDRESS 
+          */
+@@ -203,6 +211,7 @@
+                              g_strerror (errno));
+                 return FALSE;
+         }
++#endif
+ 
+         /* Should not be reached */
+         return TRUE;

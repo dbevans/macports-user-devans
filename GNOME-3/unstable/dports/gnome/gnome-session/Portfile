@@ -1,0 +1,81 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                gnome-session
+version             3.15.3
+license             LGPL-2+
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         Session component for the GNOME 3 desktop.
+long_description    ${description}  This package contains the \
+                    commands needed to start GNOME 3.0.
+maintainers         devans openmaintainer
+categories          gnome
+platforms           darwin
+homepage            https://wiki.gnome.org/Projects/SessionManagement/
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  5f503d9f5bf6137c4e2cfcc40c563fd540158ab2 \
+                    sha256  600f87cc25380544c6212761f921c67ab7bf87e8a3685f4ea48195b0c3985360
+
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:libxslt \
+                    port:gnome-common
+ 
+depends_lib         port:desktop-file-utils \
+                    port:gnome-desktop \
+                    port:metacity \
+                    port:gnome-panel \
+                    port:gtk3 \
+                    port:dbus-glib \
+                    port:json-glib \
+                    port:xorg-libX11 \
+                    port:xorg-libsm \
+                    port:xorg-libice \
+                    port:xorg-libXext \
+                    port:xorg-libXau \
+                    port:xorg-libXtst \
+                    port:xorg-libXcomposite \
+                    port:xrender \
+                    port:xorg-xtrans \
+                    port:mesa
+
+patchfiles          patch-gnome-session-main.c.diff \
+                    patch-gnome-session-check-accelerated-helper.c.diff
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf      yes
+autoreconf.args     -fvi
+
+configure.cflags-append \
+                    -Wno-format-nonliteral
+
+configure.args      --x-includes=${prefix}/include \
+                    --x-libraries=${prefix}/lib \
+                    --disable-gconf \
+                    --disable-systemd \
+                    --disable-docbook-docs \
+                    --disable-schemas-compile \
+                    --disable-silent-rules
+
+variant gconf description {Enable gconf start-up} {
+    depends_lib-append      port:gconf
+    configure.args-replace  --disable-gconf --enable-gconf
+}
+
+post-activate {
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+    system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type  gnome-with-unstable
