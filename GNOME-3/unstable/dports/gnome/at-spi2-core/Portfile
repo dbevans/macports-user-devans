@@ -2,12 +2,13 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           gobject_introspection 1.0
 
 name                at-spi2-core
 # you probably want to keep this at the same version as at-spi2-atk
-version             2.15.2
-checksums           rmd160  c96e8c585f5e71c12791f441fdb0a566a3f602b0 \
-                    sha256  c68a212935d95631cdb85adee8423bc2d28af02dd0f111adf74e8618a13cdb53
+version             2.15.4
+checksums           rmd160  7fdb39843695492e1a64c6953ab8dfd3ae77c096 \
+                    sha256  0e3b01af6ba06d98faf7b85891ece394897fe145b0760b7846e810b57f1b809f
 
 license             LGPL
 set branch          [join [lrange [split ${version} .] 0 1] .]
@@ -36,7 +37,8 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:xorg-libXtst \
                     port:xorg-libXi \
                     port:xorg-libXevie \
-                    port:gobject-introspection
+
+gobject_introspection yes
 
 # update m4/intltool.m4 and autoreconf
 
@@ -48,16 +50,7 @@ use_autoreconf      yes
 autoreconf.args     -fvi
 
 configure.args      --disable-xevie \
-                    --enable-introspection=yes \
                     --x-includes=${prefix}/include \
                     --x-libraries=${prefix}/lib
-
-# The rules enabled by gobject-introspection require GNU make 3.81+
-platform darwin 8 {
-    depends_build-append    port:gmake
-    build.cmd               ${prefix}/bin/gmake
-}
-# gobject-introspection uses $CC from env
-build.env-append    CC=${configure.cc}
 
 livecheck.type      gnome-with-unstable
