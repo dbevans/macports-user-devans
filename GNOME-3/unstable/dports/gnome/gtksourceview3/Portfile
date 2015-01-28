@@ -3,10 +3,11 @@
 
 PortSystem          1.0
 PortGroup           active_variants 1.1
+PortGroup           gobject_introspection 1.0
 
 name                gtksourceview3
 set gname           gtksourceview
-version             3.15.2
+version             3.15.3
 license             LGPL-2.1+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
@@ -26,8 +27,8 @@ master_sites        gnome:sources/${gname}/${branch}/
 distname            ${gname}-${version}
 use_xz              yes
 
-checksums           rmd160  9841c2564b6bfe3f519840c070bc46a4dd1324aa \
-                    sha256  ab30b9b24b2756ef4ccd5851f44dc4f5310ee48759ca043f2edfb6e97eeca58a
+checksums           rmd160  34571f7aae7fdc8084d0348cc1180cd93e27692d \
+                    sha256  2b11d61a3d514c9003b5154280c133bdb130f8d6210b8db97184e5ad2cc3fdce
 
 depends_build       port:intltool \
                     port:pkgconfig \
@@ -37,9 +38,10 @@ depends_build       port:intltool \
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:gettext \
                     port:gtk3 \
-                    port:gobject-introspection \
                     port:libxml2 \
                     port:vala
+
+gobject_introspection yes
 
 # update m4/intltool.m4 and autoreconf
 
@@ -51,7 +53,6 @@ use_autoreconf      yes
 autoreconf.args     -fvi
 
 configure.args      --enable-compile-warnings=minimum \
-                    --enable-introspection=yes \
                     --disable-silent-rules
 
 test.run            yes
