@@ -2,10 +2,11 @@
 # $Id$
 
 PortSystem              1.0
+PortGroup               gobject_introspection 1.0
 
 name                    atk
 epoch                   2
-version                 2.15.2
+version                 2.15.4
 set branch              [join [lrange [split ${version} .] 0 1] .]
 categories              devel
 license                 LGPL
@@ -19,8 +20,8 @@ long_description        ATK is the GNOME Accessibility ToolKit
 homepage                http://projects.gnome.org/accessibility/
 master_sites            gnome:sources/${name}/${branch}/
 
-checksums           rmd160  542d6981e00f63d38764aa99b3f8c7cfd1376cb1 \
-                    sha256  179d15424b8aa3a5726903f0da458de68e0585dfd9d451c6dcfcdb6b7b509cbe
+checksums           rmd160  ea86db2e6c734c0be69a8a32c357030934484dd9 \
+                    sha256  0dddfa73a02178ca21a8de172c86d699aa887b4efeec736b4c8721eee4ac349c
 
 use_xz                  yes
 
@@ -28,21 +29,11 @@ depends_build           port:pkgconfig
 
 depends_lib             path:lib/pkgconfig/glib-2.0.pc:glib2 \
                         port:gettext \
-                        port:libiconv \
-                        port:gobject-introspection
+                        port:libiconv
+
+gobject_introspection yes
 
 configure.args          --enable-static \
-                        --enable-introspection \
                         --disable-silent-rules
-
-# The rules enabled by gobject-introspection require GNU make 3.81+, #35200
-platform darwin 8 {
-    depends_build-append    port:gmake
-    build.cmd               ${prefix}/bin/gmake
-}
-
-# gobject-introspection uses g-ir-scanner, which uses $CC from env
-build.args-append       CC="${configure.cc} ${configure.cc_archflags}"
-destroot.args-append    CC="${configure.cc} ${configure.cc_archflags}"
 
 livecheck.type          gnome-with-unstable
