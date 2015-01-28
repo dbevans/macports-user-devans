@@ -2,9 +2,10 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           gobject_introspection 1.0
 
 name                geocode-glib
-version             3.15.2
+version             3.15.4
 license             LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A convenience library for geocoding and reverse geocoding.
@@ -22,8 +23,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  9386263646f3ad8d521080e3d80b66a861d2ff66 \
-                    sha256  f6260bd35d522b7ec207fe6b568f5898deb9b9ff29985f15ef09c3962917eb8b
+checksums           rmd160  7fa363267b1b77b3065760afaa6af188d4f56599 \
+                    sha256  64e3166ccc1505c151bc05f2f7d5aa931c55c4e28ee3fb940e39403e460890a5
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -32,10 +33,11 @@ depends_build       port:pkgconfig \
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:json-glib \
                     port:libxml2 \
-                    port:libsoup \
-                    port:gobject-introspection
+                    port:libsoup
 
 patchfiles          patch-geocode-glib-geocode-glib.symbols.diff
+
+gobject_introspection yes
 
 # update m4/intltool.m4 and autoreconf
 
@@ -46,16 +48,6 @@ pre-configure {
 use_autoreconf      yes
 autoreconf.args     -fvi
 
-configure.args      --enable-introspection=yes \
-                    --disable-silent-rules
-
-# gobject-introspection uses g-ir-scanner, which uses $CC from env
-build.args-append   CC="${configure.cc} ${configure.cc_archflags}"
-
-platform darwin 8 {
-    # The rules enabled by gobject-introspection require GNU make 3.81+
-    depends_build-append    port:gmake
-    build.cmd               ${prefix}/bin/gmake
-}
+configure.args      --disable-silent-rules
 
 livecheck.type      gnome-with-unstable
