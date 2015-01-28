@@ -3,9 +3,10 @@
 
 PortSystem          1.0
 PortGroup           compiler_blacklist_versions 1.0
+PortGroup           gobject_introspection 1.0
 
 name                rygel
-version             0.25.0
+version             0.25.1
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Rygel DLNA media server, renderer
@@ -19,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  f7fb741bc0b9d3a8f47c1dc436fdb5f7a1e09cdf \
-                    sha256  aa1aa72275b02504f1fef7cadc6da4f88755873b48a2538b1757f261f84f6906
+checksums           rmd160  81fea5a8f78b565c84f31d0bb4e550c7e52d4830 \
+                    sha256  66fc1f84b4d2c80fab168a2618b46ea031387d70f2011c6efe8cc1da8fff8f90
 
 depends_build       port:pkgconfig \
                     port:intltool
@@ -40,6 +41,8 @@ depends_lib         port:desktop-file-utils \
 depends_run         port:gnome-settings-daemon
 
 patchfiles          patch-configure.ac.diff
+
+gobject_introspection yes
 
 # blacklist compilers that do not support C11
 # due to error: redefinition of typedef 'GUPnPService'
