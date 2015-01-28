@@ -1,0 +1,82 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                gedit
+version             3.15.1
+license             GPL-2
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         GNOME editor.
+long_description    ${description}
+maintainers         devans openmaintainer
+categories          gnome editors
+platforms           darwin
+homepage            https://wiki.gnome.org/Apps/Gedit
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  b795f24ad9a492e51db626583e6adbcddd55c8a4 \
+                    sha256  b76e6c3e6c2f3ed8b5482d775faf30cba90865a699e2356a7aa514845873b4aa
+
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:itstool \
+                    port:yelp-tools \
+                    port:gnome-common \
+                    port:gtk-doc
+
+depends_lib         port:desktop-file-utils \
+                    port:gsettings-desktop-schemas \
+                    port:gtk3 \
+                    port:gvfs \
+                    port:gtksourceview3 \
+                    port:libpeas \
+                    port:libsoup \
+                    port:libxml2 \
+                    port:enchant \
+                    port:iso-codes \
+                    port:vala
+
+depends_run         port:gnome-settings-daemon \
+                    port:yelp
+
+patchfiles          patch-configure.ac.diff
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf      yes
+autoreconf.args     -fvi
+
+configure.cflags-append \
+                    -Wno-error=format-nonliteral
+
+configure.args      --disable-python \
+                    --disable-schemas-compile \
+                    --disable-silent-rules
+
+# minimum python version is 3.2.3
+
+variant python34 conflicts description {Use python 3.4} {
+    depends_lib-append        port:py34-gobject3
+    configure.python          ${prefix}/bin/python3.4
+    set python_framework      ${frameworks_dir}/Python.framework/Versions/3.4
+    configure.pkg_config_path ${python_framework}/lib/pkgconfig
+    configure.args-replace    --disable-python --enable-python
+}
+
+default_variants    +python34
+
+notes               "For extra functionality install gedit-plugins"
+
+post-activate    {
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type      gnome-with-unstable
