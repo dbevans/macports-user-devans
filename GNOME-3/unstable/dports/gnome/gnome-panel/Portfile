@@ -1,0 +1,87 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           gobject_introspection 1.0
+
+name                gnome-panel
+version             3.15.2
+set branch          [join [lrange [split ${version} .] 0 1] .]
+maintainers         devans openmaintainer
+categories          gnome
+license             GPL-2+ LGPL-2+
+platforms           darwin
+description         Panel component for the GNOME 2 Desktop.
+
+long_description    ${description}
+
+homepage            https://wiki.gnome.org/Projects/GnomePanel
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  a43f7e0d14b33a1489d9692223b2bf794e0e97ff \
+                    sha256  de0984dd8714af845b23b5bdf27638f146338c8c0ebea73d7dc4f4dc588d4441
+
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:itstool \
+                    port:yelp-tools \
+                    port:gnome-common \
+                    port:gtk-doc \
+                    port:python27
+
+depends_lib         port:desktop-file-utils \
+                    port:gtk3 \
+                    port:dconf \
+                    port:gnome-desktop \
+                    port:gnome-menus \
+                    port:telepathy-glib \
+                    port:policykit \
+                    port:libgweather \
+                    port:librsvg \
+                    port:libwnck3 \
+                    port:xorg-libX11 \
+                    port:xorg-libXau \
+                    port:xorg-libice \
+                    port:xorg-libsm \
+                    port:xorg-libXrandr
+
+depends_run         port:gnome-settings-daemon \
+                    port:yelp
+
+gobject_introspection yes
+
+# update m4/intltool.m4 and autoreconf
+
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+use_autoreconf      yes
+autoreconf.args     -fvi
+
+configure.python    ${prefix}/bin/python2.7
+
+configure.args      --enable-telepathy-glib \
+                    --disable-silent-rules \
+                    --enable-compile-warnings=minimum \
+                    --disable-eds \
+                    --disable-schemas-compile
+
+variant eds description {Enable evolution data server support} {
+    depends_lib-append      port:evolution-data-server
+    configure.args-delete   --disable-eds
+}
+
+if {[variant_isset eds]} {
+    universal_variant no
+}
+
+post-activate {
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+    system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type      gnome-with-unstable
