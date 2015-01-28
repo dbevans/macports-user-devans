@@ -10,7 +10,7 @@ PortGroup                   conflicts_build 1.0
 name                        glib2
 conflicts                   glib2-devel
 set my_name                 glib
-version                     2.43.1
+version                     2.43.3
 set branch                  [join [lrange [split ${version} .] 0 1] .]
 categories                  devel
 maintainers                 ryandesign openmaintainer
@@ -30,8 +30,8 @@ long_description            Glib is a library which includes support routines \
 
 master_sites                gnome:sources/${my_name}/${branch}/
 
-checksums                   rmd160  0a9cf52349cdc2346d7e13418bb52da8c801ec98 \
-                            sha256  feccbf5982c200abd283a7980a8897c32cc7b246c281ed44636907168d99cb79
+checksums           rmd160  509cad9d225847121faaf446856db11440efd110 \
+                    sha256  48f36067f1718a87824f2917039d21355ddbe782a7227482cb671e7958c13a0e
 
 # ${prefix}/include/glib-2.0/glib/gi18n.h requires -I${prefix}/include to find libintl.h
 # See https://trac.macports.org/changeset/27148
