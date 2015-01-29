@@ -1,59 +1,59 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id$
 
-PortSystem      1.0
+PortSystem          1.0
 
-name            inkscape
-conflicts       inkscape-devel
-version         0.91
-license         GPL-2 LGPL-2.1
-maintainers     devans
-categories      graphics gnome
-platforms       darwin
-homepage        http://www.inkscape.org/
+name                inkscape
+conflicts           inkscape-devel
+version             0.91
+license             GPL-2 LGPL-2.1
+maintainers         devans
+categories          graphics gnome
+platforms           darwin
+homepage            http://www.inkscape.org/
 
-description     Inkscape is an open source SVG editor.
+description         Inkscape is an open source SVG editor.
 
-long_description \
-                Inkscape is an open source SVG editor with \
-                capabilities similar to Illustrator, CorelDraw, \
-                Visio, etc. Supported SVG features include basic \
-                shapes, paths, text, alpha blending, transforms, \
-                gradients, node editing, svg-to-png export, \
-                grouping, and more.
-homepage        http://www.inkscape.org/
-#master_sites    https://sourceforge.net/projects/inkscape/files/inkscape/${version}/
-master_sites    https://inkscape.global.ssl.fastly.net/media/resources/file/
+long_description    Inkscape is an open source SVG editor with \
+                    capabilities similar to Illustrator, CorelDraw, \
+                    Visio, etc. Supported SVG features include basic \
+                    shapes, paths, text, alpha blending, transforms, \
+                    gradients, node editing, svg-to-png export, \
+                    grouping, and more.
 
-use_bzip2       yes
+homepage            http://www.inkscape.org/
+#master_sites        https://sourceforge.net/projects/inkscape/files/inkscape/${version}/
+master_sites        https://inkscape.global.ssl.fastly.net/media/resources/file/
+
+use_bzip2           yes
 
 checksums           rmd160  77421bcb96c6ad4fe17e775e86b77d576b90cf32 \
                     sha256  4d901f8a9e1924404e797ad23b8b0c495a9d155448816d95a55974314e1f141b
 
-depends_build   port:pkgconfig \
-                port:autoconf \
-                port:automake \
-                port:libtool \
-                port:intltool \
-                path:bin/perl:perl5
+depends_build       port:pkgconfig \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool \
+                    port:intltool \
+                    path:bin/perl:perl5
 
-depends_lib     port:desktop-file-utils \
-                port:popt \
-                path:lib/libgc.dylib:boehmgc \
-                port:gsl \
-                port:gtkmm \
-                port:dbus-glib \
-                port:lcms2 \
-                port:poppler \
-                port:boost \
-                port:ImageMagick \
-                port:libcdr-0.1 \
-                port:libexif \
-                port:libvisio-0.1 \
-                port:libwpg-0.3 \
-                port:gtkspell2 \
-                port:py27-lxml \
-                port:py27-numpy
+depends_lib         port:desktop-file-utils \
+                    port:popt \
+                    path:lib/libgc.dylib:boehmgc \
+                    port:gsl \
+                    port:gtkmm \
+                    port:dbus-glib \
+                    port:lcms2 \
+                    port:poppler \
+                    port:boost \
+                    port:ImageMagick \
+                    port:libcdr-0.1 \
+                    port:libexif \
+                    port:libvisio-0.1 \
+                    port:libwpg-0.3 \
+                    port:gtkspell2 \
+                    port:py27-lxml \
+                    port:py27-numpy
 
 post-patch {
     xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
@@ -63,36 +63,39 @@ post-patch {
 }
 
 variant gtk3 description {Enable experimental GTK+ 3 build} {
-    depends_lib-delete  port:gtkspell2 \
-                        port:gtk2 \
-                        port:gtkmm
-    depends_lib-append  port:gtkspell3 \
-                        port:gtk3 \
-                        port:gtkmm3 \
-                        port:gdl3
+    depends_lib-delete \
+                    port:gtkspell2 \
+                    port:gtk2 \
+                    port:gtkmm
 
-    configure.args-append --enable-gtk3-experimental
+    depends_lib-append \
+                    port:gtkspell3 \
+                    port:gtk3 \
+                    port:gtkmm3 \
+                    port:gdl3
+
+    configure.args-append \
+                    --enable-gtk3-experimental
 }
 
 variant svg2 description {Enable experimental SVG level 2 proposed features} {
     configure.cppflags-append \
-                        "-DWITH_MESH -DWITH_CSSBLEND -DWITH_CSSCOMPOSITE -DWITH_SVG2"
+                    "-DWITH_MESH -DWITH_CSSBLEND -DWITH_CSSCOMPOSITE -DWITH_SVG2"
 }
 
-configure.cmd   ./autogen.sh && ./configure
+configure.cmd       ./autogen.sh && ./configure
 
-configure.python \
-                ${prefix}/bin/python2.7
+configure.python    ${prefix}/bin/python2.7
 
-configure.args  --without-gnome-vfs \
-                --enable-lcms \
-                --enable-poppler-cairo \
-                --enable-dbusapi \
-                --disable-silent-rules \
-                --disable-strict-build
+configure.args      --without-gnome-vfs \
+                    --enable-lcms \
+                    --enable-poppler-cairo \
+                    --enable-dbusapi \
+                    --disable-silent-rules \
+                    --disable-strict-build
 
 configure.cppflags-append \
-    -I${worksrcpath}/src/extension/script
+                    -I${worksrcpath}/src/extension/script
 
 if {[string match "*clang*" ${configure.compiler}]} {
     configure.cxxflags-append -std=c++11
@@ -102,7 +105,7 @@ variant strict description {Enable strict build} {
     configure.args-replace  --disable-strict-build --enable-strict-build
 }
 
-default_variants +strict
+default_variants    +strict
 
 #
 # the following dummy variants are used
@@ -129,6 +132,6 @@ if {[variant_isset gtk3]} {
     }
 }
 
-livecheck.type          regex
-livecheck.url           http://sourceforge.net/projects/inkscape/files/inkscape/
-livecheck.regex         "${name}/(\\d+(?:\\.\\d+)*)/"
+livecheck.type      regex
+livecheck.url       http://sourceforge.net/projects/inkscape/files/inkscape/
+livecheck.regex     "${name}/(\\d+(?:\\.\\d+)*)/"
