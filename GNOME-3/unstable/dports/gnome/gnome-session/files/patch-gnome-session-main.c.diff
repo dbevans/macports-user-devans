@@ -1,5 +1,5 @@
---- gnome-session/main.c.orig	2014-12-15 13:17:00.000000000 -0800
-+++ gnome-session/main.c	2015-01-24 04:26:36.000000000 -0800
+--- gnome-session/main.c.orig	2015-01-05 10:34:39.000000000 -0800
++++ gnome-session/main.c	2015-01-30 08:42:20.000000000 -0800
 @@ -179,6 +179,14 @@
          if (g_getenv ("DBUS_SESSION_BUS_ADDRESS"))
                  return TRUE;
@@ -23,3 +23,21 @@
  
          /* Should not be reached */
          return TRUE;
+@@ -227,6 +236,17 @@
+         return g_spawn_check_exit_status (status, error);
+ }
+ 
++#ifdef __APPLE__
++
++static int
++rpmatch (const char *response)
++{
++  return (*response == 'y' || *response == 'Y' ? 1
++	  : *response == 'n' || *response == 'N' ? 0 : -1);
++}
++
++#endif
++
+ int
+ main (int argc, char **argv)
+ {

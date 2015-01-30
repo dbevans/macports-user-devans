@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-session
-version             3.15.3
+version             3.15.4
 license             LGPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Session component for the GNOME 3 desktop.
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  5f503d9f5bf6137c4e2cfcc40c563fd540158ab2 \
-                    sha256  600f87cc25380544c6212761f921c67ab7bf87e8a3685f4ea48195b0c3985360
+checksums           rmd160  266f4f8519cba3f9950d3c83d5d749823e5250aa \
+                    sha256  05d374429962486d224ac6b169855aedac16123c9c708f14fdd5fb34e6e27d0d
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -45,7 +45,8 @@ depends_lib         port:desktop-file-utils \
                     port:mesa
 
 patchfiles          patch-gnome-session-main.c.diff \
-                    patch-gnome-session-check-accelerated-helper.c.diff
+                    patch-gnome-session-check-accelerated-helper.c.diff \
+                    patch-header-guard-typo.diff
 
 # update m4/intltool.m4 and autoreconf
 
