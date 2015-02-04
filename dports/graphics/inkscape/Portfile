@@ -12,17 +12,12 @@ categories          graphics gnome
 platforms           darwin
 homepage            http://www.inkscape.org/
 
-description         Inkscape is an open source SVG editor.
+description         Inkscape is an multi-platform, Open-Source Vector Graphics Editor \
+                    that uses SVG as its native file format.
 
-long_description    Inkscape is an open source SVG editor with \
-                    capabilities similar to Illustrator, CorelDraw, \
-                    Visio, etc. Supported SVG features include basic \
-                    shapes, paths, text, alpha blending, transforms, \
-                    gradients, node editing, svg-to-png export, \
-                    grouping, and more.
+long_description    ${description}
 
 homepage            http://www.inkscape.org/
-#master_sites        https://sourceforge.net/projects/inkscape/files/inkscape/${version}/
 master_sites        https://inkscape.global.ssl.fastly.net/media/resources/file/
 
 use_bzip2           yes
@@ -133,5 +128,5 @@ if {[variant_isset gtk3]} {
 }
 
 livecheck.type      regex
-livecheck.url       http://sourceforge.net/projects/inkscape/files/inkscape/
-livecheck.regex     "${name}/(\\d+(?:\\.\\d+)*)/"
+livecheck.url       https://inkscape.org/en/download/
+livecheck.regex     "Stable release \.*>(\\d+(?:\\.\\d+)*)<"
