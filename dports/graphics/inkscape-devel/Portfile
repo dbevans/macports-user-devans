@@ -1,59 +1,56 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id$
 
-PortSystem      1.0
+PortSystem          1.0
 
-name            inkscape-devel
-conflicts       inkscape inkscape-0.91.x
-set bzr_rev     13901
-version         0.91.99.${bzr_rev}
-epoch           1
-license         GPL-2 LGPL-2.1
-maintainers     devans
-categories      graphics gnome
-platforms       darwin
-description     This is the ongoing unstable development version of Inkscape taken from \
-                recent bzr trunk after branching inkscape-0.91.x.
+name                inkscape-devel
+conflicts           inkscape inkscape-0.91.x
+set bzr_rev         13901
+version             0.91.99.${bzr_rev}
+epoch               1
+license             GPL-2 LGPL-2.1
+maintainers         devans
+categories          graphics gnome
+platforms           darwin
+description         This is the ongoing unstable development version of Inkscape taken from \
+                    recent bzr trunk.
 
-long_description \
-                Inkscape is an open source SVG editor with \
-                capabilities similar to Illustrator, CorelDraw, \
-                Visio, etc. Supported SVG features include basic \
-                shapes, paths, text, alpha blending, transforms, \
-                gradients, node editing, svg-to-png export, \
-                grouping, and more. ${description}
-homepage        http://www.inkscape.org/
-master_sites    file:///Users/devans/macports/distfiles/${name}
+long_description    Inkscape is an multi-platform, Open-Source Vector Graphics Editor \
+                    that uses SVG as its native file format. \
+                    ${description}
 
-checksums       rmd160  d19adfe5e1e0aa9489bd8ab8bcbdcdaccbe69e3a \
-                sha256  b82a4d70f60932f3f6b9b1c3e9185c01375c86df54574c424abffad625cda052
+homepage            http://www.inkscape.org/
+master_sites        file:///Users/devans/macports/distfiles/${name}
 
-worksrcdir      ${name}
+checksums           rmd160  d19adfe5e1e0aa9489bd8ab8bcbdcdaccbe69e3a \
+                    sha256  b82a4d70f60932f3f6b9b1c3e9185c01375c86df54574c424abffad625cda052
 
-depends_build   port:pkgconfig \
-                port:autoconf \
-                port:automake \
-                port:libtool \
-                port:intltool \
-                path:bin/perl:perl5
+worksrcdir          ${name}
 
-depends_lib     port:desktop-file-utils \
-                port:popt \
-                path:lib/libgc.dylib:boehmgc \
-                port:gsl \
-                port:gtkmm \
-                port:dbus-glib \
-                port:lcms2 \
-                port:poppler \
-                port:boost \
-                port:ImageMagick \
-                port:libcdr-0.1 \
-                port:libexif \
-                port:libvisio-0.1 \
-                port:libwpg-0.3 \
-                port:gtkspell2 \
-                port:py27-lxml \
-                port:py27-numpy
+depends_build       port:pkgconfig \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool \
+                    port:intltool \
+                    path:bin/perl:perl5
+
+depends_lib         port:desktop-file-utils \
+                    port:popt \
+                    path:lib/libgc.dylib:boehmgc \
+                    port:gsl \
+                    port:gtkmm \
+                    port:dbus-glib \
+                    port:lcms2 \
+                    port:poppler \
+                    port:boost \
+                    port:ImageMagick \
+                    port:libcdr-0.1 \
+                    port:libexif \
+                    port:libvisio-0.1 \
+                    port:libwpg-0.3 \
+                    port:gtkspell2 \
+                    port:py27-lxml \
+                    port:py27-numpy
 
 post-patch {
     reinplace "s|\"python-interpreter\", \"python\"|\"python-interpreter\", \"python2.7\"|g" ${worksrcpath}/src/extension/implementation/script.cpp
@@ -62,37 +59,40 @@ post-patch {
 }
 
 variant gtk3 description {Enable experimental GTK+ 3 build} {
-    depends_lib-delete  port:gtkspell2 \
-                        port:gtk2 \
-                        port:gtkmm
-    depends_lib-append  port:gnome-themes-standard \
-                        port:gtkspell3 \
-                        port:gtk3 \
-                        port:gtkmm3 \
-                        port:gdl3
+    depends_lib-delete \
+                    port:gtkspell2 \
+                    port:gtk2 \
+                    port:gtkmm
 
-    configure.args-append --enable-gtk3-experimental
+    depends_lib-append \
+                    port:gnome-themes-standard \
+                    port:gtkspell3 \
+                    port:gtk3 \
+                    port:gtkmm3 \
+                    port:gdl3
+
+    configure.args-append \
+                    --enable-gtk3-experimental
 }
 
 variant svg2 description {Enable experimental SVG level 2 proposed features} {
     configure.cppflags-append \
-                        "-DWITH_MESH -DWITH_CSSBLEND -DWITH_CSSCOMPOSITE -DWITH_SVG2"
+                    "-DWITH_MESH -DWITH_CSSBLEND -DWITH_CSSCOMPOSITE -DWITH_SVG2"
 }
 
-configure.cmd   ./autogen.sh && ./configure
+configure.cmd       ./autogen.sh && ./configure
 
-configure.python \
-                ${prefix}/bin/python2.7
+configure.python    ${prefix}/bin/python2.7
 
-configure.args  --without-gnome-vfs \
-                --enable-lcms \
-                --enable-poppler-cairo \
-                --enable-dbusapi \
-                --disable-silent-rules \
-                --disable-strict-build
+configure.args      --without-gnome-vfs \
+                    --enable-lcms \
+                    --enable-poppler-cairo \
+                    --enable-dbusapi \
+                    --disable-silent-rules \
+                    --disable-strict-build
 
 configure.cppflags-append \
-    -I${worksrcpath}/src/extension/script
+                    -I${worksrcpath}/src/extension/script
 
 if {[string match "*clang*" ${configure.compiler}]} {
     configure.cxxflags-append -std=c++11
@@ -102,7 +102,7 @@ variant strict description {Enable strict build} {
     configure.args-replace  --disable-strict-build --enable-strict-build
 }
 
-default_variants +strict
+default_variants    +strict
 
 #
 # the following dummy variants are used
@@ -129,4 +129,4 @@ if {[variant_isset gtk3]} {
     }
 }
 
-livecheck.type  none
+livecheck.type      none
