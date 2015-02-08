@@ -1,0 +1,11 @@
+--- src/file_list.c.orig	2015-02-07 19:44:56.000000000 -0800
++++ src/file_list.c	2015-02-07 20:40:34.000000000 -0800
+@@ -574,7 +574,7 @@
+     GList *result;
+     ET_File *etfile = NULL;
+ 
+-    g_return_if_fail (ETFile != NULL);
++    g_return_val_if_fail (ETFile != NULL, NULL);
+ 
+     /* Album value of the ETFile passed in parameter. */
+     ETFile_Album = ((File_Tag *)ETFile->FileTag->data)->album;
