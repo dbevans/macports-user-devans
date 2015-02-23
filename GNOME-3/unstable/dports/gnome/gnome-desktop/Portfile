@@ -6,7 +6,7 @@ PortGroup           active_variants 1.1
 PortGroup           gobject_introspection 1.0
 
 name                gnome-desktop
-version             3.15.4
+version             3.15.90
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -25,8 +25,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  006ef2a3d5c1229b9dd7bd1bba59cee44458471d \
-                    sha256  1632703bc9db116562c2f55560742f4709165e46e91e7f6b6d71e654ee6fc7e6
+checksums           rmd160  81fbb592bbe8fc7f88a68de8ff8952ee1162624d \
+                    sha256  daadd03dc9da2fbb3ea92ecdfd99438415b54761013b5c200185752be54be7b1
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -43,8 +43,6 @@ depends_lib         port:desktop-file-utils \
                     port:xorg-libXrandr \
                     port:xkeyboard-config \
                     port:xorg-libxkbfile
-
-patchfiles          patch-libgnome-destktop-libgsystem.diff
 
 gobject_introspection yes
 
