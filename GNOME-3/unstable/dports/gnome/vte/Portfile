@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                vte
-version             0.39.1
+version             0.39.90
 set branch          [join [lrange [split $version .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -23,8 +23,8 @@ master_sites        gnome:sources/$name/$branch/
 
 use_xz              yes
 
-checksums           rmd160  3b36d2f77f39afe29cfa9ea02814728bbc18b77c \
-                    sha256  fedb6cb8f41d1d9ea71fdb628e492c6bb3370cc029f6810ebf705754bf7cd253
+checksums           rmd160  ce385ea5e985a65ab85cb207d6598adc8e3610a8 \
+                    sha256  9d127e8dc9ca8267fe65f280bf3afb17d68ef154163f84b3bb2fc79e73abbc97
 
 depends_build       port:pkgconfig \
                     port:intltool \
