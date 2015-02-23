@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                vino
-version             3.15.4
+version             3.15.90
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 homepage            https://wiki.gnome.org/Projects/Vino
@@ -17,8 +17,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  02a8a1000527c7f87fd51ebb66965ca05c65a0ce \
-                    sha256  f50f8e06cf590ced3f2620fc9721167fa5d7b24ca26a1233fe073ef137271aed
+checksums           rmd160  0e0e19048a2909c5eed3764a16f89150e84b2456 \
+                    sha256  7912bcf63db7e331753dbb2901da46b6c6050698465d57d01ad286e26e071d6f
 
 depends_build       port:pkgconfig \
                     port:intltool \
