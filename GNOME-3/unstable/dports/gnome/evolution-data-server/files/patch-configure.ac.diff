@@ -1,6 +1,6 @@
---- configure.ac.orig	2014-09-29 03:53:45.000000000 -0700
-+++ configure.ac	2014-11-17 15:48:14.000000000 -0800
-@@ -212,7 +212,7 @@
+--- configure.ac.orig	2015-02-10 08:19:57.000000000 -0800
++++ configure.ac	2015-02-19 17:39:19.000000000 -0800
+@@ -219,7 +219,7 @@
  	-Wnested-externs"
  
  proposed_cxx_warning_flags="$proposed_warning_flags
@@ -9,7 +9,7 @@
  
  AS_COMPILER_FLAGS(WARNING_FLAGS, [$proposed_c_warning_flags])
  AC_SUBST(WARNING_FLAGS)
-@@ -321,8 +321,8 @@
+@@ -328,8 +328,8 @@
  
  dnl This must appear after AC_CANONICAL_HOST, which defines $host.
  case "$host" in
@@ -20,7 +20,7 @@
  	;;
  *)
  	LDFLAGS="$LDFLAGS -Wl,--no-undefined"
-@@ -627,8 +627,8 @@
+@@ -634,8 +634,8 @@
  
  if test "x$with_libdb" != "xno" ; then
  	if test "x$with_libdb" != "xyes" ; then
