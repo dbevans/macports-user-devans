@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-photos
-version             3.15.4
+version             3.15.90
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Photo manager for GNOME.
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  43f6805393ad1377b882dccca23e7732b6fb65a4 \
-                    sha256  ca6973b288beaae2f88307d8a13db81af30164e10252e192094ed3650b5ac0ee
+checksums           rmd160  4991e4531e12889085807c21d8842ff688033197 \
+                    sha256  c924dd8eef12c259c2551b12c8405edf88f0bc2dbcb6824c6cf639eb921e96a4
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -29,11 +29,11 @@ depends_build       port:pkgconfig \
 
 depends_lib         port:desktop-file-utils \
                     port:gtk3 \
-                    port:babl \
+                    port:babl-devel \
                     port:cairo \
                     port:exempi \
                     port:gfbgraph \
-                    port:gegl \
+                    port:gegl-devel \
                     port:gdk-pixbuf2 \
                     port:gnome-desktop \
                     port:gnome-online-accounts \
@@ -46,6 +46,8 @@ depends_lib         port:desktop-file-utils \
 
 depends_run         port:gnome-settings-daemon \
                     port:yelp
+
+patchfiles          patch-configure.ac.diff
 
 # update m4/intltool.m4 and autoreconf
 
