@@ -7,7 +7,7 @@ PortGroup           gobject_introspection 1.0
 
 name                gtksourceview3
 set gname           gtksourceview
-version             3.15.3
+version             3.15.90
 license             LGPL-2.1+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
@@ -27,8 +27,8 @@ master_sites        gnome:sources/${gname}/${branch}/
 distname            ${gname}-${version}
 use_xz              yes
 
-checksums           rmd160  34571f7aae7fdc8084d0348cc1180cd93e27692d \
-                    sha256  2b11d61a3d514c9003b5154280c133bdb130f8d6210b8db97184e5ad2cc3fdce
+checksums           rmd160  7bd98b3df233207f98658b7c467be86fe21f39ee \
+                    sha256  ceb7f992194c7c223baa898d6b6f1892f922c7558ed1cbc7fa56386228d51327
 
 depends_build       port:intltool \
                     port:pkgconfig \
