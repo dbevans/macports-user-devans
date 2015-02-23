@@ -8,7 +8,7 @@ name                gnome-control-center
 if {${os.platform} eq "darwin" && ${os.major} >= 13} {
 
     set mavericks_or_better yes
-    version 3.15.4
+    version 3.15.90
 
 } else {
 
@@ -33,8 +33,8 @@ use_xz              yes
 
 if {$mavericks_or_better} {
 
-    checksums       rmd160  a1b964999498dfa2128e65317c8830e200bb18d7 \
-                    sha256  d12a34b24a67746ba7b9db81c9ef3dacfac3bf11506c8d73bdb57f598c2a02aa
+    checksums       rmd160  8ee12fd6535d33f0db050fc173724011def3212d \
+                    sha256  6d975e21a1e884b2151b4f9134984fdd19f5549830b69d0f85232a8d880e101a
 
     depends_build   port:pkgconfig \
                     port:intltool \
@@ -70,8 +70,7 @@ if {$mavericks_or_better} {
 
     patchfiles      patch-disable-color-panel.diff \
                     patch-disable-shell-test-hostname.diff \
-                    patch-panels-user-accounts.diff \
-                    patch-fix-non-linux-build.diff
+                    patch-panels-user-accounts.diff
 
     pre-configure {
         copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
