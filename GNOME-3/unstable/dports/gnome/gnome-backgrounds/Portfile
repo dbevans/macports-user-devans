@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-backgrounds
-version             3.15.2
+version             3.15.90
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         nomaintainer
 categories          gnome
@@ -21,8 +21,8 @@ master_sites        gnome:sources/$name/$branch/
 
 use_xz              yes
 
-checksums           rmd160  f7d8b64f22a28578649f568a374cff767e835cf4 \
-                    sha256  571c96ae6d53985023846d1a12a024046c76b6f2477b52b1c720bc97c1b39bad
+checksums           rmd160  1d16c17665431845e708193c7fffa84dfdb1be45 \
+                    sha256  8be9743cf7e62c7b570d288dc5d17dea43f48e04a76b9c0b425914ebdb66036e
 
 depends_build       port:intltool \
                     port:gettext
