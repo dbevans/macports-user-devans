@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                totem
-version             3.15.4
+version             3.15.90
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome
 # also has an exception allowing use of non-GPL-compatible plugins
@@ -26,8 +26,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  5adfbc0bf73e3dbefaef885f149e5c933752860d \
-                    sha256  76a7fb74de62e90627d7463eb087cfef6509beee3cb6e0709383f41ae0fba10b
+checksums           rmd160  8303230c2902c47f19f67fbf3e4e0d52b5c67337 \
+                    sha256  111725fe3d0a863f6cab7b6413ca118bee3365f7ab2ed4c926f83dc5b5635a64
 
 depends_build       port:pkgconfig \
                     port:intltool \
