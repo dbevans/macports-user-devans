@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                adwaita-icon-theme
-version             3.15.1
+version             3.15.90
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome
 maintainers         devans openmaintainer
@@ -20,8 +20,8 @@ master_sites        gnome:sources/$name/$branch/
 
 use_xz              yes
 
-checksums           rmd160  fa499a4ed9c727bcf77d8eaeede2dd1f31f614a1 \
-                    sha256  12a543f6e646a89601885b61e7f649af2757dd479af271c615d71f07b6c6d97a
+checksums           rmd160  891195e541fbc96aa5a582cdb45bc82d0134a3e9 \
+                    sha256  8293aa7f9937cbc7c95ab64a18dc6f89ca4fadb821bdc2c00c91878040db6789
 
 depends_build       port:pkgconfig \
                     port:intltool \
