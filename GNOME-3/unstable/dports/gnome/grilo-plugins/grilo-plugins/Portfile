@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           compiler_blacklist_versions 1.0
 
 name                grilo-plugins
-version             0.2.14
+version             0.2.13
 license             LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Framework for discovering and browsing media - Plugins.
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  8ec4a1f6afe2daeaa392133d3956cdf110d77d90 \
-                    sha256  d0f18116675058c7e8c178b1fe26d6d73998a0452f85a73b1696df740c83d3ab
+checksums           rmd160  d30fbddb4c8c5bec27f6544e1e2961c0ada7a0d7 \
+                    sha256  a5544831ba81a4e7caea30da89874fd20142a362d389366e1113d0e64be51201
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -92,4 +92,5 @@ configure.args      --disable-silent-rules \
 #                    --enable-bookmarks \ # requires gom
 #                    --enable-dleyna \ # requires python-dbusmock
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome
+
