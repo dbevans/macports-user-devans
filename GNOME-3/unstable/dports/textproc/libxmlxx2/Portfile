@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                libxmlxx2
 set gname           libxml++
-version             2.37.2
+version             2.38.0
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          textproc
 license             LGPL
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${gname}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  8fff0b132aac828fc63482ace38e26e29b08f34e \
-                    sha256  bb3e10a2148e90fc61098499a0923b4de786b1dd86466d7ec6255e154baa773b
+checksums           rmd160  f7864714672a89db52e03445efcc986751e3e34d \
+                    sha256  5698b03f5d320fb8310e30780e328f03debca12c557434ee031aea9baf3b1346
 
 depends_build       port:pkgconfig \
                     path:bin/perl:perl5
