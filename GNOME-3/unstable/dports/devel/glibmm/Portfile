@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                glibmm
-version             2.43.3
+version             2.43.90
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         C++ interface to glib
 long_description    ${description}
@@ -17,8 +17,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  dc74af9a05efd3f510de8d8b4003edaf3d313875 \
-                    sha256  db5b040222685387349f8095b609bfa785be2e6d0d61b75e59b86a6812e10caa
+checksums           rmd160  f54331e4100b7013ed88135efa519d85d97bca33 \
+                    sha256  b5fbad2f1f5ccc6492d5751a39a90b545a91a88a65ea0d9c9ac7945f6a89dbdb
 
 depends_build       port:pkgconfig \
                     port:autoconf \
