@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                inkscape-devel
 conflicts           inkscape inkscape-0.91.x
-set bzr_rev         13907
+set bzr_rev         13973
 version             0.91.99.${bzr_rev}
 epoch               1
 license             GPL-2 LGPL-2.1
@@ -22,8 +22,8 @@ long_description    Inkscape is an multi-platform, Open-Source Vector Graphics E
 homepage            http://www.inkscape.org/
 master_sites        file:///Users/devans/macports/distfiles/${name}
 
-checksums           rmd160  82bfdfc4a7b9649bd439e8d313bc1285280583ff \
-                    sha256  9e627847e7a9bdc1acf7a0d594b9c15564dcbb32c3398bbf66bdda8c45730ade
+checksums           rmd160  9da550312d6e62d20dbe2fa8a6f34d56d506497c \
+                    sha256  1ac5e6027289330193cb98556754b19fee887911194e4ecc03b2383a3af0c6c2
 
 worksrcdir          ${name}
 
@@ -73,11 +73,6 @@ variant gtk3 description {Enable experimental GTK+ 3 build} {
 
     configure.args-append \
                     --enable-gtk3-experimental
-}
-
-variant svg2 description {Enable experimental SVG level 2 proposed features} {
-    configure.cppflags-append \
-                    "-DWITH_MESH -DWITH_CSSBLEND -DWITH_CSSCOMPOSITE -DWITH_SVG2"
 }
 
 configure.cmd       ./autogen.sh && ./configure
