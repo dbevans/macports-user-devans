@@ -4,13 +4,13 @@
 PortSystem          1.0
 
 name                gnome-photos
-version             3.15.90
+version             3.15.91
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Photo manager for GNOME.
 long_description    GNOME Photos is a simple standalone application to find, organize and view your photos.
 
-maintainers         gmail.com:juanrgar devans openmaintainer
+maintainers         juanrgar devans openmaintainer
 categories          gnome
 platforms           darwin
 homepage            https://wiki.gnome.org/Apps/Photos
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  4991e4531e12889085807c21d8842ff688033197 \
-                    sha256  c924dd8eef12c259c2551b12c8405edf88f0bc2dbcb6824c6cf639eb921e96a4
+checksums           rmd160  109e7753f7e24dc1335745c812cf220511abcd0d \
+                    sha256  1f7ba3e0065bc3df2e722540078c0b40b6fd9bfa36b25a13d21cf038ebcab84e
 
 depends_build       port:pkgconfig \
                     port:intltool \
