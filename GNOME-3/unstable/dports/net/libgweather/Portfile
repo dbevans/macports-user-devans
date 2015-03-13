@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                libgweather
-version             3.15.90
+version             3.15.91
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          net gnome
@@ -22,8 +22,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  14bd0aab42c01a9ea39ebe5d367c3df38b139e3d \
-                    sha256  742d48b0ba2a3f5fa8377ab93555f0b470ac30b1a88cfba705bcfae24c9c7579
+checksums           rmd160  e6a7fd03f5c1071fd83642315cbe3cfa0d7a9837 \
+                    sha256  28e6174a6828af71a038dc8659a23132f713bd3bf12d5da671ac42d138675b64
 
 depends_build       port:pkgconfig \
                     port:intltool \

@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                yelp
-version             3.15.90
+version             3.15.91
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Help browser for GNOME.
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  e25d8e462aae8dcf58f575f0e68f49154b20c8a5 \
-                    sha256  c5b10d60d498370cef1bff77253c89a6025303c4dfa8c69341de0a4e1325d3c7
+checksums           rmd160  d8a70f1e9bcdbfb7247f23d4de3098c7c06c6437 \
+                    sha256  51816b5f2b5d43cdf7d4e727574ec144db608b3fe2789498d32d598395121a56
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -45,7 +45,7 @@ depends_run         port:gnome-user-docs \
                     port:gnome-getting-started-docs \
                     port:gnome-settings-daemon
 
-patchfiles          patch-configure.ac.diff
+patchfiles          patch-m4-ax_compiler_flags_ldflags.m4.diff
 
 # update m4/intltool.m4 and autoreconf
 
@@ -58,6 +58,7 @@ autoreconf.args         -fvi
 
 configure.args      --x-includes=${prefix}/include \
                     --x-libraries=${prefix}/lib \
+                    --enable-compile-warnings=minimum \
                     --disable-schemas-compile \
                     --disable-silent-rules \
                     --enable-debug

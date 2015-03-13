@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-user-docs
-version             3.15.90
+version             3.15.91
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         End-user documentation for GNOME3
 long_description    This package contains documents targetted \
@@ -22,8 +22,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  7f0cd36f9860e58414d56b6cbacd4a0849f46262 \
-                    sha256  f2984fc3d7621ed6c274df32e0d011d9037ff7a2f18eeba57a06ba03a6a8693d
+checksums           rmd160  85b6b3d590fbaaf092ce4cabe0e667b02c94c810 \
+                    sha256  8d63966ff86f21039c6710563b9d6323280dd65f8a5b8231de714a94e09354d5
 
 depends_build       port:pkgconfig \
                     port:libxml2 \

@@ -6,7 +6,7 @@ PortGroup               gobject_introspection 1.0
 
 name                    atk
 epoch                   2
-version                 2.15.4
+version                 2.15.91
 set branch              [join [lrange [split ${version} .] 0 1] .]
 categories              devel
 license                 LGPL
@@ -20,8 +20,8 @@ long_description        ATK is the GNOME Accessibility ToolKit
 homepage                http://projects.gnome.org/accessibility/
 master_sites            gnome:sources/${name}/${branch}/
 
-checksums           rmd160  ea86db2e6c734c0be69a8a32c357030934484dd9 \
-                    sha256  0dddfa73a02178ca21a8de172c86d699aa887b4efeec736b4c8721eee4ac349c
+checksums           rmd160  93a6814f056c5fc541f10b51ffe50e6f4189421e \
+                    sha256  ad4ca42502341f19d6fb635f6a73a518a0c6416639430f488dd82bd88a24a73f
 
 use_xz                  yes
 

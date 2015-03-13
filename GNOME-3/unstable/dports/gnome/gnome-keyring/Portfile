@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                gnome-keyring
 epoch               1
-version             3.14.0
+version             3.15.90
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -22,8 +22,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  004826fc03a1572e538f3a7814e43713036e364d \
-                    sha256  c7059516cc47192e8bc5f1095e8e57cd3388825a4584ea8ad67a97763b7c9040
+checksums           rmd160  65637ce7b78d5b285faa925d4c200da44e6d7191 \
+                    sha256  9d8be41c5e2b8b5116926312f69d18a382a891c704aaaae39258d6a157510c44
 
 patchfiles          patch-egg-egg-asn1x.h.diff \
                     patch-egg-egg-armor.c.diff \
@@ -71,4 +71,4 @@ post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-livecheck.type      gnome
+livecheck.type      gnome-with-unstable
