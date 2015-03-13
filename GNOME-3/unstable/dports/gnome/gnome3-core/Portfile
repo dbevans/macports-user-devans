@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-core
-version         3.15.90
+version         3.15.91
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -31,6 +31,7 @@ supported_archs noarch
 # NetworkManager
 # cantarell-fonts
 # caribou
+# dconf-editor
 # gnome-bluetooth
 # gnome-calculator
 # gnome-contacts
@@ -66,6 +67,7 @@ depends_lib     port:adwaita-icon-theme \
                 port:baobab \
                 port:clutter \
                 port:clutter-gst \
+                port:clutter-gst3 \
                 port:clutter-gtk \
                 port:cogl \
                 port:dconf \
@@ -88,7 +90,6 @@ depends_lib     port:adwaita-icon-theme \
                 port:gnome-desktop \
                 port:gnome-dictionary \
                 port:gnome-font-viewer \
-                port:gnome-js-common \
                 port:gnome-keyring \
                 port:gnome-menus \
                 port:gnome-online-accounts \
