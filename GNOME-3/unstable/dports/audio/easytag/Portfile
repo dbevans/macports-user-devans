@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                easytag
-version             2.3.4
+version             2.3.5
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          audio gnome
 platforms           darwin
@@ -21,8 +21,8 @@ long_description    EasyTAG is an utility for viewing and editing tags \
 
 master_sites        gnome:sources/${name}/${branch}
 
-checksums           rmd160  a56616a808c68b7986de2be8ac6aa39d18513021 \
-                    sha256  d8bf103d46afe32f17838ddc44bb7160044de96cfdf90594b739fc626765651a
+checksums           rmd160  f175534d029dc5bfcb928ae2116f47c94c6b4f78 \
+                    sha256  b110967747ab57b289358a8a7046cf9bb613914cfece9ba1f395beba61d4663d
 
 use_xz              yes
 
@@ -46,7 +46,7 @@ depends_lib         port:desktop-file-utils \
 
 depends_run         port:gnome-themes-standard
 
-patchfiles          patch-src-file_list.c.diff
+patchfiles          patch-m4-ax_compiler_flags_ldflags.m4.diff
 
 # update m4/intltool.m4 and autoreconf
 
@@ -58,6 +58,7 @@ use_autoreconf      yes
 autoreconf.args     -fvi
 
 configure.args      --disable-nautilus-actions \
+                    --enable-compile-warnings=minimum \
                     --disable-silent-rules \
                     --disable-schemas-compile
 
