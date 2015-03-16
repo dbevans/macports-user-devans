@@ -40,7 +40,8 @@ checksums           rmd160  416d17357b99098e23b108aca6393b25d7b48dd5 \
 
 depends_build       port:pkgconfig \
                     port:intltool \
-                    port:gtk-doc
+                    port:gtk-doc \
+                    port:py34-gobject3
 
 depends_lib         port:gtk3 \
                     port:gettext \
@@ -52,6 +53,12 @@ depends_lib         port:gtk3 \
                     port:libxml2 \
                     port:libsecret \
                     port:gnome-online-accounts
+
+post-patch {
+    reinplace "s|^#!.*|#!${prefix}/bin/python3.4|" \
+        ${worksrcpath}/test/gvfs-test \
+        ${worksrcpath}/test/test_polkitd.py
+}
 
 # update m4/intltool.m4 and autoreconf
 
@@ -81,6 +88,7 @@ configure.args      --disable-avahi \
                     --enable-http \
                     --enable-archive \
                     --enable-afp \
+                    --enable-always-build-tests \
                     --disable-silent-rules
 
 test.run            yes
