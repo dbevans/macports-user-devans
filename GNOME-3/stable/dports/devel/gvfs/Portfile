@@ -41,6 +41,9 @@ checksums           rmd160  ae3e2d742b00f4eaaec34682c7ad81f6f668750d \
 depends_build       port:pkgconfig \
                     port:intltool \
                     port:gtk-doc \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool \
                     port:py34-gobject3
 
 depends_lib         port:gtk3 \
@@ -55,19 +58,15 @@ depends_lib         port:gtk3 \
                     port:gnome-online-accounts
 
 post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
     reinplace "s|^#!.*|#!${prefix}/bin/python3.4|" \
         ${worksrcpath}/test/gvfs-test \
         ${worksrcpath}/test/test_polkitd.py
 }
 
-# update m4/intltool.m4 and autoreconf
+# reconfigure using autogen.sh for intltool 0.51 compatibility
 
-pre-configure {
-    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
-}
-
-use_autoreconf      yes
-autoreconf.args     -fvi
+configure.cmd       ./autogen.sh
 
 configure.args      --disable-avahi \
                     --disable-fuse \
