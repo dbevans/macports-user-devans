@@ -40,8 +40,10 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:libxml2 \
                     port:readline \
                     port:telepathy-glib \
+                    port:vala \
                     port:zeitgeist \
 
+# the dummy backend is broken as are tests based on it
 patchfiles          patch-disable-dummy-backend.diff
 
 gobject_introspection yes
@@ -76,7 +78,6 @@ variant eds description {Enable evolution data server backend} {
     configure.args-append   --enable-eds-backend
 
 # port evolution-data-server -> nss is not universal
-
     universal_variant   no
 }
 
