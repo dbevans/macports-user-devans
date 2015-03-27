@@ -32,8 +32,7 @@ depends_build       port:pkgconfig \
                     port:intltool \
                     port:autoconf \
                     port:automake \
-                    port:libtool \
-                    port:vala
+                    port:libtool
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:dbus-glib \
@@ -42,6 +41,7 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:libxml2 \
                     port:readline \
                     port:telepathy-glib \
+                    port:vala \
                     port:zeitgeist \
 
 # the dummy backend is broken as are tests based on it
