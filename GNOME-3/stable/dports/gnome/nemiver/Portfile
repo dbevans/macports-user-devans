@@ -27,6 +27,18 @@ use_xz              yes
 checksums           sha256 33590e3964092cabb629a6ba8415786b054702063a944eca5fe4156048baf8d9 \
                     rmd160 5ccc191da5ece02691222d57e7b79798b423e9c0
 
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:itstool \
+                    port:libxml2 \
+                    port:libxslt \
+                    port:yelp-xsl \
+                    port:yelp-tools \
+                    port:gnome-common \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
+
 depends_lib         port:desktop-file-utils \
                     port:gsettings-desktop-schemas \
                     port:libgtop \
@@ -39,14 +51,6 @@ depends_lib         port:desktop-file-utils \
                     port:sqlite3 \
                     port:gdb \
                     port:boost
-
-depends_build       port:pkgconfig \
-                    port:intltool \
-                    port:itstool \
-                    port:libxml2 \
-                    port:libxslt \
-                    port:yelp-xsl \
-                    port:yelp-tools
 
 depends_run         port:yelp \
                     port:gnome-settings-daemon
@@ -67,14 +71,13 @@ patchfiles-append   patch-consolidate-gerrorsafeptr-definitions.diff \
 
 patchfiles-append   patch-src-uicommon-nmv-terminal.cc.diff
 
-# update m4/intltool.m4 and autoreconf
+# reconfigure using autogen.sh for intltool 0.51 compatibility
 
-pre-configure {
-    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
 }
 
-use_autoreconf      yes
-autoreconf.args     -fvi
+configure.cmd       ./autogen.sh
 
 configure.args      --enable-gsettings=yes \
                     --with-default-gdb=${prefix}/bin/ggdb \
