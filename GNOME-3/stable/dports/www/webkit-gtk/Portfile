@@ -13,6 +13,7 @@ PortGroup   compiler_blacklist_versions 1.0
 name        webkit-gtk
 epoch       2
 version     2.4.8
+revision    1
 description Apple's WebKit HTML rendering library for GTK+
 long_description ${description}
 maintainers jeremyhu devans
@@ -39,6 +40,7 @@ depends_lib \
         port:geoclue2 \
         port:gobject-introspection \
         port:harfbuzz-icu \
+        port:icu \
         port:libxslt \
         port:libpng \
         port:libsecret \
@@ -76,7 +78,8 @@ patchfiles \
         gstreamer.patch \
         leopard-platform.patch \
         leopard-malloc.patch \
-        libedit.patch
+        libedit.patch \
+        glib-2.44-GMutexLocker.patch
 
 conflicts_build     google-test
 
