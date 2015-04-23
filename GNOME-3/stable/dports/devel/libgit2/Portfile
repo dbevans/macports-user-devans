@@ -7,7 +7,7 @@ PortGroup           cmake 1.0
 
 cmake.out_of_source yes
 
-github.setup        libgit2 libgit2 0.22.1 v
+github.setup        libgit2 libgit2 0.22.2 v
 categories          devel
 platforms           darwin
 maintainers         juanrgar devans openmaintainer
@@ -23,8 +23,8 @@ long_description    libgit2 is a portable, pure C implementation of the \
 
 homepage            http://libgit2.github.com/
 
-checksums           rmd160  6e1aef41fab0d93a64120a2d4cc2f6014880b0ce \
-                    sha256  ea392623aaaea4c851779e0f74b606c5e4ec5e7219e0ca4b1fba684d06a4ea04
+checksums           rmd160  a798bfecb7a2337ced97fdf1fd419804884aa739 \
+                    sha256  3ee91f8d94ed97b1075924d0a1ce64f5c4c5ee36594f4f2c21ed664bdd30c4af
 
 depends_lib         port:libiconv \
                     port:libssh2 \
@@ -34,3 +34,17 @@ depends_lib         port:libiconv \
 patchfiles          patch-strnlen-posix.h.diff
 
 livecheck.regex     "archive/v(\\d+(?:\\.\\d+)*)${extract.suffix}"
+
+conflicts           libgit2-0.20
+
+# sigh, apparently libgit2 regressed and haven't accepted the pull request to
+# fix it yet: https://github.com/libgit2/libgit2/pull/2898
+subport libgit2-0.20 {
+    github.setup    libgit2 libgit2 0.20.0 v
+    conflicts       libgit2
+
+    checksums       rmd160  15d2635326274d1f6acefcb674a51506f8e319d8 \
+                    sha256  7251daf92958b7f3e59e90a989542d6ef05b1c1d9acade0632fc2becd067d6c7
+
+    livecheck.type  none
+}
