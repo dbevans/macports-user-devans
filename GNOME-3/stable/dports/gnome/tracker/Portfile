@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                tracker
-version             1.2.5
+version             1.4.0
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Metadata database, indexer and search tool.
@@ -22,11 +22,16 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  f74c73c27b6f4a061bfa336784192d28a08a875e \
-                    sha256  1e614bc33f93d5820f3c90510e11210bf34d02dba6ccbd3dc30097758a6d31aa
+checksums           rmd160  a0c302d5ebe35c15ef4e8950f999876d6598b598 \
+                    sha256  c87c35b55ab3a201f6bf306b812532de2bd35f3946a7fe966963c5d3e3d251eb
 
 depends_build       port:pkgconfig \
-                    port:intltool
+                    port:intltool \
+                    port:gnome-common \
+                    port:gtk-doc \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:sqlite3 \
@@ -56,14 +61,13 @@ patchfiles          patch-extract-configure.ac.diff \
 
 gobject_introspection yes
 
-# update m4/intltool.m4 and autoreconf
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
-pre-configure {
-    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
 }
 
-use_autoreconf      yes
-autoreconf.args     -fvi
+configure.cmd       ./autogen.sh
 
 configure.args      --disable-schemas-compile \
                     --disable-silent-rules \
@@ -118,6 +122,13 @@ variant enca description {Enable libenca for Cyrillic language detection in MP3s
     depends_lib-append      port:enca
 }
 
+variant nautilus description {Build GNOME nautilus extension} {
+    configure.args-delete   --disable-nautilus-extension
+    configure.args-append   --enable-nautilus-extension
+
+    depends_lib-append      port:nautilus
+}
+
 variant gstreamer conflicts libav description {Enable gstreamer generic media extractor backend} {
     configure.args-append   --enable-generic-media-extractor=gstreamer \
                             --with-gstreamer-backend=discoverer
@@ -144,4 +155,4 @@ post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-livecheck.type  gnome
+livecheck.type      gnome
