@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                gvfs
 epoch               1
-version             1.22.4
+version             1.24.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          devel
@@ -35,8 +35,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  ae3e2d742b00f4eaaec34682c7ad81f6f668750d \
-                    sha256  57e33faad35aba72be3822099856aca847f391626cf3ec734b42e64ba31f6484
+checksums           rmd160  1953f37b01f203196c049d65ab15e73c2f71119b \
+                    sha256  d38367ce189415c36fd19dca478bc9b80694b495c3458e74fb0f13d1ac9df1f9
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -67,7 +67,7 @@ post-patch {
         ${worksrcpath}/test/test_polkitd.py
 }
 
-# reconfigure using autogen.sh for intltool 0.51 compatibility
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
 configure.cmd       ./autogen.sh
 
