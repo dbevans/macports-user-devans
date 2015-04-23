@@ -1,0 +1,10 @@
+--- configure.ac.orig	2015-02-19 15:44:45.000000000 -0800
++++ configure.ac	2015-02-20 00:03:14.000000000 -0800
+@@ -19,6 +19,7 @@
+ 
+ AX_CHECK_ENABLE_DEBUG([yes],,, [$ax_is_release])
+ AX_COMPILER_FLAGS([WARN_CFLAGS], [WARN_LDFLAGS], [$ax_is_release])
++WARN_LDFLAGS=""
+ 
+ AC_PROG_CC
+ AC_PROG_CC_C_O
