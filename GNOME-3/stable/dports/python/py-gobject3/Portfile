@@ -24,8 +24,8 @@ master_sites        gnome:sources/${my_name}/${branch}/
 distname            ${my_name}-${version}
 use_xz              yes
 
-checksums           sha256  8d26e40c756ae288eeb35f9d52df7485f70add65d4e6b4597fd1765eb7830685 \
-                    rmd160  3d95a12d5979731e3d8e114293f13cd6e2b6809a
+checksums           sha256  7d96dad050f15ec1688617b749bb485811842de46a22d31f9396023e8eaa1ec3 \
+                    rmd160  d52d83c0b5942ff5ff35b2b5421c8785caa170d8
 
 python.versions     27 33 34
 
