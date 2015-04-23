@@ -23,7 +23,10 @@ checksums           rmd160  c5238f246f41f41fe6898bb10ffb1721a97a62d0 \
 
 depends_build       port:pkgconfig \
                     port:intltool \
-                    port:gtk-doc
+                    port:gtk-doc \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:vala
@@ -33,10 +36,13 @@ patchfiles          patch-configure.ac.diff \
 
 gobject_introspection yes
                
-# autoreconf to reconfigure with our intltool.m4
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
-use_autoreconf      yes
-autoreconf.args     -fvi
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+}
+
+configure.cmd       ./autogen.sh
 
 configure.args      --disable-silent-rules
 
