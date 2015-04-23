@@ -71,7 +71,7 @@ patchfiles-append   patch-consolidate-gerrorsafeptr-definitions.diff \
 
 patchfiles-append   patch-src-uicommon-nmv-terminal.cc.diff
 
-# reconfigure using autogen.sh for intltool 0.51 compatibility
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
 post-patch {
     xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
