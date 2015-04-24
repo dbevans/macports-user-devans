@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gthumb
-version             3.2.8
+version             3.4.0
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Image viewer and browser for the gnome desktop.
@@ -16,20 +16,24 @@ homepage            https://wiki.gnome.org/Apps/gthumb
 master_sites        gnome:sources/gthumb/${branch}
 use_xz              yes
 
-checksums           sha256  d600aba747af551540f3bbae8e8afa1cc308c658d911318c98fd4bf52ecd61b8 \
-                    rmd160  25b57ca3651706d091cc3c18187631ea4c59a4f0
+checksums           sha256  abd1afe457c65289af31c6db7037452faa3838356480857d8cdc19f0ecde4933 \
+                    rmd160  7f2d279659da308a1d22bdc3957a5b4aecf3570e
 
 depends_build       port:intltool \
                     port:pkgconfig \
                     port:gnome-common \
                     port:yelp-tools \
-                    port:itstool
+                    port:itstool \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
 
 depends_lib         port:desktop-file-utils \
                     port:gtk3 \
                     port:exiv2 \
                     port:gstreamer1-gst-plugins-base \
-                    port:libopenraw \
+                    port:lcms2 \
+                    port:libraw \
                     port:libsoup \
                     port:libsecret \
                     port:librsvg \
@@ -40,20 +44,18 @@ depends_run         port:yelp
 
 patchfiles          patch-configure.ac.diff
 
-# update m4/intltool.m4 and autoreconf
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
-pre-configure {
-    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
 }
 
-use_autoreconf      yes
-autoreconf.args     -fvi
+configure.cmd       ./autogen.sh
 
-configure.args      --enable-libopenraw \
+configure.args      --enable-libraw \
                     --disable-clutter \
                     --disable-libbrasero \
                     --disable-webkit2 \
-                    --with-smclient=no \
                     --enable-compile-warnings=minimum \
                     --disable-schemas-compile \
                     --disable-silent-rules
