@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                libgit2-glib
-version             0.22.6
+version             0.22.8
 license             LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Glib wrapper library around the libgit2 git access library.
@@ -19,8 +19,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  6af0593d52938f5d8f30af3d3db112a5b4a83151 \
-                    sha256  e299f159acc7a83c33771660514fa78a6cc7deea064e10d9e9030ad68d673a80
+checksums           rmd160  cbcf7ccc6ea061fde0339cba3e047a61eefaab94 \
+                    sha256  05c9453b195f1af0df2a5d8bc71472c9fb26d14bb8fbb5b688ad1b8ef7a30959
 
 depends_build       port:pkgconfig \
                     port:gnome-common
