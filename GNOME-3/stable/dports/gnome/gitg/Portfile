@@ -4,6 +4,7 @@
 PortSystem          1.0
 
 name                gitg
+# latest version 3.16.1 requires webkit2-gtk3
 version             0.2.7
 revision            1
 license             GPL-2
@@ -47,7 +48,7 @@ depends_run         port:gnome-settings-daemon
 
 patchfiles          gitg-commit-view-c.diff
 
-# reconfigure with our intltool.m4 using autogen.sh
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
 configure.cmd       ./autogen.sh
 
@@ -61,4 +62,5 @@ post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-livecheck.type  gnome
+# disable livecheck until webkit2-gtk3 requirement can be met
+livecheck.type      none
