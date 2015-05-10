@@ -38,7 +38,6 @@ depends_lib         port:libxml2 \
                     port:docbook-xml \
                     port:docbook-xsl \
                     port:itstool \
-                    port:yelp-tools \
                     port:source-highlight
 
 depends_run         port:py27-libxml2
