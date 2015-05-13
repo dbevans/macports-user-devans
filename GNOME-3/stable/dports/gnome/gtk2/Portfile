@@ -7,7 +7,7 @@ PortGroup           muniversal 1.0
 PortGroup           xcodeversion 1.0
 
 name                gtk2
-version             2.24.27
+version             2.24.28
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2+
@@ -29,8 +29,8 @@ master_sites        gnome:sources/gtk+/${branch}/
 
 minimum_xcodeversions {9 3.1}
 
-checksums           rmd160  01f8917cd0dbc429c9295809209c64fe8ce38c48 \
-                    sha256  20cb10cae43999732a9af2e9aac4d1adebf2a9c2e1ba147050976abca5cd24f4
+checksums           rmd160  6157ba437c3ea873cc28d38c8184be94fc253838 \
+                    sha256  b2c6441e98bc5232e5f9bba6965075dcf580a8726398f7374d39f90b88ed4656
 
 depends_build       port:gtk-doc \
                     port:pkgconfig \
