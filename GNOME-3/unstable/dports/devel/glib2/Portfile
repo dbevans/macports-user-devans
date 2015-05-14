@@ -10,7 +10,7 @@ PortGroup                   conflicts_build 1.0
 name                        glib2
 conflicts                   glib2-devel
 set my_name                 glib
-version                     2.43.92
+version                     2.45.1
 set branch                  [join [lrange [split ${version} .] 0 1] .]
 categories                  devel
 maintainers                 ryandesign openmaintainer
@@ -30,8 +30,8 @@ long_description            Glib is a library which includes support routines \
 
 master_sites                gnome:sources/${my_name}/${branch}/
 
-checksums                   rmd160  6f0aaf0647798dfc78ab06a3b2b38bff55e81ff6 \
-                            sha256  fec93e24b2c317db3a92ef7aba4ca800b9a2b83c64b6d10fc256a0af4913ceb4
+checksums                   rmd160  793054f5ebfa18dd647c964f42a272a8872a9c9b \
+                            sha256  6dcf2e15c6d08b21f48d9a3722dd9367a7c28a288ba8edfd0bbbde77a11e5d2f
 
 # ${prefix}/include/glib-2.0/glib/gi18n.h requires -I${prefix}/include to find libintl.h
 # See https://trac.macports.org/changeset/27148
@@ -60,7 +60,7 @@ depends_lib                 port:gettext \
 compiler.blacklist-append   {clang < 318}
 
 # https://bugzilla.gnome.org/show_bug.cgi?id=697017
-compiler.blacklist-append   gcc-3.3 gcc-4.0 apple-gcc-4.0
+compiler.blacklist-append   gcc-3.3 *gcc-4.0
 
 # -lresolv is needed at least on Tiger PPC.
 configure.ldflags-append    -lresolv \
