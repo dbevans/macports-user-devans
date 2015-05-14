@@ -6,7 +6,7 @@ PortGroup       muniversal 1.0
 
 name            dbus
 conflicts       dbus-devel
-version         1.8.16
+version         1.8.18
 maintainers     mcalhoun openmaintainer
 categories      devel
 platforms       darwin
@@ -19,8 +19,8 @@ long_description \
 homepage        http://www.freedesktop.org/Software/dbus
 master_sites    http://dbus.freedesktop.org/releases/dbus
 
-checksums           rmd160  c333f4e5808fc4c5b6a5d77f06bd473971411e60 \
-                    sha256  7f795268efd343ff0498786acb35097564390d40b1b6158daf1b4f742b522b07
+checksums           rmd160  96215bbd9d2ba322d8ddfe7b2fde74e37ed44671 \
+                    sha256  36f2eb9c777a3c71562573da36a147e900a642afcd44d2b0470d992a4898c4f2
 
 # See r59386
 # See r68276
@@ -84,7 +84,8 @@ configure.args  --disable-doxygen-docs \
                 --enable-launchd \
                 --with-launchd-agent-dir=${prefix}/Library/LaunchAgents \
                 --with-dbus-user=${dbus_user} \
-                --disable-tests
+                --disable-tests \
+                --enable-verbose-mode
 
 set sudo ""
 if {![variant_isset no_root]} {
