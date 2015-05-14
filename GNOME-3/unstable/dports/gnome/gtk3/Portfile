@@ -10,15 +10,15 @@ PortGroup           active_variants 1.1
 name                gtk3
 set real_name       gtk+
 epoch               1
-version             3.15.12
+version             3.17.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2.1+
 maintainers         cal devans openmaintainer
 platforms           darwin
 
-checksums           rmd160  12eacf564eb778d246470454f13346518061556d \
-                    sha256  29d7fe5b68e514c85cbdc72579b60c5b22d0a712cd6519dee8181a2fe0ca74c3
+checksums           rmd160  b84c8c9b9f7df3cb0c71064c99ceae755b8c013a \
+                    sha256  c5ec2b92829dc796a789e9cdb12071b45cc520de3202fb6dcb640a1f4baa18aa
 
 description         GTK+ widget toolkit
 
@@ -32,8 +32,7 @@ homepage            http://www.gtk.org/
 distname            ${real_name}-${version}
 use_xz              yes
 
-master_sites        gnome:sources/gtk+/${branch}/ \
-                    http://ftp.gtk.org/pub/gtk/${branch}/
+master_sites        gnome:sources/gtk+/${branch}/
 
 minimum_xcodeversions {9 3.1}
 depends_build       port:pkgconfig
@@ -61,6 +60,7 @@ archcheck.files \
 
 configure.args      --enable-static \
                     --disable-glibtest \
+                    --disable-libcanberra \
                     --enable-introspection \
                     --disable-cloudprint \
                     --disable-mir-backend \
@@ -210,8 +210,8 @@ if {[variant_isset universal]} {
         if {${os.arch} eq "i386"} {
             set host i686
         }
-        eval reinplace s/@host@/${host}-apple-darwin${os.version}/ \
-            [glob -directory ${worksrcpath} *.pc.in]
+        reinplace s/@host@/${host}-apple-darwin${os.version}/ \
+            {*}[glob -directory ${worksrcpath} *.pc.in]
     }
     
     merger_arch_compiler yes
