@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                evince
-version             3.15.90
+version             3.17.1
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Evince is a document viewer for multiple document formats like pdf, and many others.
@@ -18,14 +18,18 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  0107053f8989391c5e7bec3d535cde9cf3ce51dc \
-                    sha256  91824855d227d4d00036811df08a971fb6d6ce23fec0baf5d3d28cbdf2d92fd3
+checksums           rmd160  ffab672231aa5d134aaf0e2f507cfdba3c46883e \
+                    sha256  3acad4bff0adc8637a4d04e029d79956e83944a6a043fe231f6aa244d8045b91
 
 depends_build       port:pkgconfig \
                     port:intltool \
                     port:itstool \
                     port:yelp-tools \
-                    port:gnome-common
+                    port:gnome-common \
+                    port:gtk-doc \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
 
 depends_lib         port:desktop-file-utils \
                     port:adwaita-icon-theme \
@@ -42,21 +46,20 @@ depends_lib         port:desktop-file-utils \
                     port:texlive-bin \
                     port:t1lib
 
-depends_run         port:gnome-settings-daemon
-
-patchfiles          patch-browser-plugin-Makefile.am.diff
+depends_run         port:gnome-settings-daemon \
+                    port:yelp
 
 gobject_introspection yes
 
-# update m4/intltool.m4 and autoreconf
-# teach glibtool about -stdlib=libc++
+patchfiles          patch-browser-plugin-Makefile.am.diff
 
-pre-configure {
-    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
 }
 
-use_autoreconf      yes
-autoreconf.args     -fvi
+configure.cmd       ./autogen.sh
 
 configure.args      --disable-schemas-compile \
                     --disable-silent-rules \
