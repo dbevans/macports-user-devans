@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                easytag
-version             2.3.5
+version             2.3.7
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          audio gnome
 platforms           darwin
@@ -13,16 +13,12 @@ homepage            https://wiki.gnome.org/Apps/EasyTAG/
 license             GPL-2+
 description         Tool for editing tags of audio files
 
-long_description    EasyTAG is an utility for viewing and editing tags \
+long_description    EasyTAG is a GTK3 utility for viewing and editing tags \
                     for MP3, MP2, FLAC, Ogg Vorbis, MusePack, Monkey's \
-                    audio files and MP4/AAC. \
-                    Its simple and nice GTK2+ interface makes tagging easier \
-                    under UNIX systems.
+                    audio files and MP4/AAC.
 
 master_sites        gnome:sources/${name}/${branch}
 
-checksums           rmd160  f175534d029dc5bfcb928ae2116f47c94c6b4f78 \
-                    sha256  b110967747ab57b289358a8a7046cf9bb613914cfece9ba1f395beba61d4663d
 
 use_xz              yes
 
@@ -30,7 +26,10 @@ depends_build       port:pkgconfig \
                     port:intltool \
                     port:itstool \
                     port:yelp-tools \
-                    port:appstream-glib
+                    port:appstream-glib \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
 
 depends_lib         port:desktop-file-utils \
                     port:gtk3 \
@@ -48,14 +47,9 @@ depends_run         port:gnome-themes-standard
 
 patchfiles          patch-m4-ax_compiler_flags_ldflags.m4.diff
 
-# update m4/intltool.m4 and autoreconf
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
-pre-configure {
-    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
-}
-
-use_autoreconf      yes
-autoreconf.args     -fvi
+configure.cmd       ./autogen.sh
 
 configure.args      --disable-nautilus-actions \
                     --enable-compile-warnings=minimum \
