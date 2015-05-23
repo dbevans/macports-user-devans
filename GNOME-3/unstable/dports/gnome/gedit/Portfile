@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gedit
-version             3.15.91
+version             3.17.0
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME editor.
@@ -17,15 +17,18 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  71222a3fe86f77a047ba696fe8f51053d8c50ea8 \
-                    sha256  a0261bfcd5e259089d06ad6b2951a5edc2fd2e343d782c46dd32986873dcfca8
+checksums           rmd160  8f605aa32efc8df0f6011055d6a7349c2e9ef67f \
+                    sha256  9375117a571fedf1e43dbcf62c67d28f127b707033ecb2ea3aaa42e06dcc446d
 
 depends_build       port:pkgconfig \
                     port:intltool \
                     port:itstool \
                     port:yelp-tools \
                     port:gnome-common \
-                    port:gtk-doc
+                    port:gtk-doc \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
 
 depends_lib         port:desktop-file-utils \
                     port:gsettings-desktop-schemas \
@@ -44,14 +47,13 @@ depends_run         port:gnome-settings-daemon \
 
 patchfiles          patch-configure.ac.diff
 
-# update m4/intltool.m4 and autoreconf
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
-pre-configure {
-    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
 }
 
-use_autoreconf      yes
-autoreconf.args     -fvi
+configure.cmd       ./autogen.sh
 
 configure.cflags-append \
                     -Wno-error=format-nonliteral
