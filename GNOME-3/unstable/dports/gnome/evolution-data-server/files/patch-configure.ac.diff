@@ -1,5 +1,5 @@
---- configure.ac.orig	2015-02-10 08:19:57.000000000 -0800
-+++ configure.ac	2015-02-19 17:39:19.000000000 -0800
+--- configure.ac.orig	2015-03-16 02:33:45.000000000 -0700
++++ configure.ac	2015-03-24 16:26:43.000000000 -0700
 @@ -219,7 +219,7 @@
  	-Wnested-externs"
  
@@ -24,10 +24,10 @@
  
  if test "x$with_libdb" != "xno" ; then
  	if test "x$with_libdb" != "xyes" ; then
--		DB_CFLAGS="-I$with_libdb/include"
--		DB_LIBS="-L$with_libdb/lib -ldb"
-+		DB_CFLAGS="-I$prefix/include/db46"
-+		DB_LIBS="-L$prefix/lib/db46 -ldb"
+-		DB_CFLAGS="$CFLAGS -I$with_libdb/include"
+-		DB_LIBS="$LIBS -L$with_libdb/lib -ldb"
++               DB_CFLAGS="-I$prefix/include/db46"
++               DB_LIBS="-L$prefix/lib/db46 -ldb"
  	else
  		if test -z "$DB_CFLAGS" -a -z "$DB_LIBS"; then
- 			DB_CFLAGS=""
+ 			DB_CFLAGS="$CFLAGS"
