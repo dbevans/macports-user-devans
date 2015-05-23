@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gnome-panel
-version             3.15.2
+version             3.17.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -20,15 +20,18 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  a43f7e0d14b33a1489d9692223b2bf794e0e97ff \
-                    sha256  de0984dd8714af845b23b5bdf27638f146338c8c0ebea73d7dc4f4dc588d4441
+checksums           rmd160  17ca644aa89a7428a227897c148d33b0896ec1d5 \
+                    sha256  5f9b01109e9eaee829476c15f814890cce7f4875aef609fbd5e9e94032b90924
 
 depends_build       port:pkgconfig \
                     port:intltool \
+                    port:gtk-doc \
                     port:itstool \
                     port:yelp-tools \
                     port:gnome-common \
-                    port:gtk-doc \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool \
                     port:python27
 
 depends_lib         port:desktop-file-utils \
@@ -52,14 +55,13 @@ depends_run         port:gnome-settings-daemon \
 
 gobject_introspection yes
 
-# update m4/intltool.m4 and autoreconf
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
-pre-configure {
-    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
 }
 
-use_autoreconf      yes
-autoreconf.args     -fvi
+configure.cmd       ./autogen.sh
 
 configure.python    ${prefix}/bin/python2.7
 
