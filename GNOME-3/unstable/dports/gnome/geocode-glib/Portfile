@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                geocode-glib
-version             3.15.4
+version             3.17.1
 license             LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A convenience library for geocoding and reverse geocoding.
@@ -18,36 +18,27 @@ long_description    geocode-glib is a convenience library for geocoding (finding
 maintainers         devans openmaintainer
 categories          gnome devel
 platforms           darwin
-homepage            https://wiki.gnome.org/Librest
+homepage            https://developer.gnome.org/geocode-glib/
 master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  7fa363267b1b77b3065760afaa6af188d4f56599 \
-                    sha256  64e3166ccc1505c151bc05f2f7d5aa931c55c4e28ee3fb940e39403e460890a5
+checksums           rmd160  e35622ced3c92e6750725d783a5d0c7f2040423b \
+                    sha256  6887fb2b56a4bb17c4ebad723b6629f2fa0f58077e40e57e6ff447c93c2d60f2
 
 depends_build       port:pkgconfig \
-                    port:intltool \
-                    port:gnome-common
+                    port:gettext
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:json-glib \
                     port:libxml2 \
                     port:libsoup
 
-patchfiles          patch-geocode-glib-geocode-glib.symbols.diff
-
 gobject_introspection yes
 
-# update m4/intltool.m4 and autoreconf
+patchfiles          patch-geocode-glib-geocode-glib.symbols.diff
 
-pre-configure {
-    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
-}
-
-use_autoreconf      yes
-autoreconf.args     -fvi
-
-configure.args      --disable-silent-rules
+configure.args      --enable-compile-warnings=minimum \
+                    --disable-silent-rules
 
 livecheck.type      gnome-with-unstable
