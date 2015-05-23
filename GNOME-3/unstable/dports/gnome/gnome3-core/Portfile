@@ -4,14 +4,14 @@
 PortSystem      1.0
 
 name            gnome3-core
-version         3.15.91
+version         3.17.1
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
 description     The Core GNOME 3 User Experience module set
 long_description \
                 ${description}
-homepage        https://help.gnome.org/misc/release-notes/3.12/
+homepage        https://help.gnome.org/misc/release-notes/3.16/
 master_sites
 platforms       darwin
 distfiles
@@ -31,7 +31,6 @@ supported_archs noarch
 # NetworkManager
 # cantarell-fonts
 # caribou
-# dconf-editor
 # gnome-bluetooth
 # gnome-calculator
 # gnome-contacts
@@ -71,6 +70,7 @@ depends_lib     port:adwaita-icon-theme \
                 port:clutter-gtk \
                 port:cogl \
                 port:dconf \
+                port:dconf-editor \
                 port:empathy \
                 port:eog \
                 port:epiphany \
@@ -136,7 +136,6 @@ depends_lib     port:adwaita-icon-theme \
                 port:nautilus \
                 path:lib/pkgconfig/pango.pc:pango \
                 port:pangomm \
-                port:seed \
                 port:totem \
                 port:totem-pl-parser \
                 port:tracker \
