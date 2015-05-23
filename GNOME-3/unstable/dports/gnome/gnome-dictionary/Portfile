@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gnome-dictionary
-version             3.15.91
+version             3.17.1
 license             GPL-2 GFDL-1.1 LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME dictionary application.
@@ -20,13 +20,17 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  e86d8a51256e469c7687a3efcb0c8adc49fecc9b \
-                    sha256  f54c987164f1c2dcd6d731e565ee4a290ffad59dee3553b467de215fff939849
+checksums           rmd160  469cdc34cd447a58061323d574d6e61ce70cbbcf \
+                    sha256  818cc287a72b379ecf030c3ac148235937ba84bb2243cf2f24d52fc0cabc6e9a
 
 depends_build       port:pkgconfig \
                     port:intltool \
                     port:itstool \
-                    port:yelp-tools
+                    port:yelp-tools \
+                    port:gtk-doc \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
 
 depends_lib         port:desktop-file-utils \
                     port:gtk3
@@ -36,14 +40,14 @@ depends_run         port:gnome-settings-daemon \
 
 gobject_introspection yes
 
-# update m4/intltool.m4 and autoreconf
 
-pre-configure {
-    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
 }
 
-use_autoreconf      yes
-autoreconf.args     -fvi
+configure.cmd       ./autogen.sh
 
 configure.args      --disable-schemas-compile \
                     --disable-silent-rules
@@ -69,4 +73,4 @@ post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-livecheck.type  gnome-with-unstable
+livecheck.type      gnome-with-unstable
