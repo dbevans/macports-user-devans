@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                gvfs
 epoch               1
-version             1.23.90
+version             1.25.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          devel
@@ -35,8 +35,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  416d17357b99098e23b108aca6393b25d7b48dd5 \
-                    sha256  29a0ee4dead02c22e6c354b3f8ad6b4ae948d96248a8fba7af69dae6a7c2ce0b
+checksums           rmd160  d390f13219a73d468e5bf02b4501cc6fa5f5478a \
+                    sha256  75e9ccf0085ede7e18a1bd9bda6bc3a67e4e102f78e5decf8c06a2eec37b4539
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -44,6 +44,7 @@ depends_build       port:pkgconfig \
                     port:autoconf \
                     port:automake \
                     port:libtool \
+                    port:pidof \
                     port:py34-gobject3
 
 depends_lib         port:gtk3 \
@@ -57,6 +58,8 @@ depends_lib         port:gtk3 \
                     port:libsecret \
                     port:gnome-online-accounts
 
+patchfiles          patch-test-run-in-tree.sh.diff
+
 post-patch {
     xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
     reinplace "s|^#!.*|#!${prefix}/bin/python3.4|" \
@@ -64,7 +67,7 @@ post-patch {
         ${worksrcpath}/test/test_polkitd.py
 }
 
-# reconfigure using autogen.sh for intltool 0.51 compatibility
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
 configure.cmd       ./autogen.sh
 
