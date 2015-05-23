@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                glib-networking
-version             2.43.91
+version             2.45.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Network-related giomodules for glib
 long_description    ${description}
@@ -17,11 +17,14 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  ee6d42b25975b65e257aa17ee90781bac4f3f181 \
-                    sha256  035bd68575c1f7c8430b34b188f18862a0163c0c5a3287c06898c8c527ba5565
+checksums           rmd160  c7e220a8c43c105ddb9fa5eb9e34ae8e8d5abb75 \
+                    sha256  e3b56aa1407c2ff68322461179f5da38bac09324ae09a97a89a3fbe04cdfa9de
 
 depends_build       port:pkgconfig \
-                    port:intltool
+                    port:intltool \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:gnutls \
@@ -32,17 +35,13 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
 depends_run         path:share/curl/curl-ca-bundle.crt:curl-ca-bundle
 
 post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
     reinplace "s|-Werror=|-W|g" ${worksrcpath}/configure.ac
 }
 
-# update m4/intltool.m4 and autoreconf
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
-pre-configure {
-    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
-}
-
-use_autoreconf      yes
-autoreconf.args     -fvi
+configure.cmd       ./autogen.sh
 
 configure.args      --with-gnutls \
                     --with-libproxy \
