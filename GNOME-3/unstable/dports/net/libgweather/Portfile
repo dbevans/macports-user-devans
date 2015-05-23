@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                libgweather
-version             3.15.91
+version             3.17.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          net gnome
@@ -22,8 +22,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  e6a7fd03f5c1071fd83642315cbe3cfa0d7a9837 \
-                    sha256  28e6174a6828af71a038dc8659a23132f713bd3bf12d5da671ac42d138675b64
+checksums           rmd160  eeefa9195ca693de7d218da50c78f7f9e09d6435 \
+                    sha256  0881a0d7096b8f71f1a08ed0ff2f94a7096d6299b1f6725b2dc6ce0abe8dc8ab
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -41,7 +41,7 @@ depends_lib         port:gtk3 \
 
 gobject_introspection yes
 
-# use autogen.sh from upstream git to update m4/intltool.m4 using intltoolize and autoreconf
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
 post-patch {
     xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
