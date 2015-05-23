@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                metacity
-version             3.15.2
+version             3.17.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A window manager for the adult in you.
 long_description    ${description}
@@ -17,13 +17,16 @@ master_sites        gnome:sources/${name}/${branch}
 
 use_xz              yes
 
-checksums           rmd160  eb29ab54de34111bc68834a4a39165c46bd413fc \
-                    sha256  b2e1f417901f7a2c5f4c7b559cd51680d477fda4313c132e98308f1fabd98971
+checksums           rmd160  1ccc0fb4e332bf01ecb8b7850df5776e5f3a8a45 \
+                    sha256  44f14990f8cda640b749811fa27f5961c317f94f00d6bff65122573c2ecfa3b4
 
 depends_build       port:pkgconfig \
                     port:intltool \
+                    port:itstool \
                     port:gnome-common \
-                    port:itstool
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
 
 depends_lib         port:desktop-file-utils \
                     port:gtk3 \
@@ -46,10 +49,13 @@ depends_lib         port:desktop-file-utils \
 
 depends_run         port:gnome-settings-daemon
 
-# autoreconf to reconfigure with our intltool.m4
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
-use_autoreconf      yes
-autoreconf.args     -fvi
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+}
+
+configure.cmd       ./autogen.sh
 
 configure.args      --x-includes=${prefix}/include \
                     --x-libraries=${prefix}/lib \
