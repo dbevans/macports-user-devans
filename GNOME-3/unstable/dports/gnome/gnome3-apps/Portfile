@@ -4,14 +4,14 @@
 PortSystem      1.0
 
 name            gnome3-apps
-version         3.15.91
+version         3.17.1
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
 description     The GNOME 3 Apps module set
 long_description \
                 ${description}
-homepage        https://help.gnome.org/misc/release-notes/3.12/
+homepage        https://help.gnome.org/misc/release-notes/3.16/
 master_sites
 platforms       darwin
 distfiles
