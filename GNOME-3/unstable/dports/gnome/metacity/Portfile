@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                metacity
-version             3.17.1
+version             3.17.2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A window manager for the adult in you.
 long_description    ${description}
@@ -17,8 +17,8 @@ master_sites        gnome:sources/${name}/${branch}
 
 use_xz              yes
 
-checksums           rmd160  1ccc0fb4e332bf01ecb8b7850df5776e5f3a8a45 \
-                    sha256  44f14990f8cda640b749811fa27f5961c317f94f00d6bff65122573c2ecfa3b4
+checksums           rmd160  ddd1478cdefeee5c4de7a19906520b4619565525 \
+                    sha256  8e4ac85409b5178970220f83cd211f9d7081a784503f9d1b159f2ff58e6b542e
 
 depends_build       port:pkgconfig \
                     port:intltool \
