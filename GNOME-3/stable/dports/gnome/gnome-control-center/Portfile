@@ -14,7 +14,7 @@ if {${os.platform} eq "darwin" && ${os.major} >= 13} {
 
     set mavericks_or_better no
     version 3.8.6
-    revision 4
+    revision 5
 
 }
 
