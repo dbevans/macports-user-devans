@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-applets
-version             3.17.1
+version             3.17.2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME panel applets.
 long_description    This package contains applets for use with the \
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  31936a2a52a3a98d47f08bb7549a53cd6e9ab848 \
-                    sha256  f9aac85cd801ddce4cafc2da0d9d758bc5e498eed505d3c056bbaf9045b405ef
+checksums           rmd160  b100420a400040fced66d24f35d11167966440be \
+                    sha256  ad6a0448c34c34984b545aafdcfb4f015636e98c376bd42a2fcba3dd82807da4
 
 depends_build       port:pkgconfig \
                     port:intltool \
