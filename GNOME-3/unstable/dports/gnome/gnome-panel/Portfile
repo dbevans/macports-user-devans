@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gnome-panel
-version             3.17.1
+version             3.17.2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  17ca644aa89a7428a227897c148d33b0896ec1d5 \
-                    sha256  5f9b01109e9eaee829476c15f814890cce7f4875aef609fbd5e9e94032b90924
+checksums           rmd160  e0365d7f3855c14d1172ba0b032c73ff3dc6261a \
+                    sha256  aede00623c8549a56a0d7d6ce51d1f5ac41a39171919957aef20f1f58ec558db
 
 depends_build       port:pkgconfig \
                     port:intltool \
