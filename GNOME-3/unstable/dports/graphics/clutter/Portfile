@@ -1,0 +1,72 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           gobject_introspection 1.0
+
+name                clutter
+version             1.23.2
+license             LGPL-2.1
+set branch          [join [lrange [split ${version} .] 0 1] .]
+categories          graphics
+maintainers         devans openmaintainer
+platforms           darwin macosx
+description         A generic high-level canvas library.
+long_description    Clutter is an open source software library for \
+                    creating fast, compelling, portable, and dynamic graphical \
+                    user interfaces.
+homepage            https://wiki.gnome.org/Projects/Clutter
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  0e668cb42b2b2f2e82735e382088293947156578 \
+                    sha256  9f25480e2faa02b1213d3644d4dbf8dbaab413a86186f25a36ec6231b5cc8599
+
+depends_build       port:pkgconfig
+
+depends_lib         port:atk \
+                    port:gtk3 \
+                    path:lib/pkgconfig/cairo.pc:cairo \
+                    path:lib/pkgconfig/pango.pc:pango \
+                    port:json-glib \
+                    port:cogl
+
+gobject_introspection yes
+
+variant x11 conflicts quartz {
+    depends_lib-append port:gdk-pixbuf2 \
+                       port:xorg-libXcomposite \
+                       port:xorg-libXdamage \
+                       port:xorg-libXext \
+                       port:xorg-libXfixes
+
+    configure.args     --with-x \
+                       --x-includes=${prefix}/include \
+                       --x-libraries=${prefix}/lib \
+                       --enable-gdk-backend=yes \
+                       --enable-x11-backend=yes \
+                       --enable-gdk-pixbuf=yes \
+                       --enable-quartz-backend=no \
+                       --disable-examples \
+                       --disable-silent-rules \
+                       --disable-gtk-doc
+}
+
+variant quartz conflicts x11 {
+    configure.args  --without-x \
+                    --enable-x11-backend=no \
+                    --enable-gdk-backend=yes \
+                    --enable-gdk-pixbuf=no \
+                    --enable-quartz-backend=yes \
+                    --disable-silent-rules \
+                    --disable-gtk-doc
+}
+
+variant debug description {Enable full debugging} {
+    configure.args-append --enable-debug=yes
+}
+
+default_variants    +x11
+
+livecheck.type      gnome-with-unstable
