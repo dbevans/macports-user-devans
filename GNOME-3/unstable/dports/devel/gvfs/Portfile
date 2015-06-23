@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                gvfs
 epoch               1
-version             1.25.2
+version             1.25.3
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          devel
@@ -35,8 +35,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  c67d535ea02d3b679fc08e977a44c61a031f7614 \
-                    sha256  9976032e1e17765a547ca525a2460523903f5f4416e1c85f26683575d8f55a15
+checksums           rmd160  7406292dfea993fda6bb68aa1feac483fd3e48c7 \
+                    sha256  c7090c8d8c19e503c26d673f0d34b0e1d588b2b09d4091e1802d9f61b68590a1
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -75,7 +75,6 @@ configure.args      --disable-avahi \
                     --disable-fuse \
                     --disable-hal \
                     --disable-cdda \
-                    --disable-obexftp \
                     --disable-gphoto2 \
                     --disable-samba \
                     --disable-udev \
