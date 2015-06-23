@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                evince
-version             3.17.2
+version             3.17.3
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Evince is a document viewer for multiple document formats like pdf, and many others.
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  d2852556c85db0402d1dfbd9010dcd72a3873d1b \
-                    sha256  dc5f0517bc484b85e80e05e83de2f7eea68d2280d8b9c66619d2d5308fedfcb2
+checksums           rmd160  c9d114798ebe559a0f3e8f880a268d007034ee0f \
+                    sha256  715362a1dd227244f348e07580b22d158e9ec0d79d900629241244c649351b5c
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -65,6 +65,7 @@ configure.args      --disable-schemas-compile \
                     --disable-silent-rules \
                     --disable-djvu \
                     --disable-xps \
+                    --disable-multimedia \
                     --disable-nautilus \
                     --enable-compile-warnings=minimum \
                     --enable-debug \
@@ -85,6 +86,12 @@ if {${configure.cxx_stdlib} ne "libc++"} {
 variant djvu description {Support for djvu documents using djvulibre} {
     configure.args-replace --disable-djvu --enable-djvu
     depends_lib-append port:djvulibre
+}
+
+variant multimedia description {Build optional multimedia support using Gstreamer} {
+    configure.args-replace  --disable-multimedia --enable-multimedia
+    depends_lib-append      port:gstreamer1 \
+                            port:gstreamer1-gst-plugins-base
 }
 
 variant nautilus description {Build optional nautilus extensions} {
