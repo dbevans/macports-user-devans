@@ -1,0 +1,64 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           gobject_introspection 1.0
+
+name                libsoup
+version             2.51.3
+set branch          [join [lrange [split ${version} .] 0 1] .]
+categories          gnome net
+platforms           darwin
+license             LGPL-2+
+maintainers         devans openmaintainer
+description         Soup is an HTTP library implementation in C.
+
+long_description    Soup provides a queued asynchronous callback-based \
+                    mechanism for sending and servicing SOAP requests \
+                    and a WSDL (Web Service Definition Language) for C \
+                    compilers which generates client stubs and server \
+                    skeletons for easily calling and implementing SOAP \
+                    methods.
+
+homepage            https://wiki.gnome.org/Projects/libsoup
+master_sites        gnome:sources/${name}/${branch}/
+use_xz              yes
+
+checksums           rmd160  2348d435be9276768d66a61b26db933ef8ec41fc \
+                    sha256  ba7ef78e7e93cb08805daa1eb3a116914db7a5caf6a9f386817a7431ba5ef949
+
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:gtk-doc \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool \
+                    port:curl
+
+depends_lib         port:libxml2 \
+                    port:glib-networking
+
+gobject_introspection yes
+
+configure.args      --disable-more-warnings \
+                    --disable-silent-rules \
+                    --without-gnome
+
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+}
+
+configure.cmd       ./autogen.sh
+
+test.run            yes
+test.target         check
+
+variant gnome description {Enable GNOME support} {
+    configure.args-delete   --without-gnome
+}
+
+default_variants    +gnome
+
+livecheck.type      gnome-with-unstable
