@@ -10,7 +10,7 @@ PortGroup                   conflicts_build 1.0
 name                        glib2
 conflicts                   glib2-devel
 set my_name                 glib
-version                     2.45.2
+version                     2.45.3
 set branch                  [join [lrange [split ${version} .] 0 1] .]
 categories                  devel
 maintainers                 ryandesign openmaintainer
@@ -30,8 +30,8 @@ long_description            Glib is a library which includes support routines \
 
 master_sites                gnome:sources/${my_name}/${branch}/
 
-checksums                   rmd160  ace22e7188863a07b1d73897aa7bffb9f9589525 \
-                            sha256  3e38eddd6356da3f2ae7a47b4fcfa21d64169e811202c6bb8823474b70766c2b
+checksums                   rmd160  d6ef33b7ea0eebac119dbc861a253925d443e22f \
+                            sha256  790c903cd4dcbd725913a0a915138ac727c1f7b24c0b1132c36d03344e1356c7
 
 # ${prefix}/include/glib-2.0/glib/gi18n.h requires -I${prefix}/include to find libintl.h
 # See https://trac.macports.org/changeset/27148
@@ -44,9 +44,6 @@ patchfiles                  patch-configure.diff \
                             patch-gio_gdbusprivate.c.diff \
                             patch-get-launchd-dbus-session-address.diff \
                             patch-gmodule-gmodule-dl.c.diff
-
-# Don't link with "-flat_namespace -undefined suppress" on Yosemite and later.
-patchfiles-append           yosemite-libtool.patch
 
 depends_build               bin:xmllint:libxml2
 
