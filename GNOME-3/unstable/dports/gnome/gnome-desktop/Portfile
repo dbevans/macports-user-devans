@@ -6,7 +6,7 @@ PortGroup           active_variants 1.1
 PortGroup           gobject_introspection 1.0
 
 name                gnome-desktop
-version             3.17.2
+version             3.17.3
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -25,8 +25,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  91b584330ab1263be7dbf6865ca7844eb2fbe3cd \
-                    sha256  993dd9cf379e0ffaaa6465a67e84d5b237e775f95066d064b7c8cfd952253c94
+checksums           rmd160  e9accc6f18435609dd5c8d769ed8704660f44f30 \
+                    sha256  2af7c24e8cec2db37acf8628959b558be05a8995a34fd1a6b57dd3fa148fc1ab
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -60,7 +60,7 @@ configure.cmd       ./autogen.sh
 
 configure.args      --disable-maintainer-mode \
                     --disable-silent-rules \
-                    --disable-desktop-docs \
+                    --enable-desktop-docs \
                     --with-gnome-distributor=MacPorts \
                     --x-includes=${prefix}/include \
                     --x-libraries=${prefix}/lib
