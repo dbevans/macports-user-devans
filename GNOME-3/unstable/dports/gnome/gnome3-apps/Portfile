@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-apps
-version         3.17.2
+version         3.17.3
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
