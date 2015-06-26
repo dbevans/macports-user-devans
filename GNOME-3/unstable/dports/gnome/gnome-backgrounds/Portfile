@@ -1,0 +1,44 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                gnome-backgrounds
+version             3.17.3
+set branch          [join [lrange [split ${version} .] 0 1] .]
+maintainers         nomaintainer
+categories          gnome
+license             GPL-2
+installs_libs       no
+platforms           darwin
+supported_archs     noarch
+
+description         A collection of backgrounds for GNOME 2.
+long_description    $description
+
+homepage            http://www.gnome.org/
+master_sites        gnome:sources/$name/$branch/
+
+use_xz              yes
+
+checksums           rmd160  38fdb0f4136346b671d48a20900191ec0b64c486 \
+                    sha256  434a82bde638e6c3a2273317074d4efacc55b71d02229272ce6347b20b257524
+
+depends_build       port:intltool \
+                    port:gettext \
+                    port:gnome-common \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
+
+depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2
+
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+}
+
+configure.cmd       ./autogen.sh
+
+livecheck.type      gnome-with-unstable
