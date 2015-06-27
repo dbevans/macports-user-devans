@@ -9,7 +9,7 @@ PortGroup           muniversal 1.0
 
 name                gstreamer1-gst-plugins-base
 set my_name         gst-plugins-base
-version             1.5.1
+version             1.5.2
 description         This is gst-plugins, a set of plug-ins for GStreamer.
 long_description    ${description}
 maintainers         nomaintainer
@@ -23,8 +23,8 @@ distname            ${my_name}-${version}
 
 use_xz              yes
 
-checksums           rmd160  b5678b6822cdc4d39bbf09de37fb42b05ee35078 \
-                    sha256  b1355ee5300ed64126cc69d7f84750a4e00027d05dff89391fed3657d2b27e9a
+checksums           rmd160  9ae04d6aec6fc51fdb178f90b8ac6a42777fc8a3 \
+                    sha256  a7d65acfb6760eb7f23e1b635a13f643406541f9350a01a8bd84246219db0071
 
 depends_build       port:pkgconfig
 depends_lib         port:gstreamer1 \
