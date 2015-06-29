@@ -16,9 +16,9 @@ description	Mac OS X menu bar integration library for GTK2 quartz
 
 long_description \
 		A simple library whose purpose is to \
-		allow GTK2 quartz applications to integrate with \
-		the Mac OS X menu bar. Requires gtk2 and its \
-                dependencies to be built with variants +no_x11 +quartz
+		allow GTK quartz applications to integrate with \
+		the Mac OS X menu bar. Requires gtk2 or gtk3 and its \
+		dependencies to be built with variant +quartz
 
 homepage        https://wiki.gnome.org/Projects/GTK%2B/OSX/Integration
 
@@ -36,37 +36,29 @@ checksums       sha256    74fce9dbc5efe4e3d07a20b24796be1b1d6c3ac10a0ee6b1f1d685
 
 depends_build   port:pkgconfig
 
-variant gtk2 description {Dummy gtk2 variant} {
-}
-    
-variant gtk3 description {Dummy gtk3 variant} {
-}
-
 set gtk_version gtk2
 
 pre-configure {
 
   if {${name} eq ${subport}} {
     ui_error "
-*** The gtk-osx-application port has been replaced by 'gtk-osx-application-gtk2'
-*** and 'gtk-osx-application-gtk3'. Please `sudo port deactivate gtk-osx-application`
-*** followed by the `sudo port upgrade -u outdated` or another command to update.
-*** Then if all works as intended `sudo port uninstall gtk-osx-application`
-***"
+The gtk-osx-application port has been replaced by 'gtk-osx-application-gtk2'
+and 'gtk-osx-application-gtk3'.
+Please `sudo port deactivate gtk-osx-application`
+followed by `sudo port upgrade -u outdated` or another command to update.
+Then if all works as intended `sudo port uninstall gtk-osx-application`
+"
     return -code error
   }
 
-  if {![active_variants $gtk_version quartz x11]} {
+  if {![active_variants $gtk_version quartz ""]} {
     ui_error "
-
-****
-**** gtk-osx-application is meant to be used only in a GTK quartz
-**** development environment but your version of GTK does not
-**** support quartz.  Please make sure that port $gtk_version and all its
-**** dependencies are built with variants +no_x11 +quartz and try again.
-****
+${name}-${gtk_version} is meant to be used only in a GTK quartz
+development environment but your version of GTK does not
+support quartz.  Please make sure that port ${gtk_version} and all its
+dependencies are built with variants +quartz and try again.
 "
-    error "$gtk_version +no_x11 +quartz not installed."
+    error "$gtk_version +quartz not installed."
   }
 }
 
