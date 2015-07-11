@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                libgdata
-version             0.17.1
+version             0.17.2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         libgdata is a GLib-based library for accessing online service APIs using the \
                     GData protocol --- most notably, Google's services.
@@ -22,8 +22,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  a2d51bfd29f76477b62d28c482aa6b5323485c2c \
-                    sha256  5ef1c0f246f60812c43e3a7d077442afc872913a03f3a5eb789698dc2319bd95
+checksums           rmd160  fc64390a6e30682c8caaf61c08f1563b93068681 \
+                    sha256  9b9b4f68bef86ee2926ea14f182baf7ddaa6717dd138b5ff670f07d126176fe0
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -44,7 +44,8 @@ depends_lib         port:gtk3 \
 
 gobject_introspection yes
 
-patchfiles          patch-gdata-gdata.symbols.diff
+patchfiles          patch-m4-ax_compiler_flags_ldflags.m4.diff \
+                    patch-gdata-gdata.symbols.diff
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
