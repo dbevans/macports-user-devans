@@ -34,6 +34,8 @@ depends_lib         port:atk \
 
 gobject_introspection yes
 
+patchfiles          patch-use-x11-backend-as-default.diff
+
 variant x11 conflicts quartz {
     depends_lib-append port:gdk-pixbuf2 \
                        port:xorg-libXcomposite \
