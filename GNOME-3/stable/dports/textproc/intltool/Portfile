@@ -46,7 +46,7 @@ depends_lib-append  port:expat \
 
 patchfiles          patch-remove-intltool-perl-hack.diff
 
-# in perl 5.22 left braces in regex patterns must be escaped to avoid deprecation warnings
+# in perl 5.22 literal left braces in regex patterns must be escaped to avoid deprecation warnings
 # introduced in perl 5.21.3
 # https://metacpan.org/pod/release/PCM/perl-5.21.3/pod/perl5211delta.pod#A-literal-should-now-be-escaped-in-a-pattern
 
