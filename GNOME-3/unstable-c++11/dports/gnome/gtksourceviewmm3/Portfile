@@ -1,0 +1,36 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+
+name            gtksourceviewmm3
+set gname       gtksourceviewmm
+version         3.17.1
+license         LGPL-2+
+set branch      [join [lrange [split ${version} .] 0 1] .]
+
+description     A C++ binding for GtkSourceView3
+long_description \
+                gtksourceviewmm3 is a C++ wrapper for the GtkSourceView3 widget library.
+
+maintainers     devans openmaintainer
+categories      gnome
+platforms       darwin
+ 
+homepage        http://projects.gnome.org/gtksourceviewmm/
+master_sites    gnome:sources/${gname}/${branch}/
+
+distname        ${gname}-${version}
+
+use_xz          yes
+
+checksums       rmd160  06f960cf710a3e812986c0048d6e7bed3139f287 \
+                sha256  fe5045bd1f3111ff3be98b1bee1e2ad92efca360f09a17179efd6aec34c5a5ef
+
+depends_build   port:pkgconfig
+
+depends_lib     port:gtkmm3 \
+                port:gtksourceview3
+
+livecheck.type  gnome-with-unstable
+livecheck.name  ${gname}
