@@ -5,6 +5,7 @@ PortSystem          1.0
 
 name                glibmm
 version             2.45.3
+revision            1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         C++ interface to glib
 long_description    ${description}
@@ -20,6 +21,11 @@ use_xz              yes
 checksums           rmd160  28ca7a2412f6e76c2d90c93e7913edfd496ae08a \
                     sha256  60ed2887b902d24e2d1480393ac815d6e035b0854ff1cb4a7ddb9a3341bc66f7
 
+# set pbranch to desired perl version
+# currently 5.22 (#48365)
+
+set pbranch         5.22
+
 depends_build       port:pkgconfig \
                     port:autoconf \
                     port:automake \
@@ -27,11 +33,11 @@ depends_build       port:pkgconfig \
                     port:mm-common
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
-                    port:p5.16-xml-parser \
+                    port:p${pbranch}-xml-parser \
                     port:libsigcxx2
 
 configure.cmd       ./autogen.sh
-configure.perl      ${prefix}/bin/perl5.16
+configure.perl      ${prefix}/bin/perl${pbranch}
 
 post-destroot {
     set mmdoctooldir ${prefix}/share/glibmm-2.4/doctool
