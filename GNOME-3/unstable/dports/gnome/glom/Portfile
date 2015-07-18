@@ -22,6 +22,11 @@ use_xz              yes
 checksums           rmd160  6d0dd3c01caaa4fbf996df26126a559a3534a603 \
                     sha256  052f60cafacece4b88e40641492336caae06d051ca76ee5b9a0b9e062882a432
 
+# set pbranch to desired perl version
+# currently 5.22 (#48365)
+
+set pbranch         5.22
+
 depends_build       port:pkgconfig \
                     port:autoconf \
                     port:automake \
@@ -33,7 +38,8 @@ depends_build       port:pkgconfig \
                     path:bin/dot:graphviz \
                     port:doxygen \
                     port:libxslt \
-                    port:py27-sphinx
+                    port:py27-sphinx \
+                    port:perl${pbranch}
 
 depends_lib         port:desktop-file-utils \
                     port:libarchive \
@@ -45,7 +51,7 @@ depends_lib         port:desktop-file-utils \
                     port:libgdamm5 \
                     port:goocanvasmm2\
                     port:gtksourceviewmm3 \
-                    port:postgresql93 \
+                    port:postgresql94 \
                     port:py27-gobject3 \
                     port:libepc \
                     port:evince \
@@ -58,7 +64,7 @@ depends_run         port:gnome-settings-daemon \
 patchfiles          patch-configure.ac.diff \
                     patch-glom-libglom-connectionpool.cc.diff
 
-require_active_variants libgda5 postgresql93
+require_active_variants libgda5 postgresql94
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
@@ -73,10 +79,10 @@ configure.python          ${prefix}/bin/python${python.branch}
 configure.env       SPHINX_BUILD=${prefix}/bin/sphinx-build-${python.branch} \
                     PYTHON_EXTRA_LDFLAGS=' '
 
-configure.perl      ${prefix}/bin/perl5.16
+configure.perl      ${prefix}/bin/perl${pbranch}
 
 configure.args      --with-boost-python=mt \
-                    --with-postgres-utils=${prefix}/lib/postgresql93/bin \
+                    --with-postgres-utils=${prefix}/lib/postgresql94/bin \
                     --disable-mysql \
                     --disable-silent-rules \
                     --disable-update-mime-database \
