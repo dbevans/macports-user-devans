@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.16 5.18 5.20 5.22
-perl5.setup         Glib 1.311 ../by-authors/id/X/XA/XAOC
+perl5.setup         Glib 1.312 ../by-authors/id/X/XA/XAOC
 platforms           darwin
 maintainers         nomaintainer
 license             LGPL-2.1+
@@ -19,8 +19,8 @@ long_description    This module provides perl access to Glib and GLibs GObject \
 
 homepage            http://gtk2-perl.sourceforge.net/
 
-checksums           rmd160  f07f61ed10e0a3705d0ce755d305fa33e8c8dba3 \
-                    sha256  61a29fa4171713ee04251437e225012c9370d987cc3ec699bbace7631cae9fa2
+checksums           rmd160  d2c37f64076953b73f8d649b23c26dfe3fc52d72 \
+                    sha256  23ffa259d48afd0b4156398b3247cc97f0314f8701d18da3a32c76c5ece01cab
 
 if {${perl5.major} != ""} {
     depends_lib-append \
