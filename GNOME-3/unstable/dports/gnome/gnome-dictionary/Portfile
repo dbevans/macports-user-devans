@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gnome-dictionary
-version             3.17.3
+version             3.17.4
 license             GPL-2 GFDL-1.1 LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME dictionary application.
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  5b60f803131820b3ed78aa3ef63c84afe68cbe3a \
-                    sha256  c8bac3d31930946428962b2a897db6fdc09d289ca81815bce5ba5e62f4a0e212
+checksums           rmd160  67fb7f7f8cd0fb0856ae74360c25a89e47a6907e \
+                    sha256  27f46815399470e55b11576f4e55de79c262543a0e4f60c61781f4541a559408
 
 depends_build       port:pkgconfig \
                     port:intltool \
