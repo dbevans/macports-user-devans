@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                gvfs
 epoch               1
-version             1.25.3
+version             1.25.4
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          devel
@@ -35,8 +35,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  7406292dfea993fda6bb68aa1feac483fd3e48c7 \
-                    sha256  c7090c8d8c19e503c26d673f0d34b0e1d588b2b09d4091e1802d9f61b68590a1
+checksums           rmd160  689f80adf141de889f2df1135159e5fd22ebab3a \
+                    sha256  0831a68ad91589cea1b620bdae67452fbb01f04c63afb65b0c44a5ceeffad693
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -51,6 +51,7 @@ depends_lib         port:gtk3 \
                     port:gettext \
                     path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:libarchive \
+                    port:gcr \
                     port:libgcrypt \
                     port:openssh \
                     port:libsoup \
