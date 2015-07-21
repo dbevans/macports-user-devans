@@ -32,7 +32,7 @@
    PANEL_TYPE("info",             cc_info_panel_get_type         ),
 --- configure.ac.orig	2014-04-16 05:41:24.000000000 -0700
 +++ configure.ac	2014-04-24 06:59:38.000000000 -0700
-@@ -142,11 +142,11 @@
+@@ -143,11 +143,11 @@
  PKG_CHECK_MODULES(ONLINE_ACCOUNTS_PANEL, $COMMON_MODULES goa-1.0 goa-backend-1.0 >= $GOA_REQUIRED_VERSION)
  PKG_CHECK_MODULES(POWER_PANEL, $COMMON_MODULES upower-glib >= 0.99.0
                    gnome-settings-daemon >= $GSD_REQUIRED_VERSION)
