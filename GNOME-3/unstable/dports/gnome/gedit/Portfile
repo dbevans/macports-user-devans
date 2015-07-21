@@ -2,9 +2,10 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           active_variants 1.1
 
 name                gedit
-version             3.17.1
+version             3.17.2
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME editor.
@@ -17,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  e07c37b4e9ff4a19d3e5cb809058e27d86b0df92 \
-                    sha256  6706a1aa2dfad0ee9ce29ec0809d75f96900dcd584c9557e876aad91c9193558
+checksums           rmd160  b42775933085ef746f47d47c3fbb4c92da228523 \
+                    sha256  d28eb5dbd530a760c5e8e531506ae3785eeea33f9eee60afb2d496439951d9b6
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -33,7 +34,6 @@ depends_build       port:pkgconfig \
 depends_lib         port:desktop-file-utils \
                     port:gsettings-desktop-schemas \
                     port:gtk3 \
-                    port:gvfs \
                     port:gtksourceview3 \
                     port:libpeas \
                     port:libsoup \
@@ -42,8 +42,7 @@ depends_lib         port:desktop-file-utils \
                     port:iso-codes \
                     port:vala
 
-depends_run         port:gnome-settings-daemon \
-                    port:yelp
+depends_run         port:gnome-themes-standard
 
 patchfiles          patch-configure.ac.diff
 
@@ -70,6 +69,20 @@ variant python34 conflicts description {Use python 3.4} {
     set python_framework      ${frameworks_dir}/Python.framework/Versions/3.4
     configure.pkg_config_path ${python_framework}/lib/pkgconfig
     configure.args-replace    --disable-python --enable-python
+}
+
+variant quartz {}
+
+if {[variant_isset quartz]} {
+    require_active_variants gtk3 quartz
+    configure.args-append   --disable-gvfs-metadata
+    depends_lib-append      port:gtk-osx-application-gtk3
+} else {
+    require_active_variants gtk3 x11
+    configure.args-append   --enable-gvfs-metadata
+    depends_lib-append      port:gvfs
+    depends_run-append      port:gnome-settings-daemon \
+                            port:yelp
 }
 
 default_variants    +python34
