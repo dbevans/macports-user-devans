@@ -3,6 +3,10 @@
 
 PortSystem          1.0
 
+# as of version 4.99.9 requires C++11 to build
+
+PortGroup           cxx11 1.0
+
 name                libgdamm5
 set gname           libgdamm
 version             4.99.9
