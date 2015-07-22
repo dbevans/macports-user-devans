@@ -2,11 +2,15 @@
 # $Id$
 
 PortSystem          1.0
+
+# as of version 3.17.41 requires C++11 to build
+
+PortGroup           cxx11 1.0
 PortGroup           active_variants 1.1
 
 name                gtkmm3
 set gname           gtkmm
-version             3.17.41
+version             3.17.50
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         C++ interface to GTK+ version 3.
 long_description    gtkmm3 is the official C++ interface \
@@ -23,8 +27,8 @@ use_xz              yes
 dist_subdir         ${gname}
 distname            ${gname}-${version}
 
-checksums           rmd160  b24653a1da560124b522f1a4caaed52ad5a2baf1 \
-                    sha256  610d494984b18e5fb8cd4b7a23c7a6d2028011586624f1d4b3585d1ad592d4cb
+checksums           rmd160  4e85ff62b1944736f4cff362185c1545f163ecce \
+                    sha256  7eabd3b08b943471e541b101127d4702de5206fa4ed1b2fbfb048b5d0d47fd0d
 
 depends_build       port:pkgconfig \
                     port:mm-common \
