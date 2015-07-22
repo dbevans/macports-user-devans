@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                clutter
-version             1.23.2
+version             1.23.4
 license             LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          graphics
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  0e668cb42b2b2f2e82735e382088293947156578 \
-                    sha256  9f25480e2faa02b1213d3644d4dbf8dbaab413a86186f25a36ec6231b5cc8599
+checksums           rmd160  566a5fe1d554f98434d3964628a1ee7f9791262b \
+                    sha256  1dbc29871239e72fb9f0a152f573a26e609a68069e0679785c2277267f424ec1
 
 depends_build       port:pkgconfig
 
