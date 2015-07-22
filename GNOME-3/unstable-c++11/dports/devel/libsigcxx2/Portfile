@@ -3,6 +3,10 @@
 
 PortSystem          1.0
 
+# as of version 2.5.1 requires C++11 to build
+
+PortGroup           cxx11 1.0
+
 name                libsigcxx2
 set gname           libsigc++
 version             2.5.1
