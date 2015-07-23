@@ -62,6 +62,7 @@ depends_run         port:gnome-settings-daemon \
                     port:gnome-keyring
 
 patchfiles          patch-configure.ac.diff \
+                    patch-glom-frame_glom.cc.diff \
                     patch-glom-libglom-connectionpool.cc.diff
 
 require_active_variants libgda5 postgresql94
