@@ -1,6 +1,6 @@
---- libgtop-sysdeps.m4.orig	2014-04-28 14:09:24.000000000 -0700
-+++ libgtop-sysdeps.m4	2014-04-29 03:57:52.000000000 -0700
-@@ -109,7 +109,7 @@
+--- libgtop-sysdeps.m4.orig	2015-08-05 13:10:24.000000000 -0700
++++ libgtop-sysdeps.m4	2015-08-07 11:30:48.000000000 -0700
+@@ -82,7 +82,7 @@
  	  libgtop_use_machine_h=yes
  	  libgtop_need_server=yes
  	  libgtop_have_sysinfo=yes
