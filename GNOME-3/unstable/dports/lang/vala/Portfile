@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                vala
-version             0.29.2
+version             0.29.3
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          lang
 maintainers         nomaintainer
@@ -23,8 +23,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  5631fab2f0560ec2ffe317090a51fd35ca2879e1 \
-                    sha256  e4ef92b3b55a4dcaeb13a2cf673924234fb6330033b1b4906e125735fa41d1ba
+checksums           rmd160  09ad9023f37f8022c76f5f47d88122aa0952e910 \
+                    sha256  687f89c404cec528bc6c8e80d80146be0a42aa30f60475fcaefad37bd12949fe
 
 depends_build       path:bin/pkg-config:pkgconfig \
                     port:libxslt
