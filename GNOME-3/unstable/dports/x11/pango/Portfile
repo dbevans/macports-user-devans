@@ -10,6 +10,7 @@ PortGroup               gobject_introspection 1.0
 name                    pango
 conflicts               pango-devel
 set my_name             pango
+epoch                   1
 version                 1.37.2
 set branch              [join [lrange [split ${version} .] 0 1] .]
 categories              x11
