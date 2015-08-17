@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gnome-maps
-version             3.17.1
+version             3.17.90
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Map application for GNOME 3.
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  b186e527707e62758a9405c64c7b08a8b4fd2345 \
-                    sha256  da817e04b4ca7116581fc10e43e88ecb5df369631e5895d7afb1c0151ef03a00
+checksums           rmd160  e7b452b1c48752653b1969455d4c7cfa7074c40e \
+                    sha256  0fd1df96d95c73229629cc2c923b236e7281fbe9bdc8d7c8bcfa5741e24cb490
 
 depends_build       port:pkgconfig \
                     port:intltool \
