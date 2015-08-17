@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                yelp-xsl
-version             3.17.4
+version             3.17.90
 license             GPL-2 LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A collection of XSLT and other data files required by Yelp.
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  ca1f44ffa2c73e4c31486f7290d16a60684031a9 \
-                    sha256  3e5d83ef4fa81f9d7e46d82990869c1279f4fbe1f450856b56c3420c8a7847a5
+checksums           rmd160  4000525f1c904c330e13b3eeb2e01b9d00a9824e \
+                    sha256  ae6b892f06da0d791c551d1838420f5cd5bc6e18816030ef2706944909abce1f
 
 depends_build       port:pkgconfig \
                     port:intltool \
