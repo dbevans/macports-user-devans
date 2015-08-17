@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                geocode-glib
-version             3.17.1
+version             3.17.90
 license             LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A convenience library for geocoding and reverse geocoding.
@@ -23,8 +23,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  e35622ced3c92e6750725d783a5d0c7f2040423b \
-                    sha256  6887fb2b56a4bb17c4ebad723b6629f2fa0f58077e40e57e6ff447c93c2d60f2
+checksums           rmd160  ad53fb9c37ad2e8739a3507b6c9c7dcb9761977d \
+                    sha256  e524dba2e3a0e7d8670b0f20f4425f97f52114b00fda72e50d1a777d3a176492
 
 depends_build       port:pkgconfig \
                     port:gettext
