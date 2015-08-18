@@ -1,0 +1,24 @@
+diff -ur sysdeps/darwin.orig/glibtop_suid.h sysdeps/darwin/glibtop_suid.h
+--- sysdeps/darwin.orig/glibtop_suid.h	2015-08-17 11:59:37.000000000 -0700
++++ sysdeps/darwin/glibtop_suid.h	2015-08-18 02:03:50.000000000 -0700
+@@ -22,6 +22,8 @@
+ 
+ G_BEGIN_DECLS
+ 
++#include <glibtop_machine.h>
++
+ static inline void glibtop_suid_enter (glibtop *server) {
+ 	setreuid (server->machine->uid, server->machine->euid);
+ };
+diff -ur sysdeps/darwin.orig/open.c sysdeps/darwin/open.c
+--- sysdeps/darwin.orig/open.c	2015-08-17 11:59:37.000000000 -0700
++++ sysdeps/darwin/open.c	2015-08-18 02:06:32.000000000 -0700
+@@ -23,6 +23,8 @@
+ #include <glibtop/cpu.h>
+ #include <glibtop/open.h>
+ 
++#include <glibtop_machine.h>
++
+ #include <mach/mach_host.h>
+ #include <mach/mach_init.h>
+ #include <mach/mach_interface.h>
