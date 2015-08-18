@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           active_variants 1.1
 
 name                gedit
-version             3.17.2
+version             3.17.90
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME editor.
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  b42775933085ef746f47d47c3fbb4c92da228523 \
-                    sha256  d28eb5dbd530a760c5e8e531506ae3785eeea33f9eee60afb2d496439951d9b6
+checksums           rmd160  6798d47294e77826548b85574d082099976edbf5 \
+                    sha256  a93e42cb460280aff57e8a4e81b0d04eecc8b1331271bda0a33cededc0e7f424
 
 depends_build       port:pkgconfig \
                     port:intltool \
