@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                tracker
-version             1.5.1
+version             1.5.2
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Metadata database, indexer and search tool.
@@ -22,8 +22,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  0226661376ec8d56b5ff5340887e56cd53fffce8 \
-                    sha256  24890ecf4edd320bca4e8334a8e25622b88a055b66b66604aba16e5bce82ec32
+checksums           rmd160  8e95c63aba86d12851cbd256d67eb2ca71022ac0 \
+                    sha256  bfdddc8fccdb877b5e75d7e6f7f5e0e2a646986b4d14aaca20d48c7015fa79de
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -57,8 +57,8 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
 
 patchfiles          patch-extract-configure.ac.diff \
                     patch-libtracker-sparql-suffix.diff \
-                    patch-src-libtracker-miner-tracker-file-notifier.c.diff \
-                    patch-module-flags-no-undefined.diff
+                    patch-module-flags-no-undefined.diff \
+                    patch-tracker-miner-files-peer-listener.c.diff
 
 gobject_introspection yes
 
