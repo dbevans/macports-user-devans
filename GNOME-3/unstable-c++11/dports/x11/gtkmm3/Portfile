@@ -10,7 +10,7 @@ PortGroup           active_variants 1.1
 
 name                gtkmm3
 set gname           gtkmm
-version             3.17.50
+version             3.17.70
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         C++ interface to GTK+ version 3.
 long_description    gtkmm3 is the official C++ interface \
@@ -27,8 +27,8 @@ use_xz              yes
 dist_subdir         ${gname}
 distname            ${gname}-${version}
 
-checksums           rmd160  4e85ff62b1944736f4cff362185c1545f163ecce \
-                    sha256  7eabd3b08b943471e541b101127d4702de5206fa4ed1b2fbfb048b5d0d47fd0d
+checksums           rmd160  e8c1a95ea0d90ad34521459216c3461d7c3fc269 \
+                    sha256  d0d98d747ed8574d1fed8719da7da455a76ef458a5c0b1e5670e9af591ea9e0f
 
 depends_build       port:pkgconfig \
                     port:mm-common \
