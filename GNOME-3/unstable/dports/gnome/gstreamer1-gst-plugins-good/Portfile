@@ -9,8 +9,7 @@ PortGroup           compiler_blacklist_versions 1.0
 
 name                gstreamer1-gst-plugins-good
 set my_name         gst-plugins-good
-version             1.5.2
-revision            1
+version             1.5.90
 description         A set of good-quality plug-ins for GStreamer under GStreamer's preferred \
                     license, LGPL.
 long_description    GStreamer Good Plug-ins is a set of plug-ins that GStreamer's developers \
@@ -26,8 +25,8 @@ master_sites        http://gstreamer.freedesktop.org/src/${my_name}/
 use_xz              yes
 distname            ${my_name}-${version}
 
-checksums           rmd160  081106f28ba1a7d244304cd5eba69b344a77e047 \
-                    sha256  f0789d0e4e4e60046327fcf8908c429b6c6c0576a88823497ddc1ea8bfddc993
+checksums           rmd160  e4b19da6823ff01119afc9e979ff27a5a1bb2766 \
+                    sha256  cbaaa238f7a51f50090d86b6b31136bff133d1f8ffc02532dcbd5724dfd43fee
 
 depends_build       port:pkgconfig
 
