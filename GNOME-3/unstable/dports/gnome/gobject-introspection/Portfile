@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           active_variants 1.1
 
 name                gobject-introspection
-version             1.45.3
+version             1.45.4
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome
 platforms           darwin
@@ -20,8 +20,8 @@ homepage            https://wiki.gnome.org/Projects/GObjectIntrospection
 master_sites        gnome:sources/${name}/${branch}/
 use_xz              yes
 
-checksums           rmd160  5ea238c4132f2135bfb417769b0d927eccaf09bb \
-                    sha256  3583c3ae5fb70065d7ad2942564974fdbd86ac8a28e9bfae4e4d558f7656556e
+checksums           rmd160  af8dff61d262c06b82224c71b0b8d9b09c135ed6 \
+                    sha256  d42ed9e4f1e80a4cbc01095e01ce7060ea1caf42a3a229eee66882672e3350c2
 
 depends_build       port:pkgconfig
 
