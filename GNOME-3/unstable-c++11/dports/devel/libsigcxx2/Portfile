@@ -9,7 +9,7 @@ PortGroup           cxx11 1.0
 
 name                libsigcxx2
 set gname           libsigc++
-version             2.5.1
+version             2.5.2
 license             LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          devel
@@ -26,8 +26,8 @@ master_sites        gnome:sources/${gname}/${branch}/
 distname            ${gname}-${version}
 use_xz              yes
 
-checksums           sha256  969c37be81714e49c8cd35dbfb48f40f849961ca5468f883169db95bb5b7a36e \
-                    rmd160  2e22e8ec33750730c922138d79af34058733143c
+checksums           sha256  b7b230b38692bb9a6e6a90e10e2e62cd89a3f1a496af09a899480640724f009d \
+                    rmd160  83f048ef0249667f29ad655387a1e7aef89fef02
 
 # set pbranch to desired perl version
 # currently 5.22 (#48365)
@@ -55,7 +55,7 @@ autoreconf.args     -fvi
 post-destroot {
     set docdir ${prefix}/share/doc/${gname}-2.0
     xinstall -d ${destroot}${docdir}
-    xinstall -m 0644 -W ${worksrcpath} AUTHORS COPYING ChangeLog NEWS README TODO \
+    xinstall -m 0644 -W ${worksrcpath} AUTHORS COPYING ChangeLog NEWS README \
         ${destroot}${docdir}
 }
 
