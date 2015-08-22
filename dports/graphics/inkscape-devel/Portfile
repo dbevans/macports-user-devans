@@ -22,8 +22,8 @@ long_description    Inkscape is an multi-platform, Open-Source Vector Graphics E
 homepage            http://www.inkscape.org/
 master_sites        file:///Users/devans/macports/distfiles/${name}
 
-checksums           rmd160  19fc44e9da5d95e890946d668eabc4c7a0c3ece3 \
-                    sha256  49d0b461c87c918df725b25f0a542333189657617d9fd344197eb8afd6654dc6
+checksums           rmd160  7fec70ed2fbb29b7437f1524defacbfa038b30a0 \
+                    sha256  efeae9740608e3f82f927aea6537f2b300d07b2d7d075ce0750146043013b36c
 
 worksrcdir          ${name}
 
