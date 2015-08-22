@@ -1,6 +1,6 @@
 --- clutter/clutter-backend.c.orig	2015-07-11 02:18:18.000000000 -0700
 +++ clutter/clutter-backend.c	2015-07-22 14:24:22.000000000 -0700
-@@ -467,6 +467,11 @@
+@@ -510,6 +510,11 @@
  	backend = g_intern_string (backend_env);
      }
  
@@ -12,7 +12,7 @@
  #ifdef CLUTTER_WINDOWING_OSX
    if (backend == NULL || backend == I_(CLUTTER_WINDOWING_OSX))
      retval = g_object_new (CLUTTER_TYPE_BACKEND_OSX, NULL);
-@@ -482,11 +487,6 @@
+@@ -525,11 +525,6 @@
      retval = g_object_new (CLUTTER_TYPE_BACKEND_GDK, NULL);
    else
  #endif
