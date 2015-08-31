@@ -6,7 +6,7 @@ PortGroup           compiler_blacklist_versions 1.0
 PortGroup           gobject_introspection 1.0
 
 name                rygel
-version             0.27.4
+version             0.27.5
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Rygel DLNA media server, renderer
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  ded7068eac63e7e39cf8d5af52214d76efdff2ab \
-                    sha256  44686c50bad3d52b6980906fac4d6323fbb7c117cbb18217fb9c7438be2a85c7
+checksums           rmd160  8898a77d50b1515713d1814da92f5d4421d8e2de \
+                    sha256  b422d5643b9019ab5370a16944494fc8ca3a9542102bbbc24b5e42d8374caf7f
 
 depends_build       port:pkgconfig \
                     port:intltool \
