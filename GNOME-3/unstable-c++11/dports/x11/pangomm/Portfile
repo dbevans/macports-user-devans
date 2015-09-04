@@ -9,7 +9,7 @@ PortGroup           cxx11 1.0
 PortGroup           active_variants 1.1
 
 name                pangomm
-version             2.37.1
+version             2.37.2
 # some build files are GPL-2+ but they are not installed
 license             LGPL-2.1+
 set branch          [join [lrange [split ${version} .] 0 1] .]
@@ -24,8 +24,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  844316bc44a79e3e1a1c31050f938634d3578ef3 \
-                    sha256  ffccc63b2755784c6aafb0905477fd798d6f5655dcf4e879a4f62130e4f478e6
+checksums           rmd160  71ee70162ecdd577017b11d94ad91cf3298d9f4c \
+                    sha256  bb83d769f4d4256e0b108e84a4f0441065da8483c7cc51518b0634668ed094f5
 
 depends_build       port:pkgconfig \
                     port:mm-common
