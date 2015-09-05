@@ -9,7 +9,7 @@ PortGroup           cxx11 1.0
 
 name                libxmlxx2
 set gname           libxml++
-version             2.39.1
+version             2.39.2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          textproc
 license             LGPL
@@ -25,8 +25,8 @@ master_sites        gnome:sources/${gname}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  3cb916ff198a8749d506eb13c9db4ac374b89689 \
-                    sha256  9dbdd0180ee47b98fb04acc71c3710b257e3995c02ac0da6a9dedfcb92a4604a
+checksums           rmd160  7e91483a80c5fdc12272ae14361704eb7a89d252 \
+                    sha256  82c30620f350fe44cbdd7e7b83612466480ab11380189b73b3a4a2e3644951bb
 
 # set pbranch to desired perl version
 # currently 5.22 (#48365)
