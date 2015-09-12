@@ -7,7 +7,8 @@ PortGroup           cmake 1.0
 
 cmake.out_of_source yes
 
-github.setup        libgit2 libgit2 0.23.0 v
+# don't forget to update libgit2-glib as well
+github.setup        libgit2 libgit2 0.23.2 v
 categories          devel
 platforms           darwin
 maintainers         juanrgar devans openmaintainer
@@ -23,12 +24,12 @@ long_description    libgit2 is a portable, pure C implementation of the \
 
 homepage            http://libgit2.github.com/
 
-checksums           rmd160  b7b9868dd112d18cc0a46b461def4c881b805306 \
-                    sha256  ada7defd4996e55b86cf92d6dbce70eb678fe01e82058921587440d3a3d55d49
+checksums           rmd160  dc7458afbaa105123b69453023d520360f8bd1d2 \
+                    sha256  97ad19f26d978b08ae20494e3614ab58530a5a884e05d1f3afb6ed57570069b4
 
 depends_lib         port:libiconv \
                     port:libssh2 \
-                    port:openssl \
+                    path:lib/libssl.dylib:openssl \
                     port:zlib
 
 patchfiles          patch-strnlen-posix.h.diff
