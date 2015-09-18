@@ -10,7 +10,7 @@ PortGroup                   conflicts_build 1.0
 name                        glib2
 conflicts                   glib2-devel
 set my_name                 glib
-version                     2.45.7
+version                     2.45.8
 set branch                  [join [lrange [split ${version} .] 0 1] .]
 categories                  devel
 maintainers                 ryandesign openmaintainer
@@ -30,8 +30,8 @@ long_description            Glib is a library which includes support routines \
 
 master_sites                gnome:sources/${my_name}/${branch}/
 
-checksums           rmd160  0f669f48be333635ab03b6d2e4296cfcc74caccb \
-                    sha256  27918e1fd1d3f51bb245ce600b0329d1f0261995342f5f83e5a2867857f91e3e
+checksums           rmd160  1c71dbea8d07011076fb51a81c584bc40512373f \
+                    sha256  ba1a37d64b391c5202017cce81375e36f82e0b3eef7e9c3f1c5bbaf7c92f98c8
 
 # ${prefix}/include/glib-2.0/glib/gi18n.h requires -I${prefix}/include to find libintl.h
 # See https://trac.macports.org/changeset/27148
@@ -43,8 +43,7 @@ patchfiles                  patch-configure.diff \
                             patch-gio_xdgmime_xdgmime.c.diff \
                             patch-gio_gdbusprivate.c.diff \
                             patch-get-launchd-dbus-session-address.diff \
-                            patch-gmodule-gmodule-dl.c.diff \
-                            patch-gio-gliststore.c.diff
+                            patch-gmodule-gmodule-dl.c.diff
 
 depends_build               bin:xmllint:libxml2
 
