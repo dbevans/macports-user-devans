@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gedit-plugins
-version             3.17.0
+version             3.17.1
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Plug-ins for GEdit
@@ -17,8 +17,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  767b9a614f4f4cfbc417a37eab0e204a8a135b2b \
-                    sha256  533e9c0c4c080a2ef3e5a3a30225571e573020e8e6863697b7d011b742ea5e26
+checksums           rmd160  20da6ba891934d3aa8eece48dba5eb81a2769283 \
+                    sha256  8f335a780bc1031672bbd52d9eba3f534990e3d3817e3e8dda3932599273892c
 
 depends_build       port:pkgconfig \
                     port:intltool \
