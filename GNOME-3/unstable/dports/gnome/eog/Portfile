@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                eog
-version             3.17.91
+version             3.17.92
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         An image viewing and cataloging program.
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  b07564eeb783f1dfae92a3eb9ec833e418669390 \
-                    sha256  e4868c5667b9cc11ff6a9e9ab2589426e68e7d04aa6152d794c321932057f109
+checksums           rmd160  f526bac897bc02f67c6aa87c142e6b839e642314 \
+                    sha256  8d8cb893d595bda05f7ea52f6be6fb107940861bac390a1694b28181a6819b2c
 
 depends_build       port:pkgconfig \
                     port:intltool \
