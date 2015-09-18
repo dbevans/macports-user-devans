@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                libgtop
-version             2.31.90
+version             2.31.91
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 
@@ -22,8 +22,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  c945fa9254e2079f68e967a3ee616408a2d6d96d \
-                    sha256  d58cfbb9af04239983a5102e7e54ae195aea4f2d8f9e8e6a6c60f57572e02b35
+checksums           rmd160  e4571426be1de1c63fb7a4c88bdb16bfc848d657 \
+                    sha256  6c08a119f92a595cea7e3b88a831119e3cb74a8728934dc56c0ca87defdc6c80
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -38,8 +38,7 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2
 # patch-sysdeps-darwin.diff adds missing darwin specific includes 
 # https://bugzilla.gnome.org/show_bug.cgi?id=753743
 
-patchfiles          patch-libgtop-sysdeps.m4.diff \
-                    patch-sysdeps-darwin.diff
+patchfiles          patch-libgtop-sysdeps.m4.diff
 
 gobject_introspection yes
 
@@ -52,6 +51,7 @@ post-patch {
 configure.cmd       ./autogen.sh
 
 configure.args      --x-includes=${prefix}/include \
-                    --x-libraries=${prefix}/lib
+                    --x-libraries=${prefix}/lib \
+                    --enable-debug
 
 livecheck.type      gnome-with-unstable
