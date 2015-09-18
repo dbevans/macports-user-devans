@@ -6,8 +6,7 @@ PortGroup           active_variants 1.1
 PortGroup           gobject_introspection 1.0
 
 name                evince
-version             3.17.4
-revision            1
+version             3.17.92
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Evince is a document viewer for multiple document formats like pdf, and many others.
@@ -20,8 +19,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  45630e25a2681cf333afa6c13040d4fc9c659ddb \
-                    sha256  29e28cccd3b6afad950242cdeb130ba778562309fe8db0b8757b17fbe4e0fd53
+checksums           rmd160  43b3a2de7aafcafbed98486e9810b1511bc715bc \
+                    sha256  641971b6217a843feb098dd350c4d6f65e89e097599b6bb4ed43f89ad72230c4
 
 depends_build       port:pkgconfig \
                     port:intltool \
