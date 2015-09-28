@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-screenshot
-version             3.16.2
+version             3.18.0
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME dictionary application.
@@ -19,8 +19,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  6ca869d951c3dc2ac6d9054c3621e728d957a77b \
-                    sha256  5dd4bafb3deb0967866726ba89dab62bbd6dc3bda3b190474281142aa3dee948
+checksums           rmd160  a2ffd04310997be00928de78550f9991cde3330c \
+                    sha256  eba64dbf4acf0ab8222fec549d0a4f2dd7dbd51c255e7978dedf1f5c06a98841
 
 depends_build       port:pkgconfig \
                     port:intltool \

@@ -39,4 +39,4 @@ gobject_introspection yes
 configure.args      --enable-compile-warnings=minimum \
                     --disable-silent-rules
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome
