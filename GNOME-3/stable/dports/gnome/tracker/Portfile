@@ -5,6 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                tracker
+# version 1.6.0+ requires glib-2.0 >= 2.45.3
 version             1.4.1
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
