@@ -56,18 +56,6 @@ variant glade description {Enable glade catalog support} {
     configure.args-replace  --disable-glade-catalog --enable-glade-catalog
 }
 
-# lua 5.1 support requires lua lgi support but lua-lgi uses lua 5.2
-
-# variant lua51 description {Enable lua 5.1 plugin support} {
-#     depends_lib-append      port:lua51
-#     configure.args-replace  --disable-lua5.1 --enable-lua5.1
-# }
-# 
-# variant luajit requires lua51 description {Enable luajit plugin support} {
-#     depends_lib-append      port:luajit
-#     configure.args-replace  --disable-luajit --enable-luajit
-# }
-
 # supports one version each of python2 python3 in parallel
 
 variant python27 description {Enable Python 2.7 plugin support} {
