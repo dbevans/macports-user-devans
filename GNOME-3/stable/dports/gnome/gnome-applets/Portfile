@@ -34,16 +34,15 @@ depends_lib         port:adwaita-icon-theme \
                     port:gtk3 \
                     port:gnome-panel \
                     port:libgtop \
-                    port:libxklavier \
                     port:libwnck3 \
                     port:libnotify \
-                    port:upower \
                     port:dbus \
                     port:dbus-glib \
+                    port:policykit \
+                    port:upower \
+                    port:gucharmap \
                     port:libxml2 \
                     port:libgweather \
-                    port:gucharmap \
-                    port:policykit \
                     port:py34-gobject3
 
 patchfiles          patch-m4-ax_compiler_flags_ldflags.m4.diff \
