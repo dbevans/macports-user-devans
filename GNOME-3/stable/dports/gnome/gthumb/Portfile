@@ -4,10 +4,10 @@
 PortSystem          1.0
 
 name                gthumb
-version             3.4.0
+version             3.4.1
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
-description         Image viewer and browser for the gnome desktop.
+description         Image viewer and browser for the GNOME desktop.
 long_description    ${description}
 maintainers         nomaintainer
 categories          gnome
@@ -16,8 +16,8 @@ homepage            https://wiki.gnome.org/Apps/gthumb
 master_sites        gnome:sources/gthumb/${branch}
 use_xz              yes
 
-checksums           sha256  abd1afe457c65289af31c6db7037452faa3838356480857d8cdc19f0ecde4933 \
-                    rmd160  7f2d279659da308a1d22bdc3957a5b4aecf3570e
+checksums           sha256  1ec2cf49f499ed06eda851a3bd5c28a1768839a6ff06bc4efc5fbde46cabc857 \
+                    rmd160  4e0b5581064a726ab716965ab8fe8fe3754e31c6
 
 depends_build       port:intltool \
                     port:pkgconfig \
@@ -42,7 +42,8 @@ depends_lib         port:desktop-file-utils \
                         
 depends_run         port:yelp
 
-patchfiles          patch-configure.ac.diff
+patchfiles          patch-configure.ac.diff \
+                    patch-gthumb-gth-toolbox.c.diff
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
