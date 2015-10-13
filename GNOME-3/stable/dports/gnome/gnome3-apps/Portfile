@@ -4,8 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-apps
-version         3.16.2
-revision        1
+version         3.18.0
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -61,6 +60,7 @@ supported_archs noarch
 # iagno (previously part of gnome-games)
 # lightsoff (previously part of gnome-games)
 # nautilus-sendto
+# nemiver
 # orca
 # polari
 # quadrapassel (previously part of gnome-games)
@@ -87,7 +87,6 @@ depends_lib     port:anjuta \
                 port:gnome-music \
                 port:gnome-photos \
                 port:gnome-sudoku \
-                port:nemiver \
                 port:rygel \
                 port:seahorse
 
