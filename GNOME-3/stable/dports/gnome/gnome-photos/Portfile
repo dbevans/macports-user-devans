@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-photos
-version             3.18.0
+version             3.18.1
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Photo manager for GNOME.
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  3f998b90df18d30c737b3bc2c0f7adc0ef0958ae \
-                    sha256  5ca74b33de33da125059918e2d7c665ff78ac1adfbc04c98b3378e705cc73a54
+checksums           rmd160  ec76cb8f3b9c376d25b38b96c50f465f8282a773 \
+                    sha256  b0226d41bcb6fb822212b34bfaf5b84f8fd550ed97ea1770b64f591a82f106ed
 
 depends_build       port:pkgconfig \
                     port:intltool \
