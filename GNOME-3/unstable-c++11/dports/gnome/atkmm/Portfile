@@ -8,7 +8,7 @@ PortSystem          1.0
 PortGroup           cxx11 1.0
 
 name                atkmm
-version             2.23.3
+version             2.24.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         atkmm is the C++ binding for the ATK library.
 long_description    ${description} This port is part of the GNOME C++ bindings suite.
@@ -24,8 +24,8 @@ use_xz              yes
 
 dist_subdir         ${name}/${version}_${revision}
 
-checksums           rmd160  e82de75c875c18b28104eae48c2f13738d3e41f7 \
-                    sha256  28a5363eef6c8656286588e10b8ab6e5dd9efb373a4d2786e6c51d8e48b55914
+checksums           rmd160  7f48edcabaa7664699dc1345ce150717a45b078a \
+                    sha256  26c41d8da37d04eef9f219c6ce87d94852e1cacaad823050e520e1c08a36ed23
 
 depends_build       port:pkgconfig \
                     port:mm-common
