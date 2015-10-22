@@ -8,7 +8,7 @@ PortSystem          1.0
 PortGroup           cxx11 1.0
 
 name                glibmm
-version             2.45.80
+version             2.46.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         C++ interface to glib
 long_description    ${description}
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  c279f3ca7a99f4fb2bd7d9dc6ae6e91618c76cec \
-                    sha256  16ed25c7a4a7df8da0367e382ace6ed8e1b2ece84fc486538b9a9d9087c91ced
+checksums           rmd160  93d0c27a28a5b34e6ca901f05e053e60318a538f \
+                    sha256  9647e596c1081d2ea202bd3da2824ec2ea359498fa86eb59a55b1b307dd8c4aa
 
 # set pbranch to desired perl version
 # currently 5.22 (#48365)
