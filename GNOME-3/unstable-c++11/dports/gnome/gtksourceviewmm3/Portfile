@@ -9,7 +9,7 @@ PortGroup           cxx11 1.0
 
 name                gtksourceviewmm3
 set gname           gtksourceviewmm
-version             3.17.1
+version             3.18.0
 license             LGPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 
@@ -27,8 +27,8 @@ distname            ${gname}-${version}
 
 use_xz              yes
 
-checksums           rmd160  06f960cf710a3e812986c0048d6e7bed3139f287 \
-                    sha256  fe5045bd1f3111ff3be98b1bee1e2ad92efca360f09a17179efd6aec34c5a5ef
+checksums           rmd160  7b6dcf07ceadf87f46366ccafb864486bf90c925 \
+                    sha256  51081ae3d37975dae33d3f6a40621d85cb68f4b36ae3835eec1513482aacfb39
 
 depends_build       port:pkgconfig
 
