@@ -4,9 +4,12 @@
 PortSystem          1.0
 PortGroup           active_variants 1.1
 
+# as of version 1.11.4 requires C++11 to build
+
+PortGroup           cxx11 1.0
+
 name                cairomm
-version             1.10.0
-revision            3
+version             1.12.0
 categories          graphics
 license             LGPL-2+
 maintainers         devans openmaintainer
@@ -19,8 +22,8 @@ homepage            http://cairographics.org/
 master_sites        ${homepage}releases/
 platforms           darwin
 
-checksums           sha1    f08bf8a331067f0d1e876523f07238fba6b26b99 \
-                    rmd160  b9cd018198d954560cab3cc126d47d64389b8ca2
+checksums           rmd160  551be5f23cf694597aa6af8d1c60644d19cf13a9 \
+                    sha256  50435aec6fdd976934b791e808993160113ad19ca53a5634a9b64ccbe55874cc
 
 depends_build       port:pkgconfig \
                     port:mm-common
@@ -50,4 +53,4 @@ if {[variant_isset x11]} {
 
 livecheck.type      regex
 livecheck.url       http://cairographics.org/releases/
-livecheck.regex     ${name}-(\[0-9\]+\\.\[0-9\]*\[02468\]\\.\[0-9\]+)
+livecheck.regex     ${name}-(\[0-9\]+\\.\[0-9\]*\\.\[0-9\]+)
