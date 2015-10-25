@@ -54,6 +54,9 @@ post-activate {
    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
-notes "To play against the computer, install a chess engine such as gnuchess."
+notes "
+To play against the computer, install a chess engine such as gnuchess.
+See https://wiki.gnome.org/Apps/Chess/ChessEngines
+"
 
 livecheck.type      gnome
