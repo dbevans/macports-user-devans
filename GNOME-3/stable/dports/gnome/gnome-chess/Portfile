@@ -12,7 +12,7 @@ long_description    ${description}
 maintainers         devans openmaintainer
 categories          gnome games
 platforms           darwin
-homepage            https://wiki.gnome.org/Apps/Sudoku
+homepage            https://wiki.gnome.org/Apps/Chess
 master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
