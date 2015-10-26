@@ -47,7 +47,7 @@ depends_lib         port:desktop-file-utils \
 
 depends_run         port:gnome-user-docs \
                     port:gnome-getting-started-docs \
-                    port:gnome-settings-daemon
+                    port:gnome-themes-standard
 
 patchfiles          patch-m4-ax_compiler_flags_ldflags.m4.diff
 
