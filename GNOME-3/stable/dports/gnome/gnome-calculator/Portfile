@@ -5,13 +5,13 @@ PortSystem          1.0
 
 name                gnome-calculator
 version             3.18.1
-license             GPL-2+
+license             GPL-3
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Calculator with financial and scientific modes.
-long_description    Calculator is an application that solves mathematical equations
+long_description    Calculator is an application that solves mathematical equations \
                     and is suitable as a default application in a Desktop environment.
 maintainers         devans openmaintainer
-categories          gnome games
+categories          gnome
 platforms           darwin
 homepage            https://wiki.gnome.org/Apps/Calculator
 master_sites        gnome:sources/${name}/${branch}/
