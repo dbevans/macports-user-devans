@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-flashback
-version             3.18.0
+version             3.18.1
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME Flashback Session
@@ -12,13 +12,13 @@ long_description    ${description}
 maintainers         devans openmaintainer
 categories          gnome
 platforms           darwin
-homepage            https://wiki.gnome.org/Apps/EyeOfGnome
+homepage            https://wiki.gnome.org/Projects/GnomeFlashback
 master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  c777c1ad2d914448dc49c97c529a65ecd9dc9c4f \
-                    sha256  46d118a59057c5dbd003b97202cf3947ef2f1af383ddb5d13adf49846a4552aa
+checksums           rmd160  a0057fe1318b25337533edec2d71a0fa8c6cb2b4 \
+                    sha256  30413730ba5216e577d6c76445cfa4fe9efaef43c54f3a42a9879107156641f9
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -34,6 +34,12 @@ depends_lib         port:desktop-file-utils \
                     port:libcanberra \
                     port:pulseaudio \
                     port:upower
+
+depends_run         port:gnome-applets \
+                    port:gnome-panel \
+                    port:metacity
+
+patchfiles          patch-disable-bluetooth.diff
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
