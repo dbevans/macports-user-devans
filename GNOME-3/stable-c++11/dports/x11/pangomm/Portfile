@@ -57,4 +57,4 @@ if {[variant_isset quartz]} {
     require_active_variants ath:lib/pkgconfig/pango.pc:pango quartz
 }
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome

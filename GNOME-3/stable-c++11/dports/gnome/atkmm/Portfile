@@ -46,4 +46,4 @@ pre-activate {
     }
 }
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome

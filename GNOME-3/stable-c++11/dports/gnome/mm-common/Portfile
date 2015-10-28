@@ -36,4 +36,4 @@ depends_build   port:gsed \
                 port:curl \
                 port:wget
 
-livecheck.type  gnome-with-unstable
+livecheck.type  gnome

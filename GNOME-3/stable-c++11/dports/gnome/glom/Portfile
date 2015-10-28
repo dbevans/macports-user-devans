@@ -112,4 +112,4 @@ To work around known locale issues, set LANG=C when starting glom
 
 }
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome

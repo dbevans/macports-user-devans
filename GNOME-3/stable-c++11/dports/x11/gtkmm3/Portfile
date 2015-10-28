@@ -72,5 +72,5 @@ if {[variant_isset x11]} {
     require_active_variants gtk3 "" x11
 }
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome
 livecheck.name      ${gname}
