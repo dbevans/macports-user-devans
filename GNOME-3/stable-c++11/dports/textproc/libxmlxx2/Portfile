@@ -1,0 +1,45 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+# as of version 2.39.1 requires C++11 to build
+
+PortGroup           cxx11 1.0
+
+name                libxmlxx2
+set gname           libxml++
+version             2.40.0
+set branch          [join [lrange [split ${version} .] 0 1] .]
+categories          textproc
+license             LGPL
+maintainers         nomaintainer
+description         libxml++ is a C++ interface for working with XML files
+long_description    libxml++ is a C++ interface for working with XML files, using \
+                    libxml (gnome-xml) to parse and write the actual XML files. It \
+                    has a simple but complete API.
+homepage            http://libxmlplusplus.sourceforge.net
+platforms           darwin
+distname            ${gname}-${version}
+master_sites        gnome:sources/${gname}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  54a8dd7a8e2efa6e16b6cce437de648de8d237dc \
+                    sha256  a7b9703203696972cae50436e150979ef187d9b03c95519bdd89623b4068162a
+
+# set pbranch to desired perl version
+# currently 5.22 (#48365)
+
+set pbranch         5.22
+
+depends_build       port:pkgconfig \
+                    port:perl${pbranch}
+
+depends_lib         port:libxml2 \
+                    port:glibmm
+
+configure.perl      ${prefix}/bin/perl${pbranch}
+
+livecheck.type      gnome-with-unstable
+livecheck.name      ${gname}
