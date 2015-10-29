@@ -6,7 +6,7 @@ PortGroup           gobject_introspection 1.0
 PortGroup           compiler_blacklist_versions 1.0
 
 name                vte
-version             0.42.1
+version             0.43.0
 set branch          [join [lrange [split $version .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -24,8 +24,8 @@ master_sites        gnome:sources/$name/$branch/
 
 use_xz              yes
 
-checksums           rmd160  1530e43f4f882852cd211e91c853b11e286c2bc6 \
-                    sha256  9e00e2e9e94f4202b979c871f407a8815890bc0f4a8448a08534f76ab0fc9d34
+checksums           rmd160  d9a1eb6d6d5cbb39e04f625d22e43315500750b8 \
+                    sha256  2f10ae4148633e9ee458639f72cf2929703d413b95eee416fd6f03db8c4d4ab9
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -41,7 +41,8 @@ depends_lib         port:gtk3 \
 
 depends_run         port:gnome-themes-standard
 
-patchfiles          patch-src-Makefile.am.diff
+patchfiles          patch-src-Makefile.am.diff \
+                    patch-src-pty.cc.diff
 
 gobject_introspection yes
 
@@ -57,15 +58,20 @@ compiler.blacklist  *gcc* {clang < 300}
 
 configure.cmd       ./autogen.sh
 
-configure.args      --enable-glade-catalogue=no \
+configure.args      --disable-glade \
                     --disable-Bsymbolic \
+                    --without-pcre2 \
                     --enable-vala=yes
 
 configure.cflags-append -fstrict-aliasing
 
 variant glade description {Enable building of glade catalog items} {
     depends_lib-append  port:glade
-    configure.args-replace --enable-glade-catalogue=no --enable-glade-catalogue=yes
+    configure.args-delete --disable-glade
+}
+
+variant debug description {Enable building with debug support} {
+    configure.args-append   --enable-debug
 }
 
 # glade expects catalog modules and libraries to have a .so suffix
