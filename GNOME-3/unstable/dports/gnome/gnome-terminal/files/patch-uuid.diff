@@ -32,16 +32,6 @@ diff -ur src.orig/terminal-prefs.c src/terminal-prefs.c
  
  #include "terminal-app.h"
  #include "terminal-debug.h"
---- configure.ac.orig	2014-05-28 10:42:49.000000000 -0700
-+++ configure.ac	2014-05-28 11:52:45.000000000 -0700
-@@ -80,7 +80,6 @@
-    gtk+-$GTK_API_VERSION >= $GTK_REQUIRED
-    gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
-    dconf >= $DCONF_REQUIRED
--   uuid
-    $PLATFORM_DEPS])
- 
- # ****
 --- src/terminal-settings-list.c.orig	2015-09-21 12:44:45.000000000 -0700
 +++ src/terminal-settings-list.c	2015-10-13 14:10:01.000000000 -0700
 @@ -20,7 +20,7 @@
@@ -53,3 +43,30 @@ diff -ur src.orig/terminal-prefs.c src/terminal-prefs.c
  #include <dconf.h>
  
  #define G_SETTINGS_ENABLE_BACKEND
+--- configure.ac.orig	2015-10-27 17:31:24.000000000 -0700
++++ configure.ac	2015-10-29 12:54:55.000000000 -0700
+@@ -106,7 +106,6 @@
+    gtk+-$GTK_API_VERSION >= $GTK_REQUIRED
+    gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
+    dconf >= $DCONF_REQUIRED
+-   uuid
+    $PLATFORM_DEPS
+    $PCRE2_PKGS])
+ 
+@@ -129,7 +128,6 @@
+      gio-unix-2.0 >= $GIO_REQUIRED
+      gtk+-$GTK_API_VERSION >= $GTK_REQUIRED
+      dconf >= $DCONF_REQUIRED
+-     uuid
+      $PLATFORM_DEPS])
+ ])
+ 
+@@ -175,7 +173,7 @@
+    vte-$VTE_API_VERSION >= $VTE_REQUIRED
+    gconf-2.0 >= $GCONF_REQUIRED
+    dconf >= $DCONF_REQUIRED
+-   uuid])
++   ])
+   AC_DEFINE([ENABLE_MIGRATION],[1],[Define to 1 to enable prefs migration from GConf to GSettings])
+ fi
+ 

@@ -1,6 +1,6 @@
---- src/terminal-screen.c.orig	2015-10-12 09:24:11.000000000 -0700
-+++ src/terminal-screen.c	2015-10-13 14:10:01.000000000 -0700
-@@ -27,7 +27,7 @@
+--- src/terminal-screen.c.orig	2015-10-27 17:31:24.000000000 -0700
++++ src/terminal-screen.c	2015-10-29 13:09:11.000000000 -0700
+@@ -31,7 +31,7 @@
  #include <unistd.h>
  #include <sys/wait.h>
  #include <fcntl.h>
@@ -9,7 +9,7 @@
  
  #if defined(__FreeBSD__) || defined(__DragonFly__) || defined(__OpenBSD__)
  #include <sys/sysctl.h>
-@@ -1214,7 +1214,12 @@
+@@ -1271,7 +1271,12 @@
        for (j = 0; j < n_fds; j++) {
          if (fds[j] == target_fd) {
            do {
@@ -22,3 +22,12 @@
            } while (fd == -1 && errno == EINTR);
            if (fd == -1)
              _exit (127);
+@@ -1972,8 +1977,6 @@
+             }
+         }
+     }
+-
+-  return NULL;
+ }
+ 
+ /**
