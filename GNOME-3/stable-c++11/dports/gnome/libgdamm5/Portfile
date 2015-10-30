@@ -44,5 +44,5 @@ variant docs description {Install documentation} {
 
 default_variants    +docs
 
-livecheck.type      gnome
+livecheck.type      gnome-with-unstable
 livecheck.name      ${gname}
