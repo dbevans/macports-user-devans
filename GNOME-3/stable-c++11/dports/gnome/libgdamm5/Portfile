@@ -9,7 +9,7 @@ PortGroup           cxx11 1.0
 
 name                libgdamm5
 set gname           libgdamm
-version             4.99.10
+version             4.99.11
 license             LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 
@@ -28,8 +28,8 @@ distname            ${gname}-${version}
 
 use_xz              yes
 
-checksums           rmd160  5a999724979010ffb51b3884998da62bf63ed732 \
-                    sha256  9ba757b44db17313cd2ac2bc0e87a06bfc332dd3dfd132c141c8091334ee2c24
+checksums           rmd160  c4a0201b609b7ea1f9fae57d225a19d1caf12882 \
+                    sha256  e9820070a1b258fbdfa9b6583d97dfdb1340c90bb353c5f5e21522375609d0bb
 
 depends_build       port:pkgconfig
 
