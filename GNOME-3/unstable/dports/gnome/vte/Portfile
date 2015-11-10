@@ -7,6 +7,7 @@ PortGroup           compiler_blacklist_versions 1.0
 
 name                vte
 version             0.43.0
+revision            1
 set branch          [join [lrange [split $version .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -36,6 +37,7 @@ depends_build       port:pkgconfig \
 
 depends_lib         port:gtk3 \
                     port:gnutls \
+                    port:pcre2 \
                     port:zlib \
                     port:vala
 
@@ -60,7 +62,7 @@ configure.cmd       ./autogen.sh
 
 configure.args      --disable-glade \
                     --disable-Bsymbolic \
-                    --without-pcre2 \
+                    --with-pcre2 \
                     --enable-vala=yes
 
 configure.cflags-append -fstrict-aliasing
