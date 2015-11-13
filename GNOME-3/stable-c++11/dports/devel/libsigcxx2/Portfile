@@ -9,7 +9,7 @@ PortGroup           cxx11 1.0
 
 name                libsigcxx2
 set gname           libsigc++
-version             2.6.1
+version             2.6.2
 license             LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          devel
@@ -26,8 +26,8 @@ master_sites        gnome:sources/${gname}/${branch}/
 distname            ${gname}-${version}
 use_xz              yes
 
-checksums           sha256  186f2167c1b3d90529ce8e715246bf160bc67ec1ec19f4e45d76c0ae54dfbe1b \
-                    rmd160  5929f02fde2b1d27b7a5646832d49f2b2bc6b4c2
+checksums           sha256  fdace7134c31de792c17570f9049ca0657909b28c4c70ec4882f91a03de54437 \
+                    rmd160  7b3a6340875d51c8276bac08416ef36e2e469bee
 
 # set pbranch to desired perl version
 # currently 5.22 (#48365)
