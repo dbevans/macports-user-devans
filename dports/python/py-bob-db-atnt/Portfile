@@ -6,8 +6,8 @@ PortGroup                    python 1.0
 PortGroup                    github 1.0
 PortGroup                    active_variants 1.1
 
-name                         py-bob
-version                      2.0.5
+name                         py-bob-db-atnt
+version                      2.0.2
 license                      BSD
 homepage                     http://idiap.github.com/bob/
 
@@ -18,7 +18,8 @@ maintainers                  idiap.ch:andre.anjos \
                              idiap.ch:tiago.pereira
 
 
-description                  Bob is a signal-processing and machine learning toolbox
+description                  AT&T/ORL Face Database Access API for Bob \
+                             Bob is a signal-processing and machine learning toolbox
 
 long_description             Bob is a signal-processing and machine learning toolbox \
                              developed at the Idiap Research Institute, in Martigny, \
@@ -26,23 +27,23 @@ long_description             Bob is a signal-processing and machine learning too
                              and C++ and is designed to be both efficient and to \
                              reduce development time.
 
-github.setup                idiap bob 2.0.5 v
+github.setup                 bioidiap bob.db.atnt 2.0.2 v
+
 
 python.versions              27 34
 python.default_version       27
 
+checksums                    rmd160  89297e249689d5dec40ac7441e06012c1807e300 \
+                             sha256  53e8a7b9bd7c4de06542a6e95e5cb371de23ff9d3ff585612c0cf570aba9a6fb
 
 
-checksums                    rmd160  2724e627cb30ad68b27948e4dd8a3b80b02a059f \
-                             sha256  626fab4953759f5e65e7532e7e73396eb54278226ec89049f66f6b8f11b5aa97
+depends_build-append port:pkgconfig
 
 
 
 if {$subport ne $name} {
 
-    depends_build-append port:pkgconfig
-
-    depends_lib-append  \
+    depends_lib-append \
       port:blitz \
       path:lib/libavcodec.dylib:ffmpeg \
       port:matio \
@@ -55,6 +56,7 @@ if {$subport ne $name} {
       port:fftw-3 \
       port:vlfeat \
       port:libsvm \
+      port:py-six \
       port:boost \
       port:py${python.version}-sphinx \
       port:py${python.version}-setuptools \
@@ -64,37 +66,11 @@ if {$subport ne $name} {
       port:py${python.version}-scipy \
       port:py${python.version}-nose \
       port:py${python.version}-pillow \
+      port:py${python.version}-sqlalchemy \
       port:py${python.version}-bob-extension \
-      port:py${python.version}-bob-blitz \
-      port:py${python.version}-bob-core \
-      port:py${python.version}-bob-io-base \
-      port:py${python.version}-bob-sp \
-      port:py${python.version}-bob-ap \
-      port:py${python.version}-bob-math \
-      port:py${python.version}-bob-measure \
       port:py${python.version}-bob-db-base \
-      port:py${python.version}-bob-io-image \
-      port:py${python.version}-bob-io-video \
-      port:py${python.version}-bob-io-matlab \
-      port:py${python.version}-bob-ip-base \
-      port:py${python.version}-bob-ip-color \
-      port:py${python.version}-bob-ip-draw \
-      port:py${python.version}-bob-ip-gabor \
-      port:py${python.version}-bob-learn-activation \
-      port:py${python.version}-bob-learn-libsvm \
-      port:py${python.version}-bob-learn-linear \
-      port:py${python.version}-bob-learn-mlp \
-      port:py${python.version}-bob-learn-em \
-      port:py${python.version}-bob-learn-boosting \
-      port:py${python.version}-bob-db-verification-utils \
-      port:py${python.version}-bob-db-iris \
-      port:py${python.version}-bob-db-wine \
-      port:py${python.version}-bob-db-mnist \
-      port:py${python.version}-bob-db-atnt \
-      port:py${python.version}-bob-ip-facedetect \
-      port:py${python.version}-bob-ip-optflow-hornschunck \
-      port:py${python.version}-bob-ip-optflow-liu
+      port:py${python.version}-bob-db-verification-utils
 
       require_active_variants   port:boost python${python.version}
-
 }
+
