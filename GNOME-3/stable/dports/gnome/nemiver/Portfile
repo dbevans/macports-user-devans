@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                nemiver
-version             0.9.5
+version             0.9.6
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Standalone graphical debugger for GNOME.
@@ -24,8 +24,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           sha256 33590e3964092cabb629a6ba8415786b054702063a944eca5fe4156048baf8d9 \
-                    rmd160 5ccc191da5ece02691222d57e7b79798b423e9c0
+checksums           sha256  85ab8cf6c4f83262f441cb0952a6147d075c3c53d0687389a3555e946b694ef2 \
+                    rmd160  b66de6c22e183efdb9c7bc20b8f288be3531b24d
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -52,8 +52,8 @@ depends_lib         port:desktop-file-utils \
                     port:gdb \
                     port:boost
 
-depends_run         port:yelp \
-                    port:gnome-settings-daemon
+depends_run         port:gnome-themes-standard \
+                    port:yelp \
 
 patchfiles          nemiver-tr1-osx-patch.diff \
                     patch-dconf-configure.ac.diff \
