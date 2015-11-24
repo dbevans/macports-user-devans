@@ -6,6 +6,7 @@ PortGroup           archcheck 1.0
 PortGroup           muniversal 1.0
 PortGroup           xcodeversion 1.0
 PortGroup           active_variants 1.1
+PortGroup           compiler_blacklist_versions 1.0
 
 name                gtk3
 set real_name       gtk+
@@ -19,11 +20,10 @@ platforms           darwin
 
 description         GTK+ widget toolkit
 
-long_description    \
-    GTK+ is a highly usable, feature-rich toolkit for creating graphical user \
-    interfaces, which boasts cross-platform compatibility and an easy-to-use \
-    API. GTK+ is written in C, but has bindings to many other popular \
-    programming languages, such as C++, Python and C#, among others.
+long_description    GTK+ is a highly usable, feature-rich toolkit for creating graphical user \
+                    interfaces, which boasts cross-platform compatibility and an easy-to-use \
+                    API. GTK+ is written in C, but has bindings to many other popular \
+                    programming languages, such as C++, Python and C#, among others.
 
 homepage            http://www.gtk.org/
 distname            ${real_name}-${version}
@@ -35,11 +35,8 @@ checksums           rmd160  a6f4b4587076290fc4923eef3a8f1a3a7086d9de \
                     sha256  b995c03d52f40580a04e0d5299214fb0d1d3c423124dc85d9608c73723c7d9f0
 
 minimum_xcodeversions {9 3.1}
-depends_build       port:pkgconfig
 
-# cloudprint backend requires rest, json-glib
-# but this causes a circular dependency on libsoup
-# explicitly disable cloudprint for now
+depends_build       port:pkgconfig
 
 depends_lib         port:atk \
                     path:lib/pkgconfig/pango.pc:pango \
@@ -51,25 +48,23 @@ depends_lib         port:atk \
 depends_run         port:shared-mime-info \
                     port:hicolor-icon-theme
 
-archcheck.files \
-    lib/libatk-1.0.dylib \
-    lib/libintl.dylib \
-    lib/libjasper.dylib \
-    lib/libpango-1.0.dylib \
-    lib/libtiff.dylib
+archcheck.files     lib/libatk-1.0.dylib \
+                    lib/libintl.dylib \
+                    lib/libjasper.dylib \
+                    lib/libpango-1.0.dylib \
+                    lib/libtiff.dylib
 
 patchfiles          nawk.patch
 
-configure.args      --enable-static \
-                    --disable-glibtest \
-                    --enable-introspection \
-                    --disable-cloudprint \
-                    --disable-mir-backend \
-                    --disable-wayland-backend \
-                    --disable-schemas-compile \
-                    gio_can_sniff=yes
+# gtk3 +quartz uses instancetype which is not available
+# before approximately Xcode 4.6 (#49391)
+
+if {[variant_isset quartz]} {
+    compiler.blacklist  *gcc* {clang < 425}
+}
 
 # gobject-introspection uses g-ir-scanner, which uses $CC from env
+
 if {[variant_isset universal]} {
     foreach arch ${configure.universal_archs} {
         lappend merger_build_args(${arch})  CC='${configure.cc} -arch ${arch}'
@@ -84,18 +79,35 @@ if {[variant_isset universal]} {
                             CC_FOR_BUILD="${configure.cc} ${configure.cc_archflags}"
 }
 
-build.args-append   V=1 \
-                    CPP_FOR_BUILD="${configure.cpp}"
-
-configure.ccache    no
-configure.cppflags-append   -DX_LOCALE
-configure.cflags-append     -fstrict-aliasing
-
 pre-configure {
     if {![variant_isset quartz] && ![variant_isset x11]} {
         error "Either +x11 or +quartz is required"
     }
 }
+
+configure.ccache    no
+
+configure.cppflags-append \
+                    -DX_LOCALE
+
+configure.cflags-append \
+                    -fstrict-aliasing
+
+# cloudprint backend requires rest, json-glib
+# but this causes a circular dependency on libsoup
+# explicitly disable cloudprint for now
+
+configure.args      --enable-static \
+                    --disable-glibtest \
+                    --enable-introspection \
+                    --disable-cloudprint \
+                    --disable-mir-backend \
+                    --disable-wayland-backend \
+                    --disable-schemas-compile \
+                    gio_can_sniff=yes
+
+build.args-append   V=1 \
+                    CPP_FOR_BUILD="${configure.cpp}"
 
 test.run            yes
 test.target         check
@@ -118,31 +130,25 @@ post-destroot {
     reinplace "s|${destroot}||" ${destroot}${prefix}/etc/gtk-3.0/gtk.immodules
 }
 
-post-activate {
-    ui_debug "Updating gdk-pixbuf.loaders..."
-    system "${prefix}/bin/gdk-pixbuf-query-loaders \
-        >${prefix}/etc/gtk-3.0/gdk-pixbuf.loaders"
-    ui_debug "Updating GLib schemas..."
-    system "${prefix}/bin/glib-compile-schemas \
-        ${prefix}/share/glib-2.0/schemas"
-}
+platform darwin {
+    if {${os.major} <= 8} {
+        # The rules enabled by gobject-introspection require GNU make 3.81+
+        depends_build-append    port:gmake
+        build.cmd               ${prefix}/bin/gmake
 
-platform darwin 8 {
-    # The rules enabled by gobject-introspection require GNU make 3.81+
-    depends_build-append    port:gmake
-    build.cmd               ${prefix}/bin/gmake
-
-    if {[variant_isset quartz] || ![variant_isset x11]} {
-        configure.ldflags-append  -framework Cocoa -framework Carbon
+        if {[variant_isset quartz] || ![variant_isset x11]} {
+            configure.ldflags-append  -framework Cocoa -framework Carbon
+        }
+    
+        configure.args-append --disable-cups
     }
-}
 
-if {${os.major} <= 8} {
-    configure.args-append --disable-cups
-}
-
-if {![variant_isset quartz]} {
-    default_variants +x11
+    if {${os.major} <= 10} {
+        # OS X 10.6 and earlier do not supply all cursors specified by gtk3 +quartz (#49391)
+        if {[variant_isset quartz]} {
+            patchfiles-append   patch-gdk_quartz_gdkcursor-quartz-10_6_compat.diff
+        }
+    }
 }
 
 if {[variant_isset universal]} {
@@ -231,19 +237,30 @@ variant x11 conflicts quartz {
     require_active_variants path:lib/pkgconfig/cairo.pc:cairo x11
     require_active_variants path:lib/pkgconfig/pango.pc:pango x11
 
-    depends_lib-append \
-        port:xorg-libXi \
-        port:xorg-libXrandr \
-        port:xorg-libXcursor \
-        port:xorg-libXinerama \
-        port:xorg-libXdamage \
-        port:xorg-libXcomposite \
-        port:xorg-libXfixes \
-        port:at-spi2-atk
+    depends_lib-append      port:xorg-libXi \
+                            port:xorg-libXrandr \
+                            port:xorg-libXcursor \
+                            port:xorg-libXinerama \
+                            port:xorg-libXdamage \
+                            port:xorg-libXcomposite \
+                            port:xorg-libXfixes \
+                            port:at-spi2-atk
 
-    configure.args-append      --enable-xinerama \
-                               --x-include=${prefix}/include --x-lib=${prefix}/lib \
-                               --enable-x11-backend
+    configure.args-append   --enable-xinerama \
+                            --x-include=${prefix}/include \
+                            --x-lib=${prefix}/lib \
+                            --enable-x11-backend
+}
+
+if {![variant_isset quartz]} {
+    default_variants +x11
+}
+
+post-activate {
+    ui_debug "Updating gdk-pixbuf.loaders..."
+    system "${prefix}/bin/gdk-pixbuf-query-loaders >${prefix}/etc/gtk-3.0/gdk-pixbuf.loaders"
+    ui_debug "Updating GLib schemas..."
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
 
 livecheck.type      gnome-with-unstable
