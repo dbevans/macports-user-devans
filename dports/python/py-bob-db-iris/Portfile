@@ -7,7 +7,7 @@ PortGroup                    github 1.0
 PortGroup                    active_variants 1.1
 
 name                         py-bob-db-iris
-version                      2.0.3
+version                      2.0.4
 license                      BSD
 homepage                     http://idiap.github.com/bob/
 
@@ -27,14 +27,14 @@ long_description             Bob is a signal-processing and machine learning too
                              and C++ and is designed to be both efficient and to \
                              reduce development time.
 
-github.setup                 bioidiap bob.db.iris 2.0.3 v
+github.setup                 bioidiap bob.db.iris 2.0.4 v
 
 
 python.versions              27 34
 python.default_version       27
 
-checksums                    rmd160  1de5aea12001a3bb8e92ce45414792c2fde6efee \
-                             sha256  2ba08abdf8c54fc9c3363048344d9eed867f4dd8cd349030deb16a921fcebd9d
+checksums                    rmd160  b262d9d14a5f6395c54152c10db256b4a8458231 \
+                             sha256  b376e13b5024aa9dd3a127b44e515729856156f401d07d279b2d299792e4ab54
 
 
 
@@ -46,6 +46,7 @@ if {$subport ne $name} {
 
     depends_lib-append \
       port:blitz \
+      port:cmake \
       path:lib/libavcodec.dylib:ffmpeg \
       port:matio \
       port:jpeg \
@@ -75,4 +76,25 @@ if {$subport ne $name} {
       port:py${python.version}-bob-db-base
 
       require_active_variants   port:boost python${python.version}
+
+
+    #WORKAROUND TO AVOID CONFLICTS WITH ANOTHER BOB PACKAGES (DELETING THE ROOT __INIT_FILES)
+    post-destroot {
+        set filename ${destroot}${python.pkgd}/bob/__init__.py
+        if {[file exists $filename] == 1} {
+          file delete $filename
+          file delete ${destroot}${python.pkgd}/bob/__init__.pyc
+
+          file delete ${destroot}${python.pkgd}/bob/db/__init__.py
+          file delete ${destroot}${python.pkgd}/bob/db/__init__.pyc
+
+        }
+
+        set filename ${destroot}${python.pkgd}/bob/__pycache__/__init__.cpython-34.pyc
+        if {[file exists $filename] == 1} {
+           file delete $filename
+           file delete ${destroot}${python.pkgd}/bob/db/__pycache__/__init__.cpython-34.pyc
+        }
+    }
+
 }

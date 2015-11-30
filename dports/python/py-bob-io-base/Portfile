@@ -7,7 +7,7 @@ PortGroup                    github 1.0
 PortGroup                    active_variants 1.1
 
 name                         py-bob-io-base
-version                      2.0.6
+version                      2.0.7
 license                      BSD
 homepage                     http://idiap.github.com/bob/
 
@@ -27,14 +27,14 @@ long_description             Bob is a signal-processing and machine learning too
                              and C++ and is designed to be both efficient and to \
                              reduce development time.
 
-github.setup                 bioidiap bob.io.base 2.0.6 v
+github.setup                 bioidiap bob.io.base 2.0.7 v
 
 
 python.versions              27 34
 python.default_version       27
 
-checksums                    rmd160  3c9464bf880685fe6c1824ce767b6b994f318a2c \
-                             sha256  babb650fccc76a37791fb7e2581124f952ffb2fb8061f145f18a6d779236dc48
+checksums                    rmd160  16d0b8c865880df1af80d54311cbbe5ec2de7756 \
+                             sha256  85e20747bd6beba112aac3af49b472963cea07a355d0ff8f4844c251f1ee18d2
 
 
 if {$subport ne $name} {
@@ -43,6 +43,7 @@ if {$subport ne $name} {
 
     depends_lib-append \
       port:blitz \
+      port:cmake \
       path:lib/libavcodec.dylib:ffmpeg \
       port:matio \
       port:jpeg \
@@ -68,5 +69,22 @@ if {$subport ne $name} {
       port:py${python.version}-bob-extension
 
       require_active_variants   port:boost python${python.version}
+
+    #WORKAROUND TO AVOID CONFLICTS WITH ANOTHER BOB PACKAGES (DELETING THE ROOT __INIT_FILES)
+    post-destroot {
+        set filename ${destroot}${python.pkgd}/bob/__init__.py
+        if {[file exists $filename] == 1} {
+          file delete $filename
+          file delete ${destroot}${python.pkgd}/bob/__init__.pyc
+        }
+
+        set filename ${destroot}${python.pkgd}/bob/__pycache__/__init__.cpython-34.pyc
+        if {[file exists $filename] == 1} {
+           file delete $filename
+           file delete ${destroot}${python.pkgd}/bob/io/__pycache__/__init__.cpython-34.pyc
+        }
+
+    }
+
 }
 

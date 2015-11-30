@@ -7,7 +7,7 @@ PortGroup                    github 1.0
 PortGroup                    active_variants 1.1
 
 name                         py-bob-ip-color
-version                      2.0.3
+version                      2.0.4
 license                      BSD
 homepage                     http://idiap.github.com/bob/
 
@@ -27,14 +27,14 @@ long_description             Bob is a signal-processing and machine learning too
                              and C++ and is designed to be both efficient and to \
                              reduce development time.
 
-github.setup                 bioidiap bob.ip.color 2.0.3 v
+github.setup                 bioidiap bob.ip.color 2.0.4 v
 
 
 python.versions              27 34
 python.default_version       27
 
-checksums                    rmd160  8a3ef20032fbfae1aee08c9c92b569cd69349369 \
-                             sha256  0e7183b2f72c576b8bef0d8382b618eb1106c08a7254cb8c394715ce39569886
+checksums                    rmd160  00d27bc6f15f2ccb26b184b3d4cf21037cdc63ad \
+                             sha256  ddd68b15251a7f811cb6e8f3f0ab3ba5b78c12b7e91163d70d56a06a3eba6608
 
 
 if {$subport ne $name} {
@@ -43,6 +43,7 @@ if {$subport ne $name} {
 
     depends_lib-append \
       port:blitz \
+      port:cmake \
       path:lib/libavcodec.dylib:ffmpeg \
       port:matio \
       port:jpeg \
@@ -66,9 +67,30 @@ if {$subport ne $name} {
       port:py${python.version}-bob-extension \
       port:py${python.version}-bob-blitz \
       port:py${python.version}-bob-io-base \
-      port:py${python.version}-bob-core 
+      port:py${python.version}-bob-core
 
       require_active_variants   port:boost python${python.version}
+
+
+    #WORKAROUND TO AVOID CONFLICTS WITH ANOTHER BOB PACKAGES (DELETING THE ROOT __INIT_FILES)
+    post-destroot {
+        set filename ${destroot}${python.pkgd}/bob/__init__.py
+        if {[file exists $filename] == 1} {
+          file delete $filename
+          file delete ${destroot}${python.pkgd}/bob/__init__.pyc
+
+          file delete ${destroot}${python.pkgd}/bob/ip/__init__.py
+          file delete ${destroot}${python.pkgd}/bob/ip/__init__.pyc
+        }
+
+        set filename ${destroot}${python.pkgd}/bob/__pycache__/__init__.cpython-34.pyc
+        if {[file exists $filename] == 1} {
+           file delete $filename
+           file delete ${destroot}${python.pkgd}/bob/ip/__pycache__/__init__.cpython-34.pyc
+        }
+
+    }
+
 }
 
 

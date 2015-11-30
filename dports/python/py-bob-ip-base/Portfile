@@ -7,7 +7,7 @@ PortGroup                    github 1.0
 PortGroup                    active_variants 1.1
 
 name                         py-bob-ip-base
-version                      2.0.6
+version                      2.0.7
 license                      BSD
 homepage                     http://idiap.github.com/bob/
 
@@ -27,14 +27,14 @@ long_description             Bob is a signal-processing and machine learning too
                              and C++ and is designed to be both efficient and to \
                              reduce development time.
 
-github.setup                 bioidiap bob.ip.base 2.0.6 v
+github.setup                 bioidiap bob.ip.base 2.0.7 v
 
 
 python.versions              27 34
 python.default_version       27
 
-checksums                    rmd160  5a6edfea7c7c3f958f1566da2cb9daf6efb7a2c4 \
-                             sha256  86d225db7d66eb1e14d865c7de369ae883f87a735b7d960acc678667006d4be1
+checksums                    rmd160  651d49a23439ed65586280031d4870aac1a9b5f5 \
+                             sha256  05077ca905a4fb05e4a2f54de2b9fb2ee16eb00d941e492d7bb60a49c5ab238d
 
 
 
@@ -44,6 +44,7 @@ if {$subport ne $name} {
 
     depends_lib-append \
       port:blitz \
+      port:cmake \
       path:lib/libavcodec.dylib:ffmpeg \
       port:matio \
       port:jpeg \
@@ -72,6 +73,24 @@ if {$subport ne $name} {
       port:py${python.version}-bob-math
 
       require_active_variants   port:boost python${python.version}
+
+
+    #WORKAROUND TO AVOID CONFLICTS WITH ANOTHER BOB PACKAGES (DELETING THE ROOT __INIT_FILES)
+    post-destroot {
+        set filename ${destroot}${python.pkgd}/bob/__init__.py
+        if {[file exists $filename] == 1} {
+          file delete $filename
+          file delete ${destroot}${python.pkgd}/bob/__init__.pyc
+        }
+
+        set filename ${destroot}${python.pkgd}/bob/__pycache__/__init__.cpython-34.pyc
+        if {[file exists $filename] == 1} {
+           file delete $filename
+           file delete ${destroot}${python.pkgd}/bob/ip/__pycache__/__init__.cpython-34.pyc
+        }
+
+    }
+
 }
 
 

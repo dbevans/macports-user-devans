@@ -7,7 +7,7 @@ PortGroup                    github 1.0
 PortGroup                    active_variants 1.1
 
 name                         py-bob-extension
-version                      2.0.8
+version                      2.0.10
 license                      BSD
 homepage                     http://idiap.github.com/bob/
 
@@ -25,15 +25,15 @@ long_description             This package is part of the signal-processing and m
                              either a pure Python API, or even a mix of C++ and python.
                              
 
-github.setup                 bioidiap bob.extension 2.0.8 v
+github.setup                 bioidiap bob.extension 2.0.10 v
 
 
 python.versions              27 34
 python.default_version       27
 
 
-checksums                    rmd160  817bb0ffbd18119a1405ef0c1bfbb35bf52538f0 \
-                             sha256  a9e33cb253cfcaccc9e980af15c2eeac02d0ae8392a88eccf25f75c546e21822
+checksums                    rmd160  24bd5f3f1e7474aded6a50b124114cb7a2cf28be \
+                             sha256  86501700f3e7a096a1101ce4e8406c1b1c9b97375f6b95f5712d19bec8d1e87d
 
 
 if {$subport ne $name} {
@@ -42,8 +42,10 @@ if {$subport ne $name} {
 
     depends_lib-append \
        port:py${python.version}-sphinx \
+       port:cmake \
        port:py${python.version}-setuptools \
        port:boost \
 
        require_active_variants   port:boost python${python.version}
+
 }

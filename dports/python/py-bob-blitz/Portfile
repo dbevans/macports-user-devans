@@ -7,7 +7,7 @@ PortGroup                    github 1.0
 PortGroup                    active_variants 1.1
 
 name                         py-bob-blitz
-version                      2.0.7
+version                      2.0.8
 license                      BSD
 homepage                     http://idiap.github.com/bob/
 
@@ -23,16 +23,15 @@ description                  Bob Bindings for Blitz++ (a C++ array template libr
 long_description             This package contains a set of Pythonic bindings to the popular Blitz/C++ library. \
                              It also provides a C/C++ API that allows your Python extensions to leverage from the interfaces provided by this package.
 
-github.setup                 bioidiap bob.blitz 2.0.7 v
+github.setup                 bioidiap bob.blitz 2.0.8 v
 
 
 python.versions              27 34
 python.default_version       27
 
 
-checksums                    rmd160  6f3d0220af6981d4952880031644e426825794fd \
-                             sha256  35e7842d575e3433557a5e221a8b7de1a3bac5075ff8609997ee837e6b585e58
-
+checksums                    rmd160  c9e4623287d1ad310ede54cc4da7b1320aadaf26 \
+                             sha256  1ddc01ee7e2dc612faf87c11d8ca588d47ba9ccc55d65876fcd5136e8898b71b
 
 
 if {$subport ne $name} {
@@ -42,6 +41,7 @@ if {$subport ne $name} {
     depends_lib-append \
        port:blitz \
        port:boost \
+       port:cmake \
        port:py${python.version}-sphinx \
        port:py${python.version}-setuptools \
        port:py${python.version}-numpy \
@@ -53,4 +53,18 @@ if {$subport ne $name} {
        port:py${python.version}-bob-extension
 
        require_active_variants   port:boost python${python.version}
+
+    #WORKAROUND TO AVOID CONFLICTS WITH ANOTHER BOB PACKAGES (DELETING THE ROOT __INIT_FILES)
+    post-destroot {
+        set filename ${destroot}${python.pkgd}/bob/__init__.py
+        if {[file exists $filename] == 1} {
+          file delete $filename
+          file delete ${destroot}${python.pkgd}/bob/__init__.pyc
+        }
+
+        set filename ${destroot}${python.pkgd}/bob/__pycache__/__init__.cpython-34.pyc
+        if {[file exists $filename] == 1} {
+           file delete $filename
+        }
+    }
 }

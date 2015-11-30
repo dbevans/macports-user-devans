@@ -7,7 +7,7 @@ PortGroup                    github 1.0
 PortGroup                    active_variants 1.1
 
 name                         py-bob-core
-version                      2.0.4
+version                      2.0.5
 license                      BSD
 homepage                     http://idiap.github.com/bob/
 
@@ -26,15 +26,15 @@ long_description             Bob is a signal-processing and machine learning too
                              and C++ and is designed to be both efficient and to \
                              reduce development time.
 
-github.setup                 bioidiap bob.core 2.0.4 v
+github.setup                 bioidiap bob.core 2.0.5 v
 
 
 python.versions              27 34
 python.default_version       27
 
 
-checksums                    rmd160  beb41065dd89570f3cc1971f907aa87471fd910f \
-                             sha256  6e6d16f7ea2dfbcaa07d26168e3e65c4c81e60203cc858831aea65d73ca1af4c
+checksums                    rmd160  be40e75456477d679ca41f9d29ae041d8deb5e1e \
+                             sha256  8c6f78ee65092c9977075611de4829f6246553569577cd4cd57b6bbbbd3cd66a
 
 
 if {$subport ne $name} {
@@ -45,6 +45,7 @@ if {$subport ne $name} {
     port:blitz \
     path:lib/libavcodec.dylib:ffmpeg \
     port:matio \
+    port:cmake \
     port:jpeg \
     port:netpbm \
     port:libpng \
@@ -67,6 +68,22 @@ if {$subport ne $name} {
     port:py${python.version}-bob-extension
 
     require_active_variants   port:boost python${python.version}
+
+
+    #WORKAROUND TO AVOID CONFLICTS WITH ANOTHER BOB PACKAGES (DELETING THE ROOT __INIT_FILES)
+    post-destroot {
+        set filename ${destroot}${python.pkgd}/bob/__init__.py
+        puts $filename
+        if {[file exists $filename] == 1} {
+          file delete $filename
+          file delete ${destroot}${python.pkgd}/bob/__init__.pyc
+        }
+        set filename ${destroot}${python.pkgd}/bob/__pycache__/__init__.cpython-34.pyc
+        if {[file exists $filename] == 1} {
+           file delete $filename
+        }
+    }
+
 }
 
 

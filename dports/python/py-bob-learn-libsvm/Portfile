@@ -7,7 +7,7 @@ PortGroup                    github 1.0
 PortGroup                    active_variants 1.1
 
 name                         py-bob-learn-libsvm
-version                      2.0.2
+version                      2.0.3
 license                      BSD
 homepage                     http://idiap.github.com/bob/
 
@@ -27,14 +27,14 @@ long_description             Bob is a signal-processing and machine learning too
                              and C++ and is designed to be both efficient and to \
                              reduce development time.
 
-github.setup                 bioidiap bob.learn.libsvm 2.0.2 v
+github.setup                 bioidiap bob.learn.libsvm 2.0.3 v
 
 
 python.versions              27 34
 python.default_version       27
 
-checksums                    rmd160  84908b48df9e39b80fb68c32dc9762a2ea1d51db \
-                             sha256  327088267197b1c2dcfc52e1faaeeae36336c274a1d8aa281635725ef03f6dff
+checksums                    rmd160  28a09c8066d699d98e52dc76bd16f684b2dee068 \
+                             sha256  605c75a6f414f1e72c9e8410f9aeade0c985fd94c38cbb45d4b1f3adbb8af591
 
 
 
@@ -44,6 +44,7 @@ if {$subport ne $name} {
 
     depends_lib-append \
       port:blitz \
+      port:cmake \
       path:lib/libavcodec.dylib:ffmpeg \
       port:matio \
       port:jpeg \
@@ -70,6 +71,29 @@ if {$subport ne $name} {
       port:py${python.version}-bob-io-base
 
       require_active_variants   port:boost python${python.version}
+
+
+
+    #WORKAROUND TO AVOID CONFLICTS WITH ANOTHER BOB PACKAGES (DELETING THE ROOT __INIT_FILES)
+    post-destroot {
+        set filename ${destroot}${python.pkgd}/bob/__init__.py
+        if {[file exists $filename] == 1} {
+          file delete $filename
+          file delete ${destroot}${python.pkgd}/bob/__init__.pyc
+
+          file delete ${destroot}${python.pkgd}/bob/learn/__init__.py
+          file delete ${destroot}${python.pkgd}/bob/learn/__init__.pyc
+
+        }
+
+        set filename ${destroot}${python.pkgd}/bob/__pycache__/__init__.cpython-34.pyc
+        if {[file exists $filename] == 1} {
+           file delete $filename
+           file delete ${destroot}${python.pkgd}/bob/learn/__pycache__/__init__.cpython-34.pyc
+        }
+
+    }
+
 }
 
 

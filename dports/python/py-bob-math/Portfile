@@ -7,7 +7,7 @@ PortGroup                    github 1.0
 PortGroup                    active_variants 1.1
 
 name                         py-bob-math
-version                      2.0.2
+version                      2.0.3
 license                      BSD
 homepage                     http://idiap.github.com/bob/
 
@@ -27,14 +27,14 @@ long_description             Bob is a signal-processing and machine learning too
                              and C++ and is designed to be both efficient and to \
                              reduce development time.
 
-github.setup                 bioidiap bob.math 2.0.2 v
+github.setup                 bioidiap bob.math 2.0.3 v
 
 
 python.versions              27 34
 python.default_version       27
 
-checksums                    rmd160  c71da75c05088772ccd3d45c26e248deefd5cefd \
-                             sha256  02a3a80587cfd26c205ad9b1ee1730655902a33a7931c148eac4c69e09186a9d
+checksums                    rmd160  52b04f5b4d6c5ce910b898843904dae57eaad049 \
+                             sha256  0c12b8f574d6e96221e2f1a25981b03cc920eb13c7f122fb8c703700fc50e9cc
 
 
 if {$subport ne $name} {
@@ -43,6 +43,7 @@ if {$subport ne $name} {
 
     depends_lib-append \
       port:blitz \
+      port:cmake \
       path:lib/libavcodec.dylib:ffmpeg \
       port:matio \
       port:jpeg \
@@ -68,6 +69,23 @@ if {$subport ne $name} {
       port:py${python.version}-bob-extension
 
       require_active_variants   port:boost python${python.version}
+
+
+    #WORKAROUND TO AVOID CONFLICTS WITH ANOTHER BOB PACKAGES (DELETING THE ROOT __INIT_FILES)
+    post-destroot {
+        set filename ${destroot}${python.pkgd}/bob/__init__.py
+        if {[file exists $filename] == 1} {
+          file delete $filename
+          file delete ${destroot}${python.pkgd}/bob/__init__.pyc
+        }
+
+        set filename ${destroot}${python.pkgd}/bob/__pycache__/__init__.cpython-34.pyc
+        if {[file exists $filename] == 1} {
+           file delete $filename
+        }
+
+    }
+
 }
 
 

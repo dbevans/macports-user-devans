@@ -7,7 +7,7 @@ PortGroup                    github 1.0
 PortGroup                    active_variants 1.1
 
 name                         py-bob-db-base
-version                      2.0.3
+version                      2.0.5
 license                      BSD
 homepage                     http://idiap.github.com/bob/
 
@@ -27,14 +27,14 @@ long_description             Bob is a signal-processing and machine learning too
                              and C++ and is designed to be both efficient and to \
                              reduce development time.
 
-github.setup                 bioidiap bob.db.base 2.0.3 v
+github.setup                 bioidiap bob.db.base 2.0.5 v
 
 
 python.versions              27 34
 python.default_version       27
 
-checksums                    rmd160  9139fbd932e13188cecf9401180de9b520577438 \
-                             sha256  8c80c7934ca53bcf4a75505b4a101a6d96e43177c6ff20379a39dc3d3c39216d
+checksums                    rmd160  a31d1e89841ae1cc35fc11b721802f8a6c59a572 \
+                             sha256  40ce2b4d376fb2283d079aec3074d4829f2f8506a9e994b1dfc1988f1972ea10
 
 
 if {$subport ne $name} {
@@ -44,6 +44,7 @@ if {$subport ne $name} {
 
     depends_lib-append \
       port:blitz \
+      port:cmake \
       path:lib/libavcodec.dylib:ffmpeg \
       port:matio \
       port:jpeg \
@@ -69,6 +70,26 @@ if {$subport ne $name} {
       port:py${python.version}-sqlalchemy
 
       require_active_variants   port:boost python${python.version}
+
+
+    #WORKAROUND TO AVOID CONFLICTS WITH ANOTHER BOB PACKAGES (DELETING THE ROOT __INIT_FILES)
+    post-destroot {
+        set filename ${destroot}${python.pkgd}/bob/__init__.py
+        if {[file exists $filename] == 1} {
+          file delete $filename
+          file delete ${destroot}${python.pkgd}/bob/__init__.pyc
+
+          file delete ${destroot}${python.pkgd}/bob/db/__init__.py
+          file delete ${destroot}${python.pkgd}/bob/db/__init__.pyc
+
+        }
+
+        set filename ${destroot}${python.pkgd}/bob/__pycache__/__init__.cpython-34.pyc
+        if {[file exists $filename] == 1} {
+           file delete $filename
+        }
+
+    }
 
 }
 
