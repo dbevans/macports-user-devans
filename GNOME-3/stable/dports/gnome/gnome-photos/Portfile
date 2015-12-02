@@ -33,11 +33,11 @@ depends_build       port:pkgconfig \
 
 depends_lib         port:desktop-file-utils \
                     port:gtk3 \
-                    port:babl-devel \
+                    port:babl \
                     port:cairo \
                     port:exempi \
                     port:gfbgraph \
-                    port:gegl-devel \
+                    port:gegl-0.3 \
                     port:gdk-pixbuf2 \
                     port:gnome-desktop \
                     port:gnome-online-accounts \
