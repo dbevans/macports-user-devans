@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            mm-common
-version         0.9.8
+version         0.9.9
 license         GPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 
@@ -27,8 +27,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       sha256  c9ab5fd3872fbe245fbc35347acf4a95063111f81d54c43df3af662dad0a03d5 \
-                rmd160  7f2d86d6ee0f3615e276f8ad518b16102620a761
+checksums       sha256  9d00bc77e77794e0bd2ae68132c4b4136aa115d255e34b310f7449b29db50b7a \
+                rmd160  66f42f255ce47c6758339856f6b0329ff732df58
 
 supported_archs noarch
 
