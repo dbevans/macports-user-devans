@@ -6,7 +6,7 @@ PortGroup           active_variants 1.1
 PortGroup           gobject_introspection 1.0
 
 name                gnome-desktop
-version             3.19.1
+version             3.19.2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -25,8 +25,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  15eca83d14141ab3154433048bd2570a0c31e22c \
-                    sha256  872e91d665928edad4700adb76fcc90380e6ca4be2f28aa3adaada58e14d20b1
+checksums           rmd160  d2200b5caa8eb2968400164fb4de55b4df65213b \
+                    sha256  5978cf7a2a1bd8e9b5c96813865e5b8dfd83da61f2db1092c0ec4ba9a6f209c1
 
 depends_build       port:pkgconfig \
                     port:intltool \
