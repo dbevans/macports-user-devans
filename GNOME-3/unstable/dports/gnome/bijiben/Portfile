@@ -1,0 +1,73 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                bijiben
+version             3.19.3
+license             GPL-2+
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         Bijiben is an attempt to design an intuitive note editor with strong desktop integration
+long_description    ${description}
+maintainers         devans openmaintainer
+categories          gnome
+platforms           darwin
+homepage            https://wiki.gnome.org/Apps/Bijiben
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  a77f6fad6f10820d51f4dd5061e54d1dda7c7a70 \
+                    sha256  becc6d94cdc4b8e062ca2762f0acf278e22e986bf2b50d90bd41783372c5cd37
+
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:appstream-glib \
+                    port:gnome-common \
+                    port:gtk-doc \
+                    port:yelp-tools \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
+
+depends_lib         port:desktop-file-utils \
+                    port:shared-mime-info \
+                    port:gnome-online-accounts \
+                    port:evolution-data-server \
+                    port:gtk3 \
+                    port:tracker \
+                    port:zeitgeist
+
+platform darwin {
+    if {${configure.cxx_stdlib} eq "libstdc++"} {
+       depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
+    } else {
+       depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3
+    }
+}
+
+depends_run         port:gnome-themes-standard \
+                    port:yelp
+
+patchfiles          patch-src-Makefile.am.diff
+
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+}
+
+configure.cmd       ./autogen.sh
+
+configure.args      --disable-update-mimedb \
+                    --disable-schemas-compile \
+                    --disable-silent-rules
+
+post-activate {
+   system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
+   system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+   system "${prefix}/bin/update-mime-database ${prefix}/share/mime"
+   system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type      gnome-with-unstable
