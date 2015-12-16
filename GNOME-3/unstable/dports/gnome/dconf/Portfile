@@ -1,0 +1,47 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                dconf
+version             0.25.1
+set branch          [join [lrange [split ${version} .] 0 1] .]
+maintainers         devans openmaintainer
+categories          gnome
+platforms           darwin
+license             GPL-2+
+description         dconf is a simple key/value storage system that is heavily optimised for \
+                    reading.
+
+long_description    ${description} \
+                    This makes it an ideal system for storing user preferences \
+                    (which are read 1000s of times for each time the user changes one).
+
+homepage            https://wiki.gnome.org/Projects/dconf
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  0df89eb7c3130df9ad738dca2c0d706e07cb82fe \
+                    sha256  5011982b2b81c531f557d2abed215bb78223b6e75f0c92aaf6b73d3c8aa711d1
+
+depends_build       port:pkgconfig \
+                    port:docbook-xsl \
+                    port:libxslt
+
+depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                    port:vala
+
+patchfiles          patch-fix-lib-names-Makefile.am.diff
+
+use_autoreconf      yes
+autoreconf.args     -fvi
+
+configure.args      --disable-schemas-compile \
+                    --disable-silent-rules
+
+post-activate {
+    system "${prefix}/bin/gio-querymodules ${prefix}/lib/gio/modules"
+}
+
+livecheck.type      gnome-with-unstable
