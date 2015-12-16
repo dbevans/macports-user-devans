@@ -11,7 +11,7 @@ PortGroup           compiler_blacklist_versions 1.0
 name                gtk3
 set real_name       gtk+
 epoch               1
-version             3.19.4
+version             3.19.5
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2.1+
@@ -31,8 +31,8 @@ use_xz              yes
 
 master_sites        gnome:sources/gtk+/${branch}/
 
-checksums           rmd160  0dc28eb8a0180c93bca24677dd3e4005f87a2c9d \
-                    sha256  f213795dffa9207be94300ac4da3835d4c21e934d983d490aa110b4d88e1432f
+checksums           rmd160  8d475ec55a965158028bc27579c16c9fa8dc6fa8 \
+                    sha256  4829e8fa2353bf70329362164b5afdf54e6af3f8bd0de2a2d4f62e7560cfcc72
 
 minimum_xcodeversions {9 3.1}
 
