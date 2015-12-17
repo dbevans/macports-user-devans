@@ -4,20 +4,23 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-PKG_NAME="control-center"
 ACLOCAL_FLAGS="-I libgd $ACLOCAL_FLAGS"
 
 (test -f $srcdir/configure.ac \
   && test -f $srcdir/autogen.sh \
   && test -d $srcdir/shell) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
-    echo " top-level $PKG_NAME directory"
+    echo " top-level gnome-control-center directory"
     exit 1
 }
 
 DIE=0
 
 rm -f .using-gnome-libs-package
+
+# Fetch submodules if needed
+# echo "+ Setting up submodules"
+# git submodule update --init --recursive
 
 if ! which gnome-autogen.sh ; then
   echo "You need to install the gnome-common module and make"
