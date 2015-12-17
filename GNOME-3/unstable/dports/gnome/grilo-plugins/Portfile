@@ -5,10 +5,7 @@ PortSystem          1.0
 PortGroup           compiler_blacklist_versions 1.0
 
 name                grilo-plugins
-set git_name        ${name}
-set git_commit      c74848fbd102175c845c4958fdb18f6cb17e62c4
-set git_date        20151214
-version             0.3.0-${git_date}
+version             0.3.0
 license             LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Framework for discovering and browsing media - Plugins.
@@ -19,12 +16,12 @@ maintainers         juanrgar devans openmaintainer
 categories          gnome
 platforms           darwin
 homepage            https://wiki.gnome.org/Grilo
-master_sites        https://git.gnome.org/browse/${git_name}/snapshot/
+master_sites        gnome:sources/${name}/${branch}/
 
-distname            ${git_name}-${git_commit}
+use_xz              yes
 
-checksums           rmd160  7c7a24623cb20f6c7602e0d956783b42dc251588 \
-                    sha256  14504d21d4117c1197c76ea2b796d96088b7db2534bfdd62374f4a768ae4d220
+checksums           rmd160  66807d9e1cfa23e15cebb214b53cecc8e2bb23cb \
+                    sha256  8e7eafae50f7fdd7eec006ad6d5b9aee888270ff288e6d0bcb14d1c71f0d6fcc
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -50,6 +47,10 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+}
+
 configure.cmd       ./autogen.sh
 
 # blacklist compilers that do not support C11
@@ -64,7 +65,6 @@ configure.args      --disable-silent-rules \
                     --enable-filesystem \
                     --enable-optical-media \
                     --enable-jamendo \
-                    --enable-lastfm-albumart \
                     --enable-youtube \
                     --enable-flickr \
                     --enable-podcasts \
@@ -89,4 +89,4 @@ configure.args      --disable-silent-rules \
 #                    --enable-goa \ # as of grilo-plugins 0.2.15 requires goa-1.0 >= 3.17.91
 #                    --enable-tracker \
 
-livecheck.type      none
+livecheck.type      gnome-with-unstable

@@ -5,10 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                grilo
-set git_name        ${name}
-set git_commit      6d68858dad2afbc0662021f9ca4d7167d79fb48a
-set git_date        20151214
-version             0.3.0-${git_date}
+version             0.3.0
 license             LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Framework for discovering and browsing media.
@@ -19,12 +16,12 @@ maintainers         juanrgar devans openmaintainer
 categories          gnome
 platforms           darwin
 homepage            https://wiki.gnome.org/Projects/Grilo
-master_sites        https://git.gnome.org/browse/${git_name}/snapshot/
+master_sites        gnome:sources/${name}/${branch}/
 
-distname            ${git_name}-${git_commit}
+use_xz              yes
 
-checksums           rmd160  17a72c4fba063bb9c46adca23a65a44a2b798855 \
-                    sha256  316a97625f8d59e7ca3b7e7998dfa325df111e12c70eff888549021eed2cae7f
+checksums           rmd160  fde27449136aa834f1c408583ab82b217676c4ae \
+                    sha256  1fd1a87d606f56adb3086954baec3ea6e25d9ba3fb010f11d1d3ddc9ec66bc60
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -54,8 +51,12 @@ configure.args      --disable-silent-rules \
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+}
+
 configure.cmd       ./autogen.sh
 
 destroot.keepdirs   ${destroot}${prefix}/lib/grilo-0.2
 
-livecheck.type      none
+livecheck.type      gnome-with-unstable
