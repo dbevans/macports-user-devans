@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                tracker
-version             1.7.0
+version             1.7.1
 license             GPL-2+ LGPL-2.1+ BSD
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Metadata database, indexer and search tool.
@@ -22,8 +22,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  7590be3d46657ad9b0ea8edd2442681b1af159ea \
-                    sha256  4fbfa4b14a97ed02865451eec8f426612b7257503418f6f2c3e7488c28c9f795
+checksums           rmd160  3fea36f14bdd24a266bd8d8e10c3b1d19aea9fdd \
+                    sha256  0429a78149ab0afd0529d8423222f5c184faaceabcf3d66a67f3b716b462ce29
 
 depends_build       port:pkgconfig \
                     port:intltool \
