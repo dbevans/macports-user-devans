@@ -54,6 +54,9 @@ configure.args      --enable-compile-warnings=minimum \
                     --disable-schemas-compile \
                     --disable-silent-rules
 
+# evolution-data-server->nss is not universal
+universal_variant   no
+
 post-activate {
    system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
