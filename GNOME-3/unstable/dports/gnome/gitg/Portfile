@@ -2,10 +2,10 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           gobject_introspection 1.0
 
 name                gitg
-# latest version 3.16.1 requires webkit2-gtk3
-version             3.17.1
+version             3.19.1
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME git repository viewer.
@@ -26,8 +26,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  2c21c9b21273cd45348156756e5e31e2deebf855 \
-                    sha256  2bdacc1db4bfcb0fb95d42700fa40130458a1d7f3ded6cacc8f1f5a469efd83f
+checksums           rmd160  f7433338398aab9c3557d633854cf14903a9e4bc \
+                    sha256  fb31c8a23c93829afb518eaa81560508208a366e006593b0dba9d2f874017457
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -37,8 +37,6 @@ depends_build       port:pkgconfig \
                     port:libtool
 
 depends_lib         port:desktop-file-utils \
-                    port:json-glib \
-                    port:gobject-introspection \
                     port:gsettings-desktop-schemas \
                     port:gtk3 \
                     port:gtksourceview3 \
@@ -46,12 +44,14 @@ depends_lib         port:desktop-file-utils \
                     port:libgee \
                     port:libgit2-glib \
                     port:libpeas \
+                    port:libsoup \
                     port:libsecret
 
 
-depends_run         port:gnome-settings-daemon
+depends_run         port:gnome-themes-standard
 
-# patchfiles          gitg-commit-view-c.diff
+gobject_introspection yes
+
 patchfiles          patch-autogen.sh.diff
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
