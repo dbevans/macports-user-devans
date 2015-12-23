@@ -5,8 +5,8 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gitg
-version             3.19.2
-license             GPL-2
+version             3.19.3
+license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME git repository viewer.
 long_description    gitg is a fast git repository browser. It currently features: \
@@ -26,8 +26,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  85778cebdb4bb3928cba249adb1631e0d136fdeb \
-                    sha256  52968be7d3dffaf20d14b25ca68773bf8ce73b32c5c8d3eac63cea0721c7a709
+checksums           rmd160  aaf761406c4c2d72986a98bc7073504f73bb3eeb \
+                    sha256  c14949cda8e9d9a8ac16e3993ed188be4c408a573247faf16133580f424a091a
 
 depends_build       port:pkgconfig \
                     port:intltool \
