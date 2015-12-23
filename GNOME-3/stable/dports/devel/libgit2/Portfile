@@ -35,7 +35,11 @@ depends_lib         port:libiconv \
 
 patchfiles          patch-strnlen-posix.h.diff
 
-configure.args-append \
+variant threadsafe description {Build with threadsafe option} {
+    configure.args-append \
                     -DTHREADSAFE:BOOL=ON
+}
+
+default_variants    +threadsafe
 
 livecheck.regex     "archive/v(\\d+(?:\\.\\d+)*)${extract.suffix}"
