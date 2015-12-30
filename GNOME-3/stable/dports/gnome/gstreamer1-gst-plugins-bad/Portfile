@@ -70,7 +70,6 @@ autoreconf.args     -fvi
 
 patchfiles          modplug.patch \
                     openal.patch
-
 #
 # could depend on tons for multimedia stuff +variants
 # the following ports are available but don't configure
@@ -97,7 +96,6 @@ configure.args      --disable-silent-rules \
                     --disable-sdltest \
                     --enable-experimental \
                     --enable-static
-                    
 
 #
 # port:soundtouch (fails on autoreconf on darwin 8 & 9, see #27533) disable soundtouch on these platforms
@@ -109,10 +107,10 @@ configure.args      --disable-silent-rules \
 platform darwin {
     if {${os.major} < 10} {
         depends_lib-delete      port:soundtouch
-        configure.args-append   --disable-soundtouch --disable-opengl
+        configure.args-append   --disable-soundtouch
     }
     if {${os.major} < 11 } {
-        configure.args-append   --disable-cocoa
+        configure.args-append   --disable-cocoa --disable-opengl
     }
     if {${os.major} < 14} {
         configure.args-append   --disable-apple_media
