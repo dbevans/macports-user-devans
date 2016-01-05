@@ -4,8 +4,7 @@
 PortSystem          1.0
 
 name                yelp
-# version 3.17.3+ requires webkit2gtk-4.0 >= 2.7.1
-version             3.17.2
+version             3.19.1
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Help browser for GNOME.
@@ -21,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  38ef9ea1773b01a4407808be798cc9752457b9ff \
-                    sha256  0626f7a954d7969e058474a9d5e05977eb886703c76aaba7a48cb7cd236fcd27
+checksums           rmd160  f15e95a1c897c5cb528ba1b61f6da308267670ca \
+                    sha256  ffafa231e2d4a388870a8e131825f60afd76ef3eba53f6d589727fdbd1dbface
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -35,7 +34,6 @@ depends_build       port:pkgconfig \
 
 depends_lib         port:desktop-file-utils \
                     port:gtk3 \
-                    path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3 \
                     port:sqlite3 \
                     port:xz \
                     port:bzip2 \
@@ -70,9 +68,14 @@ post-activate {
 
 platform darwin {
     if {${configure.cxx_stdlib} eq "libstdc++"} {
-       depends_lib-delete path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3
-       depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
+        # version 3.17.3+ requires webkit2gtk-4.0 >= 2.7.1
+        version 3.17.2
+        checksums   rmd160  38ef9ea1773b01a4407808be798cc9752457b9ff \
+                    sha256  0626f7a954d7969e058474a9d5e05977eb886703c76aaba7a48cb7cd236fcd27
+        depends_lib-append  path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
+        livecheck.type      none
+    } else {
+        depends_lib-append  port:webkit2-gtk
+        livecheck.type      gnome-with-unstable
     }
 }
-
-livecheck.type      gnome-with-unstable
