@@ -4,8 +4,7 @@
 PortSystem      1.0
 
 name            epiphany
-version         3.8.2
-revision        7
+version         3.18.2
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     A GNOME Web browser.
@@ -22,8 +21,8 @@ master_sites    gnome:sources/${name}/${branch}/
 
 use_xz          yes
 
-checksums       rmd160  2aacd8b02f456e345b9f23ff6114d341bbf0013a \
-                sha256  ae89d6902ed243304d2cbf2fa361f6dd0cb3401fdaf726e6fdd4acc09197d50a
+checksums       rmd160  68c71672660a55275f83461cc0863fe0c79a14b2 \
+                sha256  8436170731966bb40b7d8e29dbedfa5d5ddbf78572cf5fd51fce1ac6da5da6c2
 
 depends_build   port:pkgconfig \
                 port:intltool \
@@ -34,7 +33,6 @@ depends_build   port:pkgconfig \
 
 depends_lib     port:desktop-file-utils \
                 port:gtk3 \
-                path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3 \
                 port:gnome-desktop \
                 port:libxslt\
                 port:libsoup \
@@ -54,17 +52,31 @@ depends_run     port:gnome-themes-standard \
 
 platform darwin {
     if {${configure.cxx_stdlib} eq "libstdc++"} {
-       depends_lib-delete path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3
-       depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
+        version         3.8.2
+        revision        7
+        checksums       rmd160  2aacd8b02f456e345b9f23ff6114d341bbf0013a \
+                        sha256  ae89d6902ed243304d2cbf2fa361f6dd0cb3401fdaf726e6fdd4acc09197d50a
+        depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
+
+        patchfiles      patch-configure.ac.diff
+
+        # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+
+        post-patch {
+            xinstall -m 755 ${filespath}/autogen.sh-3.8.2 ${worksrcpath}/autogen.sh
+        }
+    } else {
+        depends_build-append    port:appstream-glib \
+                                port:itstool \
+                                port:yelp-tools
+        depends_lib-append      path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk
+
+        # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+
+        post-patch {
+            xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+        }
     }
-}
-
-patchfiles      patch-configure.ac.diff
-
-# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
-
-post-patch {
-    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
 }
 
 configure.cmd       ./autogen.sh
@@ -72,6 +84,7 @@ configure.cmd       ./autogen.sh
 configure.cflags-append -Wno-format-nonliteral
 
 configure.args  --with-distributor-name=MacPorts \
+                --disable-silent-rules \
                 --disable-schemas-compile \
                 --disable-tests
 
