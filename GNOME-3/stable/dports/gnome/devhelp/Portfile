@@ -29,8 +29,7 @@ depends_build       port:pkgconfig \
                     port:gnome-common \
                     port:autoconf \
                     port:automake \
-                    port:libtool \
-                    port:python27
+                    port:libtool
 
 depends_lib         port:desktop-file-utils \
                     port:gtk3
@@ -39,7 +38,9 @@ depends_run         port:gnome-themes-standard
 
 configure.cmd       ./autogen.sh
 
-configure.python    ${prefix}/bin/python2.7
+# use system python for build, requires python2 >= 2.3
+
+configure.python    /usr/bin/python
 configure.args      --disable-silent-rules \
                     --disable-schemas-compile
 
