@@ -10,7 +10,7 @@ if {${os.platform} eq "darwin" && ${os.major} >= 13} {
 
     set mavericks_or_better yes
 # version 3.16.0+ requires webkit2gtk-4.0
-    version         3.15.90
+    version         3.18.3
 
 } else {
 
@@ -34,8 +34,8 @@ use_xz              yes
 
 if {$mavericks_or_better} {
 
-checksums           rmd160  c927580fb050ec011b729f69ca364a2d59493236 \
-                    sha256  3aac92ce0aee089f7167a32bc1b25e86219dfde4dda0e21aa4caf5337b12f537
+    checksums       rmd160  74978a9140daef1ea85f8fce5fbba4a69d707393 \
+                    sha256  bfb983831af8b1fbd81b70befda7683a38f86ca4cc911f763ae31207306e3827
 
     depends_build   port:pkgconfig \
                     port:intltool \
@@ -46,7 +46,6 @@ checksums           rmd160  c927580fb050ec011b729f69ca364a2d59493236 \
                     port:gtk-doc
 
     depends_lib     port:gtk3 \
-                    path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3 \
                     port:libsoup \
                     port:json-glib \
                     port:rest \
@@ -91,7 +90,6 @@ gobject_introspection yes
                     port:gnome-common
 
     depends_lib     port:gtk3 \
-                    path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3 \
                     port:libsoup \
                     port:json-glib \
                     port:rest \
@@ -126,18 +124,11 @@ configure.cmd       ./autogen.sh
 
 platform darwin {
     if {${configure.cxx_stdlib} eq "libstdc++"} {
-       depends_lib-delete path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3
-       depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
+        depends_lib-append path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
+        # Version 3.8.5 is the last version that will build on darwin < 13
+        livecheck.type  none
+    } else {
+        depends_lib-append path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk
+        livecheck.type  gnome
     }
-}
-
-if {$mavericks_or_better} {
-
-    livecheck.type  gnome-with-unstable
-
-} else {
-
-# Version 3.8.5 is the last version that will build on darwin < 13
-    livecheck.type  none
-
 }
