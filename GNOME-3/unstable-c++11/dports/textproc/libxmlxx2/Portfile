@@ -9,7 +9,7 @@ PortGroup           cxx11 1.0
 
 name                libxmlxx2
 set gname           libxml++
-version             2.91.2
+version             2.91.3
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          textproc
 license             LGPL
@@ -25,21 +25,16 @@ master_sites        gnome:sources/${gname}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  6b9278ddd8ee20a326d8150d026f3effcf9d720f \
-                    sha256  daa1a00751e2867b0d0b73985d1afc0bf3514f2826047fc980e8d104213c9040
+checksums           rmd160  abfa983edf6c11aaa4109017480d86a73abc8737 \
+                    sha256  f9f910cacd1d07c71679eeea36ae018189b72b4b7dd11511a76562377ed4d06a
 
-# set pbranch to desired perl version
-# currently 5.22 (#48365)
-
-set pbranch         5.22
-
-depends_build       port:pkgconfig \
-                    port:perl${pbranch}
+depends_build       port:pkgconfig
 
 depends_lib         port:libxml2 \
                     port:glibmm
 
-configure.perl      ${prefix}/bin/perl${pbranch}
+# build using system perl
+configure.perl      /usr/bin/perl
 
 livecheck.type      gnome-with-unstable
 livecheck.name      ${gname}
