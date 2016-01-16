@@ -10,7 +10,7 @@ PortGroup           active_variants 1.1
 
 name                gtkmm3
 set gname           gtkmm
-version             3.19.5
+version             3.19.6
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         C++ interface to GTK+ version 3.
 long_description    gtkmm3 is the official C++ interface \
@@ -27,8 +27,8 @@ use_xz              yes
 dist_subdir         ${gname}
 distname            ${gname}-${version}
 
-checksums           rmd160  cb2d51460bf1fe037dd815764ac83d22b73fa342 \
-                    sha256  d103cd11c97213df4d4eb4ceab8fe371cfb49822325e31959f66749ccf6a9e5e
+checksums           rmd160  f5bf799ea8a0aab126552338fe261a37650768eb \
+                    sha256  f487f34cd73eb44fcfe7acd92a3ffe421af477389c3221dfc851a06d5f24030d
 
 depends_build       port:pkgconfig \
                     port:mm-common \
@@ -42,11 +42,6 @@ depends_lib         port:gtk3 \
                     path:lib/pkgconfig/cairomm-1.0.pc:cairomm \
                     port:pangomm \
                     port:atkmm
-
-# temporary patch to fix build until next gtk3 unstable release
-patchfiles          patch-gtk-src-border.hg.diff
-
-configure.cmd       ./autogen.sh
 
 #
 # dummy variants to ensure that this port gets rebuilt if
