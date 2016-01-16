@@ -43,6 +43,9 @@ depends_lib         port:gtk3 \
                     port:pangomm \
                     port:atkmm
 
+# build using system perl
+configure.perl      /usr/bin/perl
+
 #
 # dummy variants to ensure that this port gets rebuilt if
 # the corresponding variants for gtk3 change
