@@ -53,7 +53,7 @@ post-activate {
 platform darwin {
     if {${configure.cxx_stdlib} eq "libstdc++"} {
         version                 3.8.2
-        revision                4
+        revision                5
         checksums               rmd160  8d855f485742a0bdc766591d36af09bdbea61801 \
                                 sha256  a245b53824c6f2ff89245ff807bb2140bde74951ea6f1d759a0fd0c6959ca9f7
         depends_lib-append      path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
