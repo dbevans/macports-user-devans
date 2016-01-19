@@ -11,7 +11,7 @@ PortGroup           compiler_blacklist_versions 1.0
 name                gtk3
 set real_name       gtk+
 epoch               1
-version             3.19.6
+version             3.19.7
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2.1+
@@ -31,8 +31,8 @@ use_xz              yes
 
 master_sites        gnome:sources/gtk+/${branch}/
 
-checksums           rmd160  0daf2cf4c9a16adf2b35faaf6b106525d0b22c83 \
-                    sha256  9bf4871a9b8bb27905641eed80179562643faf1f8ed391368842502a2f127cd5
+checksums           rmd160  7e20e20d3c762dfa1fcdda1d61b157ab84c90a61 \
+                    sha256  375d8dfd037befddc8d7bf42e2599520520c0696abfc71936cd19351a1c2877e
 
 minimum_xcodeversions {9 3.1}
 
@@ -43,6 +43,7 @@ depends_lib         port:atk \
                     port:gdk-pixbuf2 \
                     path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:gobject-introspection \
+                    port:mesa \
                     port:libepoxy
                     
 depends_run         port:shared-mime-info \
