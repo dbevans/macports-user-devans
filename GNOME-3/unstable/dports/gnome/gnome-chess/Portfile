@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-chess
-version             3.19.3
+version             3.19.4
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Play the classic two-player boardgame of chess
@@ -17,8 +17,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  e20f0b4c4b447da82c41f6e624460eaaa1cc531c \
-                    sha256  99ea857752de3cdfcfdb31d320127cc60b133daeab74da2b7ff2c846aae246e0
+checksums           rmd160  089146fa1cd8d7df892e0ec40a26e796a3542459 \
+                    sha256  fe4583ce8f284048c99600216868d9d89d84f4b38dffb8cad73b732e21b254db
 
 depends_build       port:pkgconfig \
                     port:appstream-glib \
