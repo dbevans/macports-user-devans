@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                libgtop
-version             2.33.3
+version             2.33.4
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 
@@ -22,8 +22,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  ff0f2bd5d8ecbaa34bae43fb5c197d71fc71267b \
-                    sha256  53d9e12bbf2014df547c889cd6aeaf25e2e318c572491753db531dbb275cfc0c
+checksums           rmd160  82f5369ab7e9ef725401db32285858d5c0422c97 \
+                    sha256  efca47f50b5c914ec3848910dfd4020e655a34ddb994a166761f10aebac4df64
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -48,6 +48,7 @@ post-patch {
 configure.cmd       ./autogen.sh
 
 configure.args      --x-includes=${prefix}/include \
-                    --x-libraries=${prefix}/lib
+                    --x-libraries=${prefix}/lib \
+                    --disable-silent-rules
 
 livecheck.type      gnome-with-unstable
