@@ -1,0 +1,69 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                seahorse
+version             3.19.4
+license             GPL-2+ GFDL-1.1+
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         Seahorse is a graphical interface for managing and using encryption keys.
+long_description    ${description} \
+                    Currently it supports PGP keys (using GPG/GPGME) and SSH keys. Its goal is to \
+                    provide an easy to use Key Management Tool, along with an easy to use interface \
+                    for encryption operations.
+maintainers         devans openmaintainer
+categories          gnome crypto
+platforms           darwin
+homepage            https://wiki.gnome.org/Apps/Seahorse
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  f4bd5397ab52ae0145d444bf658f2ac42c96e275 \
+                    sha256  4a87dc5ddebe3e4c29c07f0d41e9fcf17ab5b67c60d0b7b9682756e269d42b29
+
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:itstool \
+                    port:yelp-tools \
+                    port:gnome-common \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
+
+depends_lib         port:desktop-file-utils \
+                    port:gtk3 \
+                    port:gcr \
+                    port:gpgme \
+                    port:openldap \
+                    port:libsoup \
+                    port:libsecret \
+                    port:openssh \
+                    port:vala
+
+depends_run         port:gnome-themes-standard \
+                    port:yelp
+
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+}
+
+configure.cmd       ./autogen.sh
+
+configure.cflags-append \
+                    -Wno-return-type
+
+configure.args      --disable-sharing \
+                    --disable-schemas-compile \
+                    --disable-silent-rules
+
+post-activate {
+    system "${prefix}/bin/update-desktop-database -q ${prefix}/share/applications"
+    system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type      gnome-with-unstable
