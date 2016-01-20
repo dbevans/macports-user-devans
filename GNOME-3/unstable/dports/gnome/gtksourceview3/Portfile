@@ -8,7 +8,7 @@ PortGroup           gobject_introspection 1.0
 name                gtksourceview3
 set gname           gtksourceview
 # version 3.19.1+ requires glib-2.0 >= 2.47.0 gtk+-3.0 >= 3.19.0
-version             3.19.3
+version             3.19.4
 license             LGPL-2.1+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
@@ -28,16 +28,11 @@ master_sites        gnome:sources/${gname}/${branch}/
 distname            ${gname}-${version}
 use_xz              yes
 
-checksums           rmd160  c78771195a67b171fab5b25342c116b0e2f8a8ed \
-                    sha256  30c26887e0690179d4cb81bf9acd62c5e4a34dbbab5b1c9069b8ace5dc2d7361
+checksums           rmd160  145df47c64094f0badf6133dadaaae1800118ded \
+                    sha256  1beb12cd76d741839d15beb88a7900b4f9c872b3248fa9343bfea849462e9c00
 
 depends_build       port:pkgconfig \
-                    port:intltool \
-                    port:gtk-doc \
-                    port:gnome-common \
-                    port:autoconf \
-                    port:automake \
-                    port:libtool
+                    port:gtk-doc
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:gettext \
@@ -49,13 +44,10 @@ gobject_introspection yes
 
 patchfiles          patch-no-as-needed.diff
 
-# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+# autoreconf required due to patching of m4/ax_compiler_flags_ldflags.m4
 
-post-patch {
-    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
-}
-
-configure.cmd       ./autogen.sh
+use_autoreconf      yes
+autoreconf.args     -fvi
 
 configure.args      --enable-compile-warnings=minimum \
                     --disable-silent-rules
