@@ -44,7 +44,6 @@ supported_archs noarch
 # gnome-software
 # gnome-user-share
 # gnome-video-effects
-# gupnp-av
 # gom
 # libgxps
 # libzapojit
@@ -120,6 +119,7 @@ depends_lib     port:adwaita-icon-theme \
                 port:gtkmm3 \
                 port:gtksourceview3 \
                 port:gupnp \
+                port:gupnp-av \
                 port:gupnp-igd \
                 port:gvfs \
                 port:json-glib \
