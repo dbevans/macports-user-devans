@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-core
-version         3.19.3
+version         3.19.4
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -31,21 +31,28 @@ supported_archs noarch
 # NetworkManager
 # cantarell-fonts
 # caribou
+# cheese
 # gnome-bluetooth
+# gnome-characters
 # gnome-contacts
 # gnome-disk-utility
+# gnome-initial-setup
+# gnome-logs
 # gnome-online-miners
-# gnome-packagekit
 # gnome-shell
 # gnome-shell-extensions
+# gnome-software
 # gnome-user-share
 # gnome-video-effects
+# gupnp-av
 # gom
 # libgxps
 # libzapojit
 # mousetweaks
 # mutter
 # network-manager-applet
+# orca
+# pyatspi
 # sushi
 #
 # BROKEN PORTS
@@ -76,7 +83,9 @@ depends_lib     port:adwaita-icon-theme \
                 port:epiphany \
                 port:evince \
                 port:evolution-data-server \
+                port:file-roller \
                 port:folks \
+                port:gcab \
                 port:gcr \
                 port:gdk-pixbuf2 \
                 port:geocode-glib \
@@ -89,7 +98,6 @@ depends_lib     port:adwaita-icon-theme \
                 port:gnome-calculator \
                 port:gnome-control-center \
                 port:gnome-desktop \
-                port:gnome-dictionary \
                 port:gnome-font-viewer \
                 port:gnome-keyring \
                 port:gnome-menus \
@@ -97,7 +105,6 @@ depends_lib     port:adwaita-icon-theme \
                 port:gnome-screenshot \
                 port:gnome-session \
                 port:gnome-settings-daemon \
-                port:gnome-system-log \
                 port:gnome-terminal \
                 path:share/themes/HighContrast/index.theme:gnome-themes-standard \
                 port:gnome-user-docs \
@@ -112,7 +119,6 @@ depends_lib     port:adwaita-icon-theme \
                 port:gtk-engines2 \
                 port:gtkmm3 \
                 port:gtksourceview3 \
-                port:gucharmap \
                 port:gupnp \
                 port:gupnp-igd \
                 port:gvfs \

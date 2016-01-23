@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-apps
-version         3.19.3
+version         3.19.4
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -32,26 +32,23 @@ supported_archs noarch
 # aisleriot (previously part of gnome-games)
 # bijiben
 # brasero  (no support for darwin Mac OS X, requires Linux SG or BSD CAM)
-# cheese   (requires Video4Linux or  V4L2)
 # evolution
 # five-or-more (previously part of gnome-games)
 # four-in-a-row (previously part of gnome-games)
 # gnome-boxes
-# gnome-characters
 # gnome-clocks
 # gnome-color-manager (no support for darwin Mac OS X, requires colord, udev)
 # gnome-documents
-# gnome-initial-setup
 # gnome-klotski (previously part of gnome-games)
 # gnome-mahjongg (previously part of gnome-games)
 # gnome-mines (previously part of gnome-games)
 # gnome-nettool
 # gnome-nibbles (previously part of gnome-games)
 # gnome-robots (previously part of gnome-games)
-# gnome-software
 # gnome-sound-recorder
 # gnome-taquin
 # gnome-tetravex (previously part of gnome-games)
+# gnome-todo
 # gnome-tweak-tool
 # hitori
 # iagno (previously part of gnome-games)
@@ -74,13 +71,13 @@ supported_archs noarch
 
 depends_lib     port:anjuta \
                 port:devhelp \
-                port:file-roller \
                 port:gedit \
                 port:gitg \
                 port:glade \
                 port:gnome-calendar \
                 port:gnome-chess \
                 port:gnome-devel-docs \
+                port:gnome-dictionary \
                 port:gnome-getting-started-docs \
                 port:gnome-maps \
                 port:gnome-music \
