@@ -1,0 +1,57 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           gobject_introspection 1.0
+
+name                gnome-characters
+version             3.19.3
+license             GPL-2+
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         A simple utility application to find and insert unusual characters.
+long_description    ${description}
+maintainers         devans openmaintainer
+categories          gnome
+platforms           darwin
+homepage            https://wiki.gnome.org/Design/Apps/CharacterMap
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  016110438d3d1f6cf206e56497d617ce0747a56d \
+                    sha256  d7d97edd4a1ffbee1a90221d389a1060c3ebe92261efc6b62b1784632cf6c8c5
+
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:appstream-glib \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
+
+depends_lib         port:desktop-file-utils \
+                    port:gtk3 \
+                    port:gjs \
+                    port:gnome-desktop
+
+depends_run         port:gnome-themes-standard
+
+gobject_introspection yes
+
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+}
+
+configure.cmd       ./autogen.sh
+
+configure.args      --disable-schemas-compile \
+                    --disable-silent-rules
+
+post-activate {
+   system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
+   system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+   system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type      gnome-with-unstable
