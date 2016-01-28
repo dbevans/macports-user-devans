@@ -111,6 +111,6 @@ platform darwin {
         # Version 3.8.6 is the last version that will build on platforms supporting libstdc++
         livecheck.type  none
     } else {
-        livecheck.type  gnome
+        livecheck.type  gnome-with-unstable
     }
 }
