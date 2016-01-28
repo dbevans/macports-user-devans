@@ -33,7 +33,6 @@ supported_archs noarch
 # caribou
 # cheese
 # gnome-bluetooth
-# gnome-characters
 # gnome-contacts
 # gnome-disk-utility
 # gnome-initial-setup
@@ -95,6 +94,7 @@ depends_lib     port:adwaita-icon-theme \
                 port:gmime \
                 port:gnome-backgrounds \
                 port:gnome-calculator \
+                port:gnome-characters \
                 port:gnome-control-center \
                 port:gnome-desktop \
                 port:gnome-font-viewer \
