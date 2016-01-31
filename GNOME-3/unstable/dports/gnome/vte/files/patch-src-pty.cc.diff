@@ -1,11 +1,14 @@
---- src/pty.cc.orig	2015-10-29 12:42:57.000000000 -0700
-+++ src/pty.cc	2015-10-29 12:43:47.000000000 -0700
-@@ -748,7 +748,7 @@
- 	/* Set it to blocking. */
-         /* FIXMEchpe: why?? vte_terminal_set_pty does the inverse... */
-         flags = rv & ~(O_NONBLOCK);
--        rv = fcntl(fd, F_SETFL, flags);
-+//        rv = fcntl(fd, F_SETFL, flags);
-         if (rv < 0) {
-                 int errsv = errno;
-                 g_set_error(error, VTE_PTY_ERROR,
+--- src/pty.cc.orig	2016-01-30 10:31:41.000000000 -0800
++++ src/pty.cc	2016-01-30 10:33:32.000000000 -0800
+@@ -59,6 +59,11 @@
+ #ifdef HAVE_PTY_H
+ #include <pty.h>
+ #endif
++
++#ifndef O_CLOEXEC
++#define O_CLOEXEC 0
++#endif
++
+ #if defined(__sun) && defined(HAVE_STROPTS_H)
+ #include <stropts.h>
+ #endif
