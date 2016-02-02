@@ -2,10 +2,12 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           active_variants 1.1
 
 name                yelp
 license             GPL-2
 version             3.18.1
+revision            1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Help browser for GNOME.
 long_description    Yelp is the default help browser for the \
@@ -26,7 +28,6 @@ checksums           rmd160  b6f529d62f612b64df959d1f637fa7e73d97cb5d \
 depends_build       port:pkgconfig \
                     port:intltool \
                     port:itstool \
-                    port:gnome-common \
                     port:autoconf \
                     port:automake \
                     port:libtool \
@@ -54,12 +55,18 @@ patchfiles          patch-m4-ax_compiler_flags_ldflags.m4.diff
 
 configure.cmd       ./autogen.sh
 
-configure.args      --x-includes=${prefix}/include \
-                    --x-libraries=${prefix}/lib \
-                    --enable-compile-warnings=minimum \
+configure.args      --enable-compile-warnings=minimum \
                     --disable-schemas-compile \
                     --disable-silent-rules \
                     --enable-debug
+
+variant quartz {}
+
+if {[variant_isset quartz]} {
+    require_active_variants gtk3 quartz
+} else {
+    require_active_variants gtk3 x11
+}
 
 post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
