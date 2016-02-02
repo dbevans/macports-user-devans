@@ -42,7 +42,7 @@ depends_lib         port:desktop-file-utils \
 
 patchfiles          patch-src-girl-gui.c.diff
 
-# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+# reconfigure using autogen.sh from upstream git for intltool 0.51 compatibility
 
 post-patch {
     xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
