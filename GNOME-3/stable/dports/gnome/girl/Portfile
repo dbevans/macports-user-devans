@@ -21,9 +21,18 @@ checksums           rmd160  3523afd047d0f204496424711cb8d94c28e64cab \
 
 use_xz              yes
 
-depends_lib         port:streamripper \
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:gtk-doc \
+                    port:gnome-common \
+                    port:autoconf \
+                    port:automake \
+                    port:yelp-tools \
+                    port:itstool
+
+depends_lib         port:desktop-file-utils \
                     port:gtk2 \
-                    port:glib2 \
+                    path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:libgnome \
                     port:libgnomeui \
                     port:libxml2 \
@@ -31,8 +40,31 @@ depends_lib         port:streamripper \
                     port:totem \
                     port:zlib
 
-livecheck.type      gnome
+patchfiles          patch-src-girl-gui.c.diff
 
-configure.args      --with-recording \
-                    --disable-silent-rules \
-                    --mandir=${prefix}/share/man
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+}
+
+configure.cmd       ./autogen.sh
+
+configure.args      --disable-silent-rules
+
+variant debug description {Build with debug symbols and enable debug messages} {
+    patchfiles-append   patch-enable-debug.diff
+    configure.optflags  -O0 -g
+}
+
+variant record description {Enable recording using external streamripper (broken)} {
+    depends_lib-append      port:streamripper
+    configure.args-append   --with-recording
+}
+
+post-activate {
+   system "${prefix}/bin/gtk-update-icon-cache -f -t ${prefix}/share/icons/hicolor"
+   system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+}
+
+livecheck.type      gnome
