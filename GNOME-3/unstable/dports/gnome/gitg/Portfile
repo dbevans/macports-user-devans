@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gitg
-version             3.19.5
+version             3.19.6
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME git repository viewer.
@@ -26,8 +26,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  682630c07510b0b417ba8cc6ffd1f416d698f7ad \
-                    sha256  bae22827211f0eea106bd6305c4cb973132ae30add6d25de954b4658efadf2ba
+checksums           rmd160  40f859ef89a7e16c27f2f8f22a67e9ed2599a485 \
+                    sha256  d84925c843d4bc81d031a543ce84e400f133310b32c238a7dfd7a67c6cf0ddd0
 
 depends_build       port:pkgconfig \
                     port:intltool \
