@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                bijiben
-version             3.19.4
+version             3.19.4.1
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Bijiben is an attempt to design an intuitive note editor with strong desktop integration
@@ -17,8 +17,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  39c090c145dcf72b59260a4a58968ac7273acfe6 \
-                    sha256  a8d111dc0217f0801b672cfec4abc818633e12e834f8052b1a82f93ff015935f
+checksums           rmd160  402d2e01fd14160d368c76f41e0a8b4ff6d90807 \
+                    sha256  892e823e4b1e4fe41d917ad0636f8a7dc1562753d8024e5dbeaf88af052453eb
 
 depends_build       port:pkgconfig \
                     port:intltool \
