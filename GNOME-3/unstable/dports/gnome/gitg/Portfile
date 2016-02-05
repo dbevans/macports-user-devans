@@ -2,6 +2,7 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           active_variants 1.1
 PortGroup           gobject_introspection 1.0
 
 name                gitg
@@ -61,6 +62,14 @@ configure.cmd       ./autogen.sh
 configure.args      --enable-compile-warnings=no \
                     --disable-schemas-compile \
                     --disable-silent-rules
+
+variant quartz {}
+
+if {[variant_isset quartz]} {
+    require_active_variants gtk3 quartz
+} else {
+    require_active_variants gtk3 x11
+}
 
 post-activate {
     system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
