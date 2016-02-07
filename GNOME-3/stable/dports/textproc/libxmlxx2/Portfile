@@ -6,11 +6,11 @@ PortSystem          1.0
 name                libxmlxx2
 set gname           libxml++
 version             2.38.1
-revision            1
+revision            2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          textproc
 license             LGPL
-maintainers         nomaintainer
+maintainers         devans openmaintainer
 description         libxml++ is a C++ interface for working with XML files
 long_description    libxml++ is a C++ interface for working with XML files, using \
                     libxml (gnome-xml) to parse and write the actual XML files. It \
@@ -25,18 +25,12 @@ use_xz              yes
 checksums           rmd160  152350d95c2924a3f5f15111db439fd769ce8bad \
                     sha256  882529189b03db6c69925b3f579ab1941feb4f02b5fe2612504ee7e498a4a05f
 
-# set pbranch to desired perl version
-# currently 5.22 (#48365)
-
-set pbranch         5.22
-
-depends_build       port:pkgconfig \
-                    port:perl${pbranch}
+depends_build       port:pkgconfig
 
 depends_lib         port:libxml2 \
                     port:glibmm
 
-configure.perl      ${prefix}/bin/perl${pbranch}
+configure.perl      /usr/bin/perl
 
 livecheck.type      gnome
 livecheck.name      ${gname}
