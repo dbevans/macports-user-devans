@@ -11,13 +11,12 @@ version             3.18.2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories-append   gnome
 license             LGPL-2.1+
-maintainers         cal openmaintainer
+maintainers         devans openmaintainer
 platforms           darwin
 description         Python bindings for GObject, version 3
 
-long_description \
-    PyGObject is a Python dynamic module that enables developers to use the \
-    power of GObject, which is part of the GNOME platform.
+long_description    PyGObject is a Python dynamic module that enables developers to use the \
+                    power of GObject, which is part of the GNOME platform.
 
 homepage            https://wiki.gnome.org/Projects/PyGObject
 master_sites        gnome:sources/${my_name}/${branch}/
@@ -27,7 +26,7 @@ use_xz              yes
 checksums           sha256  2a3cad1517916b74e131e6002c3824361aee0671ffb0d55ded119477fc1c2c5f \
                     rmd160  d5859e5c0f65540c7aa60d9d95de0276b73e813f
 
-python.versions     27 33 34
+python.versions     27 33 34 35
 
 if {${name} ne ${subport}} {
     depends_build-append    port:pkgconfig
