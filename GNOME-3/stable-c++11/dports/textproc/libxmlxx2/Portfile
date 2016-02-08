@@ -13,7 +13,7 @@ version             2.40.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          textproc
 license             LGPL
-maintainers         nomaintainer
+maintainers         devans openmaintainer
 description         libxml++ is a C++ interface for working with XML files
 long_description    libxml++ is a C++ interface for working with XML files, using \
                     libxml (gnome-xml) to parse and write the actual XML files. It \
@@ -28,18 +28,13 @@ use_xz              yes
 checksums           rmd160  e99658fce15316319b21823c5e4cb5462b5cff1c \
                     sha256  4ad4abdd3258874f61c2e2a41d08e9930677976d303653cd1670d3e9f35463e9
 
-# set pbranch to desired perl version
-# currently 5.22 (#48365)
-
-set pbranch         5.22
-
-depends_build       port:pkgconfig \
-                    port:perl${pbranch}
+depends_build       port:pkgconfig
 
 depends_lib         port:libxml2 \
                     port:glibmm
 
-configure.perl      ${prefix}/bin/perl${pbranch}
+configure.perl      /usr/bin/perl
 
 livecheck.type      gnome
 livecheck.name      ${gname}
+livecheck.regex     "LATEST-IS-(2\\.\\d*\[02468\](?:\\.\\d+)*)"
