@@ -24,19 +24,9 @@ use_xz              yes
 checksums           rmd160  8d210c47c50217bdd4492e3774c7fa286b00abb3 \
                     sha256  3b81d6db62be613c382ddfe35cdece8480aab6042b8c058171124b96ba52a118
 
-# set pbranch to desired perl version
-# currently 5.22 (#48365)
-
-set pbranch         5.22
-
-depends_build       port:pkgconfig \
-                    port:autoconf \
-                    port:automake \
-                    port:libtool \
-                    port:mm-common
+depends_build       port:pkgconfig
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
-                    port:p${pbranch}-xml-parser \
                     port:libsigcxx2
 
 # glibmm uses thread_local as of version 2.47.3.1
@@ -46,8 +36,7 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
 
 compiler.blacklist  clang
 
-configure.cmd       ./autogen.sh
-configure.perl      ${prefix}/bin/perl${pbranch}
+configure.perl      /usr/bin/perl
 
 post-destroot {
     set mmdoctooldir ${prefix}/share/glibmm-2.4/doctool
