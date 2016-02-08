@@ -29,20 +29,14 @@ use_xz              yes
 checksums           sha256  fdace7134c31de792c17570f9049ca0657909b28c4c70ec4882f91a03de54437 \
                     rmd160  7b3a6340875d51c8276bac08416ef36e2e469bee
 
-# set pbranch to desired perl version
-# currently 5.22 (#48365)
-
-set pbranch         5.22
-
 depends_build       port:pkgconfig \
                     port:mm-common \
                     port:m4 \
-                    port:perl${pbranch} \
                     path:bin/dot:graphviz \
                     port:doxygen \
                     port:libxslt
 
-configure.perl      ${prefix}/bin/perl${pbranch}
+configure.perl      /usr/bin/perl
 configure.env-append \
                     "M4=${prefix}/bin/gm4"
 configure.args      --enable-static \
