@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gnome-characters
-version             3.19.3
+version             3.19.90
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A simple utility application to find and insert unusual characters.
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  016110438d3d1f6cf206e56497d617ce0747a56d \
-                    sha256  d7d97edd4a1ffbee1a90221d389a1060c3ebe92261efc6b62b1784632cf6c8c5
+checksums           rmd160  ee48909c4ef44ea4eb6ebcab1adb33f0c1be3b58 \
+                    sha256  c797d7e6cb103d95de24688bc9047c45604783a47e56924c84b8572d98f1f1dc
 
 depends_build       port:pkgconfig \
                     port:intltool \
