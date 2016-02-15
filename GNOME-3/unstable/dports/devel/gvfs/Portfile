@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                gvfs
 epoch               1
-version             1.27.4
+version             1.27.90
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          devel
@@ -35,8 +35,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  f51d7f20d4b18c1df8273c95b1a8ac7b378fbc12 \
-                    sha256  8e954a37b4857a956611c83cffde0e23fc1155c2f070c105fbf1f8333e588736
+checksums           rmd160  2a584147bf88e4e2eb69efc917e11a37ed091194 \
+                    sha256  2f6aba62466b5c996a92ff97494004d682ad84e0c3c26364a8158b1e4e4b70d4
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -44,8 +44,7 @@ depends_build       port:pkgconfig \
                     port:autoconf \
                     port:automake \
                     port:libtool \
-                    port:pidof \
-                    port:py34-gobject3
+                    port:pidof
 
 depends_lib         port:gtk3 \
                     port:gettext \
@@ -62,9 +61,6 @@ patchfiles          patch-test-run-in-tree.sh.diff
 
 post-patch {
     xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
-    reinplace "s|^#!.*|#!${prefix}/bin/python3.4|" \
-        ${worksrcpath}/test/gvfs-test \
-        ${worksrcpath}/test/test_polkitd.py
 }
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
@@ -104,6 +100,28 @@ post-destroot {
     xinstall -m 644 -W ${worksrcpath} AUTHORS COPYING MAINTAINERS NEWS README \
         ${destroot}${docdir}
 }
+
+variant python34 conflicts python35 description {Use Python 3.4 for testing} {
+    depends_build-append port:py34-gobject3
+    post-patch {
+        reinplace "s|^#!.*|#!${prefix}/bin/python3.4|" \
+            ${worksrcpath}/test/gvfs-test \
+            ${worksrcpath}/test/test_polkitd.py
+    }
+}
+
+variant python35 conflicts python35 description {Use Python 3.5 for testing} {
+    depends_build-append port:py34-gobject3
+    post-patch {
+        reinplace "s|^#!.*|#!${prefix}/bin/python3.5|" \
+            ${worksrcpath}/test/gvfs-test \
+            ${worksrcpath}/test/test_polkitd.py
+    }
+}
+
+if {![variant_isset python35]} {
+   default_variants +python34
+} 
 
 post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
