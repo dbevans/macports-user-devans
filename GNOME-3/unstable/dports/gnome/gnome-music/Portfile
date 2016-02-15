@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gnome-music
-version             3.19.4
+version             3.19.90
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Music is the GNOME music playing application.
@@ -19,8 +19,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  434b1b50d8ffcdad2016e94258a4c3f173035b8c \
-                    sha256  7303fd4e39f2dc91a90355e1e8b0b5df1ce932bcc74dbf21f989ac63ab0f41b3
+checksums           rmd160  640de931cfe62a1522f50032c9317fd259b0fd6b \
+                    sha256  ae16f4ee057d2440e12462fe3dea00f651bfa3496f078d8fe133f12a048f523f
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -57,13 +57,27 @@ configure.args      --disable-schemas-compile \
                     --disable-silent-rules
 
 # requires python >= 3.3
-# configure for python34
+# default to python 3.4
 
-depends_lib-append  port:py34-gobject3 \
-                    port:py34-requests \
-                    port:dbus-python34
+variant python34 conflicts python35 description {Use Python 3.4 at run time} {
+    depends_lib-append  port:py34-gobject3 \
+                        port:py34-requests \
+                        port:dbus-python34
 
-configure.python    ${prefix}/bin/python3.4
+    configure.python    ${prefix}/bin/python3.4
+}
+
+variant python35 conflicts python34 description {Use Python 3.5 at run time} {
+    depends_lib-append  port:py35-gobject3 \
+                        port:py35-requests \
+                        port:dbus-python35
+
+    configure.python    ${prefix}/bin/python3.5
+}
+
+if {![variant_isset python35]} {
+    default_variants +python34
+}
 
 # port installs hicolor icons, desktop application file, and gschemas
 post-activate {
