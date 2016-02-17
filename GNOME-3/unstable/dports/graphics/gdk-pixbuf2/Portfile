@@ -61,7 +61,9 @@ variant x11 {
     configure.args-append   --with-x11
 }
 
-default_variants    +x11
+if {![variant_isset quartz]} {
+    default_variants    +x11
+}
 
 livecheck.type      gnome-with-unstable
 livecheck.name      ${my_name}
