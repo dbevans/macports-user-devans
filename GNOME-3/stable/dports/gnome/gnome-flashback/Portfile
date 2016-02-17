@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-flashback
-version             3.18.1
+version             3.18.2
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME Flashback Session
@@ -17,15 +17,10 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  a0057fe1318b25337533edec2d71a0fa8c6cb2b4 \
-                    sha256  30413730ba5216e577d6c76445cfa4fe9efaef43c54f3a42a9879107156641f9
+checksums           rmd160  3300811812c931e5e29ee38188f3d9532481401e \
+                    sha256  986f046f937adb0edfeab997d5e463769364468288e790beede69f5c374c7dae
 
-depends_build       port:pkgconfig \
-                    port:intltool \
-                    port:gnome-common \
-                    port:autoconf \
-                    port:automake \
-                    port:libtool
+depends_build       port:pkgconfig
 
 depends_lib         port:desktop-file-utils \
                     port:gtk3 \
@@ -41,17 +36,14 @@ depends_run         port:gnome-applets \
 
 patchfiles          patch-disable-bluetooth.diff
 
-# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+# autoreconf due to patched configure.ac
 
-post-patch {
-    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
-}
-
-configure.cmd       ./autogen.sh
+use_autoreconf      yes
+autoreconf.args     -fvi
 
 configure.args      --disable-schemas-compile \
                     --disable-silent-rules \
-                    --enable-compile-warnings=minimum
+                    --enable-compile-warnings=no
 
 post-activate {
    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
