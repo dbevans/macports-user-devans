@@ -11,7 +11,7 @@ PortGroup           compiler_blacklist_versions 1.0
 name                gtk3
 set real_name       gtk+
 epoch               1
-version             3.19.8
+version             3.19.9
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2.1+
@@ -31,8 +31,8 @@ use_xz              yes
 
 master_sites        gnome:sources/gtk+/${branch}/
 
-checksums           rmd160  1026f32bf8cf1aaf8a6c26fbbc8b1dde7f970dba \
-                    sha256  ad42d0f34ea7b07a72659e5cdadd79c7d7bf8a2acc802096abf10740f2c073bc
+checksums           rmd160  60afc34b00e55927dc6e94eddf640fde66c48526 \
+                    sha256  65b6a7ba9c945c747500dc0071e6d99b12739860d0f6a71b842ea776f402b90c
 
 minimum_xcodeversions {9 3.1}
 
@@ -55,7 +55,8 @@ archcheck.files     lib/libatk-1.0.dylib \
                     lib/libpango-1.0.dylib \
                     lib/libtiff.dylib
 
-patchfiles          nawk.patch
+patchfiles          nawk.patch \
+                    patch-gtk-gtkclipboard-quartz.c.diff
 
 # gtk3 +quartz uses instancetype which is not available
 # before approximately Xcode 4.6 (#49391)
@@ -230,6 +231,7 @@ if {[variant_isset universal]} {
 variant quartz conflicts x11 {
     require_active_variants path:lib/pkgconfig/cairo.pc:cairo quartz
     require_active_variants path:lib/pkgconfig/pango.pc:pango quartz
+    require_active_variants port:gdk-pixbuf2 "" x11
 
     configure.args-append   --enable-quartz-backend
 }
@@ -237,6 +239,7 @@ variant quartz conflicts x11 {
 variant x11 conflicts quartz {
     require_active_variants path:lib/pkgconfig/cairo.pc:cairo x11
     require_active_variants path:lib/pkgconfig/pango.pc:pango x11
+    require_active_variants port:gdk-pixbuf2 x11
 
     depends_lib-append      port:xorg-libXi \
                             port:xorg-libXrandr \
