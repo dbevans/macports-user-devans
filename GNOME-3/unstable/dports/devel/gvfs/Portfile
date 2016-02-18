@@ -44,7 +44,8 @@ depends_build       port:pkgconfig \
                     port:autoconf \
                     port:automake \
                     port:libtool \
-                    port:pidof
+                    port:pidof \
+                    port:gsed
 
 depends_lib         port:gtk3 \
                     port:gettext \
@@ -57,7 +58,8 @@ depends_lib         port:gtk3 \
                     port:libsecret \
                     port:gnome-online-accounts
 
-patchfiles          patch-test-run-in-tree.sh.diff
+patchfiles          patch-test-run-in-tree.sh.diff \
+                    patch-test-gvfs-test.diff
 
 post-patch {
     xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
