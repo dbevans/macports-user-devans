@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                glib-networking
-version             2.47.1
+version             2.47.90
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Network-related giomodules for glib
 long_description    ${description}
@@ -17,8 +17,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  29d7aa8a077c6d5483d8b95292e56fe177dfee98 \
-                    sha256  b73906b0e36eea27bd68ae5dfb05f64923f76ef87e3b740fe3cf9c893bd3b48d
+checksums           rmd160  f5aa6dd7a8482716978a977c75a274ab78b140cf \
+                    sha256  fa82cdc3048e27cd91a54b2e9da807e1b8c5a3f70a7a3de8505e4a109d116623
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -47,7 +47,8 @@ configure.args      --with-gnutls \
                     --with-libproxy \
                     --with-gnome-proxy \
                     --with-ca-certificates=${prefix}/share/curl/curl-ca-bundle.crt \
-                    --disable-silent-rules
+                    --disable-silent-rules \
+                    --disable-more-warnings
 
 post-activate {
     system "${prefix}/bin/gio-querymodules ${prefix}/lib/gio/modules"
