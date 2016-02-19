@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                epiphany
-version             3.19.1
+version             3.19.90
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A GNOME Web browser.
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  dfbd805a310a9e34f3be06011328489e81a48a21 \
-                    sha256  3c841abc0a4971a62ae4c86b2b9aed66d52a4c12aff3ce0ad381c0ee3a18ada2
+checksums           rmd160  c5f48c769bb2fd7264fc06717858ea5cfa2f3dbc \
+                    sha256  8788d3f68c360fb2b98cf16adb190f93158df8b2e4ee8bf53a098d131bc2a29d
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -49,10 +49,13 @@ depends_lib         port:desktop-file-utils \
 depends_run         port:gnome-themes-standard \
                     port:gnome-keyring
 
-configure.cmd       ./autogen.sh
+# reconfigure using our intltool.m4 and upstream autogen.sh for intltool 0.51 compatibility
 
-configure.cflags-append \
-                    -Wno-format-nonliteral
+pre-configure {
+    copy -force ${prefix}/share/aclocal/intltool.m4 ${worksrcpath}/m4
+}
+
+configure.cmd       ./autogen.sh
 
 configure.args      --with-distributor-name=MacPorts \
                     --disable-silent-rules \
@@ -83,8 +86,6 @@ platform darwin {
 
         patchfiles              patch-configure.ac.diff
 
-        # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
-
         post-patch {
             xinstall -m 755 ${filespath}/autogen.sh-3.8.2 ${worksrcpath}/autogen.sh
         }
@@ -94,8 +95,6 @@ platform darwin {
                                 port:itstool \
                                 port:yelp-tools
         depends_lib-append      path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk
-
-        # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
         post-patch {
             xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
