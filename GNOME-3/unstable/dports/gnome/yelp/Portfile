@@ -2,9 +2,10 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           active_variants 1.1
 
 name                yelp
-version             3.19.1
+version             3.19.90
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Help browser for GNOME.
@@ -20,13 +21,12 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  f15e95a1c897c5cb528ba1b61f6da308267670ca \
-                    sha256  ffafa231e2d4a388870a8e131825f60afd76ef3eba53f6d589727fdbd1dbface
+checksums           rmd160  9539860056f216443884df55f90a6ed0e21f976a \
+                    sha256  b68588ad0c67b5fe1f8a2642a9605549696cb0ae78447be4e99e93452a7434d9
 
 depends_build       port:pkgconfig \
                     port:intltool \
                     port:itstool \
-                    port:gnome-common \
                     port:autoconf \
                     port:automake \
                     port:libtool \
@@ -54,12 +54,18 @@ patchfiles          patch-m4-ax_compiler_flags_ldflags.m4.diff
 
 configure.cmd       ./autogen.sh
 
-configure.args      --x-includes=${prefix}/include \
-                    --x-libraries=${prefix}/lib \
-                    --enable-compile-warnings=minimum \
+configure.args      --enable-compile-warnings=minimum \
                     --disable-schemas-compile \
                     --disable-silent-rules \
                     --enable-debug
+
+variant quartz {}
+
+if {[variant_isset quartz]} {
+    require_active_variants gtk3 quartz
+} else {
+    require_active_variants gtk3 x11
+}
 
 post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
