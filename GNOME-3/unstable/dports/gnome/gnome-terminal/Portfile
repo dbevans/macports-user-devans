@@ -5,8 +5,7 @@ PortSystem          1.0
 PortGroup           compiler_blacklist_versions 1.0
 
 name                gnome-terminal
-version             3.19.1
-revision            1
+version             3.19.90
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Terminal component for the GNOME 3 Desktop
 long_description    ${description}
@@ -19,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  2d34fe6d34bde219f40d9867d2eb80e2af9e3036 \
-                    sha256  d8163333e9255fea53f66e38268edd0927e18042b2f95bf94e8cf82602451122
+checksums           rmd160  dafe1542eb3aa1a6bd1ac5b4455f3c9d3cd20f2a \
+                    sha256  c2be96fc8bdc9a52872d5f4eeb3fa230f3f3cbecf71f253465b20d209a0193fa
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -39,15 +38,12 @@ depends_lib         port:desktop-file-utils \
                     port:vte \
                     port:dbus \
                     port:dconf \
-                    port:ossp-uuid \
-                    port:pcre2 \
                     port:xorg-libX11
 
 depends_run         port:gnome-themes-standard \
                     port:yelp
 
-patchfiles          patch-uuid.diff \
-                    patch-src-Makefile.am.diff \
+patchfiles          patch-src-Makefile.am.diff \
                     patch-src-terminal-screen.c.diff \
                     patch-src-server.c.diff
 
@@ -65,12 +61,15 @@ configure.cmd       ./autogen.sh
 
 configure.args      --with-gtk=3.0 \
                     --with-nautilus-extension=no \
-                    --with-pcre2=yes \
+                    --with-pcre2=no \
                     --enable-debug \
                     --disable-migration \
                     --disable-search-provider \
                     --disable-silent-rules \
                     --disable-schemas-compile
+
+configure.cflags-append \
+                    -I/usr/include/uuid
 
 variant nautilus description {Build optional nautilus extension} {
     configure.args-replace  --with-nautilus-extension=no --with-nautilus-extension=yes
