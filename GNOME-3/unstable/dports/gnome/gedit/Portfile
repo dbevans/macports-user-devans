@@ -6,7 +6,7 @@ PortGroup           active_variants 1.1
 PortGroup           gobject_introspection 1.0
 
 name                gedit
-version             3.19.3
+version             3.19.4
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME editor.
@@ -19,8 +19,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  e66ed9d021df11d9c2057936217a36e280fbcc6b \
-                    sha256  d4d5afd678d90b69e28ff83ebfcd7c535fc4f9e5bf331eb465bbfb45f76102fe
+checksums           rmd160  46412849b104c0681dbf3a235b60b081f102bf6c \
+                    sha256  6dfbf81dd347830e11e7898ea580d669bfdb306230fc23fa8db6c2657407f367
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -74,6 +74,14 @@ variant python34 conflicts description {Use python 3.4} {
     configure.args-replace    --disable-python --enable-python
 }
 
+variant python35 conflicts description {Use python 3.5} {
+    depends_lib-append        port:py35-gobject3
+    configure.python          ${prefix}/bin/python3.5
+    set python_framework      ${frameworks_dir}/Python.framework/Versions/3.5
+    configure.pkg_config_path ${python_framework}/lib/pkgconfig
+    configure.args-replace    --disable-python --enable-python
+}
+
 variant quartz {}
 
 if {[variant_isset quartz]} {
@@ -87,7 +95,9 @@ if {[variant_isset quartz]} {
     depends_run-append      port:yelp
 }
 
-default_variants    +python34
+if {![variant_isset python35]} {
+    default_variants    +python34
+}
 
 notes               "For extra functionality install gedit-plugins"
 
