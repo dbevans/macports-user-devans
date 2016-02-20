@@ -1,0 +1,10 @@
+--- configure.ac.orig	2016-02-19 17:33:34.000000000 -0800
++++ configure.ac	2016-02-19 17:33:45.000000000 -0800
+@@ -80,7 +80,6 @@
+ 		    libecal-1.2
+                     libxml-2.0
+                     $sparql_version
+-                    uuid
+                     webkitgtk-3.0])
+ 
+ 
