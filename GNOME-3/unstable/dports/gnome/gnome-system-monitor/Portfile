@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-system-monitor
-version             3.19.4
+version             3.19.90
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A system monitor.
@@ -19,8 +19,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  aab14e0256b6eda24be1d7f6b6ac52405108b76b \
-                    sha256  3381960c905126519693675f12bae1d41ab9dbf4e6f9dcd583f5522c6d8a17b2
+checksums           rmd160  48d17468fecea43343a6e711f7260ddaf186f5f9 \
+                    sha256  11eeae1c91c32d96ce8f6d95dff0b92952958d4bb931b21e524b1b879f77f522
 
 depends_build       port:pkgconfig \
                     port:intltool \
