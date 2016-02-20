@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-photos
-version             3.19.4
+version             3.19.90
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Photo manager for GNOME.
@@ -18,25 +18,22 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  6c1fe2ced355055f49e33113ea0f322ad9f57391 \
-                    sha256  0beba23939a8f26646f8313efaa4bf109d68ce0f9b2a512a12ecbf0950097434
+checksums           rmd160  fd9449905afff37cf34ab3f653a8deaa1fb0f76f \
+                    sha256  0961b17796ce4430df2f947c8871b2e5dcb3efd316407bc1ac3e4fc8e282412e
 
 depends_build       port:pkgconfig \
                     port:intltool \
                     port:itstool \
                     port:yelp-tools \
-                    port:gnome-common \
                     port:autoconf \
                     port:automake \
                     port:libtool
 
 depends_lib         port:desktop-file-utils \
                     port:gtk3 \
-                    port:babl \
                     port:cairo \
                     port:exempi \
                     port:gfbgraph \
-                    port:gegl-0.3 \
                     port:gdk-pixbuf2 \
                     port:gnome-desktop \
                     port:gnome-online-accounts \
@@ -46,6 +43,10 @@ depends_lib         port:desktop-file-utils \
                     port:libexif \
                     port:librsvg \
                     port:tracker
+
+# version 3.19.90 requires gegl-0.3 >= 0.3.5.
+depends_lib-append  port:gegl-devel
+
 
 depends_run         port:gnome-themes-standard \
                     port:yelp
@@ -61,10 +62,8 @@ post-patch {
 configure.cmd       ./autogen.sh
 
 configure.args      --disable-schemas-compile \
-                    --disable-silent-rules
-
-configure.cflags-append \
-                    -Wno-error=format-nonliteral
+                    --disable-silent-rules \
+                    --enable-compile-warnings=no
 
 # port installs hicolor icons, desktop application file, and gschemas
 post-activate {
