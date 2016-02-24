@@ -11,7 +11,7 @@ PortGroup           compiler_blacklist_versions 1.0
 name                gtk3
 set real_name       gtk+
 epoch               1
-version             3.19.9
+version             3.19.10
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2.1+
@@ -31,8 +31,8 @@ use_xz              yes
 
 master_sites        gnome:sources/gtk+/${branch}/
 
-checksums           rmd160  60afc34b00e55927dc6e94eddf640fde66c48526 \
-                    sha256  65b6a7ba9c945c747500dc0071e6d99b12739860d0f6a71b842ea776f402b90c
+checksums           rmd160  cb81f705b8df5db1408329f590af58a4c5b5ebd7 \
+                    sha256  173d1fba5b2ba08388a9cb1e17e900b48f1435e66be589ce990911fadb5f03a5
 
 minimum_xcodeversions {9 3.1}
 
@@ -55,8 +55,7 @@ archcheck.files     lib/libatk-1.0.dylib \
                     lib/libpango-1.0.dylib \
                     lib/libtiff.dylib
 
-patchfiles          nawk.patch \
-                    patch-gtk-gtkclipboard-quartz.c.diff
+patchfiles          nawk.patch
 
 # gtk3 +quartz uses instancetype which is not available
 # before approximately Xcode 4.6 (#49391)
