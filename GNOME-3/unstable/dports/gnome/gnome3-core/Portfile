@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-core
-version         3.19.4
+version         3.19.90
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -75,8 +75,6 @@ depends_lib     port:adwaita-icon-theme \
                 port:clutter-gtk \
                 port:cogl \
                 port:dconf \
-                port:dconf-editor \
-                port:empathy \
                 port:eog \
                 port:epiphany \
                 port:evince \
@@ -86,6 +84,7 @@ depends_lib     port:adwaita-icon-theme \
                 port:gcab \
                 port:gcr \
                 port:gdk-pixbuf2 \
+                port:gedit \
                 port:geocode-glib \
                 port:gjs \
                 path:lib/pkgconfig/glib-2.0.pc:glib2 \
@@ -94,19 +93,22 @@ depends_lib     port:adwaita-icon-theme \
                 port:gmime \
                 port:gnome-backgrounds \
                 port:gnome-calculator \
+                port:gnome-calendar \
                 port:gnome-characters \
                 port:gnome-control-center \
                 port:gnome-desktop \
                 port:gnome-font-viewer \
                 port:gnome-keyring \
+                port:gnome-maps \
                 port:gnome-menus \
                 port:gnome-online-accounts \
                 port:gnome-screenshot \
                 port:gnome-session \
                 port:gnome-settings-daemon \
                 port:gnome-terminal \
-                path:share/themes/HighContrast/index.theme:gnome-themes-standard \
+                port:gnome-themes-standard \
                 port:gnome-user-docs \
+                port:gnome-weather \
                 port:gobject-introspection \
                 port:grilo \
                 port:grilo-plugins \

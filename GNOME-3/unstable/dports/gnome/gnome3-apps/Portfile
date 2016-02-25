@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-apps
-version         3.19.4
+version         3.19.90
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -30,12 +30,12 @@ supported_archs noarch
 #
 # accerciser
 # aisleriot (previously part of gnome-games)
-# bijiben
 # brasero  (no support for darwin Mac OS X, requires Linux SG or BSD CAM)
 # evolution
 # five-or-more (previously part of gnome-games)
 # four-in-a-row (previously part of gnome-games)
 # gnome-boxes
+# gnome-builder
 # gnome-clocks
 # gnome-color-manager (no support for darwin Mac OS X, requires colord, udev)
 # gnome-documents
@@ -69,21 +69,19 @@ supported_archs noarch
 # are currently broken and/or need to be updated
 #
 
-depends_lib     port:anjuta \
+depends_lib     port:bijiben \
+                port:dconf-editor \
                 port:devhelp \
-                port:gedit \
+                port:empathy \
                 port:gitg \
                 port:glade \
-                port:gnome-calendar \
                 port:gnome-chess \
                 port:gnome-devel-docs \
                 port:gnome-dictionary \
                 port:gnome-getting-started-docs \
-                port:gnome-maps \
                 port:gnome-music \
                 port:gnome-photos \
                 port:gnome-sudoku \
-                port:gnome-weather \
                 port:rygel \
                 port:seahorse
 
