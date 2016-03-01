@@ -6,7 +6,7 @@ PortGroup           gobject_introspection 1.0
 PortGroup           compiler_blacklist_versions 1.0
 
 name                vte
-version             0.43.90
+version             0.43.91
 set branch          [join [lrange [split $version .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -24,8 +24,8 @@ master_sites        gnome:sources/$name/$branch/
 
 use_xz              yes
 
-checksums           rmd160  7ebbd26546a8c816da821aaa8f5439f716859999 \
-                    sha256  a54baf60bf74bfd3f0a643f87de26220695f9febcb742cc491d54d74f515a8d3
+checksums           rmd160  600524364340551569d140f94418ba90dce8b9b4 \
+                    sha256  7540d50f7e61f28cf004d05a4cb172fb063896d681c8aa9f72ffe5b38c0d8b51
 
 depends_build       port:pkgconfig \
                     port:intltool \
