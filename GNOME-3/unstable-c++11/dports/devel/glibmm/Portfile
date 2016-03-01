@@ -8,7 +8,7 @@ PortSystem          1.0
 PortGroup           cxx11 1.0
 
 name                glibmm
-version             2.47.4
+version             2.47.6
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         C++ interface to glib
 long_description    ${description}
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  8d210c47c50217bdd4492e3774c7fa286b00abb3 \
-                    sha256  3b81d6db62be613c382ddfe35cdece8480aab6042b8c058171124b96ba52a118
+checksums           rmd160  d1517418643a1c387514237d8fa5e57bfa1eee25 \
+                    sha256  e1a35c6ee1f948f33cde837464a46e9421dab68cb18a5ed1d0c1ac0ab7a2ac7d
 
 depends_build       port:pkgconfig
 
@@ -42,7 +42,7 @@ post-destroot {
     set mmdoctooldir ${prefix}/share/glibmm-2.4/doctool
     xinstall -d ${destroot}${mmdoctooldir}
     xinstall -m 0644 -W ${worksrcpath}/docs doc-install.pl doc-postprocess.pl \
-                                            doxygen.css tagfile-to-devhelp2.xsl \
+                                            doxygen-extra.css tagfile-to-devhelp2.xsl \
                                             ${destroot}${mmdoctooldir}
 }
 
