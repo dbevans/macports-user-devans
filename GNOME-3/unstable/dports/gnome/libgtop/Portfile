@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                libgtop
-version             2.33.4
+version             2.33.91
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 
@@ -22,8 +22,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  82f5369ab7e9ef725401db32285858d5c0422c97 \
-                    sha256  efca47f50b5c914ec3848910dfd4020e655a34ddb994a166761f10aebac4df64
+checksums           rmd160  850f54a0b1c9161dfbea02ec46cf7d8e90770b77 \
+                    sha256  7ff8d8569e4602e91bbc5857053a007393a02c83c59d6a084a859960543d3be2
 
 depends_build       port:pkgconfig \
                     port:intltool \
