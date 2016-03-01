@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                evolution-data-server
-version             3.19.90
+version             3.19.91
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Addressbook and calender libs for GNOME.
 long_description    Evolution Data Server provides a central location for \
@@ -19,8 +19,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  cdae49c4827e4017d831ede7933df1df9239c98e \
-                    sha256  02454b3e1d8e896b9670a42ff6effa1c2cfc552f2ad9d04cfba9fd0d59306f96
+checksums           rmd160  411bead49e9b9910ded0886740873cfd20e90260 \
+                    sha256  3851aa1857d1c834fb80953609c55963a987b4eccc5fd4511d662b37bf42ea33
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -44,7 +44,7 @@ depends_lib         port:gtk3 \
                     port:gnome-online-accounts \
                     port:sqlite3 \
                     port:vala \
-                    port:db46 \
+                    port:db53 \
                     port:icu
 
 gobject_introspection yes
@@ -61,8 +61,8 @@ post-patch {
 configure.cmd       ./autogen.sh
 
 configure.env-append \
-                    DB_CFLAGS="-I${prefix}/include/db46" \
-                    DB_LIBS="-L${prefix}/lib/db46 -ldb"
+                    DB_CFLAGS="-I${prefix}/include/db53" \
+                    DB_LIBS="-L${prefix}/lib/db53 -ldb"
 
 configure.args      --enable-smime \
                     --enable-ipv6 \
