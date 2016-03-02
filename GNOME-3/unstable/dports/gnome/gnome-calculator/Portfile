@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-calculator
-version             3.19.90
+version             3.19.91
 license             GPL-3
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Calculator with financial and scientific modes.
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  76d1f9e7c5f1768a9c98bc5e75411b2a9d154675 \
-                    sha256  4311c6f768c7f727202f774d301419e6b61dc1f8eb87f988a1e342d5529c48bd
+checksums           rmd160  97ae163762a7ce826d3b09e991c9e3b9f400e14c \
+                    sha256  a974fa6ccb184e6659b7e69f6a0d67bd3a610492785a84c501bf7c96288db766
 
 depends_build       port:pkgconfig \
                     port:intltool \
