@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gnome-maps
-version             3.19.90
+version             3.19.91
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Map application for GNOME 3.
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  bde81913b5519e19fdcd3a3678259e52b5153dcf \
-                    sha256  0a123817739a306b31def6812d69f94faa334710626b85b8ff0293d322521921
+checksums           rmd160  8980f4047c430a04580c2f2bf78df9837474506c \
+                    sha256  95b83629e05cffe46b2055a178e469d356fded80c1c7c4114b725dc81e56f1f4
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -41,10 +41,10 @@ depends_lib         port:desktop-file-utils \
                     port:libgweather \
                     port:libgee \
                     port:geoclue2 \
-                    port:geocode-glib
+                    port:geocode-glib \
+                    port:webkit2-gtk
 
-depends_run         port:webkit2-gtk \
-                    port:gnome-themes-standard \
+depends_run         port:gnome-themes-standard \
                     port:yelp
 
 configure.args      --disable-silent-rules
