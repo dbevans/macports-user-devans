@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           compiler_blacklist_versions 1.0
 
 name                gnome-terminal
-version             3.19.90
+version             3.19.91
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Terminal component for the GNOME 3 Desktop
 long_description    ${description}
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  dafe1542eb3aa1a6bd1ac5b4455f3c9d3cd20f2a \
-                    sha256  c2be96fc8bdc9a52872d5f4eeb3fa230f3f3cbecf71f253465b20d209a0193fa
+checksums           rmd160  614b0f8d26699addcd859afd7b108e9cb3eb0bb5 \
+                    sha256  0828660b17f5d03ab5cffc4e13902877adcb801332e3727957f57339e77e840b
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -43,7 +43,8 @@ depends_lib         port:desktop-file-utils \
 depends_run         port:gnome-themes-standard \
                     port:yelp
 
-patchfiles          patch-src-Makefile.am.diff \
+patchfiles          patch-configure.ac.diff \
+                    patch-src-Makefile.am.diff \
                     patch-src-terminal-screen.c.diff \
                     patch-src-server.c.diff
 
