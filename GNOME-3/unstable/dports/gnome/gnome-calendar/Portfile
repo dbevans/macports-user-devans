@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-calendar
-version             3.19.90
+version             3.19.91
 license             GPL-3+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Calendar is a calendar application for GNOME.
@@ -17,8 +17,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  afd3e11b115990acfa07e087e7ce67b0a384d9dd \
-                    sha256  755fa2835a0eb7486dbb3ca9d87fcbfa87ed05b20c57479f84df36860f11aeac
+checksums           rmd160  92bc3986e7822b791ae16a6df2e9b0b255ae06a6 \
+                    sha256  a255d322e2b7d6cb8e493f24d91dc64611ab44bdf9ded10e47f56ed4dcee2637
 
 depends_build       port:pkgconfig \
                     port:intltool \
