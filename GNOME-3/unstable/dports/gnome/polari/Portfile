@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                polari
-version             3.19.90
+version             3.19.91
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         An IRC Client for GNOME
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  8b630e6d96bee6e124ffd0745180e43b1e2af920 \
-                    sha256  6e7ef0903e9d1136899be20b0cff7838331d9f770d31d7ba164da5baf7282922
+checksums           rmd160  c6bea6db1c2f4da65147dd03b328fc0511d71d21 \
+                    sha256  3a0a690a7088ac855856c030837af56cc0a10e6bbfc32a751fb38a6fdd560db0
 
 depends_build       port:pkgconfig \
                     port:appstream-glib \
