@@ -6,7 +6,7 @@ PortGroup           active_variants 1.1
 PortGroup           gobject_introspection 1.0
 
 name                gnome-desktop
-version             3.19.90
+version             3.19.91
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -25,8 +25,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  475ca9e19218864aa877b83034ed6361c5310a1b \
-                    sha256  9d3c5d4523281ad3fa32d9b856f197e4b787a02eaf9fe9ae5a67edab3ecf989f
+checksums           rmd160  a7998f977cf0c6102c2b2a3d5335fba6f0a8fb83 \
+                    sha256  155194fe2e35bfef74128c37915b9d075a146d83b25cf4e4bea3b0087a920d12
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -39,7 +39,7 @@ depends_build       port:pkgconfig \
 
 depends_lib         port:desktop-file-utils \
                     port:gsettings-desktop-schemas \
-                    path:share/themes/HighContrast/index.theme:gnome-themes-standard \
+                    port:gnome-themes-standard \
                     port:adwaita-icon-theme \
                     port:gtk3 \
                     port:iso-codes \
