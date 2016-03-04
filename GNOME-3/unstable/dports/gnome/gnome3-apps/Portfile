@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-apps
-version         3.19.90
+version         3.19.91
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -56,7 +56,6 @@ supported_archs noarch
 # nautilus-sendto
 # nemiver
 # orca
-# polari
 # quadrapassel (previously part of gnome-games)
 # swell-foop
 # tali (previously part of gnome-games)
@@ -82,6 +81,7 @@ depends_lib     port:bijiben \
                 port:gnome-music \
                 port:gnome-photos \
                 port:gnome-sudoku \
+                port:polari \
                 port:rygel \
                 port:seahorse
 
