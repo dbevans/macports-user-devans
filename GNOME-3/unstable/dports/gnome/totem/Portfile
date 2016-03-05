@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                totem
-version             3.19.3
+version             3.19.91
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome
 # also has an exception allowing use of non-GPL-compatible plugins
@@ -26,8 +26,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  7d3990291254ee516a9af2ec7ea0130bb6edf306 \
-                    sha256  6fee77749f4003741cba3be774b16f5da4ddadcb850b414b6ff8dd458070442c
+checksums           rmd160  ce4d4137bae2f23836f5f02ccc820fb6579c846f \
+                    sha256  8b419bd63610fd6c19b673e892d5e7fb6b9052d331106c884447946eb9824ef0
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -37,8 +37,7 @@ depends_build       port:pkgconfig \
                     port:gnome-common \
                     port:gtk-doc \
                     port:autoconf \
-                    port:automake \
-                    port:intltool
+                    port:automake
 
 depends_lib         port:desktop-file-utils \
                     port:gnome-desktop \
@@ -95,7 +94,7 @@ variant nautilus description {Build nautilus properties page plugin} {
     depends_lib-append        port:nautilus
 }
 
-variant python27 conflicts python34 description {Use python 2.7} {
+variant python27 conflicts python34 python35 description {Use python 2.7} {
     configure.python          ${prefix}/bin/python2.7
     depends_lib-append        port:py27-gobject3 port:py27-pylint
     set python_framework      ${frameworks_dir}/Python.framework/Versions/2.7
@@ -104,7 +103,7 @@ variant python27 conflicts python34 description {Use python 2.7} {
     configure.args-replace    --disable-python --enable-python
 }
 
-variant python34 conflicts python27 description {Use python 3.4} {
+variant python34 conflicts python27 python35 description {Use python 3.4} {
     configure.python          ${prefix}/bin/python3.4
     depends_lib-append        port:py34-gobject3 port:py34-pylint
     set python_framework      ${frameworks_dir}/Python.framework/Versions/3.4
@@ -113,7 +112,16 @@ variant python34 conflicts python27 description {Use python 3.4} {
     configure.args-replace    --disable-python --enable-python
 }
 
-if {![variant_isset python27]} {
+variant python35 conflicts python27 python34 description {Use python 3.5} {
+    configure.python          ${prefix}/bin/python3.5
+    depends_lib-append        port:py34-gobject3 port:py35-pylint
+    set python_framework      ${frameworks_dir}/Python.framework/Versions/3.4
+    configure.pkg_config_path ${python_framework}/lib/pkgconfig
+    configure.env              PATH=${python_framework}/bin:$env(PATH)
+    configure.args-replace    --disable-python --enable-python
+}
+
+if {![variant_isset python27] && ![variant_isset python35]} {
     default_variants    +python34
 }
 
