@@ -6,7 +6,7 @@ PortGroup           compiler_blacklist_versions 1.0
 PortGroup           gobject_introspection 1.0
 
 name                rygel
-version             0.29.3
+version             0.29.4
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Rygel DLNA media server, renderer
@@ -20,14 +20,15 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  59a5c270c50448f2a75b3b99d75b252ecb1668a6 \
-                    sha256  8f33554a14cc44f6be501551cc90b551a75243791f07308f744601a51fb87a5d
+checksums           rmd160  a50d918c9c1e7ba317752507197fb5d029cc7b89 \
+                    sha256  d6ca99d149c2d6260d00f8783204b4f1be573558ebc18dcc2e45b246f994b9e3
 
 depends_build       port:pkgconfig \
                     port:intltool \
                     port:autoconf \
                     port:automake \
-                    port:libtool
+                    port:libtool \
+                    port:gsed
 
 depends_lib         port:desktop-file-utils \
                     port:gtk3 \
@@ -39,7 +40,6 @@ depends_lib         port:desktop-file-utils \
                     port:libgee \
                     port:libmediaart \
                     port:libunistring \
-                    port:ossp-uuid \
                     port:vala
 
 depends_run         port:gnome-themes-standard
@@ -51,6 +51,8 @@ gobject_introspection yes
 # build fix for SL and earlier
 
 compiler.blacklist  *gcc* {clang < 300}
+
+patchfiles          patch-gsed.diff
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
