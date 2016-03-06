@@ -84,8 +84,7 @@ configure.args  --disable-doxygen-docs \
                 --enable-launchd \
                 --with-launchd-agent-dir=${prefix}/Library/LaunchAgents \
                 --with-dbus-user=${dbus_user} \
-                --disable-tests \
-                --enable-verbose-mode
+                --disable-tests
 
 set sudo ""
 if {![variant_isset no_root]} {
