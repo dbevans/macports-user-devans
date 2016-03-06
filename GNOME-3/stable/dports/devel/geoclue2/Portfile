@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                geoclue2
 set gname           geoclue
-version             2.4.0
+version             2.4.3
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          devel net
 license             GPL-2+ LGPL-2.1+
@@ -21,8 +21,8 @@ distname            ${gname}-${version}
 
 use_xz              yes
 
-checksums           rmd160  215596796dfb0904bcb9850a47d3b2dc596e74dd \
-                    sha256  a4dffe200a351c9c39d705e70be7bfa2ad122440ec8d9da98af1e62eaf4effca
+checksums           rmd160  bf571a341eaaf1133c2946a5fd10af2cdc3ca331 \
+                    sha256  ada9dba870dd79e1b21923aeda4d82b66cbda39e57978fbe3d83d356cc3c605e
 
 depends_build       port:intltool \
                     port:pkgconfig \
