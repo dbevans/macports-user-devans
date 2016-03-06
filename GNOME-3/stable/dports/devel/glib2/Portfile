@@ -3,7 +3,6 @@
 
 PortSystem                  1.0
 PortGroup                   compiler_blacklist_versions 1.0
-PortGroup                   conflicts_build 1.0
 
 # Please keep the glib2 and glib2-devel ports as similar as possible.
 
@@ -75,7 +74,8 @@ configure.cflags-append     -fstrict-aliasing
 
 configure.args              --enable-static --disable-libelf \
                             --disable-compile-warnings \
-                            --with-pcre=system
+                            --with-pcre=system \
+                            ac_cv_prog_AWK=/usr/bin/awk
 
 configure.perl              /usr/bin/perl
 configure.python            /usr/bin/python
