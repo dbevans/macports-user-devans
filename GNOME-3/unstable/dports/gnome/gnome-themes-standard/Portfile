@@ -1,0 +1,63 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                gnome-themes-standard
+version             3.19.91
+set branch          [join [lrange [split ${version} .] 0 1] .]
+categories          gnome
+maintainers         devans openmaintainer
+license             LGPL-2.1+ GPL-2+
+platforms           darwin
+description         Default GNOME 3 theme
+
+long_description    gnome-themes-standard contains various components of the \
+                    default GNOME 3 themes for GTK+ 2 and GTK+ 3 applications \
+                    (Adwaita, HighContrast, LowContrast).
+
+homepage            http://www.gnome.org/
+master_sites        gnome:sources/$name/$branch/
+
+use_xz              yes
+
+checksums           rmd160  4764a3b58c9d0d6ebd9085ea1e3b73c0a05c6f3f \
+                    sha256  46e024e160efdd32595db445517db8d0f8caae6c4941852e253b320200994300
+
+depends_build       port:intltool \
+                    port:pkgconfig \
+                    port:gnome-common \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
+
+depends_lib         port:gtk3 \
+                    port:gtk2 \
+                    port:librsvg \
+                    port:adwaita-icon-theme \
+                    port:gnome-backgrounds
+
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+}
+
+configure.cmd       ./autogen.sh
+
+configure.args      --disable-silent-rules
+
+#
+# the following dummy variants are used
+# to identify this port's binary dependencies
+# based on which variant of gtk2, gtk3 is used for the build
+#
+
+variant x11 conflicts quartz {}
+variant quartz conflicts x11 {}
+
+if {![variant_isset quartz]} {
+    default_variants +x11
+}
+
+livecheck.type      gnome-with-unstable
