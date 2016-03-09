@@ -69,8 +69,11 @@ depends_lib         port:atk \
                     port:webp \
                     port:zlib
 
+# PR-152650-*.patch: https://bugs.webkit.org/show_bug.cgi?id=152650
 # PR-153138.patch: https://bugs.webkit.org/show_bug.cgi?id=153138
 patchfiles-append \
+    PR-152650-1.patch \
+    PR-152650-2.patch \
     PR-153138.patch
 
 # Build out-of-tree
@@ -81,14 +84,14 @@ default build.dir       {${workpath}/build}
 configure.args-append \
     -DPORT=GTK \
     -DUSE_SYSTEM_MALLOC=ON \
+    -DENABLE_GTKDOC=ON \
+    -DENABLE_INTROSPECTION=ON \
     -DENABLE_MINIBROWSER=OFF \
     -DENABLE_PLUGIN_PROCESS_GTK2=OFF \
     -DENABLE_VIDEO=ON
 
 # https://bugs.webkit.org/show_bug.cgi?id=152650
-# configure.args-append -DENABLE_INTROSPECTION=OFF
-patchfiles-append \
-    enable-introspection.patch
+build.env-append DYLD_LIBRARY_PATH=${build.dir}/lib
 
 # <rdar://problem/24031030>
 configure.optflags  -Os
@@ -138,9 +141,6 @@ post-configure {
 # https://trac.macports.org/ticket/41560#comment:2
 configure.cflags-append     -ftemplate-depth=256
 configure.cxxflags-append   -ftemplate-depth=256
-
-build.env-append \
-    DYLD_LIBRARY_PATH=${build.dir}/lib
 
 variant quartz conflicts x11 gtk2 {
     require_active_variants port:gtk3 quartz
