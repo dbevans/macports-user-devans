@@ -6,7 +6,7 @@ PortGroup           active_variants 1.1
 PortGroup           gobject_introspection 1.0
 
 name                gspell
-version             0.2.4
+version             0.2.6
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         gspell - a spell-checking library for GTK+
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  1b3509b3cbf538827b7c5cc875552b118ec65453 \
-                    sha256  24d9332bc14d629f528d89fa2034b7c857a41c40f969a1741a6aa9ff5f82b00b
+checksums           rmd160  cd2de9089d9b9df65dbf902aaa7f1a6bc4404cb6 \
+                    sha256  cf2d2d68a9148affa1f872fe36fe428915a0dc726af79531cc1d6e41e399b2a2
 
 depends_build       port:pkgconfig \
                     port:gtk-doc
