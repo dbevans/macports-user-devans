@@ -6,7 +6,7 @@ PortGroup           active_variants 1.1
 PortGroup           gobject_introspection 1.0
 
 name                gedit
-version             3.19.4
+version             3.19.5
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME editor.
@@ -19,8 +19,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  46412849b104c0681dbf3a235b60b081f102bf6c \
-                    sha256  6dfbf81dd347830e11e7898ea580d669bfdb306230fc23fa8db6c2657407f367
+checksums           rmd160  8316c2ffe22c3a19edb354bc4e4b71901ce42f0d \
+                    sha256  75823f6968e5f8bac6733cc1d2644cd4a87e498d7f31b6bb8f07c2bada982b9b
 
 depends_build       port:pkgconfig \
                     port:intltool \
