@@ -1,0 +1,41 @@
+From d55ce1608d03fcdf31cd7c5a19e28dc2535b5929 Mon Sep 17 00:00:00 2001
+From: Ignacio Casal Quinteiro <icq@gnome.org>
+Date: Tue, 15 Mar 2016 00:07:15 +0100
+Subject: Bump libgit2-glib to 0.23.11 and fix api break
+
+---
+ configure.ac             | 4 ++--
+ libgitg/gitg-remote.vala | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 697f1e6..9012ea0 100644
+--- configure.ac
++++ configure.ac
+@@ -133,8 +133,8 @@ GLIB_REQUIRED_VERSION=2.38
+ GTK_REQUIRED_VERSION=3.18.0
+ GTKSOURCEVIEW_REQUIRED_VERSION=3.10
+ INTROSPECTION_REQUIRED=0.10.1
+-LIBGIT2_GLIB_REQUIRED_VERSION=0.23.5
+-LIBGIT2_GLIB_REQUIRED_MAX_VERSION=0.24.0
++LIBGIT2_GLIB_REQUIRED_VERSION=0.23.11
++LIBGIT2_GLIB_REQUIRED_MAX_VERSION=0.25.0
+ LIBXML_REQUIRED_VERSION=2.9.0
+ 
+ PKG_CHECK_MODULES(LIBGITG, [
+diff --git a/libgitg/gitg-remote.vala b/libgitg/gitg-remote.vala
+index 991d4cf..6637312 100644
+--- libgitg/gitg-remote.vala
++++ libgitg/gitg-remote.vala
+@@ -247,7 +247,7 @@ public class Remote : Ggit.Remote
+ 			try
+ 			{
+ 				yield Async.thread(() => {
+-					base.connect(direction, new Callbacks(this, callbacks, null));
++					base.connect(direction, new Callbacks(this, callbacks, null), null);
+ 				});
+ 			}
+ 			catch (Error e)
+-- 
+cgit v0.12
+

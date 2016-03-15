@@ -7,6 +7,7 @@ PortGroup           gobject_introspection 1.0
 
 name                gitg
 version             3.19.6
+revision            1
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME git repository viewer.
@@ -53,7 +54,8 @@ depends_run         port:gnome-themes-standard
 
 gobject_introspection yes
 
-patchfiles          patch-autogen.sh.diff
+patchfiles          patch-autogen.sh.diff \
+                    patch-libgit2-0.24.0.diff
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
