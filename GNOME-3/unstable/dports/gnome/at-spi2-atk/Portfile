@@ -5,10 +5,10 @@ PortSystem          1.0
 
 name                at-spi2-atk
 # you probably want to keep this at the same version as at-spi2-core
-version             2.19.91
+version             2.19.92
 
-checksums           rmd160  30e16ee0bcdc068a6c425b548d76a5748699a419 \
-                    sha256  d8349f72795df0992e19a7717d87d4a028ca19ede1e1034782d2d7bd8f541289
+checksums           rmd160  031d13f56073e390727adb4aef791c5a9c85045d \
+                    sha256  ca14964ae08a2e57d28ec4f9c9e3edb0507f4e032bef00b27c44e71df1a25fe1
 
 license             LGPL
 set branch          [join [lrange [split ${version} .] 0 1] .]
