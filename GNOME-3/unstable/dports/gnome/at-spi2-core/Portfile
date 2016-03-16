@@ -6,9 +6,10 @@ PortGroup           gobject_introspection 1.0
 
 name                at-spi2-core
 # you probably want to keep this at the same version as at-spi2-atk
-version             2.19.91
-checksums           rmd160  893656e8815cbaae5ba931e7e33636a33ca561ef \
-                    sha256  106fee50e770530450d1e5bbbd3a184fb7ae806813f8fcc7da6e539e93452a16
+version             2.19.92
+
+checksums           rmd160  daa2dd4d89c5d5d2262d1180169ab022228e9b2e \
+                    sha256  cd217a8161ad3da326bd766b23b583eec9741721a6c59750a697a97d7f41e918
 
 license             LGPL
 set branch          [join [lrange [split ${version} .] 0 1] .]
