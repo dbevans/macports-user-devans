@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                libsoup
-version             2.53.90
+version             2.53.92
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome net
 platforms           darwin
@@ -24,8 +24,8 @@ homepage            https://wiki.gnome.org/Projects/libsoup
 master_sites        gnome:sources/${name}/${branch}/
 use_xz              yes
 
-checksums           rmd160  5e95644f8e9257aecd5d4746400aa9f9eeaecd4f \
-                    sha256  1ce75a6cdea5cb34724772c95aa08e089a3d9224c2527458e9c5b763ed9802e3
+checksums           rmd160  b94d13bc8b0d8f636fe0246f9af711d8662319eb \
+                    sha256  9753cd0279b82410a1f8b37f1e0cda4b851cd49374f6ac515e1efb84ae0f3b5b
 
 depends_build       port:pkgconfig \
                     port:intltool \
