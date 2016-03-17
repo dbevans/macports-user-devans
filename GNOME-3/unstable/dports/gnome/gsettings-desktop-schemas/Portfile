@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gsettings-desktop-schemas
-version             3.19.90
+version             3.19.92
 license             LGPL-2.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 
@@ -22,8 +22,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  8b9250fbb134bf55640721247732c5645ca3d98a \
-                    sha256  f062e55fb978fcf8cf0a4cd798876319bc699fe1fd5662591c7404e5fad86a83
+checksums           rmd160  dea8499f6af689ffcad6cf397c048b5389462b82 \
+                    sha256  88c9af6a465da804b364c21cea15fa62457cc765911eee64099c984ada61f79d
 
 supported_archs     noarch
 
