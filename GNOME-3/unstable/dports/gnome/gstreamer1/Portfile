@@ -10,7 +10,7 @@ PortGroup           muniversal 1.0
 
 name                gstreamer1
 set my_name         gstreamer
-version             1.7.90
+version             1.7.91
 description         GStreamer is a library for constructing graphs of media-handling components.
 long_description    The applications it supports range from simple Ogg/Vorbis playback, audio/video \
                     streaming to complex audio (mixing) and video (non-linear editing) processing.
@@ -25,8 +25,8 @@ master_sites        http://gstreamer.freedesktop.org/src/${my_name}/
 
 use_xz              yes
 
-checksums           rmd160  c781e587c44df91d432ca95f094a2873f525b8f9 \
-                    sha256  f8c10fc4ecc3ad544aa8e761551ee4c0d9ad812cdb4a57acbfdf413919886c46
+checksums           rmd160  32cca06e91deb77e9ad1fca00a16ab5d1ee62c49 \
+                    sha256  f45c3063a8281a69905b931e174dc5cab127894126e1b39445ce3fe392df2f08
 
 depends_build       port:gzip \
                     port:m4 \

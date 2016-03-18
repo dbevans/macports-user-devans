@@ -9,7 +9,7 @@ PortGroup           gobject_introspection 1.0
 
 name                gstreamer1-gst-plugins-bad
 set my_name         gst-plugins-bad
-version             1.7.90
+version             1.7.91
 description         A set of plug-ins for GStreamer that need more quality.
 long_description    GStreamer Bad Plug-ins is a set of plug-ins that aren't up to par compared \
                     to the rest. They might be close to being good quality, but they're missing \
@@ -24,8 +24,8 @@ master_sites        http://gstreamer.freedesktop.org/src/${my_name}/
 distname            ${my_name}-${version}
 use_xz              yes
 
-checksums           rmd160  32c7846c73c5fcc5e7f7435a3c03341c37df2aab \
-                    sha256  01f1c168324738c543ce26b1332b0d77547c9717f3b2fde4f22a8e4ebcb06d14
+checksums           rmd160  16b8c496499ba6a995cc2bc5028e63c0cbe9085c \
+                    sha256  df8efbfd0261b214a4b20f4caae78282a8fc5143e61218f9fe03b1e74599fb2c
 
 depends_build       port:pkgconfig
 depends_lib         port:gstreamer1-gst-plugins-base \
@@ -68,6 +68,12 @@ autoreconf.args     -fvi
 
 patchfiles          modplug.patch \
                     openal.patch
+
+post-patch {
+# plugin applemedia: install files from upstream git master, missing from tarball
+    xinstall -m 0644 -W ${filespath} corevideomemory.h iosurfacememory.h ${worksrcpath}/sys/applemedia
+}
+
 #
 # could depend on tons for multimedia stuff +variants
 # the following ports are available but don't configure
@@ -79,6 +85,7 @@ patchfiles          modplug.patch \
 # port:opencv (opencv plugin requires opencv >= 2.0.0 opencv < 2.5.0 but current version is 3.0.0)
 # port:slv2 (builds but lv2 plugin fails to load and slv2 is not universal) disable lv2 explicitly in case slv2 is installed
 # port:Xvid plugin xvid not ported in this version
+# plugin opus is now contained in gstreamer1-gst-plugins-base, disable this version
 #
 # the following plugins build opportunisticly due to missing dependencies
 # explicitly disabled for now
@@ -86,7 +93,6 @@ patchfiles          modplug.patch \
 
 configure.args      --disable-silent-rules \
                     --disable-fatal-warnings \
-                    --disable-apple_media \
                     --disable-dc1394 \
                     --disable-faac \
                     --disable-frei0r \
@@ -103,7 +109,7 @@ configure.args      --disable-silent-rules \
 # port:soundtouch (fails on autoreconf on darwin 8 & 9, see #27533) disable soundtouch on these platforms
 # gl cocoa build continues to fail due to use of API not available on darwin 10 or earlier
 # plugin applemedia (Apple video) now only builds on darwin 14 and later due to use of
-#     constant AVQueuedSampleBufferRenderingStatusFailed introduced in OSX 10.10
+# constant AVQueuedSampleBufferRenderingStatusFailed introduced in OSX 10.10
 #
 
 platform darwin {

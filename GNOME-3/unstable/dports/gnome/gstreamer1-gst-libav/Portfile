@@ -10,7 +10,7 @@ PortGroup           compiler_blacklist_versions 1.0
 
 name                gstreamer1-gst-libav
 set my_name         gst-libav
-version             1.7.90
+version             1.7.91
 description         This is gst-libav, a set of plug-ins for GStreamer.
 long_description    ${description}
 maintainers         nomaintainer
@@ -22,8 +22,8 @@ master_sites        http://gstreamer.freedesktop.org/src/${my_name}/
 distname            ${my_name}-${version}
 use_xz              yes
 
-checksums           rmd160  b9efd32f53deeac38c0e1a81ec4c450589dc4a6b \
-                    sha256  b9e30df308c39752f0b22e0f554d8b6f93d95f5d8673a78538219e05adc73e5d
+checksums           rmd160  1c07c8a41ff2c3b00b03ebc124901e1d8c73fdae \
+                    sha256  c17460adde6644c10499dd335fcd320ea2a4712a7646cf3e16964e6a1890082a
 
 depends_build       port:pkgconfig \
                     port:yasm
