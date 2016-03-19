@@ -8,7 +8,7 @@ PortSystem          1.0
 PortGroup           cxx11 1.0
 
 name                glibmm
-version             2.47.6
+version             2.47.92
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         C++ interface to glib
 long_description    ${description}
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  d1517418643a1c387514237d8fa5e57bfa1eee25 \
-                    sha256  e1a35c6ee1f948f33cde837464a46e9421dab68cb18a5ed1d0c1ac0ab7a2ac7d
+checksums           rmd160  8807e1d0a7a1e5d8468bd065810b3cfa31770aee \
+                    sha256  47cfcd960cbd78e1e960a04aa650227e7ce57874121f0f014140d3e40c928900
 
 depends_build       port:pkgconfig
 
