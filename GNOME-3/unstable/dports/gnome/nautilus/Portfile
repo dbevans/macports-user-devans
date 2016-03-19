@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                nautilus
-version             3.19.90
+version             3.19.93
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         The GNOME filemanager
 long_description    Nautilus is the official file manager for the \
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  4e97ffa7694efe6954c1137f929c1bf917f10df7 \
-                    sha256  c54099fdce9bb0f38a06e5a4458af7a59af5f0d5e60a15eeabd9805f3c996adb
+checksums           rmd160  6a0fe44a8df5a483f647780a0ceeefa941166b0c \
+                    sha256  5aa3aa4e07bb4d66e884c7cc89968e657cabe9df0c4d3419a487a6303478d912
 
 depends_build       port:pkgconfig \
                     port:intltool \
