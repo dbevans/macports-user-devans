@@ -1,0 +1,65 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                pan2
+set git_commit      dfd5c32d7ea51c2aac3599cf76ed3a8c83ee38d5
+set git_date        20160318
+version             0.140-${git_date}
+categories          news
+license             GPL-2
+platforms           darwin
+maintainers         nomaintainer
+
+description         News reader for gtk2
+
+long_description    Pan2 is a newsreader for GTK2/GNOME2 that is based on \
+                    the Agent newsreader for Windows OSes.
+
+homepage            http://pan.rebelbase.com/
+master_sites        https://git.gnome.org/browse/${name}/snapshot/
+distname            ${name}-${git_commit}
+
+use_xz              yes
+
+checksums           rmd160  b42f94e0fac17e83281ab2a3bda7c50d07ee34ee \
+                    sha256  7d919eadce7e8e4afe4a49bc7735fd8ea9800ab9960c72563d19e246a7d6ae7a
+
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:gnome-common \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
+
+depends_lib         port:pcre \
+                    port:gmime \
+                    port:gnutls \
+                    port:gtk2 \
+                    port:gtkspell2 \
+                    port:libiconv
+
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+
+#post-patch {
+#    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+#}
+
+configure.cmd       ./autogen.sh
+
+configure.args      --with-gnutls \
+                    --disable-silent-rules
+
+configure.ldflags-append \
+                    -liconv
+
+variant gtk3 description {Build using gtk3} {
+    depends_lib-replace port:gtk2 port:gtk3
+    depends_lib-replace port:gtkspell2 port:gtkspell3
+    configure.args-append --with-gtk3
+}
+
+livecheck.type      regex
+livecheck.url       http://pan.rebelbase.com/download/releases/
+livecheck.regex     {>([0-9.]+)/<}
