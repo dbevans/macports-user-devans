@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gnome-music
-version             3.19.91
+version             3.19.92
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Music is the GNOME music playing application.
@@ -19,8 +19,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  b1ca63849a48d5860c2b16c669424ba8f6378de9 \
-                    sha256  bbf8aa5edb56d1ccebcf5741025a7f73a9839333e209949e3b3c964ce252d17e
+checksums           rmd160  b7a003023d9f3fe4d8edb9d8a135f642ba78ecca \
+                    sha256  96ec8c5fa500fdbb6d3fe15479ae064b2486300b4317bed673a3ccaa02144af7
 
 depends_build       port:pkgconfig \
                     port:intltool \
