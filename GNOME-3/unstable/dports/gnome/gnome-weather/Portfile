@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gnome-weather
-version             3.19.90
+version             3.19.92
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A small application that allows you to monitor the current weather \
@@ -19,13 +19,12 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  a57f4ef68aa288375b9732d0d38b22e257e83738 \
-                    sha256  88b2150d38f3704197d0f20be079757427a21eb832809b14d7a7b8cf41a7fede
+checksums           rmd160  78c80dbc40a2e6c56d823473833c86eb5290e3f5 \
+                    sha256  4febb9c4edc8b0a84a843041d9d656c871d36b846159bda1f6d31c9dbea77458
 
 depends_build       port:pkgconfig \
                     port:intltool \
                     port:appstream-glib \
-                    port:gnome-common \
                     port:autoconf \
                     port:automake \
                     port:libtool
