@@ -6,8 +6,7 @@ PortGroup           gobject_introspection 1.0
 PortGroup           muniversal 1.0
 
 name                anjuta
-version             3.18.2
-revision            1
+version             3.20.0
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A GNOME/GTK IDE
@@ -20,8 +19,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  0c8289d057d2b1543032b34543668c539c461e47 \
-                    sha256  be864f2f1807e1b870697f646294e997d221d5984a135245543b719e501cef8e
+checksums           rmd160  34f28bc54b8331a8a110471a9b58c27fb4aa43ce \
+                    sha256  a676c587a28f784ec2096775460cd29fafc3f0216c53e0821641bcd9126b6935
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -101,17 +100,22 @@ variant vala description {Enable vala support} {
     depends_lib-append      port:vala
 }
 
-variant python27 conflicts python34 description {Use Python 2.7} {
+variant python27 conflicts python34 python35 description {Use Python 2.7} {
     configure.python        ${prefix}/bin/python2.7
     depends_lib-append      port:py27-gobject3
 }
 
-variant python34 conflicts python27 description {Use Python 3.4} {
+variant python34 conflicts python27 python35 description {Use Python 3.4} {
     configure.python        ${prefix}/bin/python3.4
     depends_lib-append      port:py34-gobject3
 }
 
-if {![variant_isset python27]} {
+variant python35 conflicts python27 python34 description {Use Python 3.5} {
+    configure.python        ${prefix}/bin/python3.5
+    depends_lib-append      port:py35-gobject3
+}
+
+if {![variant_isset python27] && ![variant_isset python35]} {
     default_variants +python34
 }
 
