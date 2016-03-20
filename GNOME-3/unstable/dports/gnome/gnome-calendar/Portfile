@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-calendar
-version             3.19.91
+version             3.19.92
 license             GPL-3+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Calendar is a calendar application for GNOME.
@@ -17,8 +17,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  92bc3986e7822b791ae16a6df2e9b0b255ae06a6 \
-                    sha256  a255d322e2b7d6cb8e493f24d91dc64611ab44bdf9ded10e47f56ed4dcee2637
+checksums           rmd160  990d0b29eda5a3ddf1c481a5feb9cd04083d487a \
+                    sha256  e87ed339e78a552a739f99df7e27be94ed99bcd2dc2b581d83ef6e8c73a826e3
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -39,6 +39,10 @@ depends_run         port:gnome-themes-standard \
 
 patchfiles          patch-configure.ac.diff \
                     patch-src-Makefile.am.diff
+
+# revert upstream commit 'year-view: Read show-weekdate from GNOME Shell'
+# https://git.gnome.org/browse/gnome-calendar/commit/?id=32c5c824e326759af0766b011b02f354889a7b6c
+patchfiles-append   patch-src-gcal-year-view.c.diff
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
