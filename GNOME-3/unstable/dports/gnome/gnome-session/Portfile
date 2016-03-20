@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-session
-version             3.19.91
+version             3.19.92
 license             LGPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Session component for the GNOME 3 desktop.
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  c36b9aac5cc38aee87e29ee2dc4d4338b82ccf7e \
-                    sha256  17a11e39b0f5cbad6f3e1a0e841ebd1c5f0340314f41615903e828d4810bab13
+checksums           rmd160  e01276db77659d69d785048f785b85902d667bee \
+                    sha256  27d7eb9514ec554852065e5a64fa255b74663a25d369a443227e6841ed80b75a
 
 depends_build       port:pkgconfig \
                     port:intltool \
