@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-photos
-version             3.19.91
+version             3.19.92
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Photo manager for GNOME.
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  a08d0ad66539ea2acf99531c3ada2e7f4e87bd2c \
-                    sha256  16782bf52348941fc4cbaf5d7fc5be18c8ed53de96bb547a0eca2bb8f173e0a5
+checksums           rmd160  e4ef893f00e146841a4d77d5045efdbf1ecc55d2 \
+                    sha256  9ba3a4416266700f1a0df342945e8a5ff8281daafcd94a3b36952d3846c7812a
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -32,21 +32,14 @@ depends_build       port:pkgconfig \
 depends_lib         port:desktop-file-utils \
                     port:gtk3 \
                     port:cairo \
-                    port:exempi \
+                    port:gegl-0.3 \
                     port:gfbgraph \
                     port:gdk-pixbuf2 \
                     port:gnome-desktop \
                     port:gnome-online-accounts \
                     port:grilo \
                     port:grilo-plugins \
-                    port:lcms2 \
-                    port:libexif \
-                    port:librsvg \
                     port:tracker
-
-# version 3.19.90 requires gegl-0.3 >= 0.3.5.
-depends_lib-append  port:gegl-devel
-
 
 depends_run         port:gnome-themes-standard \
                     port:yelp
