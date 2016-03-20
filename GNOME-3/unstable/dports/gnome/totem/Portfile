@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                totem
-version             3.19.91
+version             3.19.92
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome
 # also has an exception allowing use of non-GPL-compatible plugins
@@ -26,8 +26,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  ce4d4137bae2f23836f5f02ccc820fb6579c846f \
-                    sha256  8b419bd63610fd6c19b673e892d5e7fb6b9052d331106c884447946eb9824ef0
+checksums           rmd160  a918deccda882fbe51cc4633d8c65d45c89d6ab0 \
+                    sha256  e89ac3fd955fb9415f64f513eb0ab21315a32a8ce948197bf6f16204edca0e04
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -65,11 +65,12 @@ depends_lib         port:desktop-file-utils \
 depends_run         port:gnome-themes-standard \
                     port:yelp
 
-patchfiles          patch-vala-cflags.diff
+patchfiles          patch-vala-cflags.diff \
+                    patch-autogen.sh.diff
 
 gobject_introspection yes
 
-# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+# reconfigure using autogen.sh for intltool 0.51 compatibility
 
 configure.cmd       ./autogen.sh
 
