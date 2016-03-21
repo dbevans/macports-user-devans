@@ -37,7 +37,6 @@ supported_archs noarch
 # gnome-disk-utility
 # gnome-initial-setup
 # gnome-logs
-# gnome-online-miners
 # gnome-shell
 # gnome-shell-extensions
 # gnome-software
@@ -102,6 +101,7 @@ depends_lib     port:adwaita-icon-theme \
                 port:gnome-maps \
                 port:gnome-menus \
                 port:gnome-online-accounts \
+                port:gnome-online-miners \
                 port:gnome-screenshot \
                 port:gnome-session \
                 port:gnome-settings-daemon \
