@@ -29,8 +29,8 @@ long_description            Glib is a library which includes support routines \
 
 master_sites                gnome:sources/${my_name}/${branch}/
 
-checksums           rmd160  02739adc3a027ec575066915522bf40c3567f217 \
-                    sha256  219898ab67786de7e7537cc34a6d9af50d4731cdb1356905471d981abfd4d79a
+checksums                   rmd160  02739adc3a027ec575066915522bf40c3567f217 \
+                            sha256  219898ab67786de7e7537cc34a6d9af50d4731cdb1356905471d981abfd4d79a
 
 # ${prefix}/include/glib-2.0/glib/gi18n.h requires -I${prefix}/include to find libintl.h
 # See https://trac.macports.org/changeset/27148
@@ -50,11 +50,6 @@ if {[vercmp ${macosx_deployment_target} 10.9] < 0} {
 } else {
     # gcocoanotificationbackend.c:115:52: error: array subscript is not an integer
     compiler.blacklist-append {clang < 600}
-}
-
-if {[string match {*gcc-4.[0123]} ${configure.compiler}]} {
-    # Remove pragmas incompatible with gcc < 4.4
-    patchfiles-append       patch-glib-gdate.c.diff
 }
 
 depends_build               bin:xmllint:libxml2
