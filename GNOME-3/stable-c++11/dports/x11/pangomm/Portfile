@@ -9,7 +9,7 @@ PortGroup           cxx11 1.0
 PortGroup           active_variants 1.1
 
 name                pangomm
-version             2.38.1
+version             2.40.0
 # some build files are GPL-2+ but they are not installed
 license             LGPL-2.1+
 set branch          [join [lrange [split ${version} .] 0 1] .]
@@ -24,8 +24,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  1c5e608e979e8f94fdeecdde28a4ed6816d52330 \
-                    sha256  effb18505b36d81fc32989a39ead8b7858940d0533107336a30bc3eef096bc8b
+checksums           rmd160  ef5e8433c9e86240bc91617ec4296f42b0e3332a \
+                    sha256  7dd0afa9dcce57cdb0aad77da9ea46823ee8515d5f3ffd895b9ede7365c3d70d
 
 depends_build       port:pkgconfig \
                     port:mm-common
@@ -37,6 +37,8 @@ depends_lib         path:lib/pkgconfig/pango.pc:pango \
  
 use_autoreconf      yes
 autoreconf.args     -fvi
+
+configure.perl      /usr/bin/perl
 
 #
 # dummy variants to ensure that this port gets rebuilt if
@@ -57,4 +59,4 @@ if {[variant_isset quartz]} {
     require_active_variants ath:lib/pkgconfig/pango.pc:pango quartz
 }
 
-livecheck.type      gnome
+livecheck.type      gnome-with-unstable
