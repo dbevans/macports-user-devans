@@ -10,7 +10,7 @@ PortGroup           active_variants 1.1
 
 name                gtkmm3
 set gname           gtkmm
-version             3.18.0
+version             3.20.0
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         C++ interface to GTK+ version 3.
 long_description    gtkmm3 is the official C++ interface \
@@ -27,8 +27,8 @@ use_xz              yes
 dist_subdir         ${gname}
 distname            ${gname}-${version}
 
-checksums           rmd160  2d38da907f8de2cb52b8df2fdc75fddff2abdb0e \
-                    sha256  829fa113daed74398c49c3f2b7672807f58ba85d0fa463f5bc726e1b0138b86b
+checksums           rmd160  fefb5e0e7f7e5c0b7bbc5fcfb5790ad03cc3e1da \
+                    sha256  f021573f870df8a0b40ba37a7864c37be517c7a88cc957a193dbab28449b028a
 
 depends_build       port:pkgconfig \
                     port:mm-common \
@@ -43,6 +43,9 @@ depends_lib         port:gtk3 \
 # Update glibtool to know about -stdlib=... in CXXFLAGS
 use_autoreconf      yes
 autoreconf.args     -fvi
+
+# build using system perl
+configure.perl      /usr/bin/perl
 
 #
 # dummy variants to ensure that this port gets rebuilt if
