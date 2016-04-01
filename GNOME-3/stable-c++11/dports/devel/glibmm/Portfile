@@ -8,7 +8,7 @@ PortSystem          1.0
 PortGroup           cxx11 1.0
 
 name                glibmm
-version             2.46.3
+version             2.48.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         C++ interface to glib
 long_description    ${description}
@@ -21,13 +21,20 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  47ed02bdacecf1e219710c728dca748262ef3f78 \
-                    sha256  c78654addeb27a1213bedd7cd21904a45bbb98a5ba2f2f0de2b2f1a5682d86cf
+checksums           rmd160  297bf029a55b880feb2a448e8240ad50385f5e85 \
+                    sha256  dc225f7d2f466479766332483ea78f82dc349d59399d30c00de50e5073157cdf
 
 depends_build       port:pkgconfig
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:libsigcxx2
+
+# glibmm uses thread_local as of version 2.47.3.1
+# Apple clang does not support this
+# open source clang does
+# https://devforums.apple.com/message/1079348#1079348
+
+compiler.blacklist  clang
 
 configure.perl      /usr/bin/perl
 
@@ -35,7 +42,7 @@ post-destroot {
     set mmdoctooldir ${prefix}/share/glibmm-2.4/doctool
     xinstall -d ${destroot}${mmdoctooldir}
     xinstall -m 0644 -W ${worksrcpath}/docs doc-install.pl doc-postprocess.pl \
-                                            doxygen.css tagfile-to-devhelp2.xsl \
+                                            doxygen-extra.css tagfile-to-devhelp2.xsl \
                                             ${destroot}${mmdoctooldir}
 }
 
