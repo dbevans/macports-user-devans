@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                tracker
-version             1.6.2
+version             1.8.0
 license             GPL-2+ LGPL-2.1+ BSD
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Metadata database, indexer and search tool.
@@ -22,8 +22,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  7c9d523c37ca5b2e290c1b551272dd35a9b5b37e \
-                    sha256  d3583f32e6a06ccb1146ca31939710edb630d7ffe3da37b01f893b45f4480045
+checksums           rmd160  26d6c239b5240fafe8c44a708e44738ec6d98819 \
+                    sha256  a11f31a373bfec3abae38ae719d0a59f666f1f067d8789ade2ed7032a152907d
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -35,7 +35,6 @@ depends_build       port:pkgconfig \
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:sqlite3 \
-                    port:ossp-uuid \
                     port:libgee \
                     port:libgrss \
                     port:vala \
@@ -55,7 +54,8 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:flac \
                     port:totem-pl-parser
 
-patchfiles          patch-extract-configure.ac.diff \
+patchfiles          patch-configure.ac.diff \
+                    patch-extract-configure.ac.diff \
                     patch-libtracker-sparql-suffix.diff \
                     patch-module-flags-no-undefined.diff
 
