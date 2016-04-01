@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-photos
-version             3.18.3
+version             3.20.0
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Photo manager for GNOME.
@@ -18,36 +18,31 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  2155be8194938b9e9ff2e814a3e1554a2498e815 \
-                    sha256  cb0b0573b2b473257a41024de7b99986a10a67af07cbdead5bf266291e9ed167
+checksums           rmd160  4008b6d87b993ee9f5204ffcf08e207e3838fbef \
+                    sha256  2b026a34bf29e7e020e9dbfac39aaeabaad94bf03d9cc786dadd711048f945ae
 
 depends_build       port:pkgconfig \
                     port:intltool \
                     port:itstool \
                     port:yelp-tools \
-                    port:gnome-common \
                     port:autoconf \
                     port:automake \
                     port:libtool
 
 depends_lib         port:desktop-file-utils \
                     port:gtk3 \
-                    port:babl \
                     port:cairo \
-                    port:exempi \
-                    port:gfbgraph \
                     port:gegl-0.3 \
+                    port:gfbgraph \
                     port:gdk-pixbuf2 \
                     port:gnome-desktop \
                     port:gnome-online-accounts \
                     port:grilo \
                     port:grilo-plugins \
-                    port:lcms2 \
-                    port:libexif \
-                    port:librsvg \
                     port:tracker
 
-depends_run         port:gnome-themes-standard \
+depends_run         port:gnome-online-miners \
+                    port:gnome-themes-standard \
                     port:yelp
 
 patchfiles          patch-configure.ac.diff
@@ -61,10 +56,8 @@ post-patch {
 configure.cmd       ./autogen.sh
 
 configure.args      --disable-schemas-compile \
-                    --disable-silent-rules
-
-configure.cflags-append \
-                    -Wno-error=format-nonliteral
+                    --disable-silent-rules \
+                    --enable-compile-warnings=no
 
 # port installs hicolor icons, desktop application file, and gschemas
 post-activate {
