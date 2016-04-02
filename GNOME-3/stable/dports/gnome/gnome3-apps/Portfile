@@ -4,8 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-apps
-version         3.18.2
-revision        1
+version         3.20.0
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -31,27 +30,25 @@ supported_archs noarch
 #
 # accerciser
 # aisleriot (previously part of gnome-games)
-# bijiben
 # brasero  (no support for darwin Mac OS X, requires Linux SG or BSD CAM)
-# cheese   (requires Video4Linux or  V4L2)
 # evolution
 # five-or-more (previously part of gnome-games)
 # four-in-a-row (previously part of gnome-games)
 # gnome-boxes
+# gnome-builder
 # gnome-clocks
 # gnome-color-manager (no support for darwin Mac OS X, requires colord, udev)
 # gnome-documents
-# gnome-initial-setup
 # gnome-klotski (previously part of gnome-games)
 # gnome-mahjongg (previously part of gnome-games)
 # gnome-mines (previously part of gnome-games)
 # gnome-nettool
 # gnome-nibbles (previously part of gnome-games)
 # gnome-robots (previously part of gnome-games)
-# gnome-software
 # gnome-sound-recorder
 # gnome-taquin
 # gnome-tetravex (previously part of gnome-games)
+# gnome-todo
 # gnome-tweak-tool
 # hitori
 # iagno (previously part of gnome-games)
@@ -59,7 +56,6 @@ supported_archs noarch
 # nautilus-sendto
 # nemiver
 # orca
-# polari
 # quadrapassel (previously part of gnome-games)
 # swell-foop
 # tali (previously part of gnome-games)
@@ -72,22 +68,20 @@ supported_archs noarch
 # are currently broken and/or need to be updated
 #
 
-depends_lib     port:anjuta \
+depends_lib     port:bijiben \
+                port:dconf-editor \
                 port:devhelp \
-                port:file-roller \
-                port:gedit \
+                port:empathy \
                 port:gitg \
                 port:glade \
-                port:gnome-calendar \
-                port:gnome-characters \
                 port:gnome-chess \
                 port:gnome-devel-docs \
+                port:gnome-dictionary \
                 port:gnome-getting-started-docs \
-                port:gnome-maps \
                 port:gnome-music \
                 port:gnome-photos \
                 port:gnome-sudoku \
-                port:gnome-weather \
+                port:polari \
                 port:rygel \
                 port:seahorse
 
