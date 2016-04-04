@@ -16,6 +16,7 @@ long_description    Polari is an IRC chat client designed to integrate \
 maintainers         devans openmaintainer
 categories          gnome
 platforms           darwin
+
 homepage            https://wiki.gnome.org/Apps/Polari
 master_sites        gnome:sources/${name}/${branch}/
 

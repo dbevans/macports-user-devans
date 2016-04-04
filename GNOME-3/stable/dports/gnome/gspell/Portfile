@@ -15,6 +15,7 @@ long_description    gspell provides a flexible API to implement the spell checki
 maintainers         devans openmaintainer
 categories          gnome
 platforms           darwin
+
 homepage            https://wiki.gnome.org/Projects/gspell
 master_sites        gnome:sources/${name}/${branch}/
 
