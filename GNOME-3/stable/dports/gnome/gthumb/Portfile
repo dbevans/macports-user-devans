@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gthumb
-version             3.4.1
+version             3.4.2
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Image viewer and browser for the GNOME desktop.
@@ -16,8 +16,8 @@ homepage            https://wiki.gnome.org/Apps/gthumb
 master_sites        gnome:sources/gthumb/${branch}
 use_xz              yes
 
-checksums           sha256  1ec2cf49f499ed06eda851a3bd5c28a1768839a6ff06bc4efc5fbde46cabc857 \
-                    rmd160  4e0b5581064a726ab716965ab8fe8fe3754e31c6
+checksums           sha256  c34423bf9a33bc287e8e81a917fe29d1956e5308a7191e86f486f66c71607cfa \
+                    rmd160  9ff3d698b7bb3c1d22ca0d498906e04038e093b8
 
 depends_build       port:intltool \
                     port:pkgconfig \
