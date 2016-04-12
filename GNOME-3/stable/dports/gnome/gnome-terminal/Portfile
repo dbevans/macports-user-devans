@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           compiler_blacklist_versions 1.0
 
 name                gnome-terminal
-version             3.20.0
+version             3.20.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Terminal component for the GNOME 3 Desktop
 long_description    ${description}
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  05377f1467c040f4cec7255cb1704a3e8f52dacb \
-                    sha256  2fe7f6bd3ca4e93ce156f83e673b9e8c3f0155b6bc603e109edc942718eb4150
+checksums           rmd160  fdfae1688710d2acca16829c4f20ad8e7ab5b31a \
+                    sha256  98b7f48b13b37f05c92aa6b09006f608985efaf5440a1d76c28eda5f46b50894
 
 depends_build       port:pkgconfig \
                     port:intltool \
