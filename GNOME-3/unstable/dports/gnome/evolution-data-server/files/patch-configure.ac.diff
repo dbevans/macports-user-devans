@@ -1,0 +1,33 @@
+--- configure.ac.orig	2016-02-15 02:19:30.000000000 -0800
++++ configure.ac	2016-03-01 06:19:32.000000000 -0800
+@@ -221,7 +221,7 @@
+ 	-Wnested-externs"
+ 
+ proposed_cxx_warning_flags="$proposed_warning_flags
+-	-Wabi -Wnoexcept"
++	-Wabi"
+ 
+ AS_COMPILER_FLAGS(WARNING_FLAGS, [$proposed_c_warning_flags])
+ AC_SUBST(WARNING_FLAGS)
+@@ -330,8 +330,8 @@
+ 
+ dnl This must appear after AC_CANONICAL_HOST, which defines $host.
+ case "$host" in
+-*openbsd*|*freebsd*)
+-	dnl Do not set '-Wl,--no-undefined' on freebsd/openbsd
++*openbsd*|*freebsd*|*darwin*)
++	dnl Do not set '-Wl,--no-undefined' on freebsd/openbsd/darwin
+ 	;;
+ *)
+ 	LDFLAGS="$LDFLAGS -Wl,--no-undefined"
+@@ -672,8 +672,8 @@
+ 
+ if test "x$with_libdb" != "xno" ; then
+ 	if test "x$with_libdb" != "xyes" ; then
+-		DB_CFLAGS="$CFLAGS -I$with_libdb/include"
+-		DB_LIBS="$LIBS -L$with_libdb/lib -ldb"
++               DB_CFLAGS="-I$prefix/include/db53"
++               DB_LIBS="-L$prefix/lib/db53 -ldb"
+ 	else
+ 		if test -z "$DB_CFLAGS" -a -z "$DB_LIBS"; then
+ 			DB_CFLAGS="$CFLAGS"
