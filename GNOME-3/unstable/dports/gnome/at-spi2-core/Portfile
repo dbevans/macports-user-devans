@@ -1,0 +1,59 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           gobject_introspection 1.0
+
+name                at-spi2-core
+# you probably want to keep this at the same version as at-spi2-atk
+version             2.21.1
+
+checksums           rmd160  3219f275ce102f070dc798448ecae189eae6a7a5 \
+                    sha256  0c31d0b3c7d3c30770e1c04afce6ea719fa67586cf48982f31a87ae3dbd43b90
+
+license             LGPL
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         Gnome Accesibility Technology Service
+long_description \
+   'at-spi' is a part of the Gnome Accessibility Project.  It provides a \
+   Service Provider Interface for the Assistive Technologies available on \
+   the GNOME platform, and a library against which applications can be linked.
+maintainers         devans openmaintainer
+categories          gnome
+platforms           darwin
+homepage            http://a11y.org/
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:gtk-doc \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
+
+depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                    port:dbus \
+                    port:xorg-libX11 \
+                    port:xorg-libXi \
+                    port:xorg-libXtst \
+                    port:xorg-libice \
+                    port:xorg-libsm
+
+gobject_introspection yes
+
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+                  
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+}
+
+configure.cmd       ./autogen.sh
+
+configure.args      --disable-xevie \
+                    --disable-silent-rules \
+                    --x-includes=${prefix}/include \
+                    --x-libraries=${prefix}/lib
+
+livecheck.type      gnome-with-unstable
