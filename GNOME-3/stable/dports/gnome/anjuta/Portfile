@@ -2,6 +2,7 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           compiler_blacklist_versions 1.0
 PortGroup           gobject_introspection 1.0
 PortGroup           muniversal 1.0
 
@@ -38,6 +39,7 @@ depends_lib         port:desktop-file-utils \
                     port:gtk3 \
                     port:gdl3 \
                     port:gjs \
+                    port:gnutls \
                     port:gtksourceview3 \
                     port:libgda5 \
                     port:libxml2 \
@@ -51,9 +53,13 @@ depends_run         port:gnome-themes-standard \
 patchfiles          patch-configure.ac.diff \
                     patch-python-cflags.diff \
                     python-ldflags.patch \
-                    patch-ltmain.sh.diff
+                    patch-ltmain.sh.diff \
+                    patch-plugins-python-loader-plugin.c.diff
 
 gobject_introspection yes
+
+# blacklist compilers that do not support C11 (redefinition of typedef ‘GtkSourceTag’ at gtksourceview/gtksourcetag.h:35)
+compiler.blacklist  *gcc* {clang < 300}
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
