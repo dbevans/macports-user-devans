@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                inkscape-devel
 conflicts           inkscape inkscape-0.91.x
-set bzr_rev         14865
+set bzr_rev         15002
 version             0.91.99.${bzr_rev}
 epoch               1
 license             GPL-2 LGPL-2.1
@@ -22,8 +22,8 @@ long_description    Inkscape is an multi-platform, Open-Source Vector Graphics E
 homepage            http://www.inkscape.org/
 master_sites        file:///Users/devans/macports/distfiles/${name}
 
-checksums           rmd160  8fc88bb7f2051b4c821f7a8a62baae8d29c49487 \
-                    sha256  a983026cefec869502ef5dcad1f4d81d662d901a09d09a978bb22df29dbff9ba
+checksums           rmd160  790c809b6cc56212c7dedfca95dbd6c1f11d7f1c \
+                    sha256  ada989162979044b70f1b19770752102133de695e5ccefd3f5187d5acb8c75ca
 
 worksrcdir          ${name}
 
@@ -48,6 +48,7 @@ depends_lib         port:desktop-file-utils \
                     port:libexif \
                     port:libvisio-0.1 \
                     port:libwpg-0.3 \
+                    port:aspell \
                     port:gtkspell2 \
                     port:potrace \
                     port:py27-lxml \
