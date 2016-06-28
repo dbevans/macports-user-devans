@@ -4,14 +4,14 @@
 PortSystem          1.0
 
 name                gnome-screenshot
-version             3.18.0
+version             3.20.1
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME dictionary application.
 long_description    GNOME Dictionary can look for the definition or translation \
                     of a word in existing databases over the Internet.
 
-maintainers         gmail.com:juanrgar devans openmaintainer
+maintainers         juanrgar devans openmaintainer
 categories          gnome
 platforms           darwin
 homepage            https://www.gnome.org
@@ -19,8 +19,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  a2ffd04310997be00928de78550f9991cde3330c \
-                    sha256  eba64dbf4acf0ab8222fec549d0a4f2dd7dbd51c255e7978dedf1f5c06a98841
+checksums           rmd160  76eacdb5c298a821e22f65d695c9fdce5947f9a8 \
+                    sha256  06a89b6887146cdbbeb64adf11bdae21acf22b0422337041c66eedb21ef7e143
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -41,9 +41,6 @@ depends_run         port:gnome-themes-standard \
 
 post-patch {
     xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
-# fixup gsettings schema for glib2 >= 1.45.1
-    reinplace "s|_summary|summary|g" ${worksrcpath}/src/org.gnome.gnome-screenshot.gschema.xml.in
-    reinplace "s|_description|description|g" ${worksrcpath}/src/org.gnome.gnome-screenshot.gschema.xml.in
 }
 
 configure.cmd       ./autogen.sh
