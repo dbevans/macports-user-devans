@@ -58,7 +58,7 @@ configure.cmd       ./autogen.sh
 
 configure.args      --enable-gnome \
                     --enable-goa \
-                    --enable-compile-warnings=minimum \
+                    --enable-compile-warnings=no \
                     --disable-silent-rules
 
 test.run            yes
