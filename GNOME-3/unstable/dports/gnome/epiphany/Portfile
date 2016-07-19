@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                epiphany
-version             3.21.2
+version             3.21.4
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A GNOME Web browser.
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  f3e654e1bd2d83db00dac8ea554b0de53effb237 \
-                    sha256  a77f5aece79e0522bcde1e16938c603ea85c972a9b198c5e543a42989c810d8b
+checksums           rmd160  dfca16cf4d40e5e127a5d33f415eadf87d433de0 \
+                    sha256  6051dcd1e1a964e84b13cffa420e2165f314ff2dca10058fb8429908c7718a87
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -92,7 +92,7 @@ platform darwin {
         depends_build-append    port:appstream-glib \
                                 port:itstool \
                                 port:yelp-tools
-        depends_lib-append      path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk
+        depends_lib-append      path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk-devel
 
         post-patch {
             xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
