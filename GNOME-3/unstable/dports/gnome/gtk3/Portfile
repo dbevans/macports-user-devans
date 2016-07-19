@@ -11,7 +11,7 @@ PortGroup           compiler_blacklist_versions 1.0
 name                gtk3
 set real_name       gtk+
 epoch               1
-version             3.21.1
+version             3.21.4
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2.1+
@@ -31,8 +31,8 @@ use_xz              yes
 
 master_sites        gnome:sources/gtk+/${branch}/
 
-checksums           rmd160  a04a242c6b231c6872563d3e9e736e8aadfe3c8a \
-                    sha256  d62513b28d545675cfbc1df963aef5abec4bbfaa17e8fdc22304a973b378abca
+checksums           rmd160  ce035f5a4439da42817d3c30e0f28fa541c559a8 \
+                    sha256  46bb46c420b1406dcb7d6034a9a4c80340f0db464fb98a8c271343bf56e43cf1
 
 minimum_xcodeversions {9 3.1}
 
@@ -43,7 +43,6 @@ depends_lib         port:atk \
                     port:gdk-pixbuf2 \
                     path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:gobject-introspection \
-                    port:mesa \
                     port:libepoxy
                     
 depends_run         port:shared-mime-info \
@@ -55,7 +54,7 @@ archcheck.files     lib/libatk-1.0.dylib \
                     lib/libpango-1.0.dylib \
                     lib/libtiff.dylib
 
-patchfiles          nawk.patch cups.patch
+patchfiles          nawk.patch
 
 # gtk3 +quartz uses instancetype which is not available
 # before approximately Xcode 4.6 (#49391)
@@ -247,7 +246,8 @@ variant x11 conflicts quartz {
                             port:xorg-libXdamage \
                             port:xorg-libXcomposite \
                             port:xorg-libXfixes \
-                            port:at-spi2-atk
+                            port:at-spi2-atk \
+                            port:mesa
 
     configure.args-append   --enable-xinerama \
                             --x-include=${prefix}/include \
