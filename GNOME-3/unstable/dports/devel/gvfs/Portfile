@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                gvfs
 epoch               1
-version             1.29.1
+version             1.29.4
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          devel
@@ -35,8 +35,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  ba1e912fcd3645d6336c798b7155e221dccf10f5 \
-                    sha256  afd7b70918ec6c0532826a4a59514a68d6c7a0c679b3b62cafaeb73928af7aba
+checksums           rmd160  a38c2fbe1225acc0e45a068fb3cef8886e1ec71e \
+                    sha256  53fbf43fca31961e1e7598d89c1cb1bf8c67b1809015396689bf2065792735bc
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -80,6 +80,7 @@ configure.args      --disable-avahi \
                     --disable-gdu \
                     --disable-udisks2 \
                     --disable-libsystemd-login \
+                    --disable-admin \
                     --disable-gudev \
                     --disable-afc \
                     --disable-bluray \
