@@ -7,7 +7,7 @@ PortGroup           gobject_introspection 1.0
 name                gnome-online-accounts
 
 # version 3.16.0+ requires webkit2gtk-4.0
-version             3.21.1
+version             3.21.3
 
 license             LGPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  d519e6a25c3388fe6f5076f147d48cfab8677d3d \
-                    sha256  14bab973d479f4adb83a243cbdd6caffd3f6179d6208277e7cc1ffe6a43c6a50
+checksums           rmd160  71e72fed58306ac812a40f647688f7d8999dee5f \
+                    sha256  21f0b114f878ca6c04bb0a43fe5aa7b7524e7abcabd199a162eef0b7212e989e
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -99,7 +99,7 @@ platform darwin {
             delete ${worksrcpath}/m4/glib-gettext.m4
         }
         configure.cmd   ./autogen.sh
-        depends_lib-append path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk
+        depends_lib-append path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk-devel
         livecheck.type  gnome-with-unstable
     }
 }
