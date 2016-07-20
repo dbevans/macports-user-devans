@@ -1,6 +1,6 @@
 --- glom/libglom/connectionpool.cc.orig	2015-07-07 01:53:04.000000000 -0700
 +++ glom/libglom/connectionpool.cc	2015-07-17 21:56:09.000000000 -0700
-@@ -603,7 +603,7 @@
+@@ -572,7 +572,7 @@
  // TODO: This is probably mingw specific
  static __p_sig_fn_t previous_sig_handler = SIG_DFL;
  #else

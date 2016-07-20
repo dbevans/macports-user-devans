@@ -5,11 +5,13 @@ PortSystem          1.0
 PortGroup           active_variants 1.1
 
 # as of version 1.29.5 requires C++11 to build
+# as of version 1.31.1 requires libxmlxx3 to build
+# as of version 1.31.2 uses C++14
 
 PortGroup           cxx11 1.0
 
 name                glom
-version             1.31.1
+version             1.31.6
 set branch          [join [lrange [split ${version} .] 0 1] .]
 license             GPL-2
 description         Glom is an easy-to-use database designer and user interface.
@@ -23,13 +25,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  42eae360cdd99c063cb6f360ab6cb99e9613444e \
-                    sha256  3e15f5e875b641addcaf06da3791b3227099a6c76dc7bd6374fc1f62f3ac6068
-
-# set pbranch to desired perl version
-# currently 5.22 (#48365)
-
-set pbranch         5.22
+checksums           rmd160  4ad2acba1775cce9ebc37e9ea07ddf7f2b19a0ae \
+                    sha256  6c5bb163e66d487f979763c3ca3437b56322581872429f1fc3af95f11a2eace0
 
 depends_build       port:pkgconfig \
                     port:autoconf \
@@ -42,15 +39,14 @@ depends_build       port:pkgconfig \
                     path:bin/dot:graphviz \
                     port:doxygen \
                     port:libxslt \
-                    port:py34-sphinx \
-                    port:perl${pbranch}
+                    port:py34-sphinx
 
 depends_lib         port:desktop-file-utils \
                     port:libarchive \
                     port:gtkmm3 \
                     port:boost \
                     port:libxml2 \
-                    port:libxmlxx2 \
+                    port:libxmlxx3 \
                     port:libgda5 \
                     port:libgdamm5 \
                     port:goocanvasmm2\
@@ -84,7 +80,7 @@ configure.python          ${prefix}/bin/python${python.branch}
 configure.env       SPHINX_BUILD=${prefix}/bin/sphinx-build-${python.branch} \
                     PYTHON_EXTRA_LDFLAGS=' '
 
-configure.perl      ${prefix}/bin/perl${pbranch}
+configure.perl      /usr/bin/perl
 
 configure.args      --with-boost-python=mt \
                     --with-postgres-utils=${prefix}/lib/postgresql94/bin \
