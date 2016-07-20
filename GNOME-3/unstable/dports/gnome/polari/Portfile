@@ -36,6 +36,7 @@ depends_lib         port:desktop-file-utils \
                     port:gtk3 \
                     port:libiconv \
                     port:libsecret \
+                    port:libsoup \
                     port:telepathy-glib \
                     port:telepathy-idle \
                     port:telepathy-logger
