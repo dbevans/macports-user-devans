@@ -1,5 +1,5 @@
---- tools/gnome-session-check-accelerated-gl-helper.c.orig	2016-05-26 14:04:18.000000000 -0700
-+++ tools/gnome-session-check-accelerated-gl-helper.c	2016-06-23 12:49:07.000000000 -0700
+--- tools/gnome-session-check-accelerated-gl-helper.c.orig	2016-07-22 06:50:10.000000000 -0700
++++ tools/gnome-session-check-accelerated-gl-helper.c	2016-07-23 12:04:15.000000000 -0700
 @@ -87,6 +87,75 @@
  
  #include "gnome-session-check-accelerated-common.h"
@@ -119,4 +119,4 @@
 +#endif
          }
  
-         if (has_llvmpipe) {
+         ret = has_llvmpipe ? HELPER_SOFTWARE_RENDERING : HELPER_ACCEL;
