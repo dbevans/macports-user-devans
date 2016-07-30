@@ -1,7 +1,6 @@
-diff -ur daemon.orig/gdm-server.c daemon/gdm-server.c
---- daemon.orig/gdm-server.c	2015-04-02 06:52:39.000000000 -0700
-+++ daemon/gdm-server.c	2015-05-04 12:11:56.000000000 -0700
-@@ -94,6 +94,7 @@
+--- daemon/gdm-server.c.orig	2016-04-26 11:43:59.000000000 -0700
++++ daemon/gdm-server.c	2016-06-23 14:29:43.000000000 -0700
+@@ -92,6 +92,7 @@
          char    *auth_file;
  
          guint    child_watch_id;
@@ -9,8 +8,8 @@ diff -ur daemon.orig/gdm-server.c daemon/gdm-server.c
  
          gboolean is_initial;
  };
-@@ -179,83 +180,15 @@
-         return g_strdup (server->priv->display_device);
+@@ -129,83 +130,15 @@
+         return NULL;
  }
  
 -static void
@@ -33,8 +32,7 @@ diff -ur daemon.orig/gdm-server.c daemon/gdm-server.c
 -
  static gboolean
 -got_sigusr1 (gpointer user_data)
-+on_sigusr1(gpointer user_data)
- {
+-{
 -        GPid pid = GPOINTER_TO_UINT (user_data);
 -        GSList *l;
 -
@@ -71,8 +69,7 @@ diff -ur daemon.orig/gdm-server.c daemon/gdm-server.c
 -
 -                if (sigwaitinfo (&sigusr1_mask, &info) == -1)
 -                        continue;
-+        GdmServer *server = user_data;
- 
+-
 -                g_idle_add (got_sigusr1, GUINT_TO_POINTER (info.si_pid));
 -        }
 -
@@ -81,9 +78,11 @@ diff -ur daemon.orig/gdm-server.c daemon/gdm-server.c
 -
 -static void
 -gdm_server_launch_sigusr1_thread_if_needed (void)
--{
++on_sigusr1(gpointer user_data)
+ {
 -        static GThread *sigusr1_thread;
--
++        GdmServer *server = user_data;
+ 
 -        if (sigusr1_thread == NULL) {
 -                sigusr1_thread = g_thread_new ("gdm SIGUSR1 catcher", sigusr1_thread_main, NULL);
 +        g_debug ("GdmServer: Got USR1 from X server - emitting READY");
@@ -98,7 +97,7 @@ diff -ur daemon.orig/gdm-server.c daemon/gdm-server.c
  }
  
  static void
-@@ -709,12 +642,6 @@
+@@ -663,12 +596,6 @@
          g_object_unref (server);
  }
  
@@ -111,7 +110,7 @@ diff -ur daemon.orig/gdm-server.c daemon/gdm-server.c
  static gboolean
  gdm_server_spawn (GdmServer    *server,
                    const char   *vtarg,
-@@ -752,15 +679,6 @@
+@@ -706,15 +633,6 @@
          g_debug ("GdmServer: Starting X server process: %s", freeme);
          g_free (freeme);
  
@@ -127,7 +126,7 @@ diff -ur daemon.orig/gdm-server.c daemon/gdm-server.c
          if (!g_spawn_async_with_pipes (NULL,
                                         argv,
                                         (char **)env->pdata,
-@@ -1096,11 +1014,16 @@
+@@ -1050,11 +968,16 @@
  static void
  gdm_server_init (GdmServer *server)
  {
@@ -144,7 +143,7 @@ diff -ur daemon.orig/gdm-server.c daemon/gdm-server.c
  }
  
  static void
-@@ -1115,6 +1038,9 @@
+@@ -1069,6 +992,9 @@
  
          g_return_if_fail (server->priv != NULL);
  
@@ -154,38 +153,3 @@ diff -ur daemon.orig/gdm-server.c daemon/gdm-server.c
          gdm_server_stop (server);
  
          g_free (server->priv->command);
-Only in daemon: gdm-server.c.orig
-Only in daemon: gdm-server.c.rej
-diff -ur daemon.orig/main.c daemon/main.c
---- daemon.orig/main.c	2015-04-02 06:52:42.000000000 -0700
-+++ daemon/main.c	2015-05-04 11:58:58.000000000 -0700
-@@ -289,19 +289,6 @@
-         return debug;
- }
- 
--/* SIGUSR1 is used by the X server to tell us that we're ready, so
-- * block it. We'll unblock it in the worker thread in gdm-server.c
-- */
--static void
--block_sigusr1 (void)
--{
--        sigset_t mask;
--
--        sigemptyset (&mask);
--        sigaddset (&mask, SIGUSR1);
--        sigprocmask (SIG_BLOCK, &mask, NULL);
--}
--
- int
- main (int    argc,
-       char **argv)
-@@ -322,8 +309,6 @@
-                 { NULL }
-         };
- 
--        block_sigusr1 ();
--
-         bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-         textdomain (GETTEXT_PACKAGE);
-         setlocale (LC_ALL, "");
-Only in daemon: main.c.orig
