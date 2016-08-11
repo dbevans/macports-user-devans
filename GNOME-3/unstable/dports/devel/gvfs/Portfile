@@ -5,11 +5,10 @@ PortSystem          1.0
 
 name                gvfs
 epoch               1
-version             1.29.4
+version             1.29.90
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          devel
-# trashlib code used in the daemon is GPL
 license             {LGPL GPL-3}
 platforms           darwin
 description         The Gnome Virtual File System.
@@ -35,15 +34,11 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  a38c2fbe1225acc0e45a068fb3cef8886e1ec71e \
-                    sha256  53fbf43fca31961e1e7598d89c1cb1bf8c67b1809015396689bf2065792735bc
+checksums           rmd160  53f0cc48aed1f25da2a5fa8ba477694fb4660799 \
+                    sha256  04571b63b022573b98ccc4d3307158fea9316ea1f711ac5086e6d04133ed0607
 
 depends_build       port:pkgconfig \
-                    port:intltool \
                     port:gtk-doc \
-                    port:autoconf \
-                    port:automake \
-                    port:libtool \
                     port:pidof \
                     port:gsed
 
@@ -61,14 +56,6 @@ depends_lib         port:gtk3 \
 
 patchfiles          patch-test-run-in-tree.sh.diff \
                     patch-test-gvfs-test.diff
-
-post-patch {
-    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
-}
-
-# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
-
-configure.cmd       ./autogen.sh
 
 configure.args      --disable-avahi \
                     --disable-fuse \
