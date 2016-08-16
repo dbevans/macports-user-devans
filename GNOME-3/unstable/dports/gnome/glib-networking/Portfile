@@ -1,0 +1,44 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                glib-networking
+version             2.49.90
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         Network-related giomodules for glib
+long_description    ${description}
+maintainers         nomaintainer
+categories          gnome
+platforms           darwin
+license             LGPL-2+
+homepage            http://www.gnome.org/
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  0702c61e9c833d0b3f8d855f0cc7616d0a954d5e \
+                    sha256  409ceae012ce6f8ad12aaded90e6a08b82507de6a9a70ca6eb05e17244f2129b
+
+depends_build       port:pkgconfig
+
+depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                    port:gnutls \
+                    port:libproxy \
+                    port:gsettings-desktop-schemas \
+                    port:p11-kit
+
+depends_run         path:share/curl/curl-ca-bundle.crt:curl-ca-bundle
+
+configure.args      --with-gnutls \
+                    --with-libproxy \
+                    --with-gnome-proxy \
+                    --with-ca-certificates=${prefix}/share/curl/curl-ca-bundle.crt \
+                    --disable-silent-rules \
+                    --disable-more-warnings
+
+post-activate {
+    system "${prefix}/bin/gio-querymodules ${prefix}/lib/gio/modules"
+}
+
+livecheck.type      gnome-with-unstable
