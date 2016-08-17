@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           compiler_blacklist_versions 1.0
 
 name                gnome-calculator
-version             3.21.2
+version             3.21.90
 license             GPL-3
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Calculator with financial and scientific modes.
@@ -19,8 +19,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  57e8ba632a3859d6cb56e6ca97b7f4b1d559a368 \
-                    sha256  aaf0be2db5540eac40405847ceb2c6487f3f5d87c372fa66fad375a45a542023
+checksums           rmd160  c451a1b18f93183a051ecbadd8aa0d3f52d6fdbd \
+                    sha256  07408cb200ed1e1ef831a7afdd48f92e1ab4738a421d057fcc75ad134203bdc2
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -32,6 +32,7 @@ depends_build       port:pkgconfig \
 depends_lib         port:desktop-file-utils \
                     port:gtk3 \
                     port:gtksourceview3 \
+                    port:libsoup \
                     port:libxml2 \
                     port:mpfr \
                     port:vala
