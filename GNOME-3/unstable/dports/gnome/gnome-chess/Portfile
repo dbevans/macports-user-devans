@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-chess
-version             3.21.3
+version             3.21.90
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Play the classic two-player boardgame of chess
@@ -17,17 +17,13 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  9ef017ea380b827b5f7b0c57f54940c6c03505ca \
-                    sha256  1d5b65a0ca670b00843ac6c71fad20c4c1f7540e3a22d73c7085268c28bcd719
+checksums           rmd160  7e671fcc635e52bf719a3173bcf81d30bcf7bfc3 \
+                    sha256  76d77361701f08e5c5e277986c2d1ec3288bdae64d3ffaa5541a6e488c05e64e
 
 depends_build       port:pkgconfig \
                     port:appstream-glib \
                     port:yelp-tools \
                     port:itstool \
-                    port:intltool \
-                    port:autoconf \
-                    port:automake \
-                    port:libtool
 
 depends_lib         port:desktop-file-utils \
                     port:gtk3 \
@@ -36,14 +32,6 @@ depends_lib         port:desktop-file-utils \
 
 depends_run         port:gnome-themes-standard \
                     port:yelp
-
-# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
-
-post-patch {
-    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
-}
-
-configure.cmd       ./autogen.sh
 
 configure.args      --disable-schemas-compile \
                     --disable-silent-rules
