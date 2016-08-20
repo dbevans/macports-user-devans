@@ -1,6 +1,6 @@
---- tools/gnome-session-check-accelerated-gl-helper.c.orig	2016-07-22 06:50:10.000000000 -0700
-+++ tools/gnome-session-check-accelerated-gl-helper.c	2016-07-23 12:04:15.000000000 -0700
-@@ -87,6 +87,75 @@
+--- tools/gnome-session-check-accelerated-gl-helper.c.orig	2016-08-18 11:09:18.000000000 -0700
++++ tools/gnome-session-check-accelerated-gl-helper.c	2016-08-19 21:58:54.000000000 -0700
+@@ -91,6 +91,75 @@
  
  #include "gnome-session-check-accelerated-common.h"
  
@@ -76,7 +76,7 @@
  #define SIZE_UNSET 0
  #define SIZE_ERROR -1
  static int max_texture_size = SIZE_UNSET;
-@@ -447,26 +516,42 @@
+@@ -481,26 +550,42 @@
                  _print_error ("No X display.");
                  goto out;
          }
