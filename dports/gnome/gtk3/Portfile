@@ -11,7 +11,8 @@ PortGroup           compiler_blacklist_versions 1.0
 name                gtk3
 set real_name       gtk+
 epoch               1
-version             3.20.9
+set git_commit      b79a187d47ee5c45952fab60c141fcaed7e05ef6
+version             3.19.4-${git_commit}
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2.1+
@@ -26,17 +27,21 @@ long_description    GTK+ is a highly usable, feature-rich toolkit for creating g
                     programming languages, such as C++, Python and C#, among others.
 
 homepage            http://www.gtk.org/
-distname            ${real_name}-${version}
+distname            ${real_name}-${git_commit}
 use_xz              yes
 
-master_sites        gnome:sources/gtk+/${branch}/
+master_sites        https://git.gnome.org/browse/gtk+/snapshot/
 
-checksums           rmd160  18b94aee023518068f7837895b711b63fdf1eb13 \
-                    sha256  83a609ba2f3424b5509e73967c49c67833af466d6f91081b24ee5c64fce6ac17
+checksums           rmd160  3940c0557d4f0e150d62efa694c8b43868548b2d \
+                    sha256  357bfcd46408d23939c2eadba9084fa49dfbb533e5fdd47e36e65d10dac074f1
 
 minimum_xcodeversions {9 3.1}
 
-depends_build       port:pkgconfig
+depends_build       port:pkgconfig \
+                    port:gtk-doc \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
 
 depends_lib         port:atk \
                     path:lib/pkgconfig/pango.pc:pango \
@@ -54,8 +59,7 @@ archcheck.files     lib/libatk-1.0.dylib \
                     lib/libpango-1.0.dylib \
                     lib/libtiff.dylib
 
-patchfiles          nawk.patch \
-                    0001-iconhelper-check-if-surface-was-invalidated.patch
+patchfiles          0001-iconhelper-check-if-surface-was-invalidated.patch
 
 # gtk3 +quartz uses instancetype which is not available
 # before approximately Xcode 4.6 (#49391)
@@ -85,6 +89,8 @@ pre-configure {
         error "Either +x11 or +quartz is required"
     }
 }
+
+configure.cmd       ./autogen.sh
 
 configure.ccache    no
 
