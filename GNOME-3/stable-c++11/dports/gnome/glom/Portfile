@@ -9,7 +9,7 @@ PortGroup           active_variants 1.1
 PortGroup           cxx11 1.0
 
 name                glom
-version             1.30.3
+version             1.30.4
 set branch          [join [lrange [split ${version} .] 0 1] .]
 license             GPL-2
 description         Glom is an easy-to-use database designer and user interface.
@@ -23,8 +23,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  3686dd8bfe58e380e40d669000fc84246df92c3d \
-                    sha256  27148ad084ac1c300a4dfe4b4bc3c6bbb1b13fbe279fe1ce25818f2251c6085e
+checksums           rmd160  3e132d74f3b92f8258c2fbf88f9369612a74e00b \
+                    sha256  789bffc96f4ca993970d5dad222f9aa58390292b01274d85c3db4f92105da169
 
 # set pbranch to desired perl version
 # currently 5.22 (#48365)
