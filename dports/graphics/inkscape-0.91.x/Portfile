@@ -5,14 +5,14 @@ PortSystem      1.0
 
 name            inkscape-0.91.x
 conflicts       inkscape inkscape-devel
-set bzr_rev     13731
+set bzr_rev     13866
 version         ${bzr_rev}
 license         GPL-2 LGPL-2.1
 maintainers     devans
 categories      graphics gnome
 platforms       darwin
 description     This is a branched development version of Inkscape taken from the \
-                inkscape-0.91.x bzr branch leading up to the release of version 0.91.
+                inkscape-0.91.x bzr maintenance branch.
 
 long_description \
                 Inkscape is an open source SVG editor with \
@@ -24,8 +24,8 @@ long_description \
 homepage        http://www.inkscape.org/
 master_sites    file:///Users/devans/macports/distfiles/${name}
 
-checksums       rmd160  f6bbdf7095cc09a98f4fd94e77c196596c834a09 \
-                sha256  b175d668ad7cfd317100845e3f8c9f3203f430c3033c70818fc54c859cec8c47
+checksums       rmd160  3ba1ccefb8fd7cb0a1ef18189b93e6b8b38d6d90 \
+                sha256  3316ba1a8005a1b98a08d1d4751fc7dba74198d7de6eb7ca92cf60e85c2f37e1
 
 worksrcdir      ${name}
 
