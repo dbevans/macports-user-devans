@@ -8,7 +8,7 @@ PortSystem          1.0
 PortGroup           cxx11 1.0
 
 name                gnome-sudoku
-version             3.21.4
+version             3.21.90
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Sudoku is a Japanese logic game that exploded in popularity in 2005.
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  3b8076e178ddd442d48339bf70d7f2ec7aea5d34 \
-                    sha256  011de82cef0c83b3ca4d24bcc5cfea203895ada1a7859dc76a3f310bf825e294
+checksums           rmd160  63f80ec25ea5c12f4bf9310bc8369a2d5ab30c2b \
+                    sha256  6f4ca9588261e8f6dd5c8da721133ba74e4791f702d1fa623bc104c6f5786f6d
 
 depends_build       port:pkgconfig \
                     port:intltool \
