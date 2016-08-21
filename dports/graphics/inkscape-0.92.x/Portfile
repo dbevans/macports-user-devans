@@ -1,0 +1,138 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                inkscape-0.92.x
+conflicts           inkscape inkscape-0.91.x inkscape-devel
+set bzr_rev         15044
+version             ${bzr_rev}
+epoch               1
+license             GPL-2 LGPL-2.1
+maintainers         devans
+categories          graphics gnome
+platforms           darwin
+description         This is the current pre-freeze snapshot of Inkscape 0.92 for testing \
+                    and for packagers.
+
+long_description    Inkscape is an multi-platform, Open-Source Vector Graphics Editor \
+                    that uses SVG as its native file format. \
+                    ${description}
+
+homepage            http://www.inkscape.org/
+master_sites        file:///Users/devans/macports/distfiles/${name}
+
+checksums           rmd160  18466a0fd13d86d957dd2dfcf61e496c5074a606 \
+                    sha256  b73833a70f4b4c2f23c3375b9328d9dfb09379d0d4471a225f4a9d2693b0dc50
+
+worksrcdir          ${name}
+
+depends_build       port:pkgconfig \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool \
+                    port:intltool \
+                    path:bin/perl:perl5
+
+depends_lib         port:desktop-file-utils \
+                    port:popt \
+                    path:lib/libgc.dylib:boehmgc \
+                    port:gsl \
+                    port:gtkmm \
+                    port:dbus-glib \
+                    port:lcms2 \
+                    port:poppler \
+                    port:boost \
+                    port:ImageMagick \
+                    port:libcdr-0.1 \
+                    port:libexif \
+                    port:libvisio-0.1 \
+                    port:libwpg-0.3 \
+                    port:aspell \
+                    port:gtkspell2 \
+                    port:potrace \
+                    port:py27-lxml \
+                    port:py27-numpy
+
+post-patch {
+    reinplace "s|\"python-interpreter\", \"python\"|\"python-interpreter\", \"python2.7\"|g" ${worksrcpath}/src/extension/implementation/script.cpp
+    reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.h
+    reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.cpp
+}
+
+# py27-numpy is currently not universal (#42416).
+
+universal_variant no
+
+variant gtk3 description {Enable experimental GTK+ 3 build} {
+    depends_lib-delete \
+                    port:gtkspell2 \
+                    port:gtk2 \
+                    port:gtkmm
+
+    depends_lib-append \
+                    port:gtkspell3 \
+                    port:gtk3 \
+                    port:gtkmm3 \
+                    port:gdl3
+
+    configure.args-append \
+                    --enable-gtk3-experimental
+}
+
+configure.cmd       ./autogen.sh && ./configure
+
+configure.python    ${prefix}/bin/python2.7
+
+configure.args      --without-gnome-vfs \
+                    --enable-lcms \
+                    --enable-poppler-cairo \
+                    --enable-dbusapi \
+                    --disable-silent-rules \
+                    --disable-strict-build
+
+configure.cppflags-append \
+                    -I${worksrcpath}/src/extension/script
+
+platform darwin {
+    if {[string match "*clang*" ${configure.compiler}]} {
+        if {${configure.cxx_stdlib} eq "libstdc++"} {
+            configure.cxxflags-append -std=c++98
+        } else {
+            configure.cxxflags-append -std=c++11
+        }
+    }
+}
+
+variant strict description {Enable strict build} {
+    configure.args-replace  --disable-strict-build --enable-strict-build
+}
+
+default_variants    +strict
+
+#
+# the following dummy variants are used
+# to identify this port's binary dependencies
+# based on which variant of gtkmm is used for the build
+#
+
+variant x11 conflicts quartz {}
+variant quartz conflicts x11 {}
+
+if {![variant_isset quartz]} {
+    default_variants +x11
+}
+
+if {[variant_isset gtk3]} {
+    post-activate {
+        system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
+        system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+    }
+} else {
+    post-activate {
+        system "${prefix}/bin/gtk-update-icon-cache -f -t ${prefix}/share/icons/hicolor"
+        system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+    }
+}
+
+livecheck.type      none
