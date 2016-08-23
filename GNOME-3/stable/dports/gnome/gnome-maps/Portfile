@@ -65,6 +65,7 @@ platform darwin {
         master_sites gnome:sources/${name}/${branch}/
         checksums   rmd160  8e7dbaea863239d139e3f21776ea4baf66636d92 \
                     sha256  76a3e49867a474afbe3835ce4f2d49472567ad610e839d0c6808ce1d11ccf2b5
+        livecheck.regex "LATEST-IS-(${branch}(?:\\.\\d+)*)"
     } else {
         depends_lib-append  path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk
     }
