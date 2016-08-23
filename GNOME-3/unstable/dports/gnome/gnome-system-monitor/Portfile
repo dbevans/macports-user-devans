@@ -4,8 +4,12 @@
 PortSystem          1.0
 PortGroup           compiler_blacklist_versions 1.0
 
+# As of 3.17.90 requires C++11 to build when using gtkmm3 > 3.16.0
+
+PortGroup           cxx11 1.0
+
 name                gnome-system-monitor
-version             3.21.3
+version             3.21.90
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A system monitor.
@@ -20,8 +24,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  de9fd62d9d69de23bf1581bb7deb4771ab988c0c \
-                    sha256  7a29426e8940bc1bdaa22eb81efa37dac56668878b84f3e0af7632c63cc9a0fb
+checksums           rmd160  472806d41a4677974ac75b507a4d88c13fe74e56 \
+                    sha256  d7296456209b9cf7ad85b52a27c93b8d181c8485a5fc5ed5e231e42f18176d6e
 
 depends_build       port:pkgconfig \
                     port:intltool \
