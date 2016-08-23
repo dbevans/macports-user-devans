@@ -8,7 +8,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gdm
-version             3.21.4
+version             3.21.90
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         The Gnome Display Manager is a re-implementation of the well known xdm program.
@@ -22,8 +22,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  7fbb6c666a5868cdf50be0d87e44d63987028259 \
-                    sha256  f42d7629d6b6689b6c6aad044622b7518a02479522610a45f3effe4d3f7fb8d3
+checksums           rmd160  5628dc32405614bf1fd019ceb37748457e7e1264 \
+                    sha256  d2f55483d1e3a02f97c560d4ea7311add71833e1c963521ca7aa3c15527e4aa9
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -36,9 +36,7 @@ depends_lib         port:desktop-file-utils \
                     port:gtk3 \
                     port:dconf \
                     port:accountsservice \
-                    port:nss \
                     port:libcanberra \
-                    port:upower \
                     port:fontconfig \
                     port:iso-codes \
                     port:xorg-libX11 \
@@ -72,6 +70,7 @@ configure.cmd       ./autogen.sh
 configure.args      --enable-ipv6 \
                     --without-console-kit \
                     --without-plymouth \
+                    --with-default-pam-config=none \
                     --disable-systemd-journal \
                     --disable-schemas-compile \
                     --disable-silent-rules

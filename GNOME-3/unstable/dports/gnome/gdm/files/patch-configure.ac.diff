@@ -1,6 +1,6 @@
---- configure.ac.orig	2016-06-20 11:19:45.000000000 -0700
-+++ configure.ac	2016-06-23 14:31:03.000000000 -0700
-@@ -501,6 +501,7 @@
+--- configure.ac.orig	2016-08-22 13:24:01.000000000 -0700
++++ configure.ac	2016-08-23 02:02:10.000000000 -0700
+@@ -507,6 +507,7 @@
  AC_CHECK_LIB(pam, pam_syslog, [AC_DEFINE(HAVE_PAM_SYSLOG, [], [Define to 1 if you have the pam_syslog function])])
  
  dnl test whether struct pam_message is const (Linux) or not (Sun)
@@ -8,7 +8,7 @@
  if test "x$have_pam" = "xyes"; then
     pam_appl_h="$ac_pam_includes/security/pam_appl.h"
     AC_MSG_CHECKING(for const pam_message)
-@@ -1182,7 +1183,17 @@
+@@ -1196,7 +1197,17 @@
  # and /usr/X11 since they often symlink to each other, and configure
  # should use the more stable location (the real directory) if possible.
  #
