@@ -71,7 +71,7 @@ if {[variant_isset universal]} {
     }
 }
 
-# in version 1.8.0 plugins opus and mpg123 have moved from bad to ugly
+# in version 1.8.0 plugin mpg123 has moved from bad to ugly
 
 pre-activate {
     if {![catch {set installed [lindex [registry_active gstreamer1-gst-plugins-bad] 0]}]} {
