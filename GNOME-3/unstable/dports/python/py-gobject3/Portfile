@@ -7,7 +7,7 @@ PortGroup           compiler_blacklist_versions 1.0
 
 name                py-gobject3
 set my_name         pygobject
-version             3.21.0
+version             3.21.91
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories-append   gnome
 license             LGPL-2.1+
@@ -23,8 +23,8 @@ master_sites        gnome:sources/${my_name}/${branch}/
 distname            ${my_name}-${version}
 use_xz              yes
 
-checksums           sha256  898c9ef2f80968ccf33d6fbd5087b1721b74792a308b277d02bc935450168a58 \
-                    rmd160  27b54f4761ff9640f7af9ceab6c85f441c34db9d
+checksums           sha256  48d163ab8e8246b037897c5be37d9f2a8b27db9529defb0a914f5e063a50dc95 \
+                    rmd160  784bed0dbcc1aae2839329151f4e7d932fa448a7
 
 python.versions     27 34 35
 
