@@ -11,6 +11,7 @@ PortGroup           gobject_introspection 1.0
 name                gstreamer1-gst-plugins-bad
 set my_name         gst-plugins-bad
 version             1.8.2
+revision            1
 description         A set of plug-ins for GStreamer that need more quality.
 long_description    GStreamer Bad Plug-ins is a set of plug-ins that aren't up to par compared \
                     to the rest. They might be close to being good quality, but they're missing \
@@ -118,8 +119,8 @@ configure.args      --disable-silent-rules \
 
 platform darwin {
     if {${os.major} < 10} {
-        depends_lib-delete      port:soundtouch
-        configure.args-append   --disable-soundtouch
+        depends_lib-delete      port:soundtouch port:x265
+        configure.args-append   --disable-soundtouch --disable-x265
     }
     if {${os.major} < 11 } {
         configure.args-append   --disable-cocoa --disable-opengl
