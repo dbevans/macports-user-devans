@@ -44,4 +44,7 @@ post-patch {
 
 configure.cmd       ./autogen.sh
 
+configure.args-append \
+                    --disable-silent-rules
+
 livecheck.type      gnome-with-unstable
