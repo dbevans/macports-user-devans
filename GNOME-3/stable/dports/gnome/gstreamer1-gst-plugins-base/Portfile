@@ -56,6 +56,17 @@ configure.args-append \
 #:info:build gstbasetextoverlay.c:1511: error: 'for' loop initial declaration used outside C99 mode
 configure.cflags-append -std=c99
 
+# in version 1.8.0 plugin opus has moved from bad to base
+
+pre-activate {
+    if {![catch {set installed [lindex [registry_active gstreamer1-gst-plugins-bad] 0]}]} {
+        set _version [lindex $installed 1]
+        if {[vercmp $_version 1.8.0] < 0} {
+            registry_deactivate_composite gstreamer1-gst-plugins-bad "" [list ports_nodepcheck 1]
+        }
+    }
+}
+
 variant x11 {
     depends_lib-append port:xorg-libice \
                        port:xorg-libsm \
