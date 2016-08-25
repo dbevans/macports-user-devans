@@ -40,7 +40,7 @@ depends_lib         port:desktop-file-utils \
                     port:librsvg \
                     port:webp \
                     port:json-glib
-                        
+
 depends_run         port:yelp
 
 patchfiles          patch-configure.ac.diff \
