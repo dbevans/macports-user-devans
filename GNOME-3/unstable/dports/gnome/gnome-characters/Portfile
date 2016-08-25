@@ -1,0 +1,45 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           gobject_introspection 1.0
+
+name                gnome-characters
+version             3.21.91
+license             GPL-2+
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         A simple utility application to find and insert unusual characters.
+long_description    ${description}
+maintainers         devans openmaintainer
+categories          gnome
+platforms           darwin
+homepage            https://wiki.gnome.org/Design/Apps/CharacterMap
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  007bb653ac1244d87f708c3588313f04f8d097ba \
+                    sha256  c5bb6deb913a8967443219b68aacdec6d87beefa8063f98ae085472ed3e9c7ea
+
+depends_build       port:pkgconfig \
+                    port:appstream-glib
+
+depends_lib         port:desktop-file-utils \
+                    port:gtk3 \
+                    port:gjs \
+                    port:gnome-desktop
+
+depends_run         port:gnome-themes-standard
+
+gobject_introspection yes
+
+configure.args      --disable-schemas-compile \
+                    --disable-silent-rules
+
+post-activate {
+   system "${prefix}/bin/gtk-update-icon-cache-3.0 -f -t ${prefix}/share/icons/hicolor"
+   system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+   system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type      gnome-with-unstable
