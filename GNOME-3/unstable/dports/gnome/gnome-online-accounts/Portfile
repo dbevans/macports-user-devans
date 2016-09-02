@@ -7,7 +7,7 @@ PortGroup           gobject_introspection 1.0
 name                gnome-online-accounts
 
 # version 3.16.0+ requires webkit2gtk-4.0
-version             3.21.90
+version             3.21.91
 
 license             LGPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  6dd793b4734d7af8171a6aeb7f269d1b6397aacb \
-                    sha256  b3154f6d6bb4ae2f628c262adc9cc8b8aa2a7c66939ee9db486858606d763958
+checksums           rmd160  8417d4ff8303dcbe5e1fd1c6f2d8a31819e864fd \
+                    sha256  c221f404453e238155e25862a27b93c14d2e66b02b000ce39b45d1897c4402c3
 
 depends_build       port:pkgconfig \
                     port:intltool \
