@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                devhelp
-version             3.21.90
+version             3.21.91
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Devhelp is an API documentation browser for GTK+ and GNOME.
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  b8a9665875473f26b96a7f1fb735c48184f634bd \
-                    sha256  4a6b713f9f3ed0312228abb581bc29c3aa3d60a22283990c1477012e4d2eb067
+checksums           rmd160  b061f034f05932223bf3d084cb34b6dfc080f230 \
+                    sha256  4464244ac005a5dfa822e5aa438958e0d4de817dd85899e7ebbc906c74e2fad3
 
 depends_build       port:pkgconfig \
                     port:intltool \
