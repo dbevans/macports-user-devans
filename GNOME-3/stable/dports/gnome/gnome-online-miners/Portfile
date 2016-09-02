@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-online-miners
-version             3.20.0
+version             3.20.1
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Crawls through your online content.
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  4694d75ccf46a8b2e04301404b62f7cd324b7bc2 \
-                    sha256  f46dac7743283385d2aeea588eeead216274d9f365e323b90f586de982336e36
+checksums           rmd160  c803b3bc8548420ed017aafa661ed9501434114a \
+                    sha256  fd67b9abad6233689a921d84dbe583a8b89d5ade7f1b5d2f348493888baa3429
 
 depends_build       port:pkgconfig
 
