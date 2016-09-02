@@ -9,7 +9,7 @@ PortGroup           compiler_blacklist_versions 1.0
 PortGroup           cxx11 1.0
 
 name                gnome-system-monitor
-version             3.21.90
+version             3.21.91
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A system monitor.
@@ -24,8 +24,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  472806d41a4677974ac75b507a4d88c13fe74e56 \
-                    sha256  d7296456209b9cf7ad85b52a27c93b8d181c8485a5fc5ed5e231e42f18176d6e
+checksums           rmd160  581f7b228f0d94efe4412477a49688e00d241fdd \
+                    sha256  761c149d3d375dd6b38537a089e3d18494225427188e0394074d070920427551
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -59,6 +59,7 @@ compiler.blacklist  *gcc* {clang < 300}
 configure.cmd       ./autogen.sh
 
 configure.args      --disable-silent-rules \
+                    --enable-compile-warnings=no \
                     --enable-wnck \
                     --disable-systemd \
                     --disable-schemas-compile
