@@ -24,7 +24,7 @@ checksums           rmd160  cedaf0de2ad51b645c464402b536977de0db3b17 \
                     sha256  a8013082140e1f3527ffe762a440bf162f3d97fd7cf88c73788dc9f2c27c79f8
 
 depends_build       port:pkgconfig \
-                    port:icon-naming-utils \
+                    port:icon-naming-utils
 
 depends_lib         port:gtk3 \
                     port:librsvg
