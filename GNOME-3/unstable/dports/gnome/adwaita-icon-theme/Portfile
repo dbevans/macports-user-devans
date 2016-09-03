@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                adwaita-icon-theme
-version             3.21.2
+version             3.21.91
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome
 maintainers         devans openmaintainer
@@ -20,29 +20,19 @@ master_sites        gnome:sources/$name/$branch/
 
 use_xz              yes
 
-checksums           rmd160  d297e63a02bbe1f538e35de1c0acd568094b691b \
-                    sha256  c083bc8188e5d84379fcd93d2ac833ab1b6138f35a330e2a63048a4f63afd165
+checksums           rmd160  cedaf0de2ad51b645c464402b536977de0db3b17 \
+                    sha256  a8013082140e1f3527ffe762a440bf162f3d97fd7cf88c73788dc9f2c27c79f8
 
 depends_build       port:pkgconfig \
-                    port:intltool \
                     port:icon-naming-utils \
-                    port:gnome-common \
-                    port:autoconf \
-                    port:automake \
-                    port:libtool
 
 depends_lib         port:gtk3 \
                     port:librsvg
 
 patchfiles          patch-configure.ac.diff
 
-# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
-
-post-patch {
-    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
-}
-
-configure.cmd       ./autogen.sh
+use_autoreconf      yes
+autoreconf.args     -fvi
 
 use_parallel_build  no
 
