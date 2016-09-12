@@ -7,7 +7,7 @@ PortGroup           compiler_blacklist_versions 1.0
 PortGroup           gobject_introspection 1.0
 
 name                gitg
-version             3.21.91
+version             3.21.92
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME git repository viewer.
@@ -28,8 +28,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  62b2bf1ae8d01b97cb1aa60887fb5987892b121c \
-                    sha256  290156391b8be2baf3847bd24a372db19dc19d9b8182a5f0bc90ed0faaceaec6
+checksums           rmd160  1e2787e1f98f76beee27569336433ae2e01bbc08 \
+                    sha256  5755520850208294fd533363953bed822342a706f72c0936157a6a6d0f047862
 
 depends_build       port:pkgconfig \
                     port:intltool \
