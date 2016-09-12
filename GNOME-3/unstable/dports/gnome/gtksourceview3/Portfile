@@ -8,7 +8,7 @@ PortGroup           gobject_introspection 1.0
 
 name                gtksourceview3
 set gname           gtksourceview
-version             3.21.5
+version             3.21.6
 license             LGPL-2.1+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
@@ -28,8 +28,8 @@ master_sites        gnome:sources/${gname}/${branch}/
 distname            ${gname}-${version}
 use_xz              yes
 
-checksums           rmd160  291155e8ee4d0c7fefe1aec29702c659bffc6c84 \
-                    sha256  1cb4252d0cf4a001cdef8bc74639b8601a8ed1ae3fca93cd0345069ecb8ce3e2
+checksums           rmd160  6a4fd0e0353336948c0cbbd49e3cdd746fa22c07 \
+                    sha256  ab5657f323185560da255047fa843f812ac8259770399830069b2ef227f10998
 
 depends_build       port:pkgconfig \
                     port:gtk-doc
@@ -52,7 +52,7 @@ autoreconf.args     -fvi
 # blacklist compilers that do not support C11 (redefinition of typedef ‘GtkSourceTag’ at gtksourceview/gtksourcetag.h:35)
 compiler.blacklist  *gcc* {clang < 300}
 
-configure.args      --enable-compile-warnings=minimum \
+configure.args      --enable-compile-warnings=no \
                     --disable-silent-rules
 
 test.run            yes
