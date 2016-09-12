@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                epiphany
 # requires webkit2-gtk >= 2.13.2 as of version 3.21.90
-version             3.21.90
+version             3.21.92
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A GNOME Web browser.
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  b3bb0739f3a5a4ebde2eed22dcf419c49bfa1403 \
-                    sha256  7437a958569016043fcb8dd7d6d61271160f7ed981e37e6f45c93e2683a4e242
+checksums           rmd160  f5ef59ede1b70b648670d5d9a45d348c176621b9 \
+                    sha256  05da95b2fc289405c645f52dcf536b01a9d7e5ba1beae62ba79a139598d8d047
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -57,6 +57,7 @@ pre-configure {
 configure.cmd       ./autogen.sh
 
 configure.args      --with-distributor-name=MacPorts \
+                    --enable-compile-warnings=no \
                     --disable-silent-rules \
                     --disable-schemas-compile \
                     --disable-tests
