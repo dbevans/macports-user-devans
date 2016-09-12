@@ -1,0 +1,37 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                vala
+version             0.33.1
+set branch          [join [lrange [split ${version} .] 0 1] .]
+categories          lang
+maintainers         nomaintainer
+description         Compiler for the GObject type system
+long_description    Vala is a new programming language that aims to bring modern programming \
+                    language features to GNOME developers without imposing any additional \
+                    runtime requirements and without using a different ABI compared to \
+                    applications and libraries written in C.
+
+platforms           darwin
+license             LGPL-2.1+
+
+homepage            https://wiki.gnome.org/Projects/Vala
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  df13a8c9c8da3fccac5932aeb7f48ca43d4284bb \
+                    sha256  e788eca50e5a79bb5c904ceddbe463a53495f04698217e80f6e4e0f25e95de19
+
+depends_build       port:pkgconfig \
+                    port:bison \
+                    port:flex \
+                    port:libxslt
+
+depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2
+
+configure.args      --disable-silent-rules
+
+livecheck.type      gnome-with-unstable
