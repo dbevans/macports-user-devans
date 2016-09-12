@@ -4,8 +4,8 @@
 PortSystem          1.0
 
 name                baobab
-version             3.21.90
-license             GPL-2 GFDL-1.1
+version             3.21.92
+license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME disk usage analyzer.
 long_description    Disk Usage Analyzer is a graphical, menu-driven application to analyse \
@@ -23,8 +23,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  b947422ca39c4654ba32bbb042c0033052dd3b49 \
-                    sha256  9c8ecc71f3ae42305713fd86963168dc34d11978146818dc5d65644a60c6513a
+checksums           rmd160  2ccc900b3129558bd219954726a02c5e77a1e1a7 \
+                    sha256  08ef069b93124d9eeb4cc9cefa21149f9a9a1c1d6b41e65711277a6d6ebf0a6e
 
 depends_build       port:pkgconfig \
                     port:itstool \
