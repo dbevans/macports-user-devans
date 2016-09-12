@@ -7,7 +7,7 @@ PortGroup           compiler_blacklist_versions 1.0
 
 name                py-gobject3
 set my_name         pygobject
-version             3.21.91
+version             3.21.92
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories-append   gnome
 license             LGPL-2.1+
@@ -23,8 +23,8 @@ master_sites        gnome:sources/${my_name}/${branch}/
 distname            ${my_name}-${version}
 use_xz              yes
 
-checksums           sha256  48d163ab8e8246b037897c5be37d9f2a8b27db9529defb0a914f5e063a50dc95 \
-                    rmd160  784bed0dbcc1aae2839329151f4e7d932fa448a7
+checksums           sha256  e5c7bb3d15c9a7732d172203b97d5b52cef87ae0eb688479d064580987f57927 \
+                    rmd160  b19698a7e5c03971aab84e4ce50c2abb743a13cd
 
 python.versions     27 34 35
 
@@ -43,7 +43,8 @@ if {${name} ne ${subport}} {
     configure.pkg_config_path \
                             ${python.prefix}/lib/pkgconfig
     configure.pre_args      --prefix='${python.prefix}'
-    configure.args          --disable-glibtest \
+    configure.args          --enable-compile-warnings=no \
+                            --disable-glibtest \
                             --disable-silent-rules
     configure.cppflags-append \
                             -I${python.prefix}/include
