@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-control-center
-version             3.21.90
+version             3.21.92
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME's main interface for configuration of the various \
                     aspects of your desktop.
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  f72ffca1b8c1fa37b3331e1e0b7d5eb17e98fdc9 \
-                    sha256  632d0298306f196cb059ff98af20eed820bfa4bf08b24ba22ba2a58df21a88b8
+checksums           rmd160  bd440dfdbae0040b6bdeae091d57ddd060842f03 \
+                    sha256  5579fb61ce1eae6ddce81bc953ec9cb0fae314d84246b74f6af1c27224ef97a0
 
 depends_build       port:pkgconfig \
                     port:intltool \
