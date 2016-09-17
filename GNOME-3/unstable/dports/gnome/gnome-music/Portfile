@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gnome-music
-version             3.21.90
+version             3.21.92
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Music is the GNOME music playing application.
@@ -19,8 +19,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  31fa0c2e40b89cc874bbf4eae669196399bf92ae \
-                    sha256  9ab86e68df6dc9e99ab5fdf4f91748e845dad694840f8459f49fceaf6443d687
+checksums           rmd160  e2fa9b9d0eb2b3ddc1bc9a1bac870807c0ac71bb \
+                    sha256  146b74f7ae60fcdd6fd65279598f82002dc2d7a13eb1d765acc06c12ccbe98f9
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -64,7 +64,9 @@ variant python34 conflicts python35 description {Use Python 3.4 at run time} {
                         port:py34-requests \
                         port:dbus-python34
 
-    configure.python    ${prefix}/bin/python3.4
+    configure.python            ${prefix}/bin/python3.4
+    set python_prefix           ${frameworks_dir}/Python.framework/Versions/3.4
+    configure.pkg_config_path   ${python_prefix}/lib/pkgconfig
 }
 
 variant python35 conflicts python34 description {Use Python 3.5 at run time} {
@@ -72,7 +74,9 @@ variant python35 conflicts python34 description {Use Python 3.5 at run time} {
                         port:py35-requests \
                         port:dbus-python35
 
-    configure.python    ${prefix}/bin/python3.5
+    configure.python            ${prefix}/bin/python3.5
+    set python_prefix           ${frameworks_dir}/Python.framework/Versions/3.5
+    configure.pkg_config_path   ${python_prefix}/lib/pkgconfig
 }
 
 if {![variant_isset python35]} {
