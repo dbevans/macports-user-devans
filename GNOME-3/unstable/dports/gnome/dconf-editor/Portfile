@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                dconf-editor
-version             3.21.90
+version             3.21.92
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  251e8144c4a104ee7176954ca8127b53ef3a8cd8 \
-                    sha256  bb2da61905dfb021f1f36b21c9d792a3b4f280211a57768b469ebfd47a21ad48
+checksums           rmd160  92971526cb33608a9378600ed64be46479507de3 \
+                    sha256  f045e09e1f6a14c986ebac2fa1fb32484b9272208c2be9cb2831bd6d37ca0529
 
 depends_build       port:pkgconfig \
                     port:intltool \
