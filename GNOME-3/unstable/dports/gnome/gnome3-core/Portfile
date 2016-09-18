@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-core
-version         3.21.91
+version         3.21.92
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -49,8 +49,10 @@ supported_archs noarch
 # gom
 # gsound
 # gtk-vnc
+# libgepub
 # libgovert
 # libgxps
+# libvirt-glib
 # libzapojit
 # mousetweaks
 # mutter
@@ -92,6 +94,7 @@ depends_lib     port:adwaita-icon-theme \
                 port:gcr \
                 port:gdk-pixbuf2 \
                 port:gedit \
+                port:gegl-3.0 \
                 port:geocode-glib \
                 port:gjs \
                 path:lib/pkgconfig/glib-2.0.pc:glib2 \
