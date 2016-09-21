@@ -8,7 +8,7 @@ name                gnome-autoar
 version             0.1.1
 license             LGPL-2.1+
 set branch          [join [lrange [split ${version} .] 0 1] .]
-description         An automatic archives creating and extracting library
+description         An automatic archive creating and extracting library
 long_description    GNOME Autoar is a library to integrate compressed files management with GNOME
 maintainers         devans openmaintainer
 categories          gnome
