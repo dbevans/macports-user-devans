@@ -1,0 +1,11 @@
+--- bus/at-spi-bus-launcher.c.orig	2016-07-18 21:43:42.000000000 -0700
++++ bus/at-spi-bus-launcher.c	2016-07-18 21:45:55.000000000 -0700
+@@ -254,7 +254,7 @@
+       g_warning ("Failed to get session manager proxy: %s", error->message);
+       g_error_free (error);
+ 
+-      return;
++      return FALSE;
+     }
+  
+         g_dbus_proxy_call (sm_proxy,
