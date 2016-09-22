@@ -5,10 +5,10 @@ PortSystem          1.0
 
 name                at-spi2-atk
 # you probably want to keep this at the same version as at-spi2-core
-version             2.20.1
+version             2.21.91
 
-checksums           rmd160  94b60f5283d457aa327f69ec47fbd713f0e8a7fc \
-                    sha256  2358a794e918e8f47ce0c7370eee8fc8a6207ff1afe976ec9ff547a03277bf8e
+checksums           rmd160  efd1a0ab858155e37e2ae8bb6c219cf20ec9491b \
+                    sha256  a6b0eaa18c87d66b9e8d3e1a0687c31abea9e1e9c4a90f49f0f2dfb5e5714950
 
 license             LGPL
 set branch          [join [lrange [split ${version} .] 0 1] .]
@@ -38,4 +38,4 @@ autoreconf.args     -fvi
 
 configure.args      --disable-silent-rules
 
-livecheck.type      gnome
+livecheck.type      gnome-with-unstable
