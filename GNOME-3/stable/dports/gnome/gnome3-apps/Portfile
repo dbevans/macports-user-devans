@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            gnome3-apps
-version         3.20.2
+version         3.22.0
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -30,18 +30,15 @@ supported_archs noarch
 #
 # accerciser
 # aisleriot (previously part of gnome-games)
-# brasero  (no support for darwin Mac OS X, requires Linux SG or BSD CAM)
 # evolution
 # five-or-more (previously part of gnome-games)
 # four-in-a-row (previously part of gnome-games)
-# gnome-boxes
 # gnome-builder
 # gnome-clocks
-# gnome-color-manager (no support for darwin Mac OS X, requires colord, udev)
-# gnome-documents
 # gnome-klotski (previously part of gnome-games)
 # gnome-mahjongg (previously part of gnome-games)
 # gnome-mines (previously part of gnome-games)
+# gnome-multi-writer
 # gnome-nettool
 # gnome-nibbles (previously part of gnome-games)
 # gnome-robots (previously part of gnome-games)
@@ -54,7 +51,6 @@ supported_archs noarch
 # iagno (previously part of gnome-games)
 # lightsoff (previously part of gnome-games)
 # nautilus-sendto
-# nemiver
 # orca
 # quadrapassel (previously part of gnome-games)
 # swell-foop
@@ -72,14 +68,13 @@ depends_lib     port:bijiben \
                 port:dconf-editor \
                 port:devhelp \
                 port:empathy \
+                port:ghex \
                 port:gitg \
                 port:glade \
                 port:gnome-chess \
                 port:gnome-devel-docs \
                 port:gnome-dictionary \
-                port:gnome-getting-started-docs \
                 port:gnome-music \
-                port:gnome-photos \
                 port:gnome-sudoku \
                 port:polari \
                 port:rygel \
