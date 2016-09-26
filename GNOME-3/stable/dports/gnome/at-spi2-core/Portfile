@@ -6,10 +6,10 @@ PortGroup           gobject_introspection 1.0
 
 name                at-spi2-core
 # you probably want to keep this at the same version as at-spi2-atk
-version             2.21.4
+version             2.22.0
 
-checksums           rmd160  05f0f7ff7dbaa5cfeadbec197a92d466b68ff469 \
-                    sha256  4d996ac71c7c30c863362a0bf86e8c9803b1a189c9135ead8efe3dcac67621fe
+checksums           rmd160  a6a21917851799b6ccf0cede93ebcea0bd10f4b6 \
+                    sha256  415ea3af21318308798e098be8b3a17b2f0cf2fe16cecde5ad840cf4e0f2c80a
 
 license             LGPL
 set branch          [join [lrange [split ${version} .] 0 1] .]
@@ -43,8 +43,6 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
 
 gobject_introspection yes
 
-patchfiles          patch-bus-at-spi-bus-launcher.c.diff
-
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
                   
 post-patch {
@@ -58,4 +56,4 @@ configure.args      --disable-xevie \
                     --x-includes=${prefix}/include \
                     --x-libraries=${prefix}/lib
 
-livecheck.type      gnome-with-unstable
+livecheck.type      gnome
