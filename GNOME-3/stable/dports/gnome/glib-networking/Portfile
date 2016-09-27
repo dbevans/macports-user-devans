@@ -30,6 +30,10 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
 
 depends_run         path:share/curl/curl-ca-bundle.crt:curl-ca-bundle
 
+post-patch {
+    reinplace "s|-Werror=|-W|g" ${worksrcpath}/configure.ac
+}
+
 configure.args      --with-gnutls \
                     --with-libproxy \
                     --with-gnome-proxy \
