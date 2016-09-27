@@ -100,7 +100,7 @@ platform darwin {
             delete ${worksrcpath}/m4/glib-gettext.m4
         }
         configure.cmd   ./autogen.sh
-        depends_lib-append path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk-devel
+        depends_lib-append path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk
         livecheck.type  gnome
     }
 }
