@@ -81,7 +81,7 @@ platform darwin {
         depends_lib-append  path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
         livecheck.type      none
     } else {
-        depends_lib-append  path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk-devel
+        depends_lib-append  path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk
         livecheck.type      gnome
     }
 }
