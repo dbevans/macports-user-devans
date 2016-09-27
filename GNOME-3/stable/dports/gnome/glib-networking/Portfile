@@ -34,6 +34,9 @@ post-patch {
     reinplace "s|-Werror=|-W|g" ${worksrcpath}/configure.ac
 }
 
+use_autoreconf      yes
+autoreconf.args     -fvi
+
 configure.args      --with-gnutls \
                     --with-libproxy \
                     --with-gnome-proxy \
