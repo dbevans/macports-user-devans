@@ -47,7 +47,8 @@ depends_lib         port:atk \
 depends_run         port:shared-mime-info \
                     port:hicolor-icon-theme
 
-patchfiles          nawk.patch
+patchfiles          nawk.patch \
+                    bz765649-get-style-earlier.patch
 
 # gtk3 +quartz uses instancetype which is not available
 # before approximately Xcode 4.6 (#49391)
