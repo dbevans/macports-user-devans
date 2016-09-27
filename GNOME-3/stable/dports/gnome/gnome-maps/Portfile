@@ -67,7 +67,7 @@ platform darwin {
                     sha256  76a3e49867a474afbe3835ce4f2d49472567ad610e839d0c6808ce1d11ccf2b5
         livecheck.regex "LATEST-IS-(${branch}(?:\\.\\d+)*)"
     } else {
-        depends_lib-append  path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk-devel
+        depends_lib-append  path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk
     }
 }
 
