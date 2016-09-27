@@ -93,7 +93,7 @@ platform darwin {
         depends_build-append    port:appstream-glib \
                                 port:itstool \
                                 port:yelp-tools
-        depends_lib-append      path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk-devel
+        depends_lib-append      path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk
 
         post-patch {
             xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
