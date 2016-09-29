@@ -150,13 +150,6 @@ if {![variant_isset libav]} {
     default_variants    +gstreamer
 }
 
-# create tracker startup item
-
-#startupitem.create          yes
-#startupitem.start           "${prefix}/bin/tracker daemon -s"
-#startupitem.stop            "${prefix}/bin/tracker daemon -t"
-#startupitem.pidfile         none
-
 post-activate {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
