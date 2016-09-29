@@ -2,6 +2,7 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           active_variants 1.1
 
 name                vino
 version             3.22.0
@@ -43,6 +44,10 @@ depends_lib         port:desktop-file-utils \
                     port:xorg-libsm \
                     port:jpeg \
                     port:zlib
+
+# vino only builds with gtk3 +x11
+
+require_active_variants port:gtk3 x11
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
