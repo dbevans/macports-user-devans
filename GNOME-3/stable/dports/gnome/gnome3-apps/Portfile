@@ -63,6 +63,8 @@ supported_archs noarch
 # module set and have been ported to MacPorts but
 # are currently broken and/or need to be updated
 #
+# none at this point
+#
 
 depends_lib     port:bijiben \
                 port:dconf-editor \
@@ -75,10 +77,19 @@ depends_lib     port:bijiben \
                 port:gnome-devel-docs \
                 port:gnome-dictionary \
                 port:gnome-music \
-                port:gnome-sudoku \
                 port:polari \
                 port:rygel \
                 port:seahorse
+
+# ports that require libc++ to build
+# skip if default C++ stdlib is not libc++
+
+platform darwin {
+    if {${configure.cxx_stdlib} eq "libc++"} {
+        depends_lib-append  \
+                port:gnome-sudoku
+    }
+}
 
 use_configure   no
 build           { }
