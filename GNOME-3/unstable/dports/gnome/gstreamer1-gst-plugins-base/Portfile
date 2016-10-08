@@ -9,7 +9,7 @@ PortGroup           muniversal 1.0
 
 name                gstreamer1-gst-plugins-base
 set my_name         gst-plugins-base
-version             1.9.1
+version             1.9.90
 description         This is gst-plugins, a set of plug-ins for GStreamer.
 long_description    ${description}
 maintainers         nomaintainer
@@ -23,8 +23,8 @@ distname            ${my_name}-${version}
 
 use_xz              yes
 
-checksums           rmd160  66798ad045b238fcbfea5edae244126a3695b363 \
-                    sha256  8309d1660406274a94bd056f8d805fb35b902208fbb76ff8ca705b37d950fdc9
+checksums           rmd160  84b435354903fbd34af9569eb0bd3f10afa782fd \
+                    sha256  499f183c533f6652c907519a566f1a3f320341419f6062154a5ca433e96c5e82
 
 depends_build       port:pkgconfig
 depends_lib         port:gstreamer1 \
@@ -55,6 +55,17 @@ configure.args-append \
 #avoid this error:
 #:info:build gstbasetextoverlay.c:1511: error: 'for' loop initial declaration used outside C99 mode
 configure.cflags-append -std=c99
+
+# in version 1.8.0 plugin opus has moved from bad to base
+
+pre-activate {
+    if {![catch {set installed [lindex [registry_active gstreamer1-gst-plugins-bad] 0]}]} {
+        set _version [lindex $installed 1]
+        if {[vercmp $_version 1.8.0] < 0} {
+            registry_deactivate_composite gstreamer1-gst-plugins-bad "" [list ports_nodepcheck 1]
+        }
+    }
+}
 
 variant x11 {
     depends_lib-append port:xorg-libice \
