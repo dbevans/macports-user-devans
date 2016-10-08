@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-flashback
-version             3.20.2
+version             3.22.0
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME Flashback Session
@@ -17,8 +17,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  d23bcd7661735c1a6a6b95ff380f394b1a7eec79 \
-                    sha256  9f2524e6ca481ea24d553d408d637f57d50f22337ccce3f4029dffff45382159
+checksums           rmd160  b66ca09f301f69ccea2e24c12d363a7804c544bb \
+                    sha256  b4a9e891879e99fb1b02854e7d01ff4f89c1917434de4adb5c7430a71b85a0ec
 
 depends_build       port:pkgconfig
 

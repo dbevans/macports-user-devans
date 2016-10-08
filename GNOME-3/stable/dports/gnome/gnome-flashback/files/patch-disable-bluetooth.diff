@@ -1,6 +1,6 @@
 --- configure.ac.orig	2015-10-27 09:57:36.000000000 -0700
 +++ configure.ac	2015-10-27 09:58:30.000000000 -0700
-@@ -130,10 +130,10 @@
+@@ -131,10 +131,10 @@
    gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED
  ])
  
@@ -25,7 +25,7 @@
  	libcommon \
  	libdesktop-background \
  	libdisplay-config \
-@@ -55,7 +54,6 @@
+@@ -52,7 +51,6 @@
  	$(GNOME_FLASHBACK_LIBS) \
  	$(top_builddir)/gnome-flashback/libaudio-device-selection/libaudio-device-selection.la \
  	$(top_builddir)/gnome-flashback/libautomount-manager/libautomount-manager.la \
