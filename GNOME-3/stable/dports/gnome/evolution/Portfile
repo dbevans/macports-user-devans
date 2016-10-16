@@ -1,0 +1,82 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                evolution
+version             3.22.1
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         Email, calendar, todo client for GNOME.
+long_description    Evolution is the former flagship email, calendar, todo, \
+                    and personal organizer for the GNOME Desktop. \
+                    Thanks to cal@.. and devans@.. for help with creating this port.
+maintainers         gwhitney openmaintainer
+categories          gnome
+license             LGPL-2+
+platforms           darwin
+homepage            https://wiki.gnome.org/Apps/Evolution
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160 b648075002d23eb46f3e1db5c257c39021ad5014 \
+                    sha256 fa652d830f4185c33666770e6e9cfcc39d5e2f09486bbd63a084f3527064e52e
+
+depends_build       port:pkgconfig \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool \
+                    port:intltool \
+                    port:gtk-doc \
+                    port:gnome-common \
+                    port:yelp-tools \
+                    port:yelp
+
+depends_lib         port:evolution-data-server \
+                    port:gnome-autoar \
+                    port:libcanberra \
+                    port:libiconv \
+                    port:gtkspell3 \
+                    port:highlight \
+                    port:libpst
+
+depends_run         port:gnome-keyring
+
+patchfiles          patch-configure.ac.diff
+
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+}
+
+configure.cmd       ./autogen.sh
+
+configure.args      --with-nspr-includes=${prefix}/include/nspr  \
+                    --with-nspr-libs=${prefix}/lib/nspr  \
+                    --with-nss-includes=${prefix}/include/nss \
+                    --with-nss-libs=${prefix}/lib/nss \
+                    --with-help \
+                    --disable-libcryptui \
+                    --disable-schemas-compile
+configure.post_args --enable-gnome-desktop=no
+
+
+variant x11 {
+    depends_lib-append port:gnome-desktop
+    configure.post_args
+}
+
+default_variants    +x11
+
+#
+# port nss is not universal
+#
+
+universal_variant   no
+
+post-activate    {
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type      gnome
