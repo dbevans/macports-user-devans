@@ -5,7 +5,8 @@ PortSystem          1.0
 PortGroup           github 1.0
 PortGroup           gobject_introspection 1.0
 
-github.setup        lwindolf liferea 1.12-rc1 v
+github.setup        lwindolf liferea 687b0e05dd093587c5cd77c8bf9e320552f532ce
+version             1.12-rc1a
 # Note: do not remove the epoch line.
 epoch               20090731
 description         A feed aggregator for GTK+/GNOME.
@@ -19,8 +20,8 @@ license             GPL-2+
 platforms           darwin
 homepage            http://lzone.de/${name}/
 
-checksums           rmd160  7ef15c03cf6369a5d6240f077183f158a933114c \
-                    sha256  89bde85ba7e454ddbf07042a8564bb594410f71157f3f730fec20b6f415cfd1c
+checksums           rmd160  ef55858377392cd0ba827681454c1c244824b597 \
+                    sha256  c50017c0573e721fd26f5b7ea4325206493857a6b4a9be404be2524b72845d52
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -53,7 +54,9 @@ depends_run         port:gnome-themes-standard
 
 patchfiles          patch-autogen.sh.diff
 
-gobject_introspection yes
+# introspection is broken for now
+
+gobject_introspection no
 
 configure.cmd       ./autogen.sh
 
