@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           github 1.0
 PortGroup           gobject_introspection 1.0
 
-github.setup        lwindolf liferea 687b0e05dd093587c5cd77c8bf9e320552f532ce
+github.setup        lwindolf liferea 5074ec4177c2afbac0376255aa8b4e4e237cee0b
 version             1.12-rc1a
 # Note: do not remove the epoch line.
 epoch               20090731
@@ -20,8 +20,8 @@ license             GPL-2+
 platforms           darwin
 homepage            http://lzone.de/${name}/
 
-checksums           rmd160  ef55858377392cd0ba827681454c1c244824b597 \
-                    sha256  c50017c0573e721fd26f5b7ea4325206493857a6b4a9be404be2524b72845d52
+checksums           rmd160  9b5edff9a0c021f80703cefd1e3f30e7236d2bce \
+                    sha256  78b5f87c390acd9e99e7d26cb5c1dc94eec1639f7a69bb20ecb47798d572efa3
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -44,17 +44,10 @@ depends_lib         port:desktop-file-utils \
 
 depends_run         port:gnome-themes-standard
 
-#platform darwin {
-#    if {${configure.cxx_stdlib} eq "libstdc++"} {
-#       depends_lib-append path:lib/pkgconfig/webkit-3.0.pc:webkit-gtk3-2.0
-#    } else {
-#       depends_lib-append path:lib/pkgconfig/webkit-3.0.pc:webkit-gtk3
-#    }
-#}
-
 patchfiles          patch-autogen.sh.diff
 
 # introspection is broken for now
+# invalid gtk-doc/introspection annotation
 
 gobject_introspection no
 
