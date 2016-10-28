@@ -3,11 +3,15 @@
 
 PortSystem          1.0
 
+# as of 3.22.0 requires gnome-online-accounts 3.13.3+
+# which requires libc++ to build due to dependency on webkit2-gtk
+PortGroup           cxx11 1.0
+
 name                gnome-online-miners
 version             3.22.0
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
-description         Crawls through your online content.
+description         Index your online content in Tracker.
 long_description    GNOME Online Miners provides a set of crawlers that go through your \
                     online content and index them locally in Tracker. It has miners for \
                     Facebook, Flickr, Google, ownCloud and SkyDrive.
