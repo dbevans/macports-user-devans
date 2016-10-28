@@ -1,0 +1,64 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           compiler_blacklist_versions 1.0
+
+name                gnome-calculator
+version             3.23.1
+license             GPL-3
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         Calculator with financial and scientific modes.
+long_description    Calculator is an application that solves mathematical equations \
+                    and is suitable as a default application in a Desktop environment.
+maintainers         devans openmaintainer
+categories          gnome
+platforms           darwin
+homepage            https://wiki.gnome.org/Apps/Calculator
+master_sites        gnome:sources/${name}/${branch}/
+
+use_xz              yes
+
+checksums           rmd160  6399c7322689e8138175543a5001558ea91b1f03 \
+                    sha256  6bc07c653503703d8842548c6053ba6e6e4a73ea65f3b687b1b30d208b2a7a22
+
+depends_build       port:pkgconfig \
+                    port:intltool \
+                    port:itstool \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
+
+depends_lib         port:desktop-file-utils \
+                    port:gtk3 \
+                    port:gtksourceview3 \
+                    port:libsoup \
+                    port:libxml2 \
+                    port:mpfr \
+                    port:vala
+
+depends_run         port:gnome-themes-standard \
+                    port:yelp
+
+# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+
+post-patch {
+    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
+    xinstall -m 644 ${filespath}/history-entry.ui ${worksrcpath}/data
+    xinstall -m 644 ${filespath}/history-view.ui ${worksrcpath}/data
+}
+
+configure.cmd       ./autogen.sh
+
+# blacklist compilers that do not support C11 (redefinition of typedef ‘GtkSourceTag’ at gtksourceview/gtksourcetag.h:35)
+compiler.blacklist  *gcc* {clang < 300}
+
+configure.args      --disable-schemas-compile \
+                    --disable-silent-rules
+
+post-activate {
+   system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+   system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}
+
+livecheck.type      gnome-with-unstable
