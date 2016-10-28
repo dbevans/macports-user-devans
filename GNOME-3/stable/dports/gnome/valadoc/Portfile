@@ -38,4 +38,4 @@ depends_lib         port:gdk-pixbuf2 \
                     
 configure.cmd       ./autogen.sh
 
-livecheck.type      gnome
+livecheck.type      none
