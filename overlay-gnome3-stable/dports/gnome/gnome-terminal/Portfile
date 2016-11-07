@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id$
 
 PortSystem          1.0
 PortGroup           compiler_blacklist_versions 1.0
 
 name                gnome-terminal
-version             3.22.0
+version             3.22.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Terminal component for the GNOME 3 Desktop
 long_description    ${description}
@@ -18,8 +17,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  3b34e232b6190adf72c357488bb5ec26a86e4fef \
-                    sha256  97e6b1b4128ac133d8917b3940c71ddf9b89d189c5ac8402b1060126733993ed
+checksums           rmd160  4150a18c3ea14ddd2ab6291a1c7f4999b573cc02 \
+                    sha256  b00752336eb22d6d9f10c863c166ac73dcbb2ce4b280abdc0c78337e261bb0d4
 
 depends_build       port:pkgconfig \
                     port:intltool \
