@@ -1,0 +1,45 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           muniversal 1.0
+
+name                nettle
+version             3.2
+categories          devel crypto
+platforms           darwin
+maintainers         ryandesign openmaintainer
+license             LGPL-2.1+
+
+description         low-level cryptographic library
+
+long_description    Nettle is a cryptographic library that is designed to fit \
+                    easily in more or less any context: In crypto toolkits \
+                    for object-oriented languages (C++, Python, Pike, ...), \
+                    in applications like LSH or GNUPG, or even in kernel \
+                    space. It tries to solve a problem of providing a common \
+                    set of cryptographic algorithms for higher-level \
+                    applications by implementing a context-independent set of \
+                    cryptographic algorithms. In that light, Nettle doesn't \
+                    do any memory allocation or I/O, it simply provides the \
+                    cryptographic algorithms for the application to use in \
+                    any environment and in any way it needs.
+
+homepage            http://www.lysator.liu.se/~nisse/nettle/
+master_sites        gnu
+
+checksums           rmd160  84b1bc8c1103ef825c614bf7e95d9a8dad10490e \
+                    sha256  ea4283def236413edab5a4cf9cf32adf540c8df1b9b67641cfc2302fca849d97
+
+depends_lib         port:gmp
+
+patchfiles          no-fink.patch
+
+use_autoreconf      yes
+autoreconf.args     -fvi
+
+configure.args      --enable-shared --disable-openssl
+
+test.run            yes
+test.target         check
+test.env            DYLD_LIBRARY_PATH=../.lib
