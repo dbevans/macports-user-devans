@@ -37,11 +37,18 @@ depends_lib         port:desktop-file-utils \
                     port:libsoup \
                     port:libsecret \
                     port:libxslt\
+                    port:nettle \
                     port:sqlite3 \
                     port:xorg-libX11 \
 
 depends_run         port:gnome-themes-standard \
                     port:gnome-keyring
+
+patchfiles          patch-configure.ac.diff \
+                    patch-src-Makefile.am.diff
+
+use_autoreconf      yes
+autoreconf.args     -fvi
 
 configure.args      --with-distributor-name=MacPorts \
                     --enable-compile-warnings=no \
@@ -77,7 +84,7 @@ platform darwin {
     
         depends_lib-append      path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3-2.0
 
-        patchfiles              patch-configure.ac.diff
+        patchfiles              patch-configure.ac-3.8.2.diff
 
         post-patch {
             xinstall -m 755 ${filespath}/autogen.sh-3.8.2 ${worksrcpath}/autogen.sh
