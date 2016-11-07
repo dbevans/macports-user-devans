@@ -1,10 +1,9 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id$
 
 PortSystem          1.0
 
 name                gnome-photos
-version             3.22.1
+version             3.22.2
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Photo manager for GNOME.
@@ -18,8 +17,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  3439c672d10af156ba6f986ebbf67e3c84b995cb \
-                    sha256  51aa6204e8bf126015894e77aecae34b56e3cb51c6788b6e1229603746d25f4a
+checksums           rmd160  9e91f2f652ce4183d7c29e7808bf161330028405 \
+                    sha256  09b00488ca8086f149e9bd673266934b7447cf57790963090a5f93adc30a9720
 
 depends_build       port:pkgconfig \
                     port:intltool \
