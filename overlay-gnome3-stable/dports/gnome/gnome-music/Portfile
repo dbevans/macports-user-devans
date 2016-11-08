@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id$
 
 PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gnome-music
-version             3.22.1
+version             3.22.2
 license             GPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Music is the GNOME music playing application.
@@ -19,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  a4ad1d3f91277215bd0e7523ba918657ad012cff \
-                    sha256  10eda266261a2f8e374906b49712f66c7e05528055d7a7be965ef8a83c005603
+checksums           rmd160  fa65249a6ca9fd66d49aece98d9c87221dbf5a18 \
+                    sha256  88dc8b6a1d68f07d690ba22d251ac21ba32e7ed948aa3e9f68e9bdc6dfe9674a
 
 depends_build       port:pkgconfig \
                     port:intltool \
