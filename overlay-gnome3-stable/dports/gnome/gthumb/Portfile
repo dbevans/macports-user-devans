@@ -1,11 +1,9 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id$
 
 PortSystem          1.0
 
 name                gthumb
-version             3.4.3
-revision            1
+version             3.4.4.1
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Image viewer and browser for the GNOME desktop.
@@ -17,8 +15,8 @@ homepage            https://wiki.gnome.org/Apps/gthumb
 master_sites        gnome:sources/gthumb/${branch}
 use_xz              yes
 
-checksums           sha256  c10fd12f3bfea31c390c74e8e08f86f16e2159fbd6c806daa025423e0ded825d \
-                    rmd160  ca10fc54f9e18e56cfb6679747bc0ee78762e4bd
+checksums           sha256  4dc63bb1cc1f139259bba7f9fd1735182f16ba37254119a9f9c3e13a898a9533 \
+                    rmd160  4b6407221002b8b58ccdeeefc98d9d27a05180c2
 
 depends_build       port:intltool \
                     port:pkgconfig \
