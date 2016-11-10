@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id$
 
 PortSystem          1.0
 PortGroup           github 1.0
 PortGroup           gobject_introspection 1.0
 
-github.setup        lwindolf liferea eb198bc028e2d392a310a17a67c34bf36daebb0d
-version             1.12-rc1a-20161029
+github.setup        lwindolf liferea ab914a91d9881fec62bd73716486e867310c0576
+version             1.12-rc1a-20161109
 # Note: do not remove the epoch line.
 epoch               20090731
 description         A feed aggregator for GTK+/GNOME.
@@ -20,8 +19,8 @@ license             GPL-2+
 platforms           darwin
 homepage            http://lzone.de/${name}/
 
-checksums           rmd160  7e99947a352e9e0e24823af3a3bb5d9ff278ae44 \
-                    sha256  21b2bacffd5cc18029b15a1dde5157e6a31d45ce8c624f28f9ed5c5a7c5dda29
+checksums           rmd160  b894f437990c0de73ef24f3a960ff64ce9f0474b \
+                    sha256  b3c3aa8f74272cd38b573db61e8c4443d1fff46b3a02630c0a155b154bcfd40b
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -46,10 +45,7 @@ depends_run         port:gnome-themes-standard
 
 patchfiles          patch-autogen.sh.diff
 
-# introspection is broken for now
-# invalid gtk-doc/introspection annotation
-
-gobject_introspection no
+gobject_introspection yes
 
 configure.cmd       ./autogen.sh
 
