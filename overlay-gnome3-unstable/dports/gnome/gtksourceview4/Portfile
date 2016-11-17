@@ -7,13 +7,13 @@ PortGroup           gobject_introspection 1.0
 
 name                gtksourceview4
 set gname           gtksourceview
-version             3.99.1
+version             3.99.2
 license             LGPL-2.1+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
 platforms           darwin
-description         GtkSourceView-3.0 is a text widget for GTK+ 3
+description         GtkSourceView-4.0 is a text widget for GTK+ 3
 
 long_description    GtkSourceView is a text widget that extends the standard \
                     GTK+ 3.x text widget GtkTextView. It improves GtkTextView \
@@ -28,8 +28,8 @@ master_sites        gnome:sources/${gname}/${branch}/
 distname            ${gname}-${version}
 use_xz              yes
 
-checksums           rmd160  7451594fc0f1a78b58a1f92d8ed59e3ef7b966cb \
-                    sha256  20396399a0f179938922668dc13b44361cd28e303970fec4e821617403566aa9
+checksums           rmd160  0e927d5a50c4f72d949cf0d2a46d423e7a6c907c \
+                    sha256  68cb33de7eeabd07b90261456f35d437d1a5d77ac64f2519237a6134850c717e
 
 depends_build       port:pkgconfig \
                     port:gtk-doc
