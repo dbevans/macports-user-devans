@@ -1,10 +1,9 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id$
 
 PortSystem      1.0
 
 name            gnome3-core
-version         3.23.1
+version         3.23.2
 categories      gnome
 license         Permissive
 maintainers     devans openmaintainer
@@ -48,13 +47,13 @@ supported_archs noarch
 # gnome-video-effects
 # gom
 # gsound
-# graphene
 # gtk-vnc
 # libgepub
 # libgovert
 # libgxps
 # libvirt-glib
 # libzapojit
+# mobile-broadband-provider-info
 # mousetweaks
 # mutter
 # network-manager-applet
@@ -79,8 +78,8 @@ depends_lib     port:adwaita-icon-theme \
                 port:atk \
                 port:atkmm \
                 port:baobab \
+                port:cairomm \
                 port:clutter \
-                port:clutter-gst \
                 port:clutter-gst3 \
                 port:clutter-gtk \
                 port:cogl \
@@ -122,13 +121,14 @@ depends_lib     port:adwaita-icon-theme \
                 port:gnome-user-docs \
                 port:gnome-weather \
                 port:gobject-introspection \
+                port:graphene \
                 port:grilo \
                 port:grilo-plugins \
                 port:gsettings-desktop-schemas \
                 port:gssdp \
                 port:gspell \
-                port:gtk3 \
                 port:gtk2 \
+                port:gtk3 \
                 port:gtk-doc \
                 port:gtk-engines2 \
                 port:gtkmm3 \
