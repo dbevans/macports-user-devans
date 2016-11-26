@@ -1,0 +1,11 @@
+--- src/tests/meson.build.orig	2016-11-26 02:49:58.000000000 -0800
++++ src/tests/meson.build	2016-11-26 02:50:54.000000000 -0800
+@@ -21,7 +21,7 @@
+ 
+ foreach unit: unit_tests
+   exe = executable(unit, unit + '.c',
+-                   install: true,
++                   install: false,
+                    install_dir: join_paths(get_option('libexecdir'), 'installed-tests', 'graphene-1.0'),
+                    dependencies: graphene_dep,
+                    include_directories: graphene_inc,

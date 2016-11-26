@@ -1,0 +1,11 @@
+--- src/meson.build.orig	2016-11-26 01:07:03.000000000 -0800
++++ src/meson.build	2016-11-26 01:08:25.000000000 -0800
+@@ -94,7 +94,7 @@
+ if cc.get_id() == 'msvc'
+   graphene_link_args = []
+ else
+-  graphene_link_args = [ '-Wl,-Bsymbolic-functions' ]
++  graphene_link_args = []
+ endif
+ 
+ libgraphene = shared_library('graphene-@0@'.format(graphene_api_version),
