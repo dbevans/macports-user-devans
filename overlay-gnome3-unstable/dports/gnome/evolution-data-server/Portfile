@@ -1,5 +1,4 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id$
 
 PortSystem          1.0
 PortGroup           cmake 1.0
@@ -7,7 +6,7 @@ PortGroup           cmake 1.0
 cmake.out_of_source yes
 
 name                evolution-data-server
-version             3.23.1
+version             3.23.2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Addressbook and calender libs for GNOME.
 long_description    Evolution Data Server provides a central location for \
@@ -21,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  81017a5d458c4925b99f3cc53642b47e5ed52b72 \
-                    sha256  f1f6b2162b0ee22e161376e7328cee0bebf308624f7f1b3eff0e37f14748151c
+checksums           rmd160  75770ccdcdcd0f79959756413a29de1cbc70b823 \
+                    sha256  69831a26509f1370c1d52bec3b8c354b5ff88f13f8b5afed57dc1072d295c88a
 
 depends_build-append \
                     port:pkgconfig \
@@ -50,16 +49,6 @@ depends_lib         port:gtk3 \
 
 patchfiles          patch-addressbook-libebook-contacts-e-phone-number-private.cpp.diff
 
-# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
-
-#post-patch {
-#    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
-#}
-
-#configure.env-append \
-#                    DB_CFLAGS="-I${prefix}/include/db53" \
-#                    DB_LIBS="-L${prefix}/lib/db53 -ldb"
-
 configure.args-append \
                     -DENABLE_SCHEMAS_COMPILE=OFF \
                     -DENABLE_GTK_DOC=OFF \
@@ -75,7 +64,9 @@ configure.args-append \
                     -DENABLE_IPV6=ON \
                     -DENABLE_WEATHER=ON \
                     -DENABLE_GOOGLE=ON \
-                    -DENABLE_VALA_BINDINGS=ON
+                    -DENABLE_VALA_BINDINGS=ON \
+                    -DWITH_LIBDB_CFLAGS="-I${prefix}/include/db53" \
+                    -DWITH_LIBDB_LIBS="-L${prefix}/lib/db53 -ldb"
 
 #
 # port nss is not universal
@@ -89,8 +80,6 @@ variant phonenumber description {Phone number parsing/validation using libphonen
     configure.args-append       -DWITH_PHONENUMBER=ON
 }
 
-#default_variants    +phonenumber
-
 post-activate    {
     system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
 }
@@ -100,7 +89,7 @@ platform darwin {
 # google auth requires webkitgtk-3.0 >= 2.4.9 json-glib >= 1.0.4
         configure.args-append --disable-google-auth
     } else {
-        depends_lib-append  path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk \
+        depends_lib-append  path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk-devel \
                             port:json-glib
     }
 }
