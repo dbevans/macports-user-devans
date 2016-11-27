@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id$
 
 PortSystem          1.0
 
 name                gvfs
 epoch               1
-version             1.31.1
+version             1.31.2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          devel
@@ -34,8 +33,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  c74c055d38f285ed09ea6dc1eb19f6fc0f7de499 \
-                    sha256  847212006f7648d276835fe261a413f35a1965c79accdea79fdcb463e929a94e
+checksums           rmd160  aff2e53e51117eb377e4ec1405d621814d8e5ff1 \
+                    sha256  388e1e2163f13bad92005a4ebaa01693c5577bc5c7d33b6b4fdef4633d9dae60
 
 depends_build       port:pkgconfig \
                     port:gtk-doc \
