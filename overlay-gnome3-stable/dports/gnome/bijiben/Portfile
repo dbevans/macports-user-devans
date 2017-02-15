@@ -9,7 +9,7 @@ license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Bijiben is an attempt to design an intuitive note editor with strong desktop integration
 long_description    ${description}
-maintainers         devans openmaintainer
+maintainers         {devans @dbevans} openmaintainer
 categories          gnome
 platforms           darwin
 homepage            https://wiki.gnome.org/Apps/Bijiben
