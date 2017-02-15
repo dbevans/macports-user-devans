@@ -6,7 +6,7 @@ PortGroup           github 1.0
 github.setup        ebassi graphene 1.5.2
 license             Permissive
 categories          graphics gnome
-maintainers         devans openmaintainer
+maintainers         {devans @dbevans} openmaintainer
 platforms           darwin
 homepage            http://ebassi.github.io/${name}/
 
