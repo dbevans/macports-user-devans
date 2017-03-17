@@ -4,8 +4,8 @@ PortSystem          1.0
 PortGroup           github 1.0
 PortGroup           gobject_introspection 1.0
 
-github.setup        lwindolf liferea 679f2ff553a057a27c576d4624fa80e83e7f2e8a
-version             1.12-rc2-20170227
+github.setup        lwindolf liferea 15437ec1bea49063088999ab2dcae473038c784a
+version             1.12-rc2-20170313
 # Note: do not remove the epoch line.
 epoch               20090731
 description         A feed aggregator for GTK+/GNOME.
@@ -19,8 +19,8 @@ license             GPL-2+
 platforms           darwin
 homepage            http://lzone.de/${name}/
 
-checksums           rmd160  88aa6984a30825201ba4bfdcb10c9d9de0755346 \
-                    sha256  d6c9ad219aab58f8ee634ad67173e23e14c9a025f56e6469439ae6583b242195
+checksums           rmd160  be9eda8c4cf6819755f5bf2af975bd45a39b1603 \
+                    sha256  ffceef9b54f411dcbdc2f0459d43369b6969a65df5ff5ab91d7a293cdf8ba0aa
 
 depends_build       port:pkgconfig \
                     port:intltool \
